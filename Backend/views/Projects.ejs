@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education</title>
+    <title>Profile</title>
 </head>
+
 <body>
-    <h1>Your Project Experience</h1>
+    <h1>Your Project Details</h1>
     <form method="POST" action="projects">
-        <label>Job Title</label>
-        <input type="text" placeholder="John" name="jobtitle">
-        <label>Company</label>
-        <input type="text" placeholder="john@gmail.com" name="company">
-        <label>Country</label>
-        <input type="text" placeholder="9135344432" name="country">
-        <label>State</label>
-        <input type="text" placeholder="India" name="state">
-        <label>City</label>
-        <input type="text" placeholder="India" name="city">
-        <label>Start date</label>
-        <input type="text" placeholder="John" name="startdate">
-        <label>end date</label>
-        <input type="text" placeholder="John" name="enddate">
         <div>
+            <label for="projectname">project </label>
+            <input type="text" placeholder="projectname" id="projectname" name="projectname">
+        </div>
+        <div>
+            <label for="project1description">Project Description</label>
+            <input type="text" placeholder="project1description" id="project1description" name="project1description">
+        </div>
+        <div>
+            <label for="link">Link</label>
+            <input type="url" placeholder="link" id="link" name="link">
+        </div>
+        <div>
+            <label for="toolsused">Tools Used</label>
+            <input type="text" placeholder="toolsused" id="toolsused" name="toolsused">
+        </div>
+       
+        <div>
+            <button>Prev</button>
             <button>Next</button>
         </div>
     </form>
 </body>
-</html>
+
