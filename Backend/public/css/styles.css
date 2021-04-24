@@ -1,0 +1,21 @@
+*,body{
+    background-color: #FF7E83;  
+
+    
+}
+
+h1{
+    color:white;
+}
+
+.image{
+    height:500px;
+    
+}
+
+.navbar-brand{
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: bold;
+     
+}
+
