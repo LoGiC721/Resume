@@ -1,13 +1,29 @@
+require('dotenv').config()
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
+const session=require("express-session");
+const passport=require("passport");
+const passportLocalMongoose=require("passport-local-mongoose");
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+var findOrCreate = require('mongoose-findorcreate');
+
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
+app.use(session({
+  secret:"Ourlittlesecret",
+  resave:false,
+  saveUninitialized:false
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose.connect("mongodb://localhost:27017/Resume", { useNewUrlParser: true });
 
 const UserSchema = new Schema({
@@ -56,13 +72,69 @@ const UserSchema = new Schema({
   awarddate: Date,
   awarder: String,
   Awarddescription: String,
+  username:String,
+  password:String,
+  googleId:String,
+    secret:String
 });
 
+UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(findOrCreate);
 const Project = mongoose.model("Project", UserSchema);
+
+passport.use(Project.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+  passport.deserializeUser(function(id, done) {
+    Project.findById(id, function(err, user) {
+      done(err, user);
+    });
+  }); 
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/secrets",
+    userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+      console.log(profile);
+      Project.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope:
+      [ 'profile' ] }
+));
+
+app.get('/auth/google/secrets',
+    passport.authenticate( 'google', {failureRedirect: '/auth/google/login'}),
+    function(req,res)
+    {
+        res.redirect("/download");
+    });
 
 app.get("/", function (req, res) {
     res.render("home");
   });
+
+app.get("/login",function(req,res)
+{
+  res.render("Signin")
+})  
+
+app.get("/register",function(req,res)
+{
+  res.render("Register")
+})  
 
 app.get("/download", function (req, res) {
     Project.find({}, function(err, posts){
@@ -97,6 +169,48 @@ app.get("/projects", function (req, res) {
 app.get("/awards", function (req, res) {
   res.render("Awards");
 });
+
+
+app.post("/register",function(req,res)
+{
+    Project.register({useremail:req.body.useremail},req.body.userpassword,function(err,user)
+    {
+        if(err)
+        {
+            console.log(err);
+             res.redirect("/register");
+        }
+        else
+        {
+            passport.authenticate("local")(req,res,function()
+            {
+                res.redirect("/download");
+            })
+        }
+    })
+})
+
+app.post("/login",function(req,res)
+{
+    const user=new Project({
+        useremail:req.body.useremail,
+        password:req.body.useremail
+    })
+
+    req.login(user,function(err)
+    {
+        if(err)
+         console.log(err);
+        else
+        {
+            passport.authenticate("local")(req,res,function()
+            {
+                res.redirect("/download");
+            })
+        } 
+    })
+})
+
 
 app.post("/profile", function (req, res) {
 //   console.log(req.body);
@@ -188,6 +302,6 @@ app.post("/awards", function (req, res) {
   res.redirect("/download")
 });
 
-app.listen("5000", function () {
-  console.log("Server has been started at port 5000");
+app.listen("3000", function () {
+  console.log("Server has been started at port 3000");
 });
