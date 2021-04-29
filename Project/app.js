@@ -201,7 +201,7 @@ app.get("/download", function (req, res) {
         if(!err)
         {
             console.log(posts);
-          res.render("template5",{arr:posts});
+          res.render("template6",{arr:posts});
         }
       })
 });
