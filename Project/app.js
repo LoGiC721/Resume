@@ -8,7 +8,9 @@ const session=require("express-session");
 const passport=require("passport");
 const passportLocalMongoose=require("passport-local-mongoose");
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-var findOrCreate = require('mongoose-findorcreate');
+const FacebookStrategy= require('passport-facebook').Strategy;
+const TwitterStrategy= require('passport-twitter').Strategy;
+const findOrCreate = require('mongoose-findorcreate');
 
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -74,8 +76,12 @@ const UserSchema = new Schema({
   Awarddescription: String,
   username:String,
   password:String,
-  googleId:String,
-    secret:String
+  googleId:String, 
+  facebookId:String,
+  twitterId:String,
+  secret:String,
+  username:String,
+  password:String,
 });
 
 UserSchema.plugin(passportLocalMongoose);
@@ -83,8 +89,6 @@ UserSchema.plugin(findOrCreate);
 const Project = mongoose.model("Project", UserSchema);
 
 passport.use(Project.createStrategy());
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
 passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
@@ -109,6 +113,31 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+passport.use(new FacebookStrategy({
+  clientID: process.env.Facebook_CLIENT_ID,
+  clientSecret: process.env.Facebook_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/facebook/key",
+  
+},
+function(accessToken, refreshToken, profile, cb) {
+  Project.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+
+passport.use(new TwitterStrategy({
+  consumerKey: process.env.Twitter_CLIENT_ID,
+  consumerSecret: process.env.Twitter_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/twitter/importantkey"
+},
+function(token, tokenSecret, profile, cb) {
+  Project.findOrCreate({ twitterId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
 
 app.get('/auth/google',
   passport.authenticate('google', { scope:
@@ -122,9 +151,40 @@ app.get('/auth/google/secrets',
         res.redirect("/download");
     });
 
+    app.get('/auth/facebook',
+  passport.authenticate('facebook'
+
+  ));
+  
+  app.get('/auth/facebook/key',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+     
+      res.redirect('/');
+    });
+
+    app.get('/auth/twitter',
+    passport.authenticate('twitter'));
+  
+  app.get('/auth/twitter/importantkey', 
+    passport.authenticate('twitter', { failureRedirect: '/download' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    });
+
+
+
 app.get("/", function (req, res) {
-    res.render("home");
+   res.render("home");
   });
+
+
+app.get("/templates",function(req,res)
+{
+  res.render("availabletemplates");
+})
 
 app.get("/login",function(req,res)
 {
@@ -141,7 +201,7 @@ app.get("/download", function (req, res) {
         if(!err)
         {
             console.log(posts);
-          res.render("template4",{arr:posts});
+          res.render("template5",{arr:posts});
         }
       })
 });
@@ -171,9 +231,34 @@ app.get("/awards", function (req, res) {
 });
 
 
+app.post("/login",function(req,res)
+{
+    const user=new Project({
+        username:req.body.username,
+        password:req.body.password
+    })
+
+    req.login(user,function(err)
+    {
+        if(err)
+        {
+         console.log(err);
+         res.redirect("/login")
+        }
+        else
+        {
+            passport.authenticate("local")(req,res,function()
+            {
+              res.redirect("/");
+            })
+            
+        } 
+    })
+})
+
 app.post("/register",function(req,res)
 {
-    Project.register({useremail:req.body.useremail},req.body.userpassword,function(err,user)
+  Project.register({username:req.body.username},req.body.password,function(err,user)
     {
         if(err)
         {
@@ -182,33 +267,15 @@ app.post("/register",function(req,res)
         }
         else
         {
-            passport.authenticate("local")(req,res,function()
+          passport.authenticate("local")(req,res,function()
             {
-                res.redirect("/download");
+              res.redirect("/");
             })
+       
         }
     })
-})
 
-app.post("/login",function(req,res)
-{
-    const user=new Project({
-        useremail:req.body.useremail,
-        password:req.body.useremail
-    })
-
-    req.login(user,function(err)
-    {
-        if(err)
-         console.log(err);
-        else
-        {
-            passport.authenticate("local")(req,res,function()
-            {
-                res.redirect("/download");
-            })
-        } 
-    })
+   
 })
 
 
