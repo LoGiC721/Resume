@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/Resume", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/Resume", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const UserSchema = new Schema({
   firstname: { type: String, default: null },
