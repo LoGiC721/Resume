@@ -178,6 +178,7 @@ app.get('/auth/google/secrets',
 
 app.get("/", function (req, res) {
    res.render("home");
+   
   });
 
 
@@ -196,12 +197,14 @@ app.get("/register",function(req,res)
   res.render("Register")
 })  
 
+let templateno=1;
+
 app.get("/download", function (req, res) {
     Project.find({}, function(err, posts){
         if(!err)
         {
             console.log(posts);
-          res.render("template6",{arr:posts});
+          res.render("template"+templateno,{arr:posts});
         }
       })
 });
@@ -230,6 +233,16 @@ app.get("/awards", function (req, res) {
   res.render("Awards");
 });
 
+app.post("/",function(req,res)
+{
+  res.redirect("/templates")
+})
+
+app.post("/templates",function(req,res)
+{
+  templateno=req.body.template;
+  res.redirect("/profile")
+})
 
 app.post("/login",function(req,res)
 {
