@@ -29,59 +29,59 @@ app.use(passport.session());
 mongoose.connect("mongodb://localhost:27017/Resume", { useNewUrlParser: true });
 
 const UserSchema = new Schema({
-  firstname: String,
-  lastname: String,
-  email: String,
-  pno: Number,
-  website: String,
-  github: String,
-  linkedin: String,
-  twitter: String,
-  collegename: String,
-  collegestartdate: Date,
-  collegeenddate: Date,
-  collegedegree: String,
-  collegegpa: Number,
-  collegelocation: String,
-  sscschoolname: String,
-  sscboard: String,
-  ssccompletion: Date,
-  sscpercentage: Number,
-  sscschoollocation: String,
-  hscschoolname: String,
-  hscboard: String,
-  hsccompletion: Date,
-  hscpercentage: Number,
-  hscschoollocation: String,
-  companyname: String,
-  jobtitle: String,
-  state: String,
-  city: String,
-  startdate: Date,
-  enddate: Date,
-  jobdescription: String,
-  skills1: String,
-  skills2: String,
-  skills3: String,
-  skills4: String,
-  skills5: String,
-  skills6: String,
-  projectname: String,
-  project1description: String,
-  link: String,
-  toolsused: String,
-  awardname: String,
-  awarddate: Date,
-  awarder: String,
-  Awarddescription: String,
-  username:String,
-  password:String,
-  googleId:String, 
-  facebookId:String,
-  twitterId:String,
-  secret:String,
-  username:String,
-  password:String,
+  firstname: { type: String, default: null },
+  lastname: { type: String, default: null },
+  email: { type: String, default: null },
+  pno: { type: Number, default: null },
+  website: { type: String, default: null },
+  github: { type: String, default: null },
+  linkedin: { type: String, default: null },
+  twitter: { type: String, default: null },
+  collegename: { type: String, default: null },
+  collegestartdate: { type: Date, default: null },
+  collegeenddate:{ type: Date, default: null },
+  collegedegree: { type: String, default: null },
+  collegegpa: { type: Number, default: null },
+  collegelocation: { type: String, default: null },
+  sscschoolname: { type: String, default: null },
+  sscboard: { type: String, default: null },
+  ssccompletion: { type: Date, default: null },
+  sscpercentage: { type: Number, default: null },
+  sscschoollocation: { type: String, default: null },
+  hscschoolname: { type: String, default: null },
+  hscboard: { type: String, default: null },
+  hsccompletion: { type: Date, default: null },
+  hscpercentage: { type: Number, default: null },
+  hscschoollocation: { type: String, default: null },
+  companyname: { type: String, default: null },
+  jobtitle: { type: String, default: null },
+  state: { type: String, default: null },
+  city: { type: String, default: null },
+  startdate: { type: Date, default: null },
+  enddate: { type: Date, default: null },
+  jobdescription: { type: String, default: null },
+  skills1: { type: String, default: null },
+  skills2: { type: String, default: null },
+  skills3: { type: String, default: null },
+  skills4: { type: String, default: null },
+  skills5: { type: String, default: null },
+  skills6: { type: String, default: null },
+  projectname: { type: String, default: null },
+  project1description: { type: String, default: null },
+  link: { type: String, default: null },
+  toolsused: { type: String, default: null },
+  awardname: { type: String, default: null },
+  awarddate: { type: String, default: null },
+  awarder: { type: String, default: null },
+  Awarddescription: { type: String, default: null },
+  username:{ type: String, default: null },
+  password:{ type: String, default: null },
+  googleId:{ type: String, default: null }, 
+  facebookId:{ type: String, default: null },
+  twitterId:{ type: String, default: null },
+  secret:{ type: String, default: null },
+  username:{ type: String, default: null },
+  password:{ type: String, default: null },
 });
 
 UserSchema.plugin(passportLocalMongoose);
@@ -177,7 +177,8 @@ app.get('/auth/google/secrets',
 
 
 app.get("/", function (req, res) {
-   res.render("home");
+
+   res.render("home") 
    
   });
 
@@ -244,6 +245,9 @@ app.post("/templates",function(req,res)
   res.redirect("/profile")
 })
 
+
+
+let current_user_id;
 app.post("/login",function(req,res)
 {
     const user=new Project({
@@ -262,6 +266,7 @@ app.post("/login",function(req,res)
         {
             passport.authenticate("local")(req,res,function()
             {
+              current_user_id=user.id;
               res.redirect("/");
             })
             
@@ -282,6 +287,7 @@ app.post("/register",function(req,res)
         {
           passport.authenticate("local")(req,res,function()
             {
+              current_user_id=user.id;
               res.redirect("/");
             })
        
@@ -293,24 +299,29 @@ app.post("/register",function(req,res)
 
 
 app.post("/profile", function (req, res) {
-//   console.log(req.body);
 
-  const data = new Project({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    pno: req.body.pno,
-    website: req.body.website,
-    github: req.body.github,
-    linkedin: req.body.linkedin,
-    twitter: req.body.twitter,
-  });
-  data.save();
+  var myquery = {_id:current_user_id };
+  var newvalues = { $set: { 
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      pno: req.body.pno,
+      website: req.body.website,
+      github: req.body.github,
+      linkedin: req.body.linkedin,
+      twitter: req.body.twitter,
+
+   } };
+  Project.updateMany(myquery, newvalues,function(err,res){
+    if(!err)
+    console.log("Documents updated successfully");
+  })
   res.redirect("/education");
 });
 app.post("/education", function (req, res) {
 //   console.log(req.body);
-  const data = new Project({
+var myquery = {_id:current_user_id };
+  var newvalues = { $set: { 
     collegename: req.body.collegename,
     collegestartdate: req.body.collegestartdate,
     collegeenddate: req.body.collegeenddate,
@@ -327,13 +338,19 @@ app.post("/education", function (req, res) {
     hsccompletion: req.body.hsccompletion,
     hscpercentage: req.body.hscpercentage,
     hscschoollocation: req.body.hscschoollocation,
+
+   } };
+  Project.updateMany(myquery, newvalues,function(err,res){
+    if(!err)
+    console.log("Documents updated successfully");
   });
-  data.save();
   res.redirect("/work");
 });
 app.post("/work", function (req, res) {
 //   console.log(req.body);
-  const data = new Project({
+
+var myquery = {_id:current_user_id };
+  var newvalues = { $set: { 
     companyname: req.body.companyname,
     jobtitle: req.body.jobtitle,
     state: req.body.state,
@@ -341,44 +358,67 @@ app.post("/work", function (req, res) {
     startdate: req.body.startdate,
     enddate: req.body.enddate,
     jobdescription: req.body.jobdescription,
+
+   } };
+  Project.updateMany(myquery, newvalues,function(err,res){
+    if(!err)
+    console.log("Documents updated successfully");
   });
-  data.save();
+
   res.redirect("/skills");
 });
 app.post("/skills", function (req, res) {
 //   console.log(req.body);
-  const data = new Project({
+
+var myquery = {_id:current_user_id };
+  var newvalues = { $set: { 
     skills1: req.body.skills1,
     skills2: req.body.skills2,
     skills3: req.body.skills3,
     skills4: req.body.skills4,
     skills5: req.body.skills5,
     skills6: req.body.skills6,
+
+   } };
+  Project.updateMany(myquery, newvalues,function(err,res){
+    if(!err)
+    console.log("Documents updated successfully");
   });
-  data.save();
   res.redirect("/projects");
 });
 app.post("/projects", function (req, res) {
 //   console.log(req.body);
-  const data = new Project({
+
+var myquery = {_id:current_user_id };
+  var newvalues = { $set: { 
     projectname: req.body.projectname,
     project1description: req.body.project1description,
     link: req.body.link,
     toolsused: req.body.toolsused,
+
+   } };
+  Project.updateMany(myquery, newvalues,function(err,res){
+    if(!err)
+    console.log("Documents updated successfully");
   });
-  data.save();
   res.redirect("/awards");
 });
 
 app.post("/awards", function (req, res) {
 //   console.log(req.body);
-  const data = new Project({
+
+var myquery = {_id:current_user_id };
+  var newvalues = { $set: { 
     awardname: req.body.awardname,
     awarddate: req.body.awarddate,
     awarder: req.body.awarder,
     Awarddescription: req.body.Awarddescription,
+
+   } };
+  Project.updateMany(myquery, newvalues,function(err,res){
+    if(!err)
+    console.log("Documents updated successfully");
   });
-  data.save();
   res.redirect("/download")
 });
 

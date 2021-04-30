@@ -22,6 +22,12 @@ font-style: normal;
 }
 
 
+.registerlink{
+    font-family: Montserrat, Helvetica Neue, Arial, sans-serif;
+    color:white;
+    
+}
+
 .btn.btn-icon{
 height: 2.375rem;
 min-width: 2.375rem;
