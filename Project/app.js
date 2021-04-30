@@ -178,7 +178,7 @@ app.get('/auth/google/secrets',
 
 app.get("/", function (req, res) {
 
-   res.render("home") 
+   res.render("home",{currentUser:req.user}) 
    
   });
 
@@ -198,13 +198,21 @@ app.get("/register",function(req,res)
   res.render("Register")
 })  
 
+app.get("/logout", function(req, res){    
+  req.logout();    
+  res.redirect("/");
+});
+
 let templateno=1;
+let current_user_id;
 
 app.get("/download", function (req, res) {
-    Project.find({}, function(err, posts){
+
+  console.log(current_user_id);
+    Project.find({_id:current_user_id}, function(err, posts){
         if(!err)
         {
-            console.log(posts);
+          console.log(posts);
           res.render("template"+templateno,{arr:posts});
         }
       })
@@ -247,7 +255,6 @@ app.post("/templates",function(req,res)
 
 
 
-let current_user_id;
 app.post("/login",function(req,res)
 {
     const user=new Project({
@@ -266,7 +273,7 @@ app.post("/login",function(req,res)
         {
             passport.authenticate("local")(req,res,function()
             {
-              current_user_id=user.id;
+              current_user_id=req.user.id;
               res.redirect("/");
             })
             
