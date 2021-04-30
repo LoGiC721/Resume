@@ -204,12 +204,11 @@ app.get("/logout", function(req, res){
 });
 
 let templateno=1;
-let current_user_id;
+
 
 app.get("/download", function (req, res) {
 
-  console.log(current_user_id);
-    Project.find({_id:current_user_id}, function(err, posts){
+    Project.find({_id:req.user.id}, function(err, posts){
         if(!err)
         {
           console.log(posts);
@@ -273,7 +272,7 @@ app.post("/login",function(req,res)
         {
             passport.authenticate("local")(req,res,function()
             {
-              current_user_id=req.user.id;
+             
               res.redirect("/");
             })
             
@@ -294,7 +293,7 @@ app.post("/register",function(req,res)
         {
           passport.authenticate("local")(req,res,function()
             {
-              current_user_id=user.id;
+              
               res.redirect("/");
             })
        
@@ -307,7 +306,7 @@ app.post("/register",function(req,res)
 
 app.post("/profile", function (req, res) {
 
-  var myquery = {_id:current_user_id };
+  var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
       firstname: req.body.firstname,
       lastname: req.body.lastname,
@@ -327,7 +326,7 @@ app.post("/profile", function (req, res) {
 });
 app.post("/education", function (req, res) {
 //   console.log(req.body);
-var myquery = {_id:current_user_id };
+var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     collegename: req.body.collegename,
     collegestartdate: req.body.collegestartdate,
@@ -356,7 +355,7 @@ var myquery = {_id:current_user_id };
 app.post("/work", function (req, res) {
 //   console.log(req.body);
 
-var myquery = {_id:current_user_id };
+var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     companyname: req.body.companyname,
     jobtitle: req.body.jobtitle,
@@ -377,7 +376,7 @@ var myquery = {_id:current_user_id };
 app.post("/skills", function (req, res) {
 //   console.log(req.body);
 
-var myquery = {_id:current_user_id };
+var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     skills1: req.body.skills1,
     skills2: req.body.skills2,
@@ -396,7 +395,7 @@ var myquery = {_id:current_user_id };
 app.post("/projects", function (req, res) {
 //   console.log(req.body);
 
-var myquery = {_id:current_user_id };
+var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     projectname: req.body.projectname,
     project1description: req.body.project1description,
@@ -414,7 +413,7 @@ var myquery = {_id:current_user_id };
 app.post("/awards", function (req, res) {
 //   console.log(req.body);
 
-var myquery = {_id:current_user_id };
+var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     awardname: req.body.awardname,
     awarddate: req.body.awarddate,
