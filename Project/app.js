@@ -185,7 +185,10 @@ app.get("/", function (req, res) {
 
 app.get("/templates",function(req,res)
 {
-  res.render("availabletemplates");
+  if(!req.user)
+  res.render("SignIn");
+  else
+  res.render("availabletemplates",{currentUser:req.user});
 })
 
 app.get("/login",function(req,res)
@@ -211,7 +214,6 @@ app.get("/download", function (req, res) {
     Project.find({_id:req.user.id}, function(err, posts){
         if(!err)
         {
-          console.log(posts);
           res.render("template"+templateno,{arr:posts});
         }
       })

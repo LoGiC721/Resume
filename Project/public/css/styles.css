@@ -3,9 +3,14 @@
 
     
 }
+p{
+    color:#eeeeee;
+    font-family: 'Lato', sans-serif;
+}
 
-h1{
-    color:white;
+h2,h4{
+    color:aliceblue;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .image{
@@ -13,9 +18,27 @@ h1{
     
 }
 
+
 .navbar-brand{
     font-family: 'Advent Pro', sans-serif;
     font-weight: bold;
      
 }
 
+a{
+    font-weight:540;
+    font-family: 'Open Sans', sans-serif;
+}
+
+ .navbar {
+    padding:6px 25px;
+}
+
+.nav-item {
+    padding:0 18px;
+} 
+
+.nav-link {
+    font-family:"Montserrat-light";
+    font-size:1.2rem; 
+}
