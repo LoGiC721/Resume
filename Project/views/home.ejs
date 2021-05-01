@@ -21,7 +21,9 @@
   
   <nav class="navbar navbar-expand-lg navbar-light  ">
    
-    <a class="navbar-brand" style="color:aliceblue" href="/">makeresume</a>
+    <a class="navbar-brand" style="color:aliceblue" href="/">
+      <img src="/icons/navwhite.png"/>makeresume
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -30,7 +32,7 @@
       <ul class="navbar-nav ml-auto">
           <% if(!currentUser){ %>
             <li class="nav-item active"></li>
-            <a class="glyphicon glyphicon-user" href="/login">Login <span class="sr-only">(current)</span></a>
+            <a class="nav-link text-white" href="/login">Login <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link text-white" href="/register">Register</a>
@@ -63,15 +65,24 @@
 
         </p>
         <form method="POST" action="/">
-          <button type="submit" class="btn btn-light btn-lg btn-block">Submit</button>
+          <button type="submit" class="btn btn-light btn-lg  btn-block  ">Submit</button>
         </form>
       </div>
       <div class="col-lg">
-        <img class="image" src="images\hr-people_4x.jpg">
+        <img class="image" src="images\homepic.jpg">
 
       </div>
     </div>
   </div>
+
+  <footer class="not-colored" id="footer">
+    <img class="icon" src="/icons/twitterwhite.png">
+    <img class="icon" src="/icons/facebookwhite.png">
+    <img class="icon" src="/icons/instagramwhite.png">
+    <img class="icon" src="/icons/mailwhite.png">
+    <p>© Copyright Abhishek Dhar</p>
+
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
