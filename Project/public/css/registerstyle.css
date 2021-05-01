@@ -109,7 +109,7 @@ padding: 10px 0 10px 18px;
 .input-group.no-border .form-control+.input-group-text {
 background-color: rgba(222, 222, 222, 0.3);
 border: medium none;
-} */
+} 
 
 
 
@@ -150,9 +150,12 @@ position: relative;
 .card {
  border: 0;
  width: 100%;
-
  
-}                                                                    
+}
+
+.row{
+    margin-top:-40px;
+}
                                                                      
  .card .card-footer,.card-header  {
 background-color: transparent;
@@ -183,64 +186,44 @@ border:0;
  }
                                                                                                                                                 
  .section-signup {
-    padding-top: 20vh;
-    }
+padding-top: 20vh;
+}
     
-    [data-background-color="orange"] {
-        background-color: #e95e38;
-    }
+[data-background-color="orange"] {
+background-color: #e95e38;
+}
     
-     [data-background-color]:not([data-background-color="gray"]) {
-            color: #FFFFFF;
-        }
+[data-background-color]:not([data-background-color="gray"]) {
+ color: #FFFFFF;
+}
            
-        [data-background-color]:not([data-background-color="gray"]) .form-control::-webkit-input-placeholder {
-            color: #ebebeb;
-            opacity: 1;
-            filter: alpha(opacity=100);
-            }    
+[data-background-color]:not([data-background-color="gray"]) .form-control::-webkit-input-placeholder {
+color: #ebebeb;
+opacity: 1;
+ filter: alpha(opacity=100);
+}    
         
         
-            [data-background-color]:not([data-background-color="gray"]) .input-group.no-border .form-control {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: #FFFFFF;
-                }            
+[data-background-color]:not([data-background-color="gray"]) .input-group.no-border .form-control {
+background-color: rgba(255, 255, 255, 0.1);
+color: #FFFFFF;
+}            
             
-                [data-background-color]:not([data-background-color="gray"]) .input-group.no-border .input-group-text {
-                    background-color: rgba(255, 255, 255, 0.1);
-                    border: none;
-                    color: #FFFFFF;
-                    }                 
+[data-background-color]:not([data-background-color="gray"]) .input-group.no-border .input-group-text {
+background-color: rgba(255, 255, 255, 0.1);
+ border: none;
+ color: #FFFFFF;
+}                 
                 
-                        
-                        
-                            
-                           
-                                
-                                
-                                            
-                                            
-                                                
-                                             
-                                                    
-                                                    
-                                                           
-                                                                
-                                                               
-                                                                    
-                                                                                                                                                                  
-                                                                                                                                                
-                                                                                                                                            
-                                                                                                                                                                                            
  
-                                                                                                                                                                                               
-                                                                                                                                                                                                    
-                                                                                                                                                                                                    
-                                                                                                                                                                                                                    
-                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                        
+footer{
+    text-align: center;
+    margin-top:10px;
+    color:white;
+}
+
+.icon{
+    height:20px;
+    width:20px;
+    margin:10px;
+}

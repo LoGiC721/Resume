@@ -1,66 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link href="css/registerstyle.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="css/registerstyle.css" rel="stylesheet">
 </head>
+
 <body>
-       
-        <div class="section section-signup" style="background-image: url('images/bg5.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+
+    <div class="section section-signup"
+        style="background-image: url('images/bg5.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
         <div class="container">
-        <div class="row">
-        <div class="card card-signup" data-background-color="orange">
-        <form class="form" method="POST" action="/register">
-        <div class="card-header text-center">
-        <h3 class="card-title title-up">Register</h3>
-        <div class="social-line">
-        <a href="/auth/facebook" class="btn btn-neutral btn-facebook btn-icon btn-round">
-        <i class="fab fa-facebook-square"></i>
-        </a>
-        <a href="/auth/twitter" class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round">
-        <i class="fab fa-twitter"></i>
-        </a>
-        <a href="/auth/google" class="btn btn-neutral btn-google btn-icon btn-round">
-        <i class="fab fa-google-plus"></i>
-        </a>
-        </div>
-        </div>
-        <div class="card-body">
-        <div class="input-group no-border">
-        <div class="input-group-prepend">
-        <span class="input-group-text">
-        <i class="now-ui-icons users_circle-08"></i>
-        </span>
-        </div>
-        <input type="text" class="form-control" placeholder="Email..." name="username">
-        </div>
-        <div class="input-group no-border">
-        <div class="input-group-prepend">
-        <span class="input-group-text">
-        <i class="now-ui-icons ui-1_email-85"></i>
-        </span>
-        </div>
-        <input type="password" class="form-control" placeholder="Password..." name="password">
-        </div>
-        </div>
-        <div class="card-footer text-center">
-        <button type="submit" class="btn btn-neutral btn-round btn-lg">Get Started</button>
-        </div>
-        <div class="card-footer text-center">
-            <a class="registerlink" href="/login">Already have an account?</a>
+            <div class="row">
+                <div class="card card-signup" data-background-color="orange">
+                    <form class="form" method="POST" action="/register">
+                        <div class="card-header text-center">
+                            <h3 class="card-title title-up">Register</h3>
+                            <div class="social-line">
+                                <a href="/auth/facebook" class="btn btn-neutral btn-facebook btn-icon btn-round">
+                                    <i class="fab fa-facebook-square"></i>
+                                </a>
+                                <a href="/auth/twitter" class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="/auth/google" class="btn btn-neutral btn-google btn-icon btn-round">
+                                    <i class="fab fa-google-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group no-border">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="now-ui-icons users_circle-08"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Email..." name="username">
+                            </div>
+                            <div class="input-group no-border">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="now-ui-icons ui-1_email-85"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Password..." name="password">
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-neutral btn-round btn-lg">Get Started</button>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a class="registerlink" href="/login">Already have an account?</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
         </div>
-        </div>
-        </div>
-        </div>
+        <footer class="not-colored" id="footer">
+            <img class="icon" src="/icons/twitterwhite.png">
+            <img class="icon" src="/icons/facebookwhite.png">
+            <img class="icon" src="/icons/instagramwhite.png">
+            <img class="icon" src="/icons/mailwhite.png">
+            <p>© Copyright Abhishek Dhar</p>
+
+        </footer>
+    </div>
 </body>
+
 </html>
