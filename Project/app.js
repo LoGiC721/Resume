@@ -208,6 +208,10 @@ app.get("/logout", function(req, res){
 
 let templateno=1;
 
+app.get("/sidemenu",function(req,res)
+{
+  res.render("sidemenu")
+})
 
 app.get("/download", function (req, res) {
 
