@@ -1,37 +1,42 @@
 <%-include("sidemenu")-%>
-<h1>Your Project Details</h1>
-<form method="POST" action="projects">
-    <div>
-        <label for="projectname">project </label>
-        <input type="text" placeholder="projectname" id="projectname" name="projectname">
+    <h1>Your Project Details</h1>
+    <form method="POST" action="projects">
+        <div>
+            <label for="projectname">project </label>
+            <input type="text" placeholder="projectname" id="projectname" name="projectname">
+        </div>
+        <div>
+            <label for="project1description">Project Description</label>
+            <input type="text" placeholder="project1description" id="project1description" name="project1description">
+        </div>
+        <div>
+            <label for="link">Link</label>
+            <input type="url" placeholder="link" id="link" name="link">
+        </div>
+        <div>
+            <label for="toolsused">Tools Used</label>
+            <input type="text" placeholder="toolsused" id="toolsused" name="toolsused">
+        </div>
+
+        <div>
+            <button>Prev</button>
+            <button>Next</button>
+        </div>
+    </form>
     </div>
-    <div>
-        <label for="project1description">Project Description</label>
-        <input type="text" placeholder="project1description" id="project1description" name="project1description">
-    </div>
-    <div>
-        <label for="link">Link</label>
-        <input type="url" placeholder="link" id="link" name="link">
-    </div>
-    <div>
-        <label for="toolsused">Tools Used</label>
-        <input type="text" placeholder="toolsused" id="toolsused" name="toolsused">
     </div>
 
-    <div>
-        <button>Prev</button>
-        <button>Next</button>
-    </div>
-</form>
-</div>
-</div>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 
-<!-- jQuery CDN - Slim version (=without AJAX) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- Popper.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
-</html>
-   
+    </html>
