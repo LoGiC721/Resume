@@ -257,3 +257,13 @@ a.article:hover {
     border-bottom:1px solid #56c9aa;
 }
 
+
+.sameline input {
+    margin-bottom: 10px;
+    width: 50%;
+  }
+  
+  .sameline label {
+    display: inline-block;
+    width: 100px;
+  }
