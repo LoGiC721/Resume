@@ -52,7 +52,6 @@ a:focus {
 }
 
 
-
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -62,7 +61,7 @@ a:focus {
     width: 100%;
     align-items: stretch;
     position:relative;
-    bottom:39.5px;
+    bottom:39px;
 }
 
 #sidebar {
@@ -84,7 +83,7 @@ a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #fff;
+    /* border-bottom: 1px solid #fff; */
 }
 
 #sidebar ul p {
@@ -124,7 +123,6 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
 }
 
 ul.CTAs {
@@ -140,8 +138,8 @@ ul.CTAs a {
 }
 
 a.download {
-    background: #fff;
-    color: #7386D5;
+    background: #56c9aa;
+    color: black;
 }
 
 a.article,
@@ -189,16 +187,21 @@ a.article:hover {
     height: 125px;
 }
 
-
-.line{
-    color:white;
-    border-bottom:1px solid;
+.end-vertical-line{
+    display: inline-block;
+    width:1px;
+    height: 100%;
+    position: absolute;
+    right:3px;
+    background-color: #fff;
 }
+
 
 .footer {
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom:0px;
+    height:70px;
     width: 100%;
     background-color:#14171D;
     color: white;
@@ -207,13 +210,50 @@ a.article:hover {
   }
 
   .prev{
+    background-color: #56c9aa;
    position:absolute;
-   left:4%;
+   left:19%;
    bottom:20%;
   }
 
   .next{
+    background-color: #56c9aa;
     position:absolute;
-    right:4%;
+    right:19%;
     bottom:20%;
   } 
+
+
+
+
+  .firstword {
+    text-transform: lowercase;
+    text-decoration: none;
+    color: white;
+    padding-left:100px;
+}
+
+
+.secondword {
+    text-transform: lowercase;
+    color: #56c9aa;
+}
+
+
+.togglebutton{
+    background-color: #56c9aa;
+}
+
+.heading{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button:hover{
+    background-color: #fff;
+}
+
+.line{
+    border-bottom:1px solid #56c9aa;
+}
+
