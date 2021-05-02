@@ -1,44 +1,45 @@
 <%-include("sidemenu")-%>
+<div class="text-center information">
     <h1>Your Work Details</h1>
     <form method="POST" action="work">
-        <div>
+        <div class="sameline">
             <label for="companyname">Company name</label>
             <input type="text" placeholder="Company name" id="companyname" name="companyname">
         </div>
-        <div>
+        <div class="sameline">
             <label for="jobtitle">jobtitle</label>
             <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle">
         </div>
-        <div>
+        <div class="sameline">
             <label for="state">state</label>
             <input type="text" placeholder="state" id="state" name="state">
         </div>
-        <div>
+        <div class="sameline">
             <label for="city">city</label>
             <input type="text" placeholder="city" id="city" name="city">
         </div>
-        <div>
+        <div class="sameline">
             <label for="startdate">Start Date</label>
             <input type="date" placeholder="startdate" id="startdate" name="startdate">
         </div>
-        <div>
+        <div class="sameline">
             <label for="enddate">End Date</label>
             <input type="date" placeholder="enddate" id="enddate" name="enddate">
         </div>
-        <div>
+        <div class="sameline">
             <label for="jobdescription">Job Description</label>
             <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription">
         </div>
-
-        <div>
-            <button>Prev</button>
-            <button>Next</button>
-        </div>
+      <br><br>
+        <div class="footer">
+            <button class="btn button prev">Prev</button>
+            <button class="btn button next">Next</button>
+          </div>
     </form>
 
     </div>
     </div>
-
+</div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -1,83 +1,85 @@
 <%-include("sidemenu")-%>
+<div class="text-center information">
     <h1>Your Educational Details</h1>
     <form method="POST" action="education">
-        <div>
+        <div class="sameline">
             <label for="collegename">College/University</label>
             <input type="text" placeholder="College/University" id="collegename" name="collegename">
         </div>
-        <div>
+        <div class="sameline">
             <label for="collegestartdate">Start date</label>
             <input type="date" placeholder="Start date" id="collegestartdate" name="collegestartdate">
         </div>
-        <div>
+        <div class="sameline">
             <label for="collegeenddate">End date</label>
             <input type="date" placeholder="End date" id="collegeenddate" name="collegeenddate">
         </div>
-        <div>
+        <div class="sameline">
             <label for="collegedegree">Degree</label>
             <input type="text" placeholder="Degree" id="collegedegree" name="collegedegree">
         </div>
-        <div>
+        <div class="sameline">
             <label for="collegegpa">Gpa</label>
             <input type="number" placeholder="Gpa" id="collegegpa" name="collegegpa">
         </div>
-        <div>
+        <div class="sameline">
             <label for="collegelocation">College Location</label>
             <input type="text" placeholder="location" id="collegelocation" name="collegelocation">
         </div>
         <br><br><br><br>
         <p>10 Class</p>
-        <div>
+        <div class="sameline">
             <label for="sscschoolname">School</label>
             <input type="text" placeholder="School" id="sscschoolname" name="sscschoolname">
         </div>
-        <div>
+        <div class="sameline">
             <label for="sscboard">Type of board</label>
             <input type="text" placeholder="Board" id="sscboard" name="sscboard">
         </div>
-        <div>
+        <div class="sameline">
             <label for="ssccompletion">Year of completion</label>
             <input type="date" placeholder="Year of completion" id="ssccompletion" name="ssccompletion">
         </div>
-        <div>
+        <div class="sameline">
             <label for="sscpercentage">Percentage</label>
             <input type="number" placeholder="Percentage" id="sscpercentage" name="sscpercentage">
         </div>
-        <div>
+        <div class="sameline">
             <label for="sscschoollocation">School Location</label>
             <input type="text" placeholder="location" id="sscschoollocation" name="sscschoollocation">
         </div>
 
         <br><br><br>
         <p>12 Class</p>
-        <div>
+        <div class="sameline">
             <label for="hhcschoolname">School</label>
             <input type="text" placeholder="School" id="hhcschoolname" name="hhcschoolname">
         </div>
-        <div>
+        <div class="sameline">
             <label for="hscboard">Type of board</label>
             <input type="text" placeholder="Board" id="hscboard" name="hscboard">
         </div>
-        <div>
+        <div class="sameline">
             <label for="hsccompletion">Year of completion</label>
             <input type="date" placeholder="Year of completion" id="hsccompletion" name="hsccompletion">
         </div>
-        <div>
+        <div class="sameline">
             <label for="hscpercentage">Percentage</label>
             <input type="number" placeholder="Percentage" id="hscpercentage" name="hscpercentage">
         </div>
-        <div>
+        <div class="sameline">
             <label for="hscschoollocation">School Location</label>
             <input type="text" placeholder="location" id="hscschoollocation" name="hscschoollocation">
         </div>
-        <div>
-            <button>Prev</button>
-            <button>Next</button>
-        </div>
+        <br><br>
+        <div class="footer">
+            <button class="btn button prev">Prev</button>
+            <button class="btn button next">Next</button>
+          </div>
     </form>
     </div>
     </div>
-
+</div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

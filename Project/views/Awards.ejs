@@ -1,32 +1,32 @@
 <%-include("sidemenu")-%>
+<div class="text-center information">
     <h1>Your Award Details</h1>
     <form method="POST" action="awards">
-        <div>
+        <div class="sameline">
             <label for="awardname">Award name </label>
             <input type="text" placeholder="awardname" id="awardname" name="awardname">
         </div>
-        <div>
+        <div class="sameline">
             <label for="awarddate">Award Date</label>
             <input type="date" placeholder="awarddate" id="awarddate" name="awarddate">
         </div>
-        <div>
+        <div class="sameline">
             <label for="awarder">Awarder</label>
             <input type="text" placeholder="awarder" id="awarder" name="awarder">
         </div>
-        <div>
+        <div class="sameline">
             <label for="Awarddescription">Award description</label>
             <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription">
         </div>
-
-        <div>
-            <button>Prev</button>
-            <button>Download</button>
-
-        </div>
+        <br><br>
+        <div class="footer">
+            <button class="btn button prev">Prev</button>
+            <button class="btn button next">Next</button>
+          </div>
     </form>
     </div>
     </div>
-
+</div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
