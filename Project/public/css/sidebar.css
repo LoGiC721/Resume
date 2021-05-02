@@ -98,7 +98,7 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: black;
     background: #fff;
 }
 
@@ -144,7 +144,7 @@ a.download {
 
 a.article,
 a.article:hover {
-    background: #6d7fcc !important;
+    background: black !important;
     color: #fff !important;
 }
 
@@ -270,8 +270,30 @@ a.article:hover {
 
   .coloured{
       background-color: #56C9AA;
+      color:black;
   }
 
-  .white{
-    background-color:#14171D;
+ 
+
+  input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color:#999;
+  }
+
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+
+  .notclickable{
+    background-color: #14171D;
+    border:solid #fff2;
+    color:#fff2;
+  }
+
+  .notclickable:hover{
+      background-color:#14171D;
   }
