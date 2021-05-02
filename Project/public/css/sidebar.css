@@ -2,6 +2,7 @@
     DEMO STYLE
 */
 
+
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
@@ -16,6 +17,10 @@ p {
     color: #999;
 }
 
+#content{
+    background-color: #14171D;
+}
+
 a,
 a:hover,
 a:focus {
@@ -26,7 +31,7 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+   background-color: #14171D;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -46,6 +51,8 @@ a:focus {
     margin: 40px 0;
 }
 
+
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -54,12 +61,14 @@ a:focus {
     display: flex;
     width: 100%;
     align-items: stretch;
+    position:relative;
+    bottom:39.5px;
 }
 
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background:#414141;
+    background:#14171D;
     color: #fff;
     transition: all 0.3s;
 }
@@ -70,12 +79,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #414141;
+    background: #14171D;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #fff;
 }
 
 #sidebar ul p {
@@ -167,3 +176,44 @@ a.article:hover {
         display: none;
     }
 }
+
+
+.information{
+    color:white;
+    
+}
+
+.vertical-line{
+    display: inline-block;
+    width:1px;
+    height: 125px;
+}
+
+
+.line{
+    color:white;
+    border-bottom:1px solid;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:#14171D;
+    color: white;
+    text-align: center;
+    border-top: 1px solid white;
+  }
+
+  .prev{
+   position:absolute;
+   left:4%;
+   bottom:20%;
+  }
+
+  .next{
+    position:absolute;
+    right:4%;
+    bottom:20%;
+  } 
