@@ -297,3 +297,16 @@ a.article:hover {
   .notclickable:hover{
       background-color:#14171D;
   }
+
+
+  h3,li{
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  label{
+    font-family: 'Lato', sans-serif;
+  }
+
+  ::placeholder{
+    font-family: 'Lato', sans-serif;
+  }
