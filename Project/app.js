@@ -208,10 +208,6 @@ app.get("/logout", function(req, res){
 
 let templateno=1;
 
-app.get("/sidemenu",function(req,res)
-{
-  res.render("sidemenu")
-})
 
 app.get("/download", function (req, res) {
 
@@ -223,29 +219,12 @@ app.get("/download", function (req, res) {
       })
 });
 
-app.get("/profile", function (req, res) {
-  res.render("Profile");
-});
 
-app.get("/education", function (req, res) {
-  res.render("Education");
-});
+app.get("/:customName", function (req, res) {
+  let customListName = (req.params.customName);
+        res.render(customListName,{current:customListName});
+      });
 
-app.get("/work", function (req, res) {
-  res.render("Work");
-});
-
-app.get("/skills", function (req, res) {
-  res.render("Skills");
-});
-
-app.get("/projects", function (req, res) {
-  res.render("Projects");
-});
-
-app.get("/awards", function (req, res) {
-  res.render("Awards");
-});
 
 app.post("/",function(req,res)
 {

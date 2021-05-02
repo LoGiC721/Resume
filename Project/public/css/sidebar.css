@@ -267,3 +267,11 @@ a.article:hover {
     display: inline-block;
     width: 100px;
   }
+
+  .coloured{
+      background-color: #56C9AA;
+  }
+
+  .white{
+    background-color:#14171D;
+  }
