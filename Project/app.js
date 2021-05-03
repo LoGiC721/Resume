@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -222,8 +222,9 @@ app.get("/download", function (req, res) {
 
 app.get("/:customName", function (req, res) {
   let customListName = (req.params.customName);
+  // console.log(count);
         res.render(customListName,{current:customListName});
-      });
+ });
 
 
 app.post("/",function(req,res)
@@ -378,8 +379,6 @@ var myquery = {_id:req.user.id };
   res.redirect("/projects");
 });
 app.post("/projects", function (req, res) {
-//   console.log(req.body);
-
 var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     projectname: req.body.projectname,
