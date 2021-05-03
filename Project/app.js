@@ -219,11 +219,10 @@ app.get("/download", function (req, res) {
       })
 });
 
-
+let count=1;
 app.get("/:customName", function (req, res) {
   let customListName = (req.params.customName);
-  // console.log(count);
-        res.render(customListName,{current:customListName});
+        res.render(customListName,{current:customListName,count:count});
  });
 
 
@@ -378,7 +377,12 @@ var myquery = {_id:req.user.id };
   });
   res.redirect("/projects");
 });
+
 app.post("/projects", function (req, res) {
+  if(req.body.btn==="1")
+   count++;
+  else
+   count--; 
 var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     projectname: req.body.projectname,
@@ -391,7 +395,7 @@ var myquery = {_id:req.user.id };
     if(!err)
     console.log("Documents updated successfully");
   });
-  res.redirect("/awards");
+  res.redirect("/projects");
 });
 
 app.post("/awards", function (req, res) {
