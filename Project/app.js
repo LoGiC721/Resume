@@ -70,6 +70,14 @@ const UserSchema = new Schema({
   project1description: { type: String, default: null },
   link: { type: String, default: null },
   toolsused: { type: String, default: null },
+  // project:[
+  //   {
+  //   projectname: { type: String, default: null },
+  //   project1description: { type: String, default: null },
+  //   link: { type: String, default: null },
+  //   toolsused: { type: String, default: null },
+
+  //   }],
   awardname: { type: String, default: null },
   awarddate: { type: String, default: null },
   awarder: { type: String, default: null },
@@ -219,10 +227,10 @@ app.get("/download", function (req, res) {
       })
 });
 
-let count=1;
+// let count=1;
 app.get("/:customName", function (req, res) {
   let customListName = (req.params.customName);
-        res.render(customListName,{current:customListName,count:count});
+        res.render(customListName,{current:customListName});
  });
 
 
@@ -379,23 +387,40 @@ var myquery = {_id:req.user.id };
 });
 
 app.post("/projects", function (req, res) {
-  if(req.body.btn==="1")
-   count++;
-  else
-   count--; 
+  console.log(req.body);
+  let value=req.body.btn;
+  // if(value==="1")
+  //  count++;
+  // else
+  // {
+  //   if(count>1)
+  //  count--;
+  // } 
 var myquery = {_id:req.user.id };
   var newvalues = { $set: { 
     projectname: req.body.projectname,
     project1description: req.body.project1description,
     link: req.body.link,
     toolsused: req.body.toolsused,
-
+    
+    // project:[
+    //   {
+    //     projectname: req.body.projectname,
+    //     project1description: req.body.project1description,
+    //     link: req.body.link,
+    //     toolsused: req.body.toolsused,
+    //   }
+    // ]
    } };
   Project.updateMany(myquery, newvalues,function(err,res){
     if(!err)
     console.log("Documents updated successfully");
   });
-  res.redirect("/projects");
+  console.log(req.body.projectname[2]);
+  if(value==="3")
+  res.redirect("/awards");
+  else
+  res.redirect("/projects")
 });
 
 app.post("/awards", function (req, res) {

@@ -3,7 +3,7 @@
     <h3>Your Project Details</h3>
     <br>
     <form method="POST" action="projects">
-          <%for(let i=0;i<count;i++){%> 
+        
         <div class="sameline">
             <label for="projectname">project </label>
             <input type="text" placeholder="projectname" id="projectname" name="projectname">
@@ -22,7 +22,6 @@
         </div>
         <br>
         <hr class="linecoloured">
-        <%}%>
         <br>
             <button id="fg" name="btn" value="1">Add</button>
             <button id="fg" name="btn" value="2">Delete</button>
@@ -31,7 +30,7 @@
         <br><br>
         <div class="footer">
             <a href="/skills" class="btn button prev">Prev</a>
-            <button class="btn button next">Next</button>
+            <button name="btn" value="3" class="btn button next">Next</button>
           </div>
     </form>
     </div>
