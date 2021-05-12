@@ -228,7 +228,7 @@ app.get("/download", function (req, res) {
 });
 
 let count = 1;
-let flag=0;
+let flag = 0;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
@@ -238,7 +238,7 @@ app.get("/:customName", function (req, res) {
         current: customListName,
         found: found,
         count: count,
-        flag:flag
+        flag: flag,
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -378,26 +378,25 @@ app.post("/skills", function (req, res) {
   res.redirect("/projects");
 });
 
-let projectno = 0;
 app.post("/projects", function (req, res) {
-   console.log(req.body);
-   console.log("count="+count);
- 
   let value = req.body.btn;
   if (value === "1") {
     count++;
   } else {
-    if (value === "1" && count > 1) {
+    if (value === "2" && count > 1) {
       count--;
     }
   }
 
-  
+  // console.log(req.body);
+  //  console.log("count="+count);
 
   var myquery = { _id: req.user.id };
-  if (projectno === 0) {
-    var newvalues = {
-      $push: {
+
+  let checkisarray = req.body.projectname;
+  if (!Array.isArray(checkisarray)) {
+    var newvalue = {
+      $set: {
         project: {
           projectname: req.body.projectname,
           project1description: req.body.project1description,
@@ -406,60 +405,44 @@ app.post("/projects", function (req, res) {
         },
       },
     };
-    Project.updateMany(myquery, newvalues, function (err, res) {
+    Project.updateMany(myquery, newvalue, function (err, res) {
       if (!err) console.log("Documents inserted successfully");
     });
   } else {
-      let arr = req.body.projectname;
-      Project.updateMany(
-        myquery,
-        { $set: { project: [] } },
-        function (err, res) {
-          if (!err) console.log("Documents deleted successfully");
-        }
-      );
+    let arr = req.body.projectname;
+    Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
 
-      for (let i = 0; i < arr.length; i++) {
-        // console.log("Project : ", docs[0].project[i]);
-        var newvalue = {
-          $push: {
-            project: {
-              projectname: req.body.projectname[i],
-              project1description: req.body.project1description[i],
-              link: req.body.link[i],
-              toolsused: req.body.toolsused[i],
-            },
+    for (let i = 0; i < arr.length; i++) {
+      var newvalue = {
+        $push: {
+          project: {
+            projectname: req.body.projectname[i],
+            project1description: req.body.project1description[i],
+            link: req.body.link[i],
+            toolsused: req.body.toolsused[i],
           },
-        };
-        Project.updateMany(myquery, newvalue, function (err, res) {
-          if (!err) console.log("Documents inserted successfully");
-        });
-      }
-      // console.log("Project : ", docs[0].project);
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
     }
- 
+  }
 
-  //console.log("projectno="+projectno);
- // console.log("yhi hai jo hai=====" + req.body.projectname.length);
-
-  projectno=1;
-  flag=0;
   if (value === "3") {
-   flag=1;
-   console.log("flag="+flag);
+    flag = 1;
     res.redirect("/awards");
-  } else 
-  {
-    flag=0;
-    console.log("flag="+flag);
+  } else {
+    if (value === "1") flag = 0;
+    else flag = 1;
     res.redirect("/projects");
   }
 });
 
 app.post("/awards", function (req, res) {
   //   console.log(req.body);
-
-  //count++;
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
