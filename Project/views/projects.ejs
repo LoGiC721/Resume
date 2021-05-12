@@ -7,7 +7,7 @@
 
                 <div class="sameline">
                     
-                    <%if(found[0].project.length!==0&&tmp!==0&&(i+2<count||i+2===count)){%>
+                    <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="projectname">project </label>
                         <input type="text" placeholder="projectname" id="projectname" name="projectname"
                             value="<%=found[0].project[i].projectname%>">
@@ -17,10 +17,10 @@
                             <%}%>
                 </div>
                 <div class="sameline">
-                    <%if(found[0].project.length!==0){%>
+                    <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="project1description">Project Description</label>
                         <input type="text" placeholder="project1description" id="project1description"
-                            name="project1description" value="<%=found[0].project[0].project1description%>">
+                            name="project1description" value="<%=found[0].project[i].project1description%>">
                             <%}else{%>
                             <label for="project1description">Project Description</label>
                             <input type="text" placeholder="project1description" id="project1description"
@@ -28,10 +28,10 @@
                             <%}%>
                 </div>
                 <div class="sameline">
-                    <%if(found[0].project.length!==0){%>
+                    <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="link">Link</label>
                         <input type="url" placeholder="link" id="link" name="link"
-                            value="<%=found[0].project[0].link%>">
+                            value="<%=found[0].project[i].link%>">
                             <%}else{%>
                                 <label for="link">Link</label>
                                 <input type="url" placeholder="link" id="link" name="link"
@@ -39,10 +39,10 @@
                             <%}%>
                 </div>
                 <div class="sameline">
-                    <%if(found[0].project.length!==0){%>
+                    <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="toolsused">Tools Used</label>
                         <input type="text" placeholder="toolsused" id="toolsused" name="toolsused"
-                            value="<%=found[0].project[0].toolsused%>">
+                            value="<%=found[0].project[i].toolsused%>">
                             <%}else{%>
                             <label for="toolsused">Tools Used</label>
                             <input type="text" placeholder="toolsused" id="toolsused" name="toolsused" value="">

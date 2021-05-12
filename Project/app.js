@@ -228,8 +228,7 @@ app.get("/download", function (req, res) {
 });
 
 let count = 1;
-//  let temporary=-1;
-let temporary = 0;
+let flag=0;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
@@ -239,7 +238,7 @@ app.get("/:customName", function (req, res) {
         current: customListName,
         found: found,
         count: count,
-        tmp: temporary,
+        flag:flag
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -381,8 +380,9 @@ app.post("/skills", function (req, res) {
 
 let projectno = 0;
 app.post("/projects", function (req, res) {
-  // console.log(req.body);
-  if (count === 0) projectno = 0;
+   console.log(req.body);
+   console.log("count="+count);
+ 
   let value = req.body.btn;
   if (value === "1") {
     count++;
@@ -392,7 +392,7 @@ app.post("/projects", function (req, res) {
     }
   }
 
-  //console.log("count"+count);
+  
 
   var myquery = { _id: req.user.id };
   if (projectno === 0) {
@@ -410,7 +410,6 @@ app.post("/projects", function (req, res) {
       if (!err) console.log("Documents inserted successfully");
     });
   } else {
-    if (projectno < count) {
       let arr = req.body.projectname;
       Project.updateMany(
         myquery,
@@ -438,17 +437,23 @@ app.post("/projects", function (req, res) {
       }
       // console.log("Project : ", docs[0].project);
     }
-  }
+ 
 
   //console.log("projectno="+projectno);
  // console.log("yhi hai jo hai=====" + req.body.projectname.length);
 
-  temporary++;
-  projectno++;
-
+  projectno=1;
+  flag=0;
   if (value === "3") {
+   flag=1;
+   console.log("flag="+flag);
     res.redirect("/awards");
-  } else res.redirect("/projects");
+  } else 
+  {
+    flag=0;
+    console.log("flag="+flag);
+    res.redirect("/projects");
+  }
 });
 
 app.post("/awards", function (req, res) {
