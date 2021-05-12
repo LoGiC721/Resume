@@ -8,12 +8,12 @@
                 <div class="sameline">
                     
                     <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
-                        <%=console.log("yes");%>
+                        
                         <label for="projectname">project </label>
                         <input type="text" placeholder="projectname" id="projectname" name="projectname"
                             value="<%=found[0].project[i].projectname%>">
                             <%}else{%>
-                                <%=console.log("no");%>
+                               
                             <label for="projectname">project </label>
                             <input type="text" placeholder="projectname" id="projectname" name="projectname" value="">
                             <%}%>
