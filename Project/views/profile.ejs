@@ -4,36 +4,77 @@
       <br>
       <form method="POST" action="profile">
         <div class="sameline">
+            <%if(found[0].firstname!=="NULL"){%>
             <label for="firstname">First Name</label>
-            <input type="text"  placeholder="First name" id="firstname" name="firstname">
+            <input type="text"  placeholder="First name" id="firstname" name="firstname" value="<%=found[0].firstname%>">
+            <%}else{%>
+                <label for="firstname">First Name</label>
+                <input type="text"  placeholder="First name" id="firstname" name="firstname" value="">
+            <%}%>
         </div>
+
         <div class="sameline">
+            <%if(found[0].lastname!=="NULL"){%>
             <label for="lastname">Last Name</label>
-            <input type="text" placeholder="Last name" id="lastname" name="lastname">
+            <input type="text" placeholder="Last name" id="lastname" name="lastname" value="<%=found[0].lastname%>">
+            <%}else{%>
+                <label for="lastname">Last Name</label>
+                <input type="text" placeholder="Last name" id="lastname" name="lastname" value="">
+                <%}%>    
         </div>
         <div class="sameline">
+            <%if(found[0].email!=="NULL"){%>
             <label for="email">Email</label>
-            <input type="email" placeholder="Email" id="email" name="email">
+            <input type="email" placeholder="Email" id="email" name="email" value="<%=found[0].email%>" >
+            <%}else{%>
+                <label for="email">Email</label>
+                <input type="email" placeholder="Email" id="email" name="email" value="">
+                <%}%> 
         </div>
         <div class="sameline">
+            <%if(found[0].pno!=="NULL"){%>
             <label for="pno">Phone</label>
-            <input type="number" placeholder="Phone" id="pno" name="pno">
+            <input type="number" placeholder="Phone" id="pno" name="pno" value="<%=found[0].pno%>">
+            <%}else{%>
+                <label for="pno">Phone</label>
+            <input type="number" placeholder="Phone" id="pno" name="pno" value="">
+            <%}%> 
         </div>
         <div class="sameline">
+            <%if(found[0].website!=="NULL"){%>
             <label for="website">Website</label>
-            <input type="url" placeholder="Website" id="website" name="website">
+            <input type="url" placeholder="Website" id="website" name="website"  value="<%=found[0].website%>">
+            <%}else{%>
+                <label for="website">Website</label>
+                <input type="url" placeholder="Website" id="website" name="website" value="">
+                <%}%>  
         </div>
         <div class="sameline">
+            <%if(found[0].github!=="NULL"){%>
             <label for="github">Github Link</label>
-            <input type="url" placeholder="Github" id="github" name="github">
+            <input type="url" placeholder="Github" id="github" name="github" value="<%=found[0].github%>">
+            <%}else{%>
+                <label for="github">Github Link</label>
+            <input type="url" placeholder="Github" id="github" name="github" value="">
+            <%}%>   
         </div>
         <div class="sameline">
+            <%if(found[0].linkedin!=="NULL"){%>
             <label for="linkedin">Linkedin Link</label>
-            <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin">
+            <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin" value="<%=found[0].linkedin%>">
+            <%}else{%>
+                <label for="linkedin">Linkedin Link</label>
+            <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin" value="">
+            <%}%>
         </div>
         <div class="sameline">
+            <%if(found[0].twitter!=="NULL"){%>
             <label for="twitter">Twitter Link</label>
-            <input type="url" placeholder="Twitter" id="twitter" name="twitter">
+            <input type="url" placeholder="Twitter" id="twitter" name="twitter" value="<%=found[0].twitter%>">
+            <%}else{%>
+                <label for="twitter">Twitter Link</label>
+                <input type="url" placeholder="Twitter" id="twitter" name="twitter" value="">
+                <%}%>  
         </div>
         <br><br>
         <div class="footer">
