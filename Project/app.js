@@ -221,6 +221,7 @@ app.get("/download", function (req, res) {
 let count = 1;
 let noOfProjects=1;
 let flag = 0;
+let flag1=0;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
@@ -232,6 +233,7 @@ app.get("/:customName", function (req, res) {
         count: count,
         noOfProjects:noOfProjects,
         flag: flag,
+        flag1:flag1,
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -364,11 +366,11 @@ app.post("/education", function (req, res) {
   }
 
   if (value === "3") {
-    flag = 1;
+    flag1 = 1;
     res.redirect("/work");
   } else {
-    if (value === "1") flag = 0;
-    else flag = 1;
+    if (value === "1") flag1 = 0;
+    else flag1 = 1;
     res.redirect("/education");
   }
 });
