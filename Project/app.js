@@ -58,6 +58,16 @@ const UserSchema = new Schema({
   hsccompletion: { type: Date, default: null },
   hscpercentage: { type: Number, default: null },
   hscschoollocation: { type: String, default: null },
+  school: [
+    {
+      collegename: { type: String, default: null },
+      collegestartdate: { type: Date, default: null },
+      collegeenddate: { type: Date, default: null },
+      collegedegree: { type: String, default: null },
+      collegegpa: { type: Number, default: null },
+      collegelocation: { type: String, default: null },
+    },
+  ],
   companyname: { type: String, default: null },
   jobtitle: { type: String, default: null },
   state: { type: String, default: null },
@@ -71,10 +81,6 @@ const UserSchema = new Schema({
   skills4: { type: String, default: null },
   skills5: { type: String, default: null },
   skills6: { type: String, default: null },
-  projectname: { type: String, default: null },
-  project1description: { type: String, default: null },
-  link: { type: String, default: null },
-  toolsused: { type: String, default: null },
   project: [
     {
       projectname: { type: String, default: null },
