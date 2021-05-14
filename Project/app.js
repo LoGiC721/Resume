@@ -12,6 +12,7 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
+
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -42,30 +43,14 @@ const UserSchema = new Schema({
   github: { type: String, default: null },
   linkedin: { type: String, default: null },
   twitter: { type: String, default: null },
-  collegename: { type: String, default: null },
-  collegestartdate: { type: Date, default: null },
-  collegeenddate: { type: Date, default: null },
-  collegedegree: { type: String, default: null },
-  collegegpa: { type: Number, default: null },
-  collegelocation: { type: String, default: null },
-  sscschoolname: { type: String, default: null },
-  sscboard: { type: String, default: null },
-  ssccompletion: { type: Date, default: null },
-  sscpercentage: { type: Number, default: null },
-  sscschoollocation: { type: String, default: null },
-  hscschoolname: { type: String, default: null },
-  hscboard: { type: String, default: null },
-  hsccompletion: { type: Date, default: null },
-  hscpercentage: { type: Number, default: null },
-  hscschoollocation: { type: String, default: null },
   school: [
     {
-      collegename: { type: String, default: null },
-      collegestartdate: { type: Date, default: null },
-      collegeenddate: { type: Date, default: null },
-      collegedegree: { type: String, default: null },
-      collegegpa: { type: Number, default: null },
-      collegelocation: { type: String, default: null },
+      name: { type: String, default: null },
+      startdate: { type: Date, default: Date.now },
+      enddate: { type: Date, default: Date.now },
+      degree: { type: String, default: null },
+      gpa: { type: Number, default: null },
+      location: { type: String, default: null },
     },
   ],
   companyname: { type: String, default: null },
@@ -234,6 +219,7 @@ app.get("/download", function (req, res) {
 });
 
 let count = 1;
+let noOfProjects=1;
 let flag = 0;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
@@ -244,6 +230,7 @@ app.get("/:customName", function (req, res) {
         current: customListName,
         found: found,
         count: count,
+        noOfProjects:noOfProjects,
         flag: flag,
       });
       //  console.log(found[0].project[0].projectname);
@@ -315,32 +302,75 @@ app.post("/profile", function (req, res) {
   res.redirect("/education");
 });
 app.post("/education", function (req, res) {
-  //   console.log(req.body);
+    // console.log(req.body.startdate);
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfProjects++;
+  } else {
+    if (value === "2" && noOfProjects > 1) {
+      noOfProjects--;
+    }
+  }
+
+  
+  //  console.log("noOfProjects="+noOfProjects);
+
   var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      collegename: req.body.collegename,
-      collegestartdate: req.body.collegestartdate,
-      collegeenddate: req.body.collegeenddate,
-      collegedegree: req.body.collegedegree,
-      collegegpa: req.body.collegegpa,
-      collegelocation: req.body.collegelocation,
-      sscschoolname: req.body.sscschoolname,
-      sscboard: req.body.sscboard,
-      ssccompletion: req.body.ssccompletion,
-      sscpercentage: req.body.sscpercentage,
-      sscschoollocation: req.body.sscschoollocation,
-      hscschoolname: req.body.hscschoolname,
-      hscboard: req.body.hscboard,
-      hsccompletion: req.body.hsccompletion,
-      hscpercentage: req.body.hscpercentage,
-      hscschoollocation: req.body.hscschoollocation,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
-  res.redirect("/work");
+
+  let checkisarray = req.body.name;
+  if (!Array.isArray(checkisarray)) {
+    
+    var newvalue = {
+      $set: {
+        school: 
+          {
+            name:req.body.name,
+            startdate:req.body.startdate,
+            enddate: req.body.enddate,
+            degree:req.body.degree,
+            gpa: req.body.gpa,
+            location: req.body.location,
+          },
+      },
+    };
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+  } else {
+    let arr = req.body.name;
+    Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    for (let i = 0; i < arr.length; i++) {
+     
+      var newvalue = {
+        $push: {
+          school: 
+          {
+            name:req.body.name[i],
+            startdate:req.body.startdate[i],
+            enddate: req.body.enddate[i],
+            degree:req.body.degree[i],
+            gpa: req.body.gpa[i],
+            location: req.body.location[i],
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    }
+  }
+
+  if (value === "3") {
+    flag = 1;
+    res.redirect("/work");
+  } else {
+    if (value === "1") flag = 0;
+    else flag = 1;
+    res.redirect("/education");
+  }
 });
 app.post("/work", function (req, res) {
   //   console.log(req.body);

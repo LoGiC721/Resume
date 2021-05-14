@@ -1,86 +1,112 @@
 <%-include("sidemenu")-%>
-<div class="text-center information">
-    <h3>Your Educational Details</h3>
-    <br>
-    <form method="POST" action="education">
-        <div class="sameline">
-            <label for="collegename">College</label>
-            <input type="text" placeholder="College/University" id="collegename" name="collegename">
-        </div>
-        <div class="sameline">
-            <label for="collegestartdate">Start date</label>
-            <input type="date" placeholder="Start date" id="collegestartdate" name="collegestartdate">
-        </div>
-        <div class="sameline">
-            <label for="collegeenddate">End date</label>
-            <input type="date" placeholder="End date" id="collegeenddate" name="collegeenddate">
-        </div>
-        <div class="sameline">
-            <label for="collegedegree">Degree</label>
-            <input type="text" placeholder="Degree" id="collegedegree" name="collegedegree">
-        </div>
-        <div class="sameline">
-            <label for="collegegpa">Gpa</label>
-            <input type="number" placeholder="Gpa" id="collegegpa" name="collegegpa">
-        </div>
-        <div class="sameline">
-            <label for="collegelocation">College Location</label>
-            <input type="text" placeholder="location" id="collegelocation" name="collegelocation">
-        </div>
-        <br><br><br><br>
-        <p>10 Class</p>
-        <div class="sameline">
-            <label for="sscschoolname">School</label>
-            <input type="text" placeholder="School" id="sscschoolname" name="sscschoolname">
-        </div>
-        <div class="sameline">
-            <label for="sscboard">Type of board</label>
-            <input type="text" placeholder="Board" id="sscboard" name="sscboard">
-        </div>
-        <div class="sameline">
-            <label for="ssccompletion">Year of completion</label>
-            <input type="date" placeholder="Year of completion" id="ssccompletion" name="ssccompletion">
-        </div>
-        <div class="sameline">
-            <label for="sscpercentage">Percentage</label>
-            <input type="number" placeholder="Percentage" id="sscpercentage" name="sscpercentage">
-        </div>
-        <div class="sameline">
-            <label for="sscschoollocation">School Location</label>
-            <input type="text" placeholder="location" id="sscschoollocation" name="sscschoollocation">
-        </div>
+    <div class="text-center information">
+        <h3>Your Educational Details</h3>
+        <br>
+        <form method="POST" action="education">
+            <%for(let i=0;i<noOfProjects;i++){%>
+                <div class="sameline">
+                    <%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag===1)){%>
+                        <label for="name">College</label>
+                        <input type="text" placeholder="College/University" id="name" name="name"
+                            value="<%=found[0].school[i].name%>">
+                        <%}else{%>
+                            <label for="name">College</label>
+                            <input type="text" placeholder="College/University" id="name" name="name" value="">
+                            <%}%>
+                </div>
+                <div class="sameline">
+                    <%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag===1)){%>
+                        <%let template=found[0].school[i].startdate%>
+                        <%let date=template.getDate()%>
+                        <%if(date<10){%>
+                         <%date='0'+date%>
+                         <%}%>   
+                        <%let month=(template.getMonth())+1%>
+                        <%if(month<10){%>
+                            <%month='0'+month%>
+                            <%}%>
+                        <%let year=template.getFullYear()%>
+                        <%let finaldate=`${year}-${month}-${date}`%>
+                        
+                        <label for="startdate">Start date</label>
+                        <input type="date" placeholder="Start date" id="startdate" name="startdate"
+                            value="<%=finaldate%>">
+                        <%}else{%>
+                           
+                            <label for="startdate">Start date</label>
+                            <input type="date" placeholder="Start date" id="startdate" name="startdate" value="">
+                            <%}%>
+                </div>
+                <div class="sameline">
+                    <%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag===1)){%>
+                        <%let template=found[0].school[i].enddate%>
+                        <%let date=template.getDate()%>
+                        <%if(date<10){%>
+                         <%date='0'+date%>
+                         <%}%>   
+                        <%let month=(template.getMonth())+1%>
+                        <%if(month<10){%>
+                            <%month='0'+month%>
+                            <%}%>
+                        <%let year=template.getFullYear()%>
+                        <%let finaldate=`${year}-${month}-${date}`%>
+                        <label for="enddate">End date</label>
+                        <input type="date" placeholder="End date" id="enddate" name="enddate"
+                            value="<%=finaldate%>">
+                        <%}else{%>
+                            <label for="enddate">End date</label>
+                            <input type="date" placeholder="End date" id="enddate" name="enddate" value="">
+                            <%}%>
+                </div>
+                <div class="sameline">
+                    <%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag===1)){%>
+                        <label for="degree">Degree</label>
+                        <input type="text" placeholder="Degree" id="degree" name="degree"
+                            value="<%=found[0].school[i].degree%>">
+                        <%}else{%>
+                            <label for="degree">Degree</label>
+                            <input type="text" placeholder="Degree" id="degree" name="degree" value="">
+                            <%}%>
 
-        <br><br><br>
-        <p>12 Class</p>
-        <div class="sameline">
-            <label for="hhcschoolname">School</label>
-            <input type="text" placeholder="School" id="hhcschoolname" name="hhcschoolname">
-        </div>
-        <div class="sameline">
-            <label for="hscboard">Type of board</label>
-            <input type="text" placeholder="Board" id="hscboard" name="hscboard">
-        </div>
-        <div class="sameline">
-            <label for="hsccompletion">Year of completion</label>
-            <input type="date" placeholder="Year of completion" id="hsccompletion" name="hsccompletion">
-        </div>
-        <div class="sameline">
-            <label for="hscpercentage">Percentage</label>
-            <input type="number" placeholder="Percentage" id="hscpercentage" name="hscpercentage">
-        </div>
-        <div class="sameline">
-            <label for="hscschoollocation">School Location</label>
-            <input type="text" placeholder="location" id="hscschoollocation" name="hscschoollocation">
-        </div>
-        <br><br>
-        <div class="footer">
-            <a href="/profile" class="btn button prev">Prev</a>
-            <button class="btn button next">Next</button>
-          </div>
-    </form>
+                </div>
+                <div class="sameline">
+                    <%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag===1)){%>
+                        <label for="gpa">Gpa</label>
+                        <input type="number" placeholder="Gpa" id="gpa" name="gpa" value="<%=found[0].school[i].gpa%>">
+                        <%}else{%>
+                            <label for="gpa">Gpa</label>
+                            <input type="number" placeholder="Gpa" id="gpa" name="gpa"
+                                value="">
+                            <%}%>
+                </div>
+                <div class="sameline">
+                    <%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag===1)){%>
+                        <label for="location">College Location</label>
+                        <input type="text" placeholder="location" id="location" name="location"
+                            value="<%=found[0].school[i].location%>">
+                        <%}else{%>
+                            <label for="location">College Location</label>
+                            <input type="text" placeholder="location" id="location" name="location" value="">
+                            <%}%>
+                </div>
+
+                <br>
+                <hr class="linecoloured">
+                <%}%>
+                    <br>
+                    <button id="fg" name="btn" value="1">Add</button>
+                    <button id="fg" name="btn" value="2">Delete</button>
+
+
+                    <br><br>
+                    <div class="footer">
+                        <a href="/profile" class="btn button prev">Prev</a>
+                        <button name="btn" value="3" class="btn button next">Next</button>
+                    </div>
+        </form>
     </div>
     </div>
-</div>
+    </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
