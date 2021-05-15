@@ -3,27 +3,71 @@
     <h3>Your Award Details</h3>
     <br>
     <form method="POST" action="awards">
+        <%for(let i=0;i<noOfAwards;i++){%>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awardname">Award name </label>
-            <input type="text" placeholder="awardname" id="awardname" name="awardname">
+            <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[i].awardname%>">
+            <%}else{%>
+                <label for="awardname">Award name </label>
+                <input type="text" placeholder="awardname" id="awardname" name="awardname" value="">  
+            <%}%>    
         </div>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
+                <%if(found[0].awards[i].awarddate!==null){%>
+                    <%let template=found[0].awards[i].awarddate%>
+                    <%let date=template.getDate()%>
+                    <%if(date<10){%>
+                    <%date='0' +date%>
+                    <%}%>
+                    <%let month=(template.getMonth())+1%>
+                    <%if(month<10){%>
+                    <%month='0' +month%>
+                    <%}%>
+                    <%let year=template.getFullYear()%>
+                    <%let finaldate=`${year}-${month}-${date}`%>
             <label for="awarddate">Award Date</label>
-            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate">
+            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="<%=finaldate%>">
+            <%}else{%>
+                <label for="awarddate">Award Date</label>
+                <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="">
+                <%}%>
+                <%}else{%>
+                    <label for="awarddate">Award Date</label>
+                    <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="">
+                    <%}%>     
         </div>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awarder">Awarder</label>
-            <input type="text" placeholder="awarder" id="awarder" name="awarder">
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[i].awarder%>">
+            <%}else{%>
+                <label for="awarder">Awarder</label>
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="">
+            <%}%> 
         </div>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="Awarddescription">Award description</label>
-            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription">
+            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[i].Awarddescription%>">
+            <%}else{%>
+                <label for="Awarddescription">Award description</label>
+                <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="">
+            <%}%>    
         </div>
-        <br><br>
-        <div class="footer">
-            <a href="/projects" class="btn button prev">Prev</a>
-            <button class="btn button next">Download</button>
-          </div>
+        <br>
+		<hr class="linecoloured">
+		<%}%>
+		<br>
+		<button id="fg" name="btn" value="1">Add</button>
+		<button id="fg" name="btn" value="2">Delete</button>
+		<br>
+		<br>
+		<div class="footer">
+			<a href="/profile" class="btn button prev">Prev</a>
+			<button name="btn" value="3" class="btn button next">Download Resume</button>
+		</div>
     </form>
     </div>
     </div>

@@ -82,10 +82,18 @@ const UserSchema = new Schema({
       toolsused: { type: String, default: null },
     },
   ],
-  awardname: { type: String, default: null },
-  awarddate: { type: String, default: null },
-  awarder: { type: String, default: null },
-  Awarddescription: { type: String, default: null },
+
+  awards: [
+    {
+      awardname: { type: String, default: null },
+      awarddate: { type: Date, default: null },
+      awarder: { type: String, default: null },
+      Awarddescription: { type: String, default: null },
+    },
+  ],
+
+
+ 
   username: { type: String, default: null },
   password: { type: String, default: null },
   googleId: { type: String, default: null },
@@ -230,10 +238,12 @@ let count = 1;
 let noOfProjects=1;
 let noOfSkills=1;
 let noOfWorkExperience=1;
+let noOfAwards=1;
 let flag = 0;
 let flag1=0;
 let flag2=0;
 let flag3=0;
+let flag4=0;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
@@ -246,10 +256,12 @@ app.get("/:customName", function (req, res) {
         noOfProjects:noOfProjects,
         noOfSkills:noOfSkills,
         noOfWorkExperience:noOfWorkExperience,
+        noOfAwards:noOfAwards,
         flag: flag,
         flag1:flag1,
         flag2:flag2,
         flag3:flag3,
+        flag4:flag4,
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -605,20 +617,67 @@ app.post("/projects", function (req, res) {
 });
 
 app.post("/awards", function (req, res) {
-  //   console.log(req.body);
+
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfAwards++;
+  } else {
+    if (value === "2" && noOfAwards > 1) {
+      noOfAwards--;
+    }
+  }
+
+  // console.log(req.body);
+  //  console.log("count="+count);
+
   var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      awardname: req.body.awardname,
-      awarddate: req.body.awarddate,
-      awarder: req.body.awarder,
-      Awarddescription: req.body.Awarddescription,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
-  res.redirect("/download");
+
+  let checkisarray = req.body.awardname;
+  if (!Array.isArray(checkisarray)) {
+    var newvalue = {
+      $set: {
+        awards: {
+          awardname: req.body.awardname,
+          awarddate:  req.body.awarddate,
+          awarder:  req.body.awarder,
+          Awarddescription: req.body.Awarddescription,
+        },
+      },
+    };
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+  } else {
+    let arr = req.body.awardname;
+    Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    for (let i = 0; i < arr.length; i++) {
+      var newvalue = {
+        $push: {
+          awards: {
+            awardname: req.body.awardname[i],
+          awarddate:  req.body.awarddate[i],
+          awarder:  req.body.awarder[i],
+          Awarddescription: req.body.Awarddescription[i],
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    }
+  }
+
+  if (value === "3") {
+    flag4 = 1;
+    res.redirect("/projects");
+  } else {
+    if (value === "1") flag4 = 0;
+    else flag4 = 1;
+    res.redirect("/awards");
+  }
 });
 
 app.listen("3000", function () {
