@@ -288,15 +288,6 @@ a.article:hover {
   }
 
 
-  .notclickable{
-    background-color: #14171D;
-    border:solid #fff2;
-    color:#fff2;
-  }
-
-  .notclickable:hover{
-      background-color:#14171D;
-  }
 
 
   h3,li{
@@ -329,14 +320,16 @@ a.article:hover {
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    border-radius: 50%;
+    border-radius: 15%;
     outline-color:#56c9aa ;
     
+     font-family: 'Advent Pro', sans-serif; 
     
 }
 .add:hover{
     background-color: #56c9aa;
     color:black;
+    outline:none;
 }
 
 .increment{
@@ -358,3 +351,17 @@ a.article:hover {
     bottom:-10px;
     margin:5px;
 }
+
+
+.notclickable{
+    background-color: #14171D;
+    border:solid #fff2;
+    color:#fff2;
+  }
+
+  .notclickable:hover{
+      background-color:#14171D;
+      color:#fff2;
+  }
+
+  

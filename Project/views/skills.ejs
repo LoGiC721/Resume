@@ -33,7 +33,11 @@
         <div class="footer">
             <a href="/profile" class="btn button prev">Prev</a>
 			<button class="add increment" name="btn" value="1">Add Skill</button>
-		    <button class="add decrement" name="btn" value="2">Remove Skill</button>
+		    <%if(noOfSkills===1){%>
+                <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Skill</button>
+                <%}else{%>
+                    <button class="add decrement" name="btn" value="2">Remove Skill</button>
+                <%}%>
 			<button name="btn" value="3" class="btn button next">Save & Next</button>
           </div>
     </form>

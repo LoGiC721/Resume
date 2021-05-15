@@ -65,7 +65,11 @@
 		<div class="footer">
 			<a href="/profile" class="btn button prev">Prev</a>
 			<button class="add increment" name="btn" value="1">Add Award</button>
-		    <button class="add decrement" name="btn" value="2">Remove Award</button>
+            <%if(noOfAwards===1){%>
+		    <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Award</button>
+            <%}else{%>
+                <button class="add decrement" name="btn" value="2">Remove Award</button>
+            <%}%>    
 			<button name="btn" value="3" class="btn button next">Save & Download</button>
 		</div>
     </form>
