@@ -53,19 +53,27 @@ const UserSchema = new Schema({
       location: { type: String, default: null },
     },
   ],
-  companyname: { type: String, default: null },
-  jobtitle: { type: String, default: null },
-  state: { type: String, default: null },
-  city: { type: String, default: null },
-  startdate: { type: Date, default: null },
-  enddate: { type: Date, default: null },
-  jobdescription: { type: String, default: null },
-  skills1: { type: String, default: null },
-  skills2: { type: String, default: null },
-  skills3: { type: String, default: null },
-  skills4: { type: String, default: null },
-  skills5: { type: String, default: null },
-  skills6: { type: String, default: null },
+
+  work: [
+    {
+      companyname: { type: String, default: null },
+      jobtitle: { type: String, default: null },
+      state: { type: String, default: null },
+      city: { type: String, default: null },
+      startdate: { type: Date, default: null },
+      enddate: { type: Date, default: null },
+      jobdescription: { type: String, default: null },
+    },
+  ],
+
+  skills: [
+    {
+      skillsname: { type: String, default: null },
+      skillsdetails: [{technologyused:{ type: String, default: null }}],
+    },
+  ],
+
+
   project: [
     {
       projectname: { type: String, default: null },
@@ -220,8 +228,12 @@ app.get("/download", function (req, res) {
 
 let count = 1;
 let noOfProjects=1;
+let noOfSkills=1;
+let noOfWorkExperience=1;
 let flag = 0;
 let flag1=0;
+let flag2=0;
+let flag3=0;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
@@ -232,8 +244,12 @@ app.get("/:customName", function (req, res) {
         found: found,
         count: count,
         noOfProjects:noOfProjects,
+        noOfSkills:noOfSkills,
+        noOfWorkExperience:noOfWorkExperience,
         flag: flag,
         flag1:flag1,
+        flag2:flag2,
+        flag3:flag3,
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -377,43 +393,152 @@ app.post("/education", function (req, res) {
 app.post("/work", function (req, res) {
   //   console.log(req.body);
 
-  var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      companyname: req.body.companyname,
-      jobtitle: req.body.jobtitle,
-      state: req.body.state,
-      city: req.body.city,
-      startdate: req.body.startdate,
-      enddate: req.body.enddate,
-      jobdescription: req.body.jobdescription,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfWorkExperience++;
+  } else {
+    if (value === "2" && noOfWorkExperience > 1) {
+      noOfWorkExperience--;
+    }
+  }
 
-  res.redirect("/skills");
+  
+  //  console.log("noOfProjects="+noOfProjects);
+
+  var myquery = { _id: req.user.id };
+
+  let checkisarray = req.body.companyname;
+  if (!Array.isArray(checkisarray)) {
+    
+    var newvalue = {
+      $set: {
+        work: 
+          {
+            companyname: req.body.companyname,
+            jobtitle: req.body.jobtitle,
+            state: req.body.state,
+            city: req.body.city,
+            startdate: req.body.startdate,
+            enddate: req.body.enddate,
+            jobdescription: req.body.jobdescription,
+          },
+      },
+    };
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+  } else {
+    let arr = req.body.companyname;
+    Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    for (let i = 0; i < arr.length; i++) {
+     
+      var newvalue = {
+        $push: {
+          work: 
+          {
+            companyname: req.body.companyname[i],
+            jobtitle: req.body.jobtitle[i],
+            state: req.body.state[i],
+            city: req.body.city[i],
+            startdate: req.body.startdate[i],
+            enddate: req.body.enddate[i],
+            jobdescription: req.body.jobdescription[i],
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    }
+  }
+
+  if (value === "3") {
+    flag3 = 1;
+    res.redirect("/skills");
+  } else {
+    if (value === "1") flag3 = 0;
+    else flag3 = 1;
+    res.redirect("/work");
+  }
 });
 
 app.post("/skills", function (req, res) {
-  //   console.log(req.body);
+     console.log(req.body);
 
-  var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      skills1: req.body.skills1,
-      skills2: req.body.skills2,
-      skills3: req.body.skills3,
-      skills4: req.body.skills4,
-      skills5: req.body.skills5,
-      skills6: req.body.skills6,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
-  res.redirect("/projects");
+     let value = req.body.btn;
+     if (value === "-1") {
+       noOfSkills++;
+     } else {
+       if (value === "-2" && noOfSkills > 1) {
+        noOfSkills--;
+       }
+     }
+
+
+
+
+    var myquery = { _id: req.user.id };
+
+    let checkisarray = req.body.skillsname;
+    if (!Array.isArray(checkisarray)) {
+      
+      var newvalue = {
+        $set: {
+          skills: 
+            {
+              skillsname:req.body.skillsname,
+            
+              skillsdetails:
+              {
+                technologyused:req.body.skillsdetails,
+              },
+              
+            },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    } else {
+      let arr = req.body.skillsname;
+      Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
+        if (!err) console.log("Documents deleted successfully");
+      });
+  
+      for (let i = 0; i < arr.length; i++) {
+       
+        var newvalue = {
+          $push: {
+            skills: 
+            {
+              skillsname:req.body.skillsname[i],
+             
+                skillsdetails:
+                {
+                  technologyused:req.body.skillsdetails[i],
+                },
+
+            },
+          },
+        };
+        Project.updateMany(myquery, newvalue, function (err, res) {
+          if (!err) console.log("Documents inserted successfully");
+        });
+      }
+    }
+  
+    if (value === "-3") {
+      flag2 = 1;
+      res.redirect("/projects");
+    } else {
+      if (value === "-1") flag2 = 0;
+      else flag2 = 1;
+      res.redirect("/skills");
+    }
+
 });
 
 app.post("/projects", function (req, res) {

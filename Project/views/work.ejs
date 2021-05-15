@@ -3,6 +3,7 @@
     <h3>Your Work Details</h3>
     <br>
     <form method="POST" action="work">
+        <%for(let i=0;i<noOfWorkExperience;i++){%>
         <div class="sameline">
             <label for="companyname">Company name</label>
             <input type="text" placeholder="Company name" id="companyname" name="companyname">
@@ -31,11 +32,18 @@
             <label for="jobdescription">Job Description</label>
             <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription">
         </div>
-      <br><br>
-        <div class="footer">
-            <a href="/education" class="btn button prev">Prev</a>
-            <button class="btn button next">Next</button>
-          </div>
+        <br>
+		<hr class="linecoloured">
+		<%}%>
+		<br>
+		<button id="fg" name="btn" value="1">Add</button>
+		<button id="fg" name="btn" value="2">Delete</button>
+		<br>
+		<br>
+		<div class="footer">
+			<a href="/education" class="btn button prev">Prev</a>
+			<button name="btn" value="3" class="btn button next">Next</button>
+		</div>
     </form>
 
     </div>

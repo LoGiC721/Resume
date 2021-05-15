@@ -3,34 +3,29 @@
     <h3>Your Extra Details</h3>
     <br>
     <form method="POST" action="skills">
+        <%for(let i=0;i<noOfSkills;i++){%>
         <div class="sameline">
-            <label for="skills1">Skill 1</label>
-            <input type="text" placeholder="skill1" id="skills1" name="skills1">
+            <label for="skillsname">Skill Name</label>
+            <input type="text" placeholder="skillsname" id="skillsname" name="skillsname">
         </div>
+
         <div class="sameline">
-            <label for="skills2">Skill 2</label>
-            <input type="text" placeholder="skill2" id="skills2" name="skills2">
+            <label for="skillsdetails">Skill Details</label>
+            <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails">
+            <button id="fg" name="btn" value="<%=i%>">Add</button>
+		    <button id="fg" name="btn" value="<%=i%>">Delete</button>
         </div>
-        <div class="sameline">
-            <label for="skills3">Skill 3</label>
-            <input type="text" placeholder="skill3" id="skills3" name="skills3">
-        </div>
-        <div class="sameline">
-            <label for="skills4">Skill 4</label>
-            <input type="text" placeholder="skill4" id="skills4" name="skills4">
-        </div>
-        <div class="sameline">
-            <label for="skills5">Skill 5</label>
-            <input type="text" placeholder="skill5" id="skills5" name="skills5">
-        </div>
-        <div class="sameline">
-            <label for="skills6">Skill 6</label>
-            <input type="text" placeholder="skill6" id="skills6" name="skills6">
-        </div>
-        <br><br>
+        <br>
+		<hr class="linecoloured">
+        <%}%>
+		<br>
+		<button id="fg" name="btn" value="-1">Add</button>
+		<button id="fg" name="btn" value="-2">Delete</button>
+		<br>
+		<br>
         <div class="footer">
             <a href="/work" class="btn button prev">Prev</a>
-            <button class="btn button next">Next</button>
+			<button name="btn" value="-3" class="btn button next">Next</button>
           </div>
     </form>
 
