@@ -212,14 +212,14 @@ a.article:hover {
   .prev{
     background-color: #56c9aa;
    position:absolute;
-   left:19%;
+   left:9%;
    bottom:20%;
   }
 
   .next{
     background-color: #56c9aa;
     position:absolute;
-    right:19%;
+    right:9%;
     bottom:20%;
   } 
 
@@ -318,3 +318,43 @@ a.article:hover {
       border-color:#56c9aa;
       border-width:5px;
   }
+
+.add{
+    background-color: #14171D;
+    border: 1px solid;
+    color: #56c9aa;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
+    outline-color:#56c9aa ;
+    
+    
+}
+.add:hover{
+    background-color: #56c9aa;
+    color:black;
+}
+
+.increment{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    top:auto;
+    right:auto;
+    bottom:-10px;
+    margin:5px;
+}
+
+.decrement{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    top:auto;
+    right:auto;
+    bottom:-10px;
+    margin:5px;
+}
