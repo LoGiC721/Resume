@@ -69,7 +69,7 @@ const UserSchema = new Schema({
   skills: [
     {
       skillsname: { type: String, default: null },
-      skillsdetails: [{technologyused:{ type: String, default: null }}],
+      skillsdetails:{ type: String, default: null },
     },
   ],
 
@@ -244,9 +244,11 @@ let flag1=0;
 let flag2=0;
 let flag3=0;
 let flag4=0;
+
+let important=1;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
-
+  important:1;
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
       res.render(customListName, {
@@ -477,17 +479,22 @@ app.post("/work", function (req, res) {
   }
 });
 
+
 app.post("/skills", function (req, res) {
      console.log(req.body);
 
      let value = req.body.btn;
-     if (value === "-1") {
+     if (value === "1") {
        noOfSkills++;
-     } else {
-       if (value === "-2" && noOfSkills > 1) {
+     } 
+     else if (value === "2" && noOfSkills > 1) {
         noOfSkills--;
-       }
      }
+     else if(value!=="3")
+     {
+       important++;
+     }
+     
 
 
 
@@ -502,11 +509,7 @@ app.post("/skills", function (req, res) {
           skills: 
             {
               skillsname:req.body.skillsname,
-            
-              skillsdetails:
-              {
-                technologyused:req.body.skillsdetails,
-              },
+              skillsdetails:req.body.skillsdetails,
               
             },
         },
@@ -527,11 +530,7 @@ app.post("/skills", function (req, res) {
             skills: 
             {
               skillsname:req.body.skillsname[i],
-             
-                skillsdetails:
-                {
-                  technologyused:req.body.skillsdetails[i],
-                },
+              skillsdetails:req.body.skillsdetails[i],
 
             },
           },
@@ -542,11 +541,11 @@ app.post("/skills", function (req, res) {
       }
     }
   
-    if (value === "-3") {
+    if (value === "3") {
       flag2 = 1;
       res.redirect("/projects");
     } else {
-      if (value === "-1") flag2 = 0;
+      if (value === "1") flag2 = 0;
       else flag2 = 1;
       res.redirect("/skills");
     }
