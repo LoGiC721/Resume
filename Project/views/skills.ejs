@@ -7,20 +7,20 @@
         <div class="sameline">    
             <%if((found[0].skills.length!==0&&((noOfSkills-i)!==1))||(flag2===1)){%>
             <label for="skillsname">Skill Name</label>
-            <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="<%=found[0].skills[i].skillsname%>">
+            <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="<%=found[0].skills[i].skillsname%>" autocomplete="off">
             <%}else{%>
                 <label for="skillsname">Skill Name</label>
-                <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="">
+                <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="" autocomplete="off">
             <%}%>      
         </div>
 
         <div class="sameline">
             <%if((found[0].skills.length!==0&&((noOfSkills-i)!==1))||(flag2===1)){%>
             <label for="skillsdetails">Skill Details</label>
-            <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[i].skillsdetails%>"> 
+            <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[i].skillsdetails%>" autocomplete="off"> 
             <%}else{%>
                 <label for="skillsdetails">Skill Details</label>
-                <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails" value=""> 
+                <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails" value="" autocomplete="off"> 
             <%}%>          
         </div>
         <br>

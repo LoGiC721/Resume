@@ -7,10 +7,10 @@
 		<div class="sameline">
 			<%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag1===1)){%>
 			<label for="name">College</label>
-			<input type="text" placeholder="College/University" id="name" name="name" value="<%=found[0].school[i].name%>"> 
+			<input type="text" placeholder="College/University" id="name" name="name" value="<%=found[0].school[i].name%>" autocomplete="off"> 
 			<%}else{%>
 			<label for="name">College</label>
-			<input type="text" placeholder="College/University" id="name" name="name" value="">
+			<input type="text" placeholder="College/University" id="name" name="name" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<div class="sameline">
@@ -28,14 +28,14 @@
 			<%let year=template.getFullYear()%>
 			<%let finaldate=`${year}-${month}-${date}`%>
 			<label for="startdate">Start date</label>
-			<input type="date" placeholder="Start date" id="startdate" name="startdate" value="<%=finaldate%>"> 
+			<input type="date" placeholder="Start date" id="startdate" name="startdate" value="<%=finaldate%>" autocomplete="off"> 
             <%}else{%>
             <label for="startdate">Start date</label>
-			<input type="date" placeholder="Start date" id="startdate" name="startdate" value="">
+			<input type="date" placeholder="Start date" id="startdate" name="startdate" value="" autocomplete="off">
 			<%}%>
 			<%}else{%>
 			<label for="startdate">Start date</label>
-			<input type="date" placeholder="Start date" id="startdate" name="startdate" value="">
+			<input type="date" placeholder="Start date" id="startdate" name="startdate" value="" autocomplete="off">
 			<%}%>
 		</div>
 		
@@ -55,14 +55,14 @@
 			<%let year=template.getFullYear()%>
 			<%let finaldate=`${year}-${month}-${date}`%>
 			<label for="enddate">End date</label>
-			<input type="date" placeholder="End date" id="enddate" name="enddate" value="<%=finaldate%>"> 
+			<input type="date" placeholder="End date" id="enddate" name="enddate" value="<%=finaldate%>" autocomplete="off"> 
             <%}else{%>
                 <label for="enddate">End date</label>
-                <input type="date" placeholder="End date" id="enddate" name="enddate" value="">
+                <input type="date" placeholder="End date" id="enddate" name="enddate" value="" autocomplete="off">
 			<%}%>
 			<%}else{%>
                 <label for="enddate">End date</label>
-                <input type="date" placeholder="End date" id="enddate" name="enddate" value="">
+                <input type="date" placeholder="End date" id="enddate" name="enddate" value="" autocomplete="off">
 			<%}%>
 		</div>
 
@@ -70,25 +70,28 @@
 		<div class="sameline">
 			<%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag1===1)){%>
 			<label for="degree">Degree</label>
-			<input type="text" placeholder="Degree" id="degree" name="degree" value="<%=found[0].school[i].degree%>"> <%}else{%>
+			<input type="text" placeholder="Degree" id="degree" name="degree" value="<%=found[0].school[i].degree%>" autocomplete="off"> 
+			<%}else{%>
 			<label for="degree">Degree</label>
-			<input type="text" placeholder="Degree" id="degree" name="degree" value="">
+			<input type="text" placeholder="Degree" id="degree" name="degree" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<div class="sameline">
 			<%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag1===1)){%>
 			<label for="gpa">Gpa</label>
-			<input type="number" placeholder="Gpa" id="gpa" name="gpa" value="<%=found[0].school[i].gpa%>"> <%}else{%>
+			<input type="number" placeholder="Gpa" id="gpa" name="gpa" value="<%=found[0].school[i].gpa%>" autocomplete="off"> 
+			<%}else{%>
 			<label for="gpa">Gpa</label>
-			<input type="number" placeholder="Gpa" id="gpa" name="gpa" value="">
+			<input type="number" placeholder="Gpa" id="gpa" name="gpa" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<div class="sameline">
 			<%if((found[0].school.length!==0&&((noOfProjects-i)!==1))||(flag1===1)){%>
 			<label for="location">College Location</label>
-			<input type="text" placeholder="location" id="location" name="location" value="<%=found[0].school[i].location%>"> <%}else{%>
+			<input type="text" placeholder="location" id="location" name="location" value="<%=found[0].school[i].location%>" autocomplete="off"> 
+			<%}else{%>
 			<label for="location">College Location</label>
-			<input type="text" placeholder="location" id="location" name="location" value="">
+			<input type="text" placeholder="location" id="location" name="location" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<br>

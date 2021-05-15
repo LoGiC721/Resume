@@ -8,7 +8,7 @@ img{
   width:35px;
 }
 
-h2{
+h3{
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -49,6 +49,7 @@ a{
     display: block;
     transition: .5s ease;
     backface-visibility: hidden;
+    height:370px;
   }
   
   .middle {
@@ -97,7 +98,7 @@ a{
 
 footer{
   text-align: center;
-  margin-top:40px;
+  margin-top:4px;
 }
 
 .icon{

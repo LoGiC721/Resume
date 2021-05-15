@@ -7,10 +7,10 @@
         <div class="sameline">
             <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awardname">Award name </label>
-            <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[i].awardname%>">
+            <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[i].awardname%>" autocomplete="off">
             <%}else{%>
                 <label for="awardname">Award name </label>
-                <input type="text" placeholder="awardname" id="awardname" name="awardname" value="">  
+                <input type="text" placeholder="awardname" id="awardname" name="awardname" value="" autocomplete="off">  
             <%}%>    
         </div>
         <div class="sameline">
@@ -28,32 +28,32 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             <label for="awarddate">Award Date</label>
-            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="<%=finaldate%>">
+            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
                 <label for="awarddate">Award Date</label>
-                <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="">
+                <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
                 <%}%>
                 <%}else{%>
                     <label for="awarddate">Award Date</label>
-                    <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="">
+                    <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
                     <%}%>     
         </div>
         <div class="sameline">
             <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awarder">Awarder</label>
-            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[i].awarder%>">
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[i].awarder%>" autocomplete="off">
             <%}else{%>
                 <label for="awarder">Awarder</label>
-            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="">
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="" autocomplete="off">
             <%}%> 
         </div>
         <div class="sameline">
             <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="Awarddescription">Award description</label>
-            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[i].Awarddescription%>">
+            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[i].Awarddescription%>" autocomplete="off">
             <%}else{%>
                 <label for="Awarddescription">Award description</label>
-                <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="">
+                <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="" autocomplete="off">
             <%}%>    
         </div>
         <br>

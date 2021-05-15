@@ -7,37 +7,37 @@
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
             <label for="companyname">Company name</label>
-            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="<%=found[0].work[i].companyname%>">
+            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="<%=found[0].work[i].companyname%>" autocomplete="off">
             <%}else{%>
                 <label for="companyname">Company name</label>
-            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="">
+            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
             <label for="jobtitle">jobtitle</label>
-            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="<%=found[0].work[i].jobtitle%>">
+            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="<%=found[0].work[i].jobtitle%>" autocomplete="off">
             <%}else{%>
             <label for="jobtitle">jobtitle</label>
-            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="">
+            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
             <label for="state">state</label>
-            <input type="text" placeholder="state" id="state" name="state" value="<%=found[0].work[i].state%>">
+            <input type="text" placeholder="state" id="state" name="state" value="<%=found[0].work[i].state%>" autocomplete="off">
             <%}else{%>
                 <label for="state">state</label>
-                <input type="text" placeholder="state" id="state" name="state" value="">
+                <input type="text" placeholder="state" id="state" name="state" value="" autocomplete="off">
                 <%}%>     
         </div>
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
             <label for="city">city</label>
-            <input type="text" placeholder="city" id="city" name="city" value="<%=found[0].work[i].city%>">
+            <input type="text" placeholder="city" id="city" name="city" value="<%=found[0].work[i].city%>" autocomplete="off">
             <%}else{%>
                 <label for="city">city</label>
-            <input type="text" placeholder="city" id="city" name="city" value="">
+            <input type="text" placeholder="city" id="city" name="city" value="" autocomplete="off">
             <%}%> 
         </div>
         <div class="sameline">
@@ -55,14 +55,14 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             <label for="startdate">Start Date</label>
-            <input type="date" placeholder="startdate" id="startdate" name="startdate" value="<%=finaldate%>">
+            <input type="date" placeholder="startdate" id="startdate" name="startdate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
                 <label for="startdate">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="">
+                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="" autocomplete="off">
             <%}%> 
             <%}else{%>
                 <label for="startdate">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="">
+                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="" autocomplete="off">
             <%}%>     
         </div>
         <div class="sameline">
@@ -80,23 +80,23 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="<%=finaldate%>">
+            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
                 <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="">
+            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="" autocomplete="off">
             <%}%>
             <%}else{%>
                 <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="">
+            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
             <label for="jobdescription">Job Description</label>
-            <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" value="<%=found[0].work[i].jobdescription%>">
+            <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" value="<%=found[0].work[i].jobdescription%>" autocomplete="off">
             <%}else{%>
                 <label for="jobdescription">Job Description</label>
-                <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription">
+                <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" autocomplete="off">
             <%}%>       
         </div>
         <br>
