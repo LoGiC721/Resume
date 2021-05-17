@@ -275,6 +275,7 @@ let flag2=0;
 let flag3=0;
 let flag4=0;
 
+
 let important=1;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
@@ -301,7 +302,7 @@ app.get("/:customName", function (req, res) {
         flag2:flag2,
         flag3:flag3,
         flag4:flag4,
-       
+        
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -757,6 +758,8 @@ app.post('/personal', upload.single('photo'), function (req, res)
     });
 });
   
+
+
 
 
    res.redirect("/personal")

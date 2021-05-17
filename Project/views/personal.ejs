@@ -5,28 +5,44 @@
         <br>
         <form method="POST" action="personal" enctype="multipart/form-data">
 
-            <div>
 
-                <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
+            
+            <div class="container container-personal">
+             <div class="wrapper">
+                 <div class="image">
+                     <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
+                 </div>
+             </div>
+
+             <div class="content">
+                 <div class="icon"><img src="./icons/upload.png"></div>
+             <div class="text">No file chosen, yet!</div>
+                </div>
+                
+              
+               <div class="file-name">File name <%=found[0].img%></div> 
+
+                
+               
+
+
             </div>
 
+            <br>
+            
+            <label class="custom-file-upload">
+                <input name="photo" type="file"/>
+                <img class="cloud" src="./icons/upload.png"> Choose File
+            </label>
+            
+            <button class="btn button uploadbtn">Upload & Show</button>
+           
+                
+              <!-- </div> -->
 
 
 
-
-
-
-            <div class="sameline">
-
-                <label for="firstname">Photograph</label>
-
-                <input type="file" name="photo" value="" />
-                <button class="photosubmit">Submit</button>
-            </div>
-
-    </div>
-    </div>
-
+        </div>
 
 
 

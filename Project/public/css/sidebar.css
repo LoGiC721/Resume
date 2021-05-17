@@ -373,3 +373,104 @@ a.article:hover {
     width:390px;
 }
 
+
+
+
+/* personal page */
+
+.container-personal{
+    height:300px;
+    width:430px;
+    border:2px dashed #c2cdda;
+    border-radius:10px;
+}
+
+
+
+.wrapper.image img{
+    height:100%;
+    width:100%;
+    object-fit:cover;
+}
+
+.wrapper .icon{
+    font-size:100px;
+    color:#56C9AA;
+}
+
+.wrapper .text{
+    font-size:20px;
+    font-weight:500;
+    color:#5B5B7B;
+}
+
+
+
+.file-name{
+      position:relative;
+     bottom:-65px; 
+    left:-15px; 
+    width: 425px; 
+    border-bottom-right-radius:9px;
+    border-bottom-left-radius:9px;
+    color:#fff;
+    padding:12px;
+    font-size:18px;
+     background:linear-gradient(135deg,#56C9AA 0%,#068b68 100%); 
+
+
+}
+
+
+.profilepic{
+    position:absolute;
+    bottom:-284px;
+    left:-15px;
+    height:245px;
+    width:425px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    
+}
+
+
+
+
+
+    .uploadbtn{
+        position:relative;
+        bottom:0.5px;
+        background-color: #56c9aa;
+        margin-left:20px;
+    }
+
+    .uploadbtn:hover{
+        background-color:white;
+    }
+
+
+label{
+    border-radius: 4px;
+}
+ 
+label:hover{
+    background-color: #56c9aa;
+}
+
+.cloud{
+    height:25px;
+}
+
+
+
+
+
+    input[type="file"] {
+        display: none;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
