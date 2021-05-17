@@ -71,25 +71,15 @@
 
  <% if (current==="profile" ) { %>
 <li>
-<a href="/profile" class="coloured">Contact </a>
+<a href="/profile" class="coloured">Personal </a>
  </li>
  <%} else { %>
  <li>
-<a href="/profile" class="uncoloured">Contact  </a>
+<a href="/profile" class="uncoloured">Personal  </a>
 </li>
 <% } %>
 
 
-
-<% if (current==="personal" ) { %>
-    <li>
-    <a href="/personal" class="coloured">Personal </a>
-     </li>
-     <%} else { %>
-     <li>
-    <a href="/personal" class="uncoloured">Personal  </a>
-    </li>
-    <% } %>  
 
  <% if (current==="education" ) { %>
 <li>
@@ -149,7 +139,17 @@
 <% } %>
 
 
-
+<% if (current==="personal" ) { %>
+    <li>
+    <a href="/personal" class="coloured">Add Picture</a>
+    </li>
+    <%} else { %>
+    <li>
+    <a href="/personal"
+     class="uncoloured">Add Picture</a>
+    </li>
+    <% } %>
+ 
 
 </ul>
 

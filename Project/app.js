@@ -48,6 +48,12 @@ const UserSchema = new Schema({
   github: { type: String, default: null },
   linkedin: { type: String, default: null },
   twitter: { type: String, default: null },
+  country: { type: String, default: null },
+  state: { type: String, default: null },
+  city: { type: String, default: null },
+  pin: { type: String, default: null },
+  address: { type: String, default: null },
+  dob: { type: Date, default: null },
 
   img:{ type: String, default: null },
 
@@ -276,8 +282,10 @@ app.get("/:customName", function (req, res) {
  
    const loader=multer({dest:`public/uploads/${req.user.id}/`});
   
-  //important:1;
+ // important:1;
   
+  
+
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
       res.render(customListName, {
@@ -293,6 +301,7 @@ app.get("/:customName", function (req, res) {
         flag2:flag2,
         flag3:flag3,
         flag4:flag4,
+       
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -345,6 +354,7 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/profile", function (req, res) {
+  console.log(req.body);
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -356,6 +366,12 @@ app.post("/profile", function (req, res) {
       github: req.body.github,
       linkedin: req.body.linkedin,
       twitter: req.body.twitter,
+      country: req.body.country,
+      state: req.body.state,
+      city: req.body.city,
+      pin: req.body.pin,
+      address: req.body.address,
+      dob:req.body.dob,
     },
   };
   Project.updateMany(myquery, newvalues, function (err, res) {

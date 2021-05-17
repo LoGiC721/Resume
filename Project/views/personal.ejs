@@ -1,31 +1,43 @@
 <%-include("sidemenu")-%>
-  <div class="text-center information">
-  
-    
+    <div class="text-center information">
 
-      <h3>Enter Personal information</h3>
-      <br>
-      <!-- <form method="POST" action="personal"> -->
 
-        
-        <div class="sameline">
-            <form class="" enctype="multipart/form-data" action="personal" method="post"> <input type="file" name="photo" value="" /> <button type="submit" name="button">Submit</button> </form>
-            
-        </div>
+        <br>
+        <form method="POST" action="personal" enctype="multipart/form-data">
+
+            <div>
+
+                <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
+            </div>
+
+
+
+
+
+
+
+            <div class="sameline">
+
+                <label for="firstname">Photograph</label>
+
+                <input type="file" name="photo" value="" />
+                <button class="photosubmit">Submit</button>
+            </div>
+
     </div>
     </div>
-   
 
 
 
 
-        <br><br>
-        <div class="footer">
-            <a href="/profile" class="btn button prev">Prev</a>
-            <button class="btn button next">Save & Next</button>
-          </div>
-    <!-- </form> -->
-</div>
+
+    <br><br>
+    <div class="footer">
+        <a href="/profile" class="btn button prev">Prev</a>
+        <button class="btn button next">Save & Next</button>
+    </div>
+    </form>
+    </div>
     </div>
     </div>
 

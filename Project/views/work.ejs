@@ -6,10 +6,10 @@
         <%for(let i=0;i<noOfWorkExperience;i++){%>
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="companyname">Company name</label>
+            <label for="companyname">Company</label>
             <input type="text" placeholder="Company name" id="companyname" name="companyname" value="<%=found[0].work[i].companyname%>" autocomplete="off">
             <%}else{%>
-                <label for="companyname">Company name</label>
+                <label for="companyname">Company</label>
             <input type="text" placeholder="Company name" id="companyname" name="companyname" value="" autocomplete="off">
             <%}%>
         </div>
@@ -92,10 +92,10 @@
         </div>
         <div class="sameline">
             <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="jobdescription">Job Description</label>
+            <label for="jobdescription">Description</label>
             <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" value="<%=found[0].work[i].jobdescription%>" autocomplete="off">
             <%}else{%>
-                <label for="jobdescription">Job Description</label>
+                <label for="jobdescription">Description</label>
                 <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" autocomplete="off">
             <%}%>       
         </div>
