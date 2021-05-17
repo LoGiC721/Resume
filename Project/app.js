@@ -11,8 +11,11 @@ const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-var multer = require('multer');
-var upload=multer({dest:"public/uploads/"});
+const multer = require('multer');
+const fs=require("fs");
+const path = require('path');
+const loading=multer({dest:"public/uploads/"});
+
 
 
 const Schema = mongoose.Schema;
@@ -175,7 +178,7 @@ passport.use(
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/uploads/')
+    cb(null, `./public/uploads/${req.user.id}/`)
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -269,7 +272,12 @@ let flag4=0;
 let important=1;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
-  important:1;
+
+ 
+   const loader=multer({dest:`public/uploads/${req.user.id}/`});
+  
+  //important:1;
+  
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
       res.render(customListName, {
@@ -289,6 +297,7 @@ app.get("/:customName", function (req, res) {
       //  console.log(found[0].project[0].projectname);
     }
   });
+  
 });
 
 app.post("/", function (req, res) {
@@ -716,6 +725,23 @@ app.post('/personal', upload.single('photo'), function (req, res)
      if(!err)
      console.log("Document updated successfully");
    })
+
+
+   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
+    if (err) {
+        console.log(err);
+    }
+
+    files.forEach(file => {
+        const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
+
+        if (file !== imagefile) {
+            fs.unlinkSync(fileDir);
+        }
+    });
+});
+  
+
 
    res.redirect("/personal")
 });
