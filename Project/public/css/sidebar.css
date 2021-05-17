@@ -140,6 +140,8 @@ ul.CTAs a {
 a.download {
     background: #56c9aa;
     color: black;
+    position:relative;
+    bottom:40px;
 }
 
 a.article,

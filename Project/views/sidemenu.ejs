@@ -67,17 +67,29 @@
 <nav id="sidebar">
 
 <ul class="list-unstyled components">
+ 
 
  <% if (current==="profile" ) { %>
 <li>
-<a href="/profile" class="coloured">Profile </a>
+<a href="/profile" class="coloured">Contact </a>
  </li>
  <%} else { %>
  <li>
-<a href="/profile" class="uncoloured">Profile </a>
+<a href="/profile" class="uncoloured">Contact  </a>
 </li>
 <% } %>
 
+
+
+<% if (current==="personal" ) { %>
+    <li>
+    <a href="/personal" class="coloured">Personal </a>
+     </li>
+     <%} else { %>
+     <li>
+    <a href="/personal" class="uncoloured">Personal  </a>
+    </li>
+    <% } %>  
 
  <% if (current==="education" ) { %>
 <li>

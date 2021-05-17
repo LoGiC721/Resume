@@ -11,6 +11,8 @@ const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
+var multer = require('multer');
+var upload=multer({dest:"public/uploads/"});
 
 
 const Schema = mongoose.Schema;
@@ -43,6 +45,10 @@ const UserSchema = new Schema({
   github: { type: String, default: null },
   linkedin: { type: String, default: null },
   twitter: { type: String, default: null },
+
+  img:{ type: String, default: null },
+
+
   school: [
     {
       name: { type: String, default: null },
@@ -165,6 +171,21 @@ passport.use(
     }
   )
 );
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+ 
+var upload = multer({ storage: storage });
+
+
+
 
 app.get(
   "/auth/google",
@@ -678,6 +699,31 @@ app.post("/awards", function (req, res) {
     res.redirect("/awards");
   }
 });
+
+
+app.post('/personal', upload.single('photo'), function (req, res)
+{
+   let imagefile=req.file.originalname;
+   console.log(req.file);
+   console.log(imagefile);
+
+
+   var myquery = {_id: req.user.id };
+   var newvalues = { $set: { 
+       img:imagefile,
+    } };
+   Project.updateOne(myquery, newvalues,function(err,res){
+     if(!err)
+     console.log("Document updated successfully");
+   })
+
+   res.redirect("/personal")
+});
+
+
+
+
+
 
 app.listen("3000", function () {
   console.log("Server has been started at port 3000");
