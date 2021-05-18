@@ -6,43 +6,49 @@
         <form method="POST" action="personal" enctype="multipart/form-data">
 
 
-            
+
             <div class="container container-personal">
-             <div class="wrapper">
-                 <div class="image">
-                     <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
-                 </div>
-             </div>
+                <div class="wrapper">
+                    <div class="image">
+                        <%if(filepresentornot===1){%>
+                            <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
+                            <%}%>
 
-             <div class="content">
-                 <div class="icon"><img src="./icons/upload.png"></div>
-             <div class="text">No file chosen, yet!</div>
+                    </div>
                 </div>
-                
-              
-               <div class="file-name" id="fname"><%=found[0].img%></div> 
 
-                
-               
+                <div class="content">
+
+                    <div class="icon"><img src="./icons/upload.png"></div>
+                    <div class="text">No file chosen, yet!</div>
+                </div>
+
+                <%if(filepresentornot===1){%>
+                    <div class="file-name" id="fname">
+                        <%=found[0].img%>
+                    </div>
+                    <%}else{%>
+                        <div class="file-name" id="fname">File name</div>
+                        <%}%>
+
 
 
             </div>
 
             <br>
-            
+
             <label class="custom-file-upload">
-                <input name="photo" type="file"/>
+                <input name="photo" type="file" />
                 <img class="cloud" src="./icons/upload.png"> Choose File
             </label>
-            
+
             <button class="btn button uploadbtn">Upload & Show</button>
-           
-                
-              <!-- </div> -->
 
 
+            <!-- </div> -->
 
-        </div>
+
+    </div>
 
 
 
@@ -50,7 +56,8 @@
     <br><br>
     <div class="footer">
         <a href="/awards" class="btn button prev">Prev</a>
-        <button class="btn button next">Save & Download</button>
+        <a href="/download" class="btn button next">Save & Download</a>
+        <!-- <button name="btnn" value="2" class="btn button next">Save & Download</button> -->
     </div>
     </form>
     </div>

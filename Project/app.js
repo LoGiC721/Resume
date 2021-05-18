@@ -259,7 +259,7 @@ let templateno = 1;
 app.get("/download", function (req, res) {
   Project.find({ _id: req.user.id }, function (err, posts) {
     if (!err) {
-      res.render("template" + templateno, { arr: posts });
+      res.render("template" + templateno, { found: posts });
     }
   });
 });
@@ -274,7 +274,7 @@ let flag1=0;
 let flag2=0;
 let flag3=0;
 let flag4=0;
-
+let filepresentornot=0;
 
 let important=1;
 app.get("/:customName", function (req, res) {
@@ -302,6 +302,7 @@ app.get("/:customName", function (req, res) {
         flag2:flag2,
         flag3:flag3,
         flag4:flag4,
+        filepresentornot:filepresentornot,
         
       });
       //  console.log(found[0].project[0].projectname);
@@ -331,6 +332,7 @@ app.post("/login", function (req, res) {
       res.redirect("/login");
     } else {
       passport.authenticate("local")(req, res, function () {
+        filepresentornot=0;
         res.redirect("/");
       });
     }
@@ -347,6 +349,7 @@ app.post("/register", function (req, res) {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
+          filepresentornot=0;
           res.redirect("/");
         });
       }
@@ -730,9 +733,9 @@ app.post("/awards", function (req, res) {
 app.post('/personal', upload.single('photo'), function (req, res)
 {
    let imagefile=req.file.originalname;
-   console.log(req.file);
-   console.log(imagefile);
-
+  //  console.log(req.file);
+  //  console.log(imagefile);
+  //  console.log(req.body);
 
    var myquery = {_id: req.user.id };
    var newvalues = { $set: { 
@@ -743,12 +746,14 @@ app.post('/personal', upload.single('photo'), function (req, res)
      console.log("Document updated successfully");
    })
 
+   filepresentornot=1;
 
    fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
     if (err) {
         console.log(err);
     }
-
+     
+     
     files.forEach(file => {
         const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
 
@@ -760,9 +765,8 @@ app.post('/personal', upload.single('photo'), function (req, res)
   
 
 
-
-
    res.redirect("/personal")
+  
 });
 
 

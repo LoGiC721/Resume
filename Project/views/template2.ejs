@@ -11,16 +11,24 @@
 
 <body>
 
+
   <div class="resume">
     <div class="resume_left">
       <div class="resume_profile">
-        <img src="https://i.imgur.com/eCijVBe.png" alt="profile_pic">
+        <%if(found[0].img!==null){%>
+        <img src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="profile_pic">
+        <%}%>
       </div>
       <div class="resume_content">
         <div class="resume_item resume_info">
           <div class="title">
             <p class="bold">
-              <%=arr[0].firstname%>
+              <%if(found[0].firstname!==null){%>
+              <%=found[0].firstname%>
+              <%}%> 
+              <%if(found[0].lastname!==null){%>
+                <%=found[0].lastname%>
+              <%}%>  
             </p>
             <p class="regular">Designer</p>
           </div>
@@ -30,7 +38,7 @@
                 <i class="fas fa-map-signs"></i>
               </div>
               <div class="data">
-                21 Street, Texas <br /> USA
+                <%=found[0].address%> <br /> <%=found[0].country%>,<%=found[0].state%><br /><%=found[0].city%>
               </div>
             </li>
             <li>
@@ -38,7 +46,7 @@
                 <i class="fas fa-mobile-alt"></i>
               </div>
               <div class="data">
-                +324 4445678
+                <%=found[0].pno%>
               </div>
             </li>
             <li>
@@ -46,7 +54,7 @@
                 <i class="fas fa-envelope"></i>
               </div>
               <div class="data">
-                stephen@gmail.com
+                <%=found[0].email%>
               </div>
             </li>
             <li>
@@ -226,6 +234,10 @@
       </div>
     </div>
   </div>
+
+
+ 
+
 
 </body>
 
