@@ -718,7 +718,7 @@ app.post("/awards", function (req, res) {
 
   if (value === "3") {
     flag4 = 1;
-    res.redirect("/projects");
+    res.redirect("/personal");
   } else {
     if (value === "1") flag4 = 0;
     else flag4 = 1;
