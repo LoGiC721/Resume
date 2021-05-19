@@ -84,7 +84,7 @@ const UserSchema = new Schema({
   skills: [
     {
       skillsname: { type: String, default: null },
-      skillsdetails:{ type: String, default: null },
+      skillsdetails:{ type: Number, default: null },
     },
   ],
 

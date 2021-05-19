@@ -16,11 +16,11 @@
 
         <div class="sameline">
             <%if((found[0].skills.length!==0&&((noOfSkills-i)!==1))||(flag2===1)){%>
-            <label for="skillsdetails">Skill Details</label>
-            <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[i].skillsdetails%>" autocomplete="off"> 
+            <label for="skillsdetails">Level Percentage</label>
+            <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[i].skillsdetails%>" autocomplete="off"> 
             <%}else{%>
-                <label for="skillsdetails">Skill Details</label>
-                <input type="text" placeholder="skilldetails" id="skillsdetails" name="skillsdetails" value="" autocomplete="off"> 
+                <label for="skillsdetails">Level Percentage</label>
+                <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="" autocomplete="off"> 
             <%}%>          
         </div>
         <br>

@@ -217,7 +217,7 @@
                             <%if(found[0].address!=="NULL"){%>
                                 <label for="address">Address</label>
                                 <input type="text" rows="2" cols="30" placeholder="address" id="address" name="address"
-                                    value="" autocomplete="off">
+                                    value="<%=found[0].address%>" autocomplete="off">
                                 <%}else{%>
                                     <label for="address">Address</label>
                                     <input type="text" rows="2" cols="30" placeholder="address" id="address"

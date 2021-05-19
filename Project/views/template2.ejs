@@ -21,26 +21,51 @@
       </div>
       <div class="resume_content">
         <div class="resume_item resume_info">
-          <div class="title">
-            <p class="bold">
-              <%if(found[0].firstname!==null){%>
-              <%=found[0].firstname%>
-              <%}%> 
-              <%if(found[0].lastname!==null){%>
-                <%=found[0].lastname%>
-              <%}%>  
-            </p>
-            <p class="regular">Designer</p>
-          </div>
+
+
+          <%if((found[0].firstname!==null&&found[0].firstname.length!==0)||
+          (found[0].lastname!==null&&found[0].lastname.length!==0)){%> 
+             
+            <div class="title">
+              <p class="bold">
+                <%if(found[0].firstname!==null&&found[0].firstname.length!==0){%>
+                <%=found[0].firstname%>
+                <%}%> 
+                <%if(found[0].lastname!==null&&found[0].lastname.length!==0){%>
+                  <%=found[0].lastname%>
+                <%}%>  
+              </p>
+              <p class="regular">Designer</p>
+            </div>
+          <%}%>
+
+          <%if((found[0].address!==null&&found[0].address.length!==0)||
+          (found[0].country!==null&&found[0].country.length!==0)||
+          (found[0].state!==null&&found[0].state.length!==0)||
+          (found[0].city!==null&&found[0].city.length!==0)||
+          (found[0].pno!==null&&found[0].pno.length!==0)||
+          (found[0].email!==null&&found[0].email.length!==0)) {%>
+
+
           <ul>
+            
             <li>
               <div class="icon">
                 <i class="fas fa-map-signs"></i>
               </div>
               <div class="data">
-                <%=found[0].address%> <br /> <%=found[0].country%>,<%=found[0].state%><br /><%=found[0].city%>
+                <%=found[0].address%> 
+                <br /> 
+                <%=found[0].country%>
+                <%=found[0].state%>
+                <br />
+                <%=found[0].city%>
               </div>
             </li>
+
+            <%}%>
+
+            <%if(found[0].pno!==null){%>
             <li>
               <div class="icon">
                 <i class="fas fa-mobile-alt"></i>
@@ -49,6 +74,13 @@
                 <%=found[0].pno%>
               </div>
             </li>
+            <%}%>
+
+
+
+
+
+            <%if(found[0].email!==null&&found[0].email.length!==0){%>
             <li>
               <div class="icon">
                 <i class="fas fa-envelope"></i>
@@ -57,113 +89,89 @@
                 <%=found[0].email%>
               </div>
             </li>
-            <li>
-              <div class="icon">
-                <i class="fab fa-weebly"></i>
-              </div>
-              <div class="data">
-                www.stephen.com
-              </div>
-            </li>
           </ul>
+          <%}%>
         </div>
+
+
+
+       <%if(found[0].skills.length!==0){%> 
         <div class="resume_item resume_skills">
           <div class="title">
             <p class="bold">skill's</p>
           </div>
           <ul>
+            <%for(let i=0;i<found[0].skills.length;i++){%>
             <li>
+              <%if(found[0].skills[i].skillsname.length!==0){%>
               <div class="skill_name">
-                HTML
+                <%=found[0].skills[i].skillsname%>
               </div>
+              <%}%>
               <div class="skill_progress">
-                <span style="width: 80%;"></span>
+                <span style='width:<%=found[0].skills[i].skillsdetails%>%;'></span>
               </div>
-              <div class="skill_per">80%</div>
+              <div class="skill_per"><%=found[0].skills[i].skillsdetails%>%</div>
             </li>
-            <li>
-              <div class="skill_name">
-                CSS
-              </div>
-              <div class="skill_progress">
-                <span style="width: 70%;"></span>
-              </div>
-              <div class="skill_per">70%</div>
-            </li>
-            <li>
-              <div class="skill_name">
-                SASS
-              </div>
-              <div class="skill_progress">
-                <span style="width: 90%;"></span>
-              </div>
-              <div class="skill_per">90%</div>
-            </li>
-            <li>
-              <div class="skill_name">
-                JS
-              </div>
-              <div class="skill_progress">
-                <span style="width: 60%;"></span>
-              </div>
-              <div class="skill_per">60%</div>
-            </li>
-            <li>
-              <div class="skill_name">
-                JQUERY
-              </div>
-              <div class="skill_progress">
-                <span style="width: 88%;"></span>
-              </div>
-              <div class="skill_per">88%</div>
-            </li>
+            <%}%>
           </ul>
         </div>
+        <%}%>
+
+
+
+        <%if((found[0].github!==null&&found[0].github.length!=0)||
+       (found[0].linkedin!==null&&found[0].linkedin.length!==0)||
+       (found[0].twitter!==null&&found[0].twitter.length!==0)){%>
+        
         <div class="resume_item resume_social">
           <div class="title">
             <p class="bold">Social</p>
           </div>
           <ul>
+
+            <%if(found[0].github!==null&&found[0].github.length!==0){%>
             <li>
               <div class="icon">
-                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-github-square"></i>
               </div>
               <div class="data">
-                <p class="semi-bold">Facebook</p>
-                <p>Stephen@facebook</p>
+                <p class="semi-bold">Github</p>
+                <p><%=found[0].github%></p>
               </div>
             </li>
+             <%}%>
+
+             <%if(found[0].twitter!==null&&found[0].twitter.length!==0){%>
             <li>
               <div class="icon">
                 <i class="fab fa-twitter-square"></i>
               </div>
               <div class="data">
                 <p class="semi-bold">Twitter</p>
-                <p>Stephen@twitter</p>
+                <p><%=found[0].twitter%></p>
               </div>
             </li>
-            <li>
-              <div class="icon">
-                <i class="fab fa-youtube"></i>
-              </div>
-              <div class="data">
-                <p class="semi-bold">Youtube</p>
-                <p>Stephen@youtube</p>
-              </div>
-            </li>
-            <li>
+            <%}%>
+
+            <%if(found[0].linkedin!==null&&found[0].linkedin.length!==0){%>
+              <li>
               <div class="icon">
                 <i class="fab fa-linkedin"></i>
               </div>
               <div class="data">
                 <p class="semi-bold">Linkedin</p>
-                <p>Stephen@linkedin</p>
+                <p><%=found[0].linkedin%></p>
               </div>
             </li>
+            <%}%>
           </ul>
         </div>
+        <%}%>
       </div>
     </div>
+       
+           
     <div class="resume_right">
       <div class="resume_item resume_about">
         <div class="title">
