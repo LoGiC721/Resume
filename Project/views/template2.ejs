@@ -126,6 +126,7 @@
 
 
         <%if(found[0].skills.length!==0){%>
+          <%if(found[0].skills[0].skillsname.length!==0||found[0].skills[0].skillsdetails!==null){%>
           <div class="resume_item resume_skills">
             <div class="title">
               <p class="bold">skill's</p>
@@ -138,18 +139,20 @@
                       <%=found[0].skills[i].skillsname%>
                     </div>
                     <%}%>
+                    <%if(found[0].skills[i].skillsdetails!==null){%>
                       <div class="skill_progress">
                         <span style='width:<%=found[0].skills[i].skillsdetails%>%;'></span>
                       </div>
                       <div class="skill_per">
                         <%=found[0].skills[i].skillsdetails%>%
                       </div>
+                      <%}%> 
                 </li>
                 <%}%>
             </ul>
           </div>
           <%}%>
-
+          <%}%>
             
 
               <%if((found[0].github!==null&&found[0].github.length!=0)||
@@ -221,33 +224,72 @@
           officia totam atque exercitationem inventore repudiandae?</p>
       </div>
       <div class="resume_item resume_work">
+
+
+
+        <%if(found[0].work.length!==0){%>
+          <%if(found[0].work[0].companyname.length!==0||
+          found[0].work[0].startdate!==null||
+          found[0].work[0].enddate!==null||
+          found[0].work[0].jobtitle.length!==0||
+          found[0].work[0].state.length!==0||
+          found[0].work[0].city.length!==0||
+          found[0].work[0].jobdescription.length!==0){%>
+
         <div class="title">
           <p class="bold">Work Experience</p>
         </div>
+        <%}%>
+        <%}%>
+
+
+        <%for(let i=0;i<found[0].work.length;i++){%>
         <ul>
           <li>
-            <div class="date">2013 - 2015</div>
-            <div class="info">
-              <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
+            <%if(found[0].work[i].jobtitle.length!==0){%>
+            <h3><%=found[0].work[i].jobtitle.length%></h3>
+            <%}%>
+
+            <%if(found[0].work[i].startdate!==null|| found[0].work[i].enddate!==null){%>
+            <div class="date"><%=found[0].work[i].startdate.getDate()%> /
+              <%=found[0].work[i].startdate.getMonth()+1%> /
+              <%=found[0].work[i].startdate.getFullYear()%>  -   
+              <%=found[0].work[i].enddate.getDate()%> /
+              <%=found[0].work[i].enddate.getMonth()+1%> /
+              <%=found[0].work[i].enddate.getFullYear()%>
+               <div>
+              <%if(found[0].work[0].state.length!==0||
+          found[0].work[0].city.length!==0){%>  
+              <em><%=found[0].work[i].city%>  <%=found[0].work[i].state%></em>
+              <%}%>
             </div>
-          </li>
-          <li>
-            <div class="date">2015 - 2017</div>
+              </div>
+            <%}%>
+
+           
+           <%if(found[0].work[i].jobtitle.length!==null||found[0].work[i].jobdescription.length){%>
             <div class="info">
-              <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
+              <p class="semi-bold"><%=found[0].work[i].jobtitle%></p>
+              <p><%=found[0].work[i].jobdescription%><br /><br /></p>
             </div>
+           
+            <%}%>
           </li>
-          <li>
-            <div class="date">2017 - Present</div>
-            <div class="info">
-              <p class="semi-bold">Lorem ipsum dolor sit amet.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
-            </div>
-          </li>
+          
         </ul>
-      </div>
+      
+        <%}%>
+
+
+
+        <%if(found[0].school.length!==0){%>
+          <%if(found[0].school[0].name.length!==0||
+          found[0].school[0].startdate!==null||
+          found[0].school[0].enddate!==null||
+          found[0].school[0].degree.length!==0||
+          found[0].school[0].location.length!==0||
+          found[0].school[0].gpa!==null){%>   
+      
       <div class="resume_item resume_education">
         <div class="title">
           <p class="bold">Education</p>
@@ -257,18 +299,16 @@
             <div class="date">2010 - 2013</div>
             <div class="info">
               <p class="semi-bold">Web Designing (Texas University)</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibuslllllllllllllllllllllllll
+                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll!</p>
             </div>
           </li>
-          <li>
-            <div class="date">2000 - 2010</div>
-            <div class="info">
-              <p class="semi-bold">Texas International School</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
-            </div>
-          </li>
+          
         </ul>
       </div>
+<%}%>
+<%}%>
+
       <div class="resume_item resume_hobby">
         <div class="title">
           <p class="bold">Hobby</p>
