@@ -84,7 +84,7 @@ const UserSchema = new Schema({
   skills: [
     {
       skillsname: { type: String, default: null },
-      skillsdetails:{ type: Number, default: null },
+      skillsdetails:{ type: Number, default: 0 },
     },
   ],
 
@@ -333,6 +333,16 @@ app.post("/login", function (req, res) {
     } else {
       passport.authenticate("local")(req, res, function () {
         filepresentornot=0;
+        count = 1;
+        noOfProjects=1;
+        noOfSkills=1;
+     noOfWorkExperience=1;
+     noOfAwards=1;
+     flag = 0;
+     flag1=0;
+     flag2=0;
+     flag3=0;
+     flag4=0;
         res.redirect("/");
       });
     }
@@ -350,6 +360,16 @@ app.post("/register", function (req, res) {
       } else {
         passport.authenticate("local")(req, res, function () {
           filepresentornot=0;
+        count = 1;
+        noOfProjects=1;
+        noOfSkills=1;
+        noOfWorkExperience=1;
+        noOfAwards=1;
+        flag = 0;
+        flag1=0;
+        flag2=0;
+        flag3=0;
+        flag4=0;
           res.redirect("/");
         });
       }

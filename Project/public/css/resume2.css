@@ -232,3 +232,19 @@ body {
 .resume .resume_right .resume_hobby ul li:last-child:before {
   display: none;
 }
+
+.data{
+ overflow: hidden;
+  word-wrap: break-word ;
+  display: inline-block;
+  width: 170px;
+}
+
+li{
+  margin-left:5px;
+}
+
+
+
+
+
