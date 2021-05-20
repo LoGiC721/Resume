@@ -16,7 +16,7 @@
 
                         <div class="sameline">
                             <%if(found[0].firstname!=="NULL"){%>
-                                <label for="firstname">First Name</label>
+                                <label for="firstname">Full Name</label>
                                 <input type="text" placeholder="First name" id="firstname" name="firstname"
                                     value="<%=found[0].firstname%>" autocomplete="off">
                                 <%}else{%>
@@ -27,13 +27,13 @@
                         </div>
 
                         <div class="sameline">
-                            <%if(found[0].lastname!=="NULL"){%>
-                                <label for="lastname">Last Name</label>
-                                <input type="text" placeholder="Last name" id="lastname" name="lastname"
-                                    value="<%=found[0].lastname%>" autocomplete="off">
+                            <%if(found[0].profile!=="NULL"){%>
+                                <label for="profile">Heading</label>
+                                <input type="text" placeholder="Write a short note of yourself" id="profile" name="profile"
+                                    value="<%=found[0].profile%>" autocomplete="off">
                                 <%}else{%>
-                                    <label for="lastname">Last Name</label>
-                                    <input type="text" placeholder="Last name" id="lastname" name="lastname" value=""
+                                    <label for="profile">Profile</label>
+                                    <input type="text" placeholder="Write a short note of yourself" id="profile" name="profile" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
@@ -132,32 +132,23 @@
 
 
                         <div class="sameline">
-                            <%if(found[0].dob!==null){%>
-
-
-                                <%let template=found[0].dob%>
-                                    <%let date=template.getDate()%>
-                                        <%if(date<10){%>
-                                            <%date='0' +date%>
-                                                <%}%>
-                                                    <%let month=(template.getMonth())+1%>
-                                                        <%if(month<10){%>
-                                                            <%month='0' +month%>
-                                                                <%}%>
-                                                                    <%let year=template.getFullYear()%>
-                                                                        <%let finaldate=`${year}-${month}-${date}`%>
+                            <%if(found[0].currentposition!==null){%>
 
 
 
-                                                                            <label for="dob">Date of Birth</label>
-                                                                            <input type="date" placeholder="DOB"
-                                                                                id="dob" name="dob"
-                                                                                value="<%=finaldate%>"
+
+
+
+                                                                            <label for="currentposition">Position</label>
+                                                                            <input type="text" placeholder="Student/Designer"
+                                                                                id="currentposition" name="currentposition"
+                                                                                value="<%=found[0].currentposition%>"
                                                                                 autocomplete="off">
                                                                             <%}else{%>
-                                                                                <label for="dob">Date of Birth</label>
-                                                                                <input type="date" placeholder="DOB"
-                                                                                    id="dob" name="dob" value=""
+                                                                                <label for="currentposition">Position</label>
+                                                                                <input type="text" placeholder="Student/Designer"
+                                                                                    id="currentposition" name="currentposition"
+                                                                                    value=""
                                                                                     autocomplete="off">
                                                                                 <%}%>
                         </div>
