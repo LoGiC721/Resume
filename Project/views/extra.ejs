@@ -9,37 +9,50 @@
         
         
 		
-         <div class="sameline">
-              <label>Hobbies</label>
-              <%for(let i=0;i<noOfhobbies;i++){%>
-              <input type="text" name="hobbie">
-             <%}%>
+         <div class="same">
+            
+            <div>
+               <label class="labell">Hobbies</label>
+                <%for(let i=0;i<noOfhobbies;i++){%>
+              <input type="text" class="inputt" name="hobbie" value="<%=found[0].extra[0].hobbie[i]%>">
+              <%}%>
+
               <button name="btn" class="smallbtn" value="1">+</button>
               
-              <button name="btn"  class="smallbtn" value="2">-</button>
+            <button name="btn"  class="smallbtn" value="2">-</button>
+             
+                </div>
+            
+            
+              
          </div>
 
          <br>
         
 
-         <div class="sameline">
-            <label>Strengths</label>
+         <div class="same">
+            
+            <div>
+                <label>Strengths</label>
             <%for(let i=0;i<noOfStrengths;i++){%>
-                <input type="text" name="strength">
+                <input type="text" name="strength" value="<%=found[0].extra[0].strength[i]%>">
                <%}%>
-                <button name="btn"  class="smallbtn" value="3">+</button>
+               <button name="btn"  class="smallbtn" value="3">+</button>
                 
-                <button name="btn"  class="smallbtn" value="4">-</button>
+               <button name="btn"  class="smallbtn" value="4">-</button>
+
+            </div> 
+               
        </div>
       
      
       <br>
 
-       <div class="sameline">
+       <div class="same">
         <label>Languages</label>
        
         <%for(let i=0;i<noOfLanguage;i++){%>
-            <input type="text" name="language">
+            <input type="text" name="language" value="<%=found[0].extra[0].language[i]%>">
            <%}%>
             <button name="btn"  class="smallbtn" value="5">+</button>
             
@@ -49,10 +62,10 @@
        
 	<br>
 
-        <div class="sameline">
+        <div class="same">
             <label>Goals</label>
             <%for(let i=0;i<noOfGoals;i++){%>
-                <input type="text" name="language">
+                <input type="text" name="goal" value="<%=found[0].extra[0].goals[i]%>">
                <%}%>
                 <button name="btn"  class="smallbtn" value="7">+</button>
                 

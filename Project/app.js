@@ -110,10 +110,10 @@ const UserSchema = new Schema({
 
   extra: [
     {
-      hobbie:{type: String, default: null},
-      strength: { type: String, default: null },
-      language: { type: String, default: null },
-      goals: { type: String, default: null },
+      hobbie:[{type: String, default: null}],
+      strength:[{ type: String, default: null }],
+      language:[{ type: String, default: null }],
+      goals: [{ type: String, default: null }],
     },
   ],
 
@@ -825,7 +825,7 @@ app.post("/extra",function(req,res)
   {
     noOfhobbies++;
   }
-  else if(req.body.btn==="2")
+  else if(req.body.btn==="2"&&noOfhobbies>1)
   {
     noOfhobbies--;
   }
@@ -833,7 +833,7 @@ app.post("/extra",function(req,res)
   {
     noOfStrengths++;
   }
-  else if(req.body.btn==="4")
+  else if(req.body.btn==="4"&&noOfStrengths>1)
   {
     noOfStrengths--;
   }
@@ -841,7 +841,7 @@ app.post("/extra",function(req,res)
   {
     noOfLanguage++;
   }
-  else if(req.body.btn==="6")
+  else if(req.body.btn==="6"&&noOfLanguage>1)
   {
     noOfLanguage--;
   }
@@ -849,11 +849,35 @@ app.post("/extra",function(req,res)
   {
     noOfGoals++;
   }
-  else if(req.body.btn==="8")
+  else if(req.body.btn==="8"&&noOfGoals>1)
   {
     noOfGoals--;
   }
   
+  var myquery = { _id: req.user.id };
+
+
+  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+ var newvalue = {
+        $push: {
+          extra: {
+            hobbie: req.body.hobbie,
+            strength:req.body.strength,
+            language:req.body.language,
+            goals:req.body.goal,
+            
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+
+
+
   res.redirect("/extra");
 })
 
