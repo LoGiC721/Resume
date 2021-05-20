@@ -4,24 +4,25 @@
     <br>
     <form method="POST" action="skills">
         <%for(let i=0;i<noOfSkills;i++){%>
-        <div class="sameline">    
-            <%if((found[0].skills.length!==0&&((noOfSkills-i)!==1))||(flag2===1)){%>
+        <div class="sameline"> 
+              
             <label for="skillsname">Skill Name</label>
-            <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="<%=found[0].skills[i].skillsname%>" autocomplete="off">
-            <%}else{%>
-                <label for="skillsname">Skill Name</label>
-                <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="" autocomplete="off">
-            <%}%>      
+            <%if(found[0].skills.length!==0){%> 
+            <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="<%=found[0].skills[0].skillsname[i]%>" autocomplete="off">
+                <%}else{%>
+                    <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="" autocomplete="off">      
+             <%}%>
         </div>
 
         <div class="sameline">
-            <%if((found[0].skills.length!==0&&((noOfSkills-i)!==1))||(flag2===1)){%>
+            
             <label for="skillsdetails">Level Percentage</label>
-            <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[i].skillsdetails%>" autocomplete="off"> 
+            <%if(found[0].skills.length!==0){%> 
+            <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off"> 
             <%}else{%>
-                <label for="skillsdetails">Level Percentage</label>
-                <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="" autocomplete="off"> 
-            <%}%>          
+                <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="" autocomplete="off">  
+            <%}%>   
+                
         </div>
         <br>
 		<hr class="linecoloured">

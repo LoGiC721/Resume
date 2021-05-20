@@ -5,18 +5,19 @@
     <form method="POST" action="awards">
         <%for(let i=0;i<noOfAwards;i++){%>
         <div class="sameline">
-            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awardname">Award name </label>
-            <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[i].awardname%>" autocomplete="off">
+            <%if(found[0].awards.length!==0){%>
+           <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[0].awardname[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="awardname">Award name </label>
                 <input type="text" placeholder="awardname" id="awardname" name="awardname" value="" autocomplete="off">  
             <%}%>    
         </div>
+
         <div class="sameline">
-            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
-                <%if(found[0].awards[i].awarddate!==null){%>
-                    <%let template=found[0].awards[i].awarddate%>
+            <label for="awarddate">Award Date</label>
+            <%if(found[0].awards.length!==0){%>
+                <%if(found[0].awards[0].awarddate[i]!=null){%>
+                    <%let template=found[0].awards[0].awarddate[i]%>
                     <%let date=template.getDate()%>
                     <%if(date<10){%>
                     <%date='0' +date%>
@@ -27,37 +28,39 @@
                     <%}%>
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
-            <label for="awarddate">Award Date</label>
+            
             <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <label for="awarddate">Award Date</label>
                 <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
                 <%}%>
                 <%}else{%>
-                    <label for="awarddate">Award Date</label>
                     <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
                     <%}%>     
         </div>
         <div class="sameline">
-            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awarder">Awarder</label>
-            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[i].awarder%>" autocomplete="off">
+            <%if(found[0].awards.length!==0){%>
+            
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[0].awarder[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="awarder">Awarder</label>
+               
             <input type="text" placeholder="awarder" id="awarder" name="awarder" value="" autocomplete="off">
             <%}%> 
         </div>
         <div class="sameline">
-            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="Awarddescription">Award description</label>
-            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[i].Awarddescription%>" autocomplete="off">
+            <%if(found[0].awards.length!==0){%>
+            
+            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[0].Awarddescription[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="Awarddescription">Award description</label>
+                
                 <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="" autocomplete="off">
             <%}%>    
         </div>
         <br>
+        
 		<hr class="linecoloured">
+        <br>
 		<%}%>
 		<br>
 		<br>

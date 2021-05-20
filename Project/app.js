@@ -60,50 +60,50 @@ const UserSchema = new Schema({
 
   school: [
     {
-      name: { type: String, default: null },
-      startdate: { type: Date, default: Date.now },
-      enddate: { type: Date, default: Date.now },
-      degree: { type: String, default: null },
-      gpa: { type: Number, default: null },
-      location: { type: String, default: null },
+      name: [{ type: String, default: null }],
+      startdate: [{ type: Date, default: Date.now}],
+      enddate: [{ type: Date, default: Date.now }],
+      degree: [{ type: String, default: null }],
+      gpa: [{ type: Number, default: null }],
+      location:[{ type: String, default: null }],
     },
   ],
 
   work: [
     {
-      companyname: { type: String, default: null },
-      jobtitle: { type: String, default: null },
-      state: { type: String, default: null },
-      city: { type: String, default: null },
-      startdate: { type: Date, default: null },
-      enddate: { type: Date, default: null },
-      jobdescription: { type: String, default: null },
+      companyname: [{ type: String, default: null }],
+      jobtitle: [{ type: String, default: null }],
+      state: [{ type: String, default: null }],
+      city: [{ type: String, default: null }],
+      startdate: [{ type: Date, default: null }],
+      enddate: [{ type: Date, default: null }],
+      jobdescription: [{ type: String, default: null }],
     },
   ],
 
   skills: [
     {
-      skillsname: { type: String, default: null },
-      skillsdetails:{ type: Number, default: 0 },
+      skillsname: [{ type: String, default: null }],
+      skillsdetails:[{ type: Number, default: 0 }],
     },
   ],
 
 
   project: [
     {
-      projectname: { type: String, default: null },
-      project1description: { type: String, default: null },
-      link: { type: String, default: null },
-      toolsused: { type: String, default: null },
+      projectname: [{ type: String, default: null }],
+      project1description: [{ type: String, default: null }],
+      link: [{ type: String, default: null }],
+      toolsused: [{ type: String, default: null }],
     },
   ],
 
   awards: [
     {
-      awardname: { type: String, default: null },
-      awarddate: { type: Date, default: null },
-      awarder: { type: String, default: null },
-      Awarddescription: { type: String, default: null },
+      awardname: [{ type: String, default: null }],
+      awarddate: [{ type: Date, default: null }],
+      awarder: [{ type: String, default: null }],
+      Awarddescription: [{ type: String, default: null }],
     },
   ],
 
@@ -280,29 +280,25 @@ let noOfProjects=1;
 let noOfSkills=1;
 let noOfWorkExperience=1;
 let noOfAwards=1;
-let flag = 0;
-let flag1=0;
-let flag2=0;
-let flag3=0;
-let flag4=0;
+
 let filepresentornot=0;
-let flag5=0;//hobbies
+
 let noOfhobbies=1;
-let flag6=0;//strengths
+
 let noOfStrengths=1;
-let flag7=0;//language
+
 let noOfLanguage=1;
-let flag8=0;//goals
+
 let noOfGoals=1;
 
-let important=1;
+
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
  
    const loader=multer({dest:`public/uploads/${req.user.id}/`});
   
- // important:1;
+
   
   
 
@@ -316,19 +312,15 @@ app.get("/:customName", function (req, res) {
         noOfSkills:noOfSkills,
         noOfWorkExperience:noOfWorkExperience,
         noOfAwards:noOfAwards,
-        flag: flag,
-        flag1:flag1,
-        flag2:flag2,
-        flag3:flag3,
-        flag4:flag4,
+        
+        
         filepresentornot:filepresentornot,
-        flag5:flag5,
+       
         noOfhobbies:noOfhobbies,
-        flag6:flag6,
-        flag7:flag7,
+        
         noOfStrengths:noOfStrengths,
         noOfLanguage:noOfLanguage,
-        flag8:flag8,
+       
         noOfGoals:noOfGoals,
 
       });
@@ -365,11 +357,7 @@ app.post("/login", function (req, res) {
         noOfSkills=1;
      noOfWorkExperience=1;
      noOfAwards=1;
-     flag = 0;
-     flag1=0;
-     flag2=0;
-     flag3=0;
-     flag4=0;
+    
         res.redirect("/");
       });
     }
@@ -392,11 +380,7 @@ app.post("/register", function (req, res) {
         noOfSkills=1;
         noOfWorkExperience=1;
         noOfAwards=1;
-        flag = 0;
-        flag1=0;
-        flag2=0;
-        flag3=0;
-        flag4=0;
+       
           res.redirect("/");
         });
       }
@@ -430,9 +414,10 @@ app.post("/profile", function (req, res) {
   });
   res.redirect("/education");
 });
+
 app.post("/education", function (req, res) {
-    // console.log(req.body.startdate);
-  let value = req.body.btn;
+    
+  let value=req.body.btn;
   if (value === "1") {
     noOfProjects++;
   } else {
@@ -441,17 +426,20 @@ app.post("/education", function (req, res) {
     }
   }
 
-  
-  //  console.log("noOfProjects="+noOfProjects);
 
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.name;
-  if (!Array.isArray(checkisarray)) {
+  
     
-    var newvalue = {
-      $set: {
-        school: 
+    Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    
+     
+      var newvalue = {
+        $push: {
+          school: 
           {
             name:req.body.name,
             startdate:req.body.startdate,
@@ -460,49 +448,24 @@ app.post("/education", function (req, res) {
             gpa: req.body.gpa,
             location: req.body.location,
           },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.name;
-    Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
-
-    for (let i = 0; i < arr.length; i++) {
-     
-      var newvalue = {
-        $push: {
-          school: 
-          {
-            name:req.body.name[i],
-            startdate:req.body.startdate[i],
-            enddate: req.body.enddate[i],
-            degree:req.body.degree[i],
-            gpa: req.body.gpa[i],
-            location: req.body.location[i],
-          },
         },
       };
       Project.updateMany(myquery, newvalue, function (err, res) {
         if (!err) console.log("Documents inserted successfully");
       });
-    }
-  }
+    
+
 
   if (value === "3") {
-    flag1 = 1;
+   
     res.redirect("/work");
   } else {
-    if (value === "1") flag1 = 0;
-    else flag1 = 1;
+    
     res.redirect("/education");
   }
 });
 app.post("/work", function (req, res) {
-  //   console.log(req.body);
+  
 
   let value = req.body.btn;
   if (value === "1") {
@@ -514,16 +477,24 @@ app.post("/work", function (req, res) {
   }
 
   
-  //  console.log("noOfProjects="+noOfProjects);
-
+  
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.companyname;
-  if (!Array.isArray(checkisarray)) {
+ 
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+
+    let arr = req.body.companyname;
+    Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
     
-    var newvalue = {
-      $set: {
-        work: 
+     
+      var newvalue = {
+        $push: {
+          work: 
           {
             companyname: req.body.companyname,
             jobtitle: req.body.jobtitle,
@@ -533,45 +504,18 @@ app.post("/work", function (req, res) {
             enddate: req.body.enddate,
             jobdescription: req.body.jobdescription,
           },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.companyname;
-    Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
-
-    for (let i = 0; i < arr.length; i++) {
-     
-      var newvalue = {
-        $push: {
-          work: 
-          {
-            companyname: req.body.companyname[i],
-            jobtitle: req.body.jobtitle[i],
-            state: req.body.state[i],
-            city: req.body.city[i],
-            startdate: req.body.startdate[i],
-            enddate: req.body.enddate[i],
-            jobdescription: req.body.jobdescription[i],
-          },
         },
       };
       Project.updateMany(myquery, newvalue, function (err, res) {
         if (!err) console.log("Documents inserted successfully");
       });
-    }
-  }
+    
 
   if (value === "3") {
-    flag3 = 1;
+   
     res.redirect("/skills");
   } else {
-    if (value === "1") flag3 = 0;
-    else flag3 = 1;
+    
     res.redirect("/work");
   }
 });
@@ -587,10 +531,7 @@ app.post("/skills", function (req, res) {
      else if (value === "2" && noOfSkills > 1) {
         noOfSkills--;
      }
-     else if(value!=="3")
-     {
-       important++;
-     }
+    
      
 
 
@@ -598,36 +539,18 @@ app.post("/skills", function (req, res) {
 
     var myquery = { _id: req.user.id };
 
-    let checkisarray = req.body.skillsname;
-    if (!Array.isArray(checkisarray)) {
-      
-      var newvalue = {
-        $set: {
-          skills: 
-            {
-              skillsname:req.body.skillsname,
-              skillsdetails:req.body.skillsdetails,
-              
-            },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    } else {
-      let arr = req.body.skillsname;
       Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
         if (!err) console.log("Documents deleted successfully");
       });
   
-      for (let i = 0; i < arr.length; i++) {
+      
        
         var newvalue = {
           $push: {
             skills: 
             {
-              skillsname:req.body.skillsname[i],
-              skillsdetails:req.body.skillsdetails[i],
+              skillsname:req.body.skillsname,
+              skillsdetails:req.body.skillsdetails,
 
             },
           },
@@ -635,15 +558,13 @@ app.post("/skills", function (req, res) {
         Project.updateMany(myquery, newvalue, function (err, res) {
           if (!err) console.log("Documents inserted successfully");
         });
-      }
-    }
+      
   
     if (value === "3") {
-      flag2 = 1;
+     
       res.redirect("/projects");
     } else {
-      if (value === "1") flag2 = 0;
-      else flag2 = 1;
+     
       res.redirect("/skills");
     }
 
@@ -659,55 +580,38 @@ app.post("/projects", function (req, res) {
     }
   }
 
-  // console.log(req.body);
-  //  console.log("count="+count);
+  
 
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.projectname;
-  if (!Array.isArray(checkisarray)) {
-    var newvalue = {
-      $set: {
-        project: {
-          projectname: req.body.projectname,
-          project1description: req.body.project1description,
-          link: req.body.link,
-          toolsused: req.body.toolsused,
-        },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.projectname;
+  
+    
     Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
       if (!err) console.log("Documents deleted successfully");
     });
 
-    for (let i = 0; i < arr.length; i++) {
+    
       var newvalue = {
         $push: {
           project: {
-            projectname: req.body.projectname[i],
-            project1description: req.body.project1description[i],
-            link: req.body.link[i],
-            toolsused: req.body.toolsused[i],
+            projectname: req.body.projectname,
+            project1description: req.body.project1description,
+            link: req.body.link,
+            toolsused: req.body.toolsused,
           },
         },
       };
       Project.updateMany(myquery, newvalue, function (err, res) {
         if (!err) console.log("Documents inserted successfully");
       });
-    }
-  }
+    
+  
 
   if (value === "3") {
-    flag = 1;
+    
     res.redirect("/awards");
   } else {
-    if (value === "1") flag = 0;
-    else flag = 1;
+    
     res.redirect("/projects");
   }
 });
@@ -723,55 +627,38 @@ app.post("/awards", function (req, res) {
     }
   }
 
-  // console.log(req.body);
-  //  console.log("count="+count);
+  
 
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.awardname;
-  if (!Array.isArray(checkisarray)) {
-    var newvalue = {
-      $set: {
-        awards: {
-          awardname: req.body.awardname,
-          awarddate:  req.body.awarddate,
-          awarder:  req.body.awarder,
-          Awarddescription: req.body.Awarddescription,
-        },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
+ 
+  
     let arr = req.body.awardname;
     Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
       if (!err) console.log("Documents deleted successfully");
     });
 
-    for (let i = 0; i < arr.length; i++) {
+   
       var newvalue = {
         $push: {
           awards: {
-            awardname: req.body.awardname[i],
-          awarddate:  req.body.awarddate[i],
-          awarder:  req.body.awarder[i],
-          Awarddescription: req.body.Awarddescription[i],
+          awardname: req.body.awardname,
+          awarddate:  req.body.awarddate,
+          awarder:  req.body.awarder,
+          Awarddescription: req.body.Awarddescription,
           },
         },
       };
       Project.updateMany(myquery, newvalue, function (err, res) {
         if (!err) console.log("Documents inserted successfully");
       });
-    }
-  }
+    
 
   if (value === "3") {
-    flag4 = 1;
+    
     res.redirect("/personal");
   } else {
-    if (value === "1") flag4 = 0;
-    else flag4 = 1;
+    
     res.redirect("/awards");
   }
 });

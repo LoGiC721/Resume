@@ -14,7 +14,11 @@
             <div>
                <label class="labell">Hobbies</label>
                 <%for(let i=0;i<noOfhobbies;i++){%>
+              <%if(found[0].extra.length!==0){%> 
               <input type="text" class="inputt" name="hobbie" value="<%=found[0].extra[0].hobbie[i]%>">
+              <%}else{%>
+                <input type="text" class="inputt" name="hobbie" value="">
+                <%}%>
               <%}%>
 
               <button name="btn" class="smallbtn" value="1">+</button>
@@ -35,7 +39,11 @@
             <div>
                 <label>Strengths</label>
             <%for(let i=0;i<noOfStrengths;i++){%>
+                <%if(found[0].extra.length!==0){%> 
                 <input type="text" name="strength" value="<%=found[0].extra[0].strength[i]%>">
+                <%}else{%>
+                    <input type="text" name="strength" value="">
+                    <%}%>
                <%}%>
                <button name="btn"  class="smallbtn" value="3">+</button>
                 
@@ -52,7 +60,11 @@
         <label>Languages</label>
        
         <%for(let i=0;i<noOfLanguage;i++){%>
+            <%if(found[0].extra.length!==0){%> 
             <input type="text" name="language" value="<%=found[0].extra[0].language[i]%>">
+            <%}else{%>
+                <input type="text" name="language" value="">
+                <%}%>
            <%}%>
             <button name="btn"  class="smallbtn" value="5">+</button>
             
@@ -65,7 +77,11 @@
         <div class="same">
             <label>Goals</label>
             <%for(let i=0;i<noOfGoals;i++){%>
+                <%if(found[0].extra.length!==0){%> 
                 <input type="text" name="goal" value="<%=found[0].extra[0].goals[i]%>">
+                <%}else{%>
+                    <input type="text" name="goal" value="">
+                    <%}%>
                <%}%>
                 <button name="btn"  class="smallbtn" value="7">+</button>
                 
