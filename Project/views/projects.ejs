@@ -8,60 +8,64 @@
                 <div class="sameline">
                     
                     <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
-                        <%=console.log("yes");%>
+                        
                         <label for="projectname">project </label>
                         <input type="text" placeholder="projectname" id="projectname" name="projectname"
-                            value="<%=found[0].project[i].projectname%>">
+                            value="<%=found[0].project[i].projectname%>" autocomplete="off">
                             <%}else{%>
-                                <%=console.log("no");%>
+                               
                             <label for="projectname">project </label>
-                            <input type="text" placeholder="projectname" id="projectname" name="projectname" value="">
+                            <input type="text" placeholder="projectname" id="projectname" name="projectname" value="" autocomplete="off">
                             <%}%>
                 </div>
                 <div class="sameline">
                     <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="project1description">Project Description</label>
                         <input type="text" placeholder="project1description" id="project1description"
-                            name="project1description" value="<%=found[0].project[i].project1description%>">
+                            name="project1description" value="<%=found[0].project[i].project1description%>" autocomplete="off">
                             <%}else{%>
                             <label for="project1description">Project Description</label>
                             <input type="text" placeholder="project1description" id="project1description"
-                                name="project1description" value="">
+                                name="project1description" value="" autocomplete="off">
                             <%}%>
                 </div>
                 <div class="sameline">
                     <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="link">Link</label>
                         <input type="url" placeholder="link" id="link" name="link"
-                            value="<%=found[0].project[i].link%>">
+                            value="<%=found[0].project[i].link%>" autocomplete="off">
                             <%}else{%>
                                 <label for="link">Link</label>
                                 <input type="url" placeholder="link" id="link" name="link"
-                                    value="">
+                                    value="" autocomplete="off">
                             <%}%>
                 </div>
                 <div class="sameline">
                     <%if((found[0].project.length!==0&&((count-i)!==1))||(flag===1)){%>
                         <label for="toolsused">Tools Used</label>
                         <input type="text" placeholder="toolsused" id="toolsused" name="toolsused"
-                            value="<%=found[0].project[i].toolsused%>">
+                            value="<%=found[0].project[i].toolsused%>" autocomplete="off">
                             <%}else{%>
                             <label for="toolsused">Tools Used</label>
-                            <input type="text" placeholder="toolsused" id="toolsused" name="toolsused" value="">
+                            <input type="text" placeholder="toolsused" id="toolsused" name="toolsused" value="" autocomplete="off">
                             <%}%>
                 </div>
                 <br>
                 <hr class="linecoloured">
                 <%}%>
                     <br>
-                    <button id="fg" name="btn" value="1">Add</button>
-                    <button id="fg" name="btn" value="2">Delete</button>
-                    <!-- <a href="/projects">Remove</a>  -->
+                   
     </div>
     <br><br>
     <div class="footer">
         <a href="/skills" class="btn button prev">Prev</a>
-        <button name="btn" value="3" class="btn button next">Next</button>
+        <button class="add increment" name="btn" value="1">Add Project</button>
+        <%if(count===1){%>
+		    <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Project</button>
+            <%}else{%>
+                <button class="add decrement" name="btn" value="2">Remove Project</button>
+            <%}%>  
+        <button name="btn" value="3" class="btn button next">Save & Next</button>
     </div>
     </form>
     </div>

@@ -3,27 +3,75 @@
     <h3>Your Award Details</h3>
     <br>
     <form method="POST" action="awards">
+        <%for(let i=0;i<noOfAwards;i++){%>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awardname">Award name </label>
-            <input type="text" placeholder="awardname" id="awardname" name="awardname">
+            <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[i].awardname%>" autocomplete="off">
+            <%}else{%>
+                <label for="awardname">Award name </label>
+                <input type="text" placeholder="awardname" id="awardname" name="awardname" value="" autocomplete="off">  
+            <%}%>    
         </div>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
+                <%if(found[0].awards[i].awarddate!==null){%>
+                    <%let template=found[0].awards[i].awarddate%>
+                    <%let date=template.getDate()%>
+                    <%if(date<10){%>
+                    <%date='0' +date%>
+                    <%}%>
+                    <%let month=(template.getMonth())+1%>
+                    <%if(month<10){%>
+                    <%month='0' +month%>
+                    <%}%>
+                    <%let year=template.getFullYear()%>
+                    <%let finaldate=`${year}-${month}-${date}`%>
             <label for="awarddate">Award Date</label>
-            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate">
+            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="<%=finaldate%>" autocomplete="off">
+            <%}else{%>
+                <label for="awarddate">Award Date</label>
+                <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
+                <%}%>
+                <%}else{%>
+                    <label for="awarddate">Award Date</label>
+                    <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
+                    <%}%>     
         </div>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="awarder">Awarder</label>
-            <input type="text" placeholder="awarder" id="awarder" name="awarder">
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[i].awarder%>" autocomplete="off">
+            <%}else{%>
+                <label for="awarder">Awarder</label>
+            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="" autocomplete="off">
+            <%}%> 
         </div>
         <div class="sameline">
+            <%if((found[0].awards.length!==0&&((noOfAwards-i)!==1))||(flag4===1)){%>
             <label for="Awarddescription">Award description</label>
-            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription">
+            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[i].Awarddescription%>" autocomplete="off">
+            <%}else{%>
+                <label for="Awarddescription">Award description</label>
+                <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="" autocomplete="off">
+            <%}%>    
         </div>
-        <br><br>
-        <div class="footer">
-            <a href="/projects" class="btn button prev">Prev</a>
-            <button class="btn button next">Download</button>
-          </div>
+        <br>
+		<hr class="linecoloured">
+		<%}%>
+		<br>
+		<br>
+		<br>
+		<div class="footer">
+			<a href="/projects" class="btn button prev">Prev</a>
+			<button class="add increment" name="btn" value="1">Add Award</button>
+            <%if(noOfAwards===1){%>
+		    <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Award</button>
+            <%}else{%>
+                <button class="add decrement" name="btn" value="2">Remove Award</button>
+            <%}%>    
+			<button name="btn" value="3" class="btn button next">Save & Next</button>
+		</div>
     </form>
     </div>
     </div>

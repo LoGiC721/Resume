@@ -11,6 +11,12 @@ const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
+const multer = require('multer');
+const fs=require("fs");
+const path = require('path');
+const loading=multer({dest:"public/uploads/"});
+
+
 
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,39 +48,47 @@ const UserSchema = new Schema({
   github: { type: String, default: null },
   linkedin: { type: String, default: null },
   twitter: { type: String, default: null },
-  collegename: { type: String, default: null },
-  collegestartdate: { type: Date, default: null },
-  collegeenddate: { type: Date, default: null },
-  collegedegree: { type: String, default: null },
-  collegegpa: { type: Number, default: null },
-  collegelocation: { type: String, default: null },
-  sscschoolname: { type: String, default: null },
-  sscboard: { type: String, default: null },
-  ssccompletion: { type: Date, default: null },
-  sscpercentage: { type: Number, default: null },
-  sscschoollocation: { type: String, default: null },
-  hscschoolname: { type: String, default: null },
-  hscboard: { type: String, default: null },
-  hsccompletion: { type: Date, default: null },
-  hscpercentage: { type: Number, default: null },
-  hscschoollocation: { type: String, default: null },
-  companyname: { type: String, default: null },
-  jobtitle: { type: String, default: null },
+  country: { type: String, default: null },
   state: { type: String, default: null },
   city: { type: String, default: null },
-  startdate: { type: Date, default: null },
-  enddate: { type: Date, default: null },
-  jobdescription: { type: String, default: null },
-  skills1: { type: String, default: null },
-  skills2: { type: String, default: null },
-  skills3: { type: String, default: null },
-  skills4: { type: String, default: null },
-  skills5: { type: String, default: null },
-  skills6: { type: String, default: null },
-  projectname: { type: String, default: null },
-  project1description: { type: String, default: null },
-  link: { type: String, default: null },
-  toolsused: { type: String, default: null },
+  pin: { type: String, default: null },
+  address: { type: String, default: null },
+  dob: { type: Date, default: null },
+
+  img:{ type: String, default: null },
+
+
+  school: [
+    {
+      name: { type: String, default: null },
+      startdate: { type: Date, default: Date.now },
+      enddate: { type: Date, default: Date.now },
+      degree: { type: String, default: null },
+      gpa: { type: Number, default: null },
+      location: { type: String, default: null },
+    },
+  ],
+
+  work: [
+    {
+      companyname: { type: String, default: null },
+      jobtitle: { type: String, default: null },
+      state: { type: String, default: null },
+      city: { type: String, default: null },
+      startdate: { type: Date, default: null },
+      enddate: { type: Date, default: null },
+      jobdescription: { type: String, default: null },
+    },
+  ],
+
+  skills: [
+    {
+      skillsname: { type: String, default: null },
+      skillsdetails:{ type: Number, default: 0 },
+    },
+  ],
+
+
   project: [
     {
       projectname: { type: String, default: null },
@@ -83,10 +97,18 @@ const UserSchema = new Schema({
       toolsused: { type: String, default: null },
     },
   ],
-  awardname: { type: String, default: null },
-  awarddate: { type: String, default: null },
-  awarder: { type: String, default: null },
-  Awarddescription: { type: String, default: null },
+
+  awards: [
+    {
+      awardname: { type: String, default: null },
+      awarddate: { type: Date, default: null },
+      awarder: { type: String, default: null },
+      Awarddescription: { type: String, default: null },
+    },
+  ],
+
+
+ 
   username: { type: String, default: null },
   password: { type: String, default: null },
   googleId: { type: String, default: null },
@@ -159,6 +181,21 @@ passport.use(
   )
 );
 
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `./public/uploads/${req.user.id}/`)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+ 
+var upload = multer({ storage: storage });
+
+
+
+
 app.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile"] })
@@ -222,15 +259,33 @@ let templateno = 1;
 app.get("/download", function (req, res) {
   Project.find({ _id: req.user.id }, function (err, posts) {
     if (!err) {
-      res.render("template" + templateno, { arr: posts });
+      res.render("template" + templateno, { found: posts });
     }
   });
 });
 
 let count = 1;
+let noOfProjects=1;
+let noOfSkills=1;
+let noOfWorkExperience=1;
+let noOfAwards=1;
 let flag = 0;
+let flag1=0;
+let flag2=0;
+let flag3=0;
+let flag4=0;
+let filepresentornot=0;
+
+let important=1;
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
+
+ 
+   const loader=multer({dest:`public/uploads/${req.user.id}/`});
+  
+ // important:1;
+  
+  
 
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
@@ -238,11 +293,22 @@ app.get("/:customName", function (req, res) {
         current: customListName,
         found: found,
         count: count,
+        noOfProjects:noOfProjects,
+        noOfSkills:noOfSkills,
+        noOfWorkExperience:noOfWorkExperience,
+        noOfAwards:noOfAwards,
         flag: flag,
+        flag1:flag1,
+        flag2:flag2,
+        flag3:flag3,
+        flag4:flag4,
+        filepresentornot:filepresentornot,
+        
       });
       //  console.log(found[0].project[0].projectname);
     }
   });
+  
 });
 
 app.post("/", function (req, res) {
@@ -266,6 +332,17 @@ app.post("/login", function (req, res) {
       res.redirect("/login");
     } else {
       passport.authenticate("local")(req, res, function () {
+        filepresentornot=0;
+        count = 1;
+        noOfProjects=1;
+        noOfSkills=1;
+     noOfWorkExperience=1;
+     noOfAwards=1;
+     flag = 0;
+     flag1=0;
+     flag2=0;
+     flag3=0;
+     flag4=0;
         res.redirect("/");
       });
     }
@@ -282,6 +359,17 @@ app.post("/register", function (req, res) {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
+          filepresentornot=0;
+        count = 1;
+        noOfProjects=1;
+        noOfSkills=1;
+        noOfWorkExperience=1;
+        noOfAwards=1;
+        flag = 0;
+        flag1=0;
+        flag2=0;
+        flag3=0;
+        flag4=0;
           res.redirect("/");
         });
       }
@@ -290,6 +378,7 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/profile", function (req, res) {
+  console.log(req.body);
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -301,6 +390,12 @@ app.post("/profile", function (req, res) {
       github: req.body.github,
       linkedin: req.body.linkedin,
       twitter: req.body.twitter,
+      country: req.body.country,
+      state: req.body.state,
+      city: req.body.city,
+      pin: req.body.pin,
+      address: req.body.address,
+      dob:req.body.dob,
     },
   };
   Project.updateMany(myquery, newvalues, function (err, res) {
@@ -309,73 +404,222 @@ app.post("/profile", function (req, res) {
   res.redirect("/education");
 });
 app.post("/education", function (req, res) {
-  //   console.log(req.body);
+    // console.log(req.body.startdate);
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfProjects++;
+  } else {
+    if (value === "2" && noOfProjects > 1) {
+      noOfProjects--;
+    }
+  }
+
+  
+  //  console.log("noOfProjects="+noOfProjects);
+
   var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      collegename: req.body.collegename,
-      collegestartdate: req.body.collegestartdate,
-      collegeenddate: req.body.collegeenddate,
-      collegedegree: req.body.collegedegree,
-      collegegpa: req.body.collegegpa,
-      collegelocation: req.body.collegelocation,
-      sscschoolname: req.body.sscschoolname,
-      sscboard: req.body.sscboard,
-      ssccompletion: req.body.ssccompletion,
-      sscpercentage: req.body.sscpercentage,
-      sscschoollocation: req.body.sscschoollocation,
-      hscschoolname: req.body.hscschoolname,
-      hscboard: req.body.hscboard,
-      hsccompletion: req.body.hsccompletion,
-      hscpercentage: req.body.hscpercentage,
-      hscschoollocation: req.body.hscschoollocation,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
-  res.redirect("/work");
+
+  let checkisarray = req.body.name;
+  if (!Array.isArray(checkisarray)) {
+    
+    var newvalue = {
+      $set: {
+        school: 
+          {
+            name:req.body.name,
+            startdate:req.body.startdate,
+            enddate: req.body.enddate,
+            degree:req.body.degree,
+            gpa: req.body.gpa,
+            location: req.body.location,
+          },
+      },
+    };
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+  } else {
+    let arr = req.body.name;
+    Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    for (let i = 0; i < arr.length; i++) {
+     
+      var newvalue = {
+        $push: {
+          school: 
+          {
+            name:req.body.name[i],
+            startdate:req.body.startdate[i],
+            enddate: req.body.enddate[i],
+            degree:req.body.degree[i],
+            gpa: req.body.gpa[i],
+            location: req.body.location[i],
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    }
+  }
+
+  if (value === "3") {
+    flag1 = 1;
+    res.redirect("/work");
+  } else {
+    if (value === "1") flag1 = 0;
+    else flag1 = 1;
+    res.redirect("/education");
+  }
 });
 app.post("/work", function (req, res) {
   //   console.log(req.body);
 
-  var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      companyname: req.body.companyname,
-      jobtitle: req.body.jobtitle,
-      state: req.body.state,
-      city: req.body.city,
-      startdate: req.body.startdate,
-      enddate: req.body.enddate,
-      jobdescription: req.body.jobdescription,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfWorkExperience++;
+  } else {
+    if (value === "2" && noOfWorkExperience > 1) {
+      noOfWorkExperience--;
+    }
+  }
 
-  res.redirect("/skills");
+  
+  //  console.log("noOfProjects="+noOfProjects);
+
+  var myquery = { _id: req.user.id };
+
+  let checkisarray = req.body.companyname;
+  if (!Array.isArray(checkisarray)) {
+    
+    var newvalue = {
+      $set: {
+        work: 
+          {
+            companyname: req.body.companyname,
+            jobtitle: req.body.jobtitle,
+            state: req.body.state,
+            city: req.body.city,
+            startdate: req.body.startdate,
+            enddate: req.body.enddate,
+            jobdescription: req.body.jobdescription,
+          },
+      },
+    };
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+  } else {
+    let arr = req.body.companyname;
+    Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    for (let i = 0; i < arr.length; i++) {
+     
+      var newvalue = {
+        $push: {
+          work: 
+          {
+            companyname: req.body.companyname[i],
+            jobtitle: req.body.jobtitle[i],
+            state: req.body.state[i],
+            city: req.body.city[i],
+            startdate: req.body.startdate[i],
+            enddate: req.body.enddate[i],
+            jobdescription: req.body.jobdescription[i],
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    }
+  }
+
+  if (value === "3") {
+    flag3 = 1;
+    res.redirect("/skills");
+  } else {
+    if (value === "1") flag3 = 0;
+    else flag3 = 1;
+    res.redirect("/work");
+  }
 });
 
-app.post("/skills", function (req, res) {
-  //   console.log(req.body);
 
-  var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      skills1: req.body.skills1,
-      skills2: req.body.skills2,
-      skills3: req.body.skills3,
-      skills4: req.body.skills4,
-      skills5: req.body.skills5,
-      skills6: req.body.skills6,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
-  res.redirect("/projects");
+app.post("/skills", function (req, res) {
+     console.log(req.body);
+
+     let value = req.body.btn;
+     if (value === "1") {
+       noOfSkills++;
+     } 
+     else if (value === "2" && noOfSkills > 1) {
+        noOfSkills--;
+     }
+     else if(value!=="3")
+     {
+       important++;
+     }
+     
+
+
+
+
+    var myquery = { _id: req.user.id };
+
+    let checkisarray = req.body.skillsname;
+    if (!Array.isArray(checkisarray)) {
+      
+      var newvalue = {
+        $set: {
+          skills: 
+            {
+              skillsname:req.body.skillsname,
+              skillsdetails:req.body.skillsdetails,
+              
+            },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    } else {
+      let arr = req.body.skillsname;
+      Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
+        if (!err) console.log("Documents deleted successfully");
+      });
+  
+      for (let i = 0; i < arr.length; i++) {
+       
+        var newvalue = {
+          $push: {
+            skills: 
+            {
+              skillsname:req.body.skillsname[i],
+              skillsdetails:req.body.skillsdetails[i],
+
+            },
+          },
+        };
+        Project.updateMany(myquery, newvalue, function (err, res) {
+          if (!err) console.log("Documents inserted successfully");
+        });
+      }
+    }
+  
+    if (value === "3") {
+      flag2 = 1;
+      res.redirect("/projects");
+    } else {
+      if (value === "1") flag2 = 0;
+      else flag2 = 1;
+      res.redirect("/skills");
+    }
+
 });
 
 app.post("/projects", function (req, res) {
@@ -442,21 +686,113 @@ app.post("/projects", function (req, res) {
 });
 
 app.post("/awards", function (req, res) {
-  //   console.log(req.body);
+
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfAwards++;
+  } else {
+    if (value === "2" && noOfAwards > 1) {
+      noOfAwards--;
+    }
+  }
+
+  // console.log(req.body);
+  //  console.log("count="+count);
+
   var myquery = { _id: req.user.id };
-  var newvalues = {
-    $set: {
-      awardname: req.body.awardname,
-      awarddate: req.body.awarddate,
-      awarder: req.body.awarder,
-      Awarddescription: req.body.Awarddescription,
-    },
-  };
-  Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
-  });
-  res.redirect("/download");
+
+  let checkisarray = req.body.awardname;
+  if (!Array.isArray(checkisarray)) {
+    var newvalue = {
+      $set: {
+        awards: {
+          awardname: req.body.awardname,
+          awarddate:  req.body.awarddate,
+          awarder:  req.body.awarder,
+          Awarddescription: req.body.Awarddescription,
+        },
+      },
+    };
+    Project.updateMany(myquery, newvalue, function (err, res) {
+      if (!err) console.log("Documents inserted successfully");
+    });
+  } else {
+    let arr = req.body.awardname;
+    Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
+      if (!err) console.log("Documents deleted successfully");
+    });
+
+    for (let i = 0; i < arr.length; i++) {
+      var newvalue = {
+        $push: {
+          awards: {
+            awardname: req.body.awardname[i],
+          awarddate:  req.body.awarddate[i],
+          awarder:  req.body.awarder[i],
+          Awarddescription: req.body.Awarddescription[i],
+          },
+        },
+      };
+      Project.updateMany(myquery, newvalue, function (err, res) {
+        if (!err) console.log("Documents inserted successfully");
+      });
+    }
+  }
+
+  if (value === "3") {
+    flag4 = 1;
+    res.redirect("/personal");
+  } else {
+    if (value === "1") flag4 = 0;
+    else flag4 = 1;
+    res.redirect("/awards");
+  }
 });
+
+
+app.post('/personal', upload.single('photo'), function (req, res)
+{
+   let imagefile=req.file.originalname;
+  //  console.log(req.file);
+  //  console.log(imagefile);
+  //  console.log(req.body);
+
+   var myquery = {_id: req.user.id };
+   var newvalues = { $set: { 
+       img:imagefile,
+    } };
+   Project.updateOne(myquery, newvalues,function(err,res){
+     if(!err)
+     console.log("Document updated successfully");
+   })
+
+   filepresentornot=1;
+
+   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
+    if (err) {
+        console.log(err);
+    }
+     
+     
+    files.forEach(file => {
+        const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
+
+        if (file !== imagefile) {
+            fs.unlinkSync(fileDir);
+        }
+    });
+});
+  
+
+
+   res.redirect("/personal")
+  
+});
+
+
+
+
+
 
 app.listen("3000", function () {
   console.log("Server has been started at port 3000");

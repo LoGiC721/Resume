@@ -1,88 +1,250 @@
 <%-include("sidemenu")-%>
-  <div class="text-center information">
-      <h3>Enter Personal information</h3>
-      <br>
-      <form method="POST" action="profile">
-        <div class="sameline">
-            <%if(found[0].firstname!=="NULL"){%>
-            <label for="firstname">First Name</label>
-            <input type="text"  placeholder="First name" id="firstname" name="firstname" value="<%=found[0].firstname%>">
-            <%}else{%>
-                <label for="firstname">First Name</label>
-                <input type="text"  placeholder="First name" id="firstname" name="firstname" value="">
-            <%}%>
-        </div>
+    <div class="text-center information">
 
-        <div class="sameline">
-            <%if(found[0].lastname!=="NULL"){%>
-            <label for="lastname">Last Name</label>
-            <input type="text" placeholder="Last name" id="lastname" name="lastname" value="<%=found[0].lastname%>">
-            <%}else{%>
-                <label for="lastname">Last Name</label>
-                <input type="text" placeholder="Last name" id="lastname" name="lastname" value="">
-                <%}%>    
-        </div>
-        <div class="sameline">
-            <%if(found[0].email!=="NULL"){%>
-            <label for="email">Email</label>
-            <input type="email" placeholder="Email" id="email" name="email" value="<%=found[0].email%>" >
-            <%}else{%>
-                <label for="email">Email</label>
-                <input type="email" placeholder="Email" id="email" name="email" value="">
-                <%}%> 
-        </div>
-        <div class="sameline">
-            <%if(found[0].pno!=="NULL"){%>
-            <label for="pno">Phone</label>
-            <input type="number" placeholder="Phone" id="pno" name="pno" value="<%=found[0].pno%>">
-            <%}else{%>
-                <label for="pno">Phone</label>
-            <input type="number" placeholder="Phone" id="pno" name="pno" value="">
-            <%}%> 
-        </div>
-        <div class="sameline">
-            <%if(found[0].website!=="NULL"){%>
-            <label for="website">Website</label>
-            <input type="url" placeholder="Website" id="website" name="website"  value="<%=found[0].website%>">
-            <%}else{%>
-                <label for="website">Website</label>
-                <input type="url" placeholder="Website" id="website" name="website" value="">
-                <%}%>  
-        </div>
-        <div class="sameline">
-            <%if(found[0].github!=="NULL"){%>
-            <label for="github">Github Link</label>
-            <input type="url" placeholder="Github" id="github" name="github" value="<%=found[0].github%>">
-            <%}else{%>
-                <label for="github">Github Link</label>
-            <input type="url" placeholder="Github" id="github" name="github" value="">
-            <%}%>   
-        </div>
-        <div class="sameline">
-            <%if(found[0].linkedin!=="NULL"){%>
-            <label for="linkedin">Linkedin Link</label>
-            <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin" value="<%=found[0].linkedin%>">
-            <%}else{%>
-                <label for="linkedin">Linkedin Link</label>
-            <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin" value="">
-            <%}%>
-        </div>
-        <div class="sameline">
-            <%if(found[0].twitter!=="NULL"){%>
-            <label for="twitter">Twitter Link</label>
-            <input type="url" placeholder="Twitter" id="twitter" name="twitter" value="<%=found[0].twitter%>">
-            <%}else{%>
-                <label for="twitter">Twitter Link</label>
-                <input type="url" placeholder="Twitter" id="twitter" name="twitter" value="">
-                <%}%>  
-        </div>
-        <br><br>
-        <div class="footer">
-            <a class="btn button prev notclickable" style="cursor: no-drop;">Prev</a>
-            <button class="btn button next">Next</button>
-          </div>
-    </form>
-</div>
+
+
+        <h3>Enter Contact information</h3>
+        <br>
+        <form method="POST" action="profile">
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col col-6-lg col-6-md col-12-sm">
+
+
+
+                        <div class="sameline">
+                            <%if(found[0].firstname!=="NULL"){%>
+                                <label for="firstname">First Name</label>
+                                <input type="text" placeholder="First name" id="firstname" name="firstname"
+                                    value="<%=found[0].firstname%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="firstname">First Name</label>
+                                    <input type="text" placeholder="First name" id="firstname" name="firstname" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+                        <div class="sameline">
+                            <%if(found[0].lastname!=="NULL"){%>
+                                <label for="lastname">Last Name</label>
+                                <input type="text" placeholder="Last name" id="lastname" name="lastname"
+                                    value="<%=found[0].lastname%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" placeholder="Last name" id="lastname" name="lastname" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+                        <div class="sameline">
+                            <%if(found[0].email!=="NULL"){%>
+                                <label for="email">Email</label>
+                                <input type="email" placeholder="Email" id="email" name="email"
+                                    value="<%=found[0].email%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="email">Email</label>
+                                    <input type="email" placeholder="Email" id="email" name="email" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+
+
+                        <div class="sameline">
+                            <%if(found[0].website!=="NULL"){%>
+                                <label for="website">Website</label>
+                                <input type="url" placeholder="Website" id="website" name="website"
+                                    value="<%=found[0].website%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="website">Website</label>
+                                    <input type="url" placeholder="Website" id="website" name="website" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+                        <div class="sameline">
+                            <%if(found[0].github!=="NULL"){%>
+                                <label for="github">Github Link</label>
+                                <input type="url" placeholder="Github" id="github" name="github"
+                                    value="<%=found[0].github%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="github">Github Link</label>
+                                    <input type="url" placeholder="Github" id="github" name="github" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+                        <div class="sameline">
+                            <%if(found[0].linkedin!=="NULL"){%>
+                                <label for="linkedin">Linkedin Link</label>
+                                <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin"
+                                    value="<%=found[0].linkedin%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="linkedin">Linkedin Link</label>
+                                    <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+                        <div class="sameline">
+                            <%if(found[0].twitter!=="NULL"){%>
+                                <label for="twitter">Twitter Link</label>
+                                <input type="url" placeholder="Twitter" id="twitter" name="twitter"
+                                    value="<%=found[0].twitter%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="twitter">Twitter Link</label>
+                                    <input type="url" placeholder="Twitter" id="twitter" name="twitter" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+                        
+                        <div class="footer">
+                            <a class="btn button prev notclickable" style="cursor: no-drop;">Prev</a>
+                            <button class="btn button next">Save & Next</button>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="col col-6-lg col-6-md col-12-sm">
+
+                        <div class="sameline">
+                            <%if(found[0].pno!=="NULL"){%>
+                                <label for="pno">Phone</label>
+                                <input type="number" placeholder="Phone" id="pno" name="pno" value="<%=found[0].pno%>"
+                                    autocomplete="off">
+                                <%}else{%>
+                                    <label for="pno">Phone</label>
+                                    <input type="number" placeholder="Phone" id="pno" name="pno" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+
+                        <div class="sameline">
+                            <%if(found[0].dob!==null){%>
+
+
+                                <%let template=found[0].dob%>
+                                    <%let date=template.getDate()%>
+                                        <%if(date<10){%>
+                                            <%date='0' +date%>
+                                                <%}%>
+                                                    <%let month=(template.getMonth())+1%>
+                                                        <%if(month<10){%>
+                                                            <%month='0' +month%>
+                                                                <%}%>
+                                                                    <%let year=template.getFullYear()%>
+                                                                        <%let finaldate=`${year}-${month}-${date}`%>
+
+
+
+                                                                            <label for="dob">Date of Birth</label>
+                                                                            <input type="date" placeholder="DOB"
+                                                                                id="dob" name="dob"
+                                                                                value="<%=finaldate%>"
+                                                                                autocomplete="off">
+                                                                            <%}else{%>
+                                                                                <label for="dob">Date of Birth</label>
+                                                                                <input type="date" placeholder="DOB"
+                                                                                    id="dob" name="dob" value=""
+                                                                                    autocomplete="off">
+                                                                                <%}%>
+                        </div>
+
+
+
+                        <div class="sameline">
+                            <%if(found[0].country!=="NULL"){%>
+                                <label for="country">Country</label>
+                                <input type="text" placeholder="Country" id="country" name="country"
+                                    value="<%=found[0].country%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="country">Country</label>
+                                    <input type="text" placeholder="Country" id="country" name="country" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+                        <div class="sameline">
+                            <%if(found[0].state!=="NULL"){%>
+                                <label for="state">State</label>
+                                <input type="text" placeholder="State" id="state" name="state"
+                                    value="<%=found[0].state%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="state">State</label>
+                                    <input type="text" placeholder="state" id="state" name="state" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+                        <div class="sameline">
+                            <%if(found[0].city!=="NULL"){%>
+                                <label for="city">City</label>
+                                <input type="text" placeholder="City" id="city" name="city" value="<%=found[0].city%>"
+                                    autocomplete="off">
+                                <%}else{%>
+                                    <label for="city">State</label>
+                                    <input type="text" placeholder="City" id="city" name="city" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+
+                        <div class="sameline">
+                            <%if(found[0].pin!=="NULL"){%>
+                                <label for="pin">Pincode</label>
+                                <input type="text" placeholder="Pincode" id="pin" name="pin" value="<%=found[0].pin%>"
+                                    autocomplete="off">
+                                <%}else{%>
+                                    <label for="pin">Pincode</label>
+                                    <input type="text" placeholder="Pincode" id="pin" name="pin" value=""
+                                        autocomplete="off">
+                                    <%}%>
+                        </div>
+
+                        <div class="sameline">
+                            <%if(found[0].address!=="NULL"){%>
+                                <label for="address">Address</label>
+                                <input type="text" rows="2" cols="30" placeholder="address" id="address" name="address"
+                                    value="<%=found[0].address%>" autocomplete="off">
+                                <%}else{%>
+                                    <label for="address">Address</label>
+                                    <input type="text" rows="2" cols="30" placeholder="address" id="address"
+                                        name="address" value="" autocomplete="off">
+
+
+                                    <%}%>
+                        </div>
+
+
+                        <br> <br>
+
+                    
+
+
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </form>
+    </div>
     </div>
     </div>
 

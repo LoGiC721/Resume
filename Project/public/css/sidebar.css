@@ -140,6 +140,8 @@ ul.CTAs a {
 a.download {
     background: #56c9aa;
     color: black;
+    position:relative;
+    bottom:40px;
 }
 
 a.article,
@@ -212,14 +214,14 @@ a.article:hover {
   .prev{
     background-color: #56c9aa;
    position:absolute;
-   left:19%;
+   left:9%;
    bottom:20%;
   }
 
   .next{
     background-color: #56c9aa;
     position:absolute;
-    right:19%;
+    right:9%;
     bottom:20%;
   } 
 
@@ -288,15 +290,6 @@ a.article:hover {
   }
 
 
-  .notclickable{
-    background-color: #14171D;
-    border:solid #fff2;
-    color:#fff2;
-  }
-
-  .notclickable:hover{
-      background-color:#14171D;
-  }
 
 
   h3,li{
@@ -318,3 +311,166 @@ a.article:hover {
       border-color:#56c9aa;
       border-width:5px;
   }
+
+.add{
+    background-color: #14171D;
+    border: 1px solid;
+    color: #56c9aa;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 15%;
+    outline-color:#56c9aa ;
+    
+     font-family: 'Advent Pro', sans-serif; 
+    
+}
+.add:hover{
+    background-color: #56c9aa;
+    color:black;
+    outline:none;
+}
+
+.increment{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    top:auto;
+    right:auto;
+    bottom:-10px;
+    margin:5px;
+}
+
+.decrement{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    top:auto;
+    right:auto;
+    bottom:-10px;
+    margin:5px;
+}
+
+
+.notclickable{
+    background-color: #14171D;
+    border:solid #fff2;
+    color:#fff2;
+  }
+
+  .notclickable:hover{
+      background-color:#14171D;
+      color:#fff2;
+  }
+
+ 
+
+.profilepic{
+    height:280px;
+    width:390px;
+}
+
+
+
+
+/* personal page */
+
+.container-personal{
+    height:300px;
+    width:430px;
+    border:2px dashed #c2cdda;
+    border-radius:10px;
+}
+
+
+
+.wrapper.image img{
+    height:100%;
+    width:100%;
+    object-fit:cover;
+}
+
+.wrapper .icon{
+    font-size:100px;
+    color:#56C9AA;
+}
+
+.wrapper .text{
+    font-size:20px;
+    font-weight:500;
+    color:#5B5B7B;
+}
+
+
+
+.file-name{
+      position:relative;
+     bottom:-65px; 
+    left:-15px; 
+    width: 425px; 
+    border-bottom-right-radius:9px;
+    border-bottom-left-radius:9px;
+    color:#fff;
+    padding:12px;
+    font-size:18px;
+     background:linear-gradient(135deg,#56C9AA 0%,#068b68 100%); 
+
+
+}
+
+
+.profilepic{
+    position:absolute;
+    bottom:-284px;
+    left:-15px;
+    height:245px;
+    width:425px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    
+}
+
+
+
+
+
+    .uploadbtn{
+        position:relative;
+        bottom:0.5px;
+        background-color: #56c9aa;
+        margin-left:20px;
+    }
+
+    .uploadbtn:hover{
+        background-color:white;
+    }
+
+
+label{
+    border-radius: 4px;
+}
+ 
+label:hover{
+    background-color: #56c9aa;
+}
+
+.cloud{
+    height:25px;
+}
+
+
+
+
+
+    input[type="file"] {
+        display: none;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
