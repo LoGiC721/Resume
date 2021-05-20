@@ -11,12 +11,10 @@ const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-const multer = require('multer');
-const fs=require("fs");
-const path = require('path');
-const loading=multer({dest:"public/uploads/"});
-
-
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const loading = multer({ dest: "public/uploads/" });
 
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,17 +53,16 @@ const UserSchema = new Schema({
   address: { type: String, default: null },
   currentposition: { type: String, default: null },
 
-  img:{ type: String, default: null },
-
+  img: { type: String, default: null },
 
   school: [
     {
       name: [{ type: String, default: null }],
-      startdate: [{ type: Date, default: Date.now}],
+      startdate: [{ type: Date, default: Date.now }],
       enddate: [{ type: Date, default: Date.now }],
       degree: [{ type: String, default: null }],
       gpa: [{ type: Number, default: null }],
-      location:[{ type: String, default: null }],
+      location: [{ type: String, default: null }],
     },
   ],
 
@@ -84,10 +81,9 @@ const UserSchema = new Schema({
   skills: [
     {
       skillsname: [{ type: String, default: null }],
-      skillsdetails:[{ type: Number, default: 0 }],
+      skillsdetails: [{ type: Number, default: 0 }],
     },
   ],
-
 
   project: [
     {
@@ -107,19 +103,15 @@ const UserSchema = new Schema({
     },
   ],
 
-
   extra: [
     {
-      hobbie:[{type: String, default: null}],
-      strength:[{ type: String, default: null }],
-      language:[{ type: String, default: null }],
+      hobbie: [{ type: String, default: null }],
+      strength: [{ type: String, default: null }],
+      language: [{ type: String, default: null }],
       goals: [{ type: String, default: null }],
     },
   ],
 
-
-
- 
   username: { type: String, default: null },
   password: { type: String, default: null },
   googleId: { type: String, default: null },
@@ -192,20 +184,16 @@ passport.use(
   )
 );
 
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `./public/uploads/${req.user.id}/`)
+    cb(null, `./public/uploads/${req.user.id}/`);
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
- 
+    cb(null, file.originalname);
+  },
+});
+
 var upload = multer({ storage: storage });
-
-
-
 
 app.get(
   "/auth/google",
@@ -260,10 +248,15 @@ app.get("/register", function (req, res) {
   res.render("Register");
 });
 
+
 app.get("/logout", function (req, res) {
+ 
+
   req.logout();
   res.redirect("/");
 });
+
+
 
 let templateno = 1;
 
@@ -276,31 +269,25 @@ app.get("/download", function (req, res) {
 });
 
 let count = 1;
-let noOfProjects=1;
-let noOfSkills=1;
-let noOfWorkExperience=1;
-let noOfAwards=1;
+let noOfProjects = 1;
+let noOfSkills = 1;
+let noOfWorkExperience = 1;
+let noOfAwards = 1;
 
-let filepresentornot=0;
+let filepresentornot = 0;
 
-let noOfhobbies=1;
+let noOfhobbies = 1;
 
-let noOfStrengths=1;
+let noOfStrengths = 1;
 
-let noOfLanguage=1;
+let noOfLanguage = 1;
 
-let noOfGoals=1;
-
+let noOfGoals = 1;
 
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
- 
-   const loader=multer({dest:`public/uploads/${req.user.id}/`});
-  
-
-  
-  
+  const loader = multer({ dest: `public/uploads/${req.user.id}/` });
 
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
@@ -308,27 +295,25 @@ app.get("/:customName", function (req, res) {
         current: customListName,
         found: found,
         count: count,
-        noOfProjects:noOfProjects,
-        noOfSkills:noOfSkills,
-        noOfWorkExperience:noOfWorkExperience,
-        noOfAwards:noOfAwards,
-        
-        
-        filepresentornot:filepresentornot,
-       
-        noOfhobbies:noOfhobbies,
-        
-        noOfStrengths:noOfStrengths,
-        noOfLanguage:noOfLanguage,
-       
-        noOfGoals:noOfGoals,
+        noOfProjects: noOfProjects,
+        noOfSkills: noOfSkills,
+        noOfWorkExperience: noOfWorkExperience,
+        noOfAwards: noOfAwards,
 
+        filepresentornot: filepresentornot,
+
+        noOfhobbies: noOfhobbies,
+
+        noOfStrengths: noOfStrengths,
+        noOfLanguage: noOfLanguage,
+
+        noOfGoals: noOfGoals,
       });
       //  console.log(found[0].project[0].projectname);
     }
   });
-  
 });
+
 
 app.post("/", function (req, res) {
   res.redirect("/templates");
@@ -351,13 +336,19 @@ app.post("/login", function (req, res) {
       res.redirect("/login");
     } else {
       passport.authenticate("local")(req, res, function () {
-        filepresentornot=0;
+        filepresentornot = 0;
         count = 1;
-        noOfProjects=1;
-        noOfSkills=1;
-     noOfWorkExperience=1;
-     noOfAwards=1;
-    
+        noOfProjects = 1;
+        noOfSkills = 1;
+        noOfWorkExperience = 1;
+        noOfAwards = 1;
+        noOfhobbies = 1;
+
+        noOfStrengths = 1;
+
+        noOfLanguage = 1;
+
+        noOfGoals = 1;
         res.redirect("/");
       });
     }
@@ -374,13 +365,19 @@ app.post("/register", function (req, res) {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          filepresentornot=0;
+          filepresentornot = 0;
         count = 1;
-        noOfProjects=1;
-        noOfSkills=1;
-        noOfWorkExperience=1;
-        noOfAwards=1;
-       
+        noOfProjects = 1;
+        noOfSkills = 1;
+        noOfWorkExperience = 1;
+        noOfAwards = 1;
+        noOfhobbies = 1;
+
+        noOfStrengths = 1;
+
+        noOfLanguage = 1;
+
+        noOfGoals = 1;
           res.redirect("/");
         });
       }
@@ -406,7 +403,7 @@ app.post("/profile", function (req, res) {
       city: req.body.city,
       pin: req.body.pin,
       address: req.body.address,
-      currentposition:req.body.currentposition,
+      currentposition: req.body.currentposition,
     },
   };
   Project.updateMany(myquery, newvalues, function (err, res) {
@@ -416,8 +413,7 @@ app.post("/profile", function (req, res) {
 });
 
 app.post("/education", function (req, res) {
-    
-  let value=req.body.btn;
+  let value = req.body.btn;
   if (value === "1") {
     noOfProjects++;
   } else {
@@ -426,47 +422,35 @@ app.post("/education", function (req, res) {
     }
   }
 
-
   var myquery = { _id: req.user.id };
 
-  
-    
-    Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
+  Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
-    
-     
-      var newvalue = {
-        $push: {
-          school: 
-          {
-            name:req.body.name,
-            startdate:req.body.startdate,
-            enddate: req.body.enddate,
-            degree:req.body.degree,
-            gpa: req.body.gpa,
-            location: req.body.location,
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    
-
+  var newvalue = {
+    $push: {
+      school: {
+        name: req.body.name,
+        startdate: req.body.startdate,
+        enddate: req.body.enddate,
+        degree: req.body.degree,
+        gpa: req.body.gpa,
+        location: req.body.location,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
   if (value === "3") {
-   
     res.redirect("/work");
   } else {
-    
     res.redirect("/education");
   }
 });
 app.post("/work", function (req, res) {
-  
-
   let value = req.body.btn;
   if (value === "1") {
     noOfWorkExperience++;
@@ -476,98 +460,74 @@ app.post("/work", function (req, res) {
     }
   }
 
-  
-  
   var myquery = { _id: req.user.id };
 
- 
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
-    let arr = req.body.companyname;
-    Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
+  let arr = req.body.companyname;
+  Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
-    
-     
-      var newvalue = {
-        $push: {
-          work: 
-          {
-            companyname: req.body.companyname,
-            jobtitle: req.body.jobtitle,
-            state: req.body.state,
-            city: req.body.city,
-            startdate: req.body.startdate,
-            enddate: req.body.enddate,
-            jobdescription: req.body.jobdescription,
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    
+  var newvalue = {
+    $push: {
+      work: {
+        companyname: req.body.companyname,
+        jobtitle: req.body.jobtitle,
+        state: req.body.state,
+        city: req.body.city,
+        startdate: req.body.startdate,
+        enddate: req.body.enddate,
+        jobdescription: req.body.jobdescription,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
   if (value === "3") {
-   
     res.redirect("/skills");
   } else {
-    
     res.redirect("/work");
   }
 });
 
-
 app.post("/skills", function (req, res) {
-     console.log(req.body);
+  console.log(req.body);
 
-     let value = req.body.btn;
-     if (value === "1") {
-       noOfSkills++;
-     } 
-     else if (value === "2" && noOfSkills > 1) {
-        noOfSkills--;
-     }
-    
-     
+  let value = req.body.btn;
+  if (value === "1") {
+    noOfSkills++;
+  } else if (value === "2" && noOfSkills > 1) {
+    noOfSkills--;
+  }
 
+  var myquery = { _id: req.user.id };
 
+  Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
+  var newvalue = {
+    $push: {
+      skills: {
+        skillsname: req.body.skillsname,
+        skillsdetails: req.body.skillsdetails,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
-    var myquery = { _id: req.user.id };
-
-      Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
-        if (!err) console.log("Documents deleted successfully");
-      });
-  
-      
-       
-        var newvalue = {
-          $push: {
-            skills: 
-            {
-              skillsname:req.body.skillsname,
-              skillsdetails:req.body.skillsdetails,
-
-            },
-          },
-        };
-        Project.updateMany(myquery, newvalue, function (err, res) {
-          if (!err) console.log("Documents inserted successfully");
-        });
-      
-  
-    if (value === "3") {
-     
-      res.redirect("/projects");
-    } else {
-     
-      res.redirect("/skills");
-    }
-
+  if (value === "3") {
+    res.redirect("/projects");
+  } else {
+    res.redirect("/skills");
+  }
 });
 
 app.post("/projects", function (req, res) {
@@ -580,44 +540,34 @@ app.post("/projects", function (req, res) {
     }
   }
 
-  
-
   var myquery = { _id: req.user.id };
 
-  
-    
-    Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
+  Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
-    
-      var newvalue = {
-        $push: {
-          project: {
-            projectname: req.body.projectname,
-            project1description: req.body.project1description,
-            link: req.body.link,
-            toolsused: req.body.toolsused,
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    
-  
+  var newvalue = {
+    $push: {
+      project: {
+        projectname: req.body.projectname,
+        project1description: req.body.project1description,
+        link: req.body.link,
+        toolsused: req.body.toolsused,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
   if (value === "3") {
-    
     res.redirect("/awards");
   } else {
-    
     res.redirect("/projects");
   }
 });
 
 app.post("/awards", function (req, res) {
-
   let value = req.body.btn;
   if (value === "1") {
     noOfAwards++;
@@ -627,148 +577,112 @@ app.post("/awards", function (req, res) {
     }
   }
 
-  
-
   var myquery = { _id: req.user.id };
 
- 
-  
-    let arr = req.body.awardname;
-    Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
+  let arr = req.body.awardname;
+  Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
-   
-      var newvalue = {
-        $push: {
-          awards: {
-          awardname: req.body.awardname,
-          awarddate:  req.body.awarddate,
-          awarder:  req.body.awarder,
-          Awarddescription: req.body.Awarddescription,
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    
+  var newvalue = {
+    $push: {
+      awards: {
+        awardname: req.body.awardname,
+        awarddate: req.body.awarddate,
+        awarder: req.body.awarder,
+        Awarddescription: req.body.Awarddescription,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
   if (value === "3") {
-    
     res.redirect("/personal");
   } else {
-    
     res.redirect("/awards");
   }
 });
 
-
-app.post('/personal', upload.single('photo'), function (req, res)
-{
-   let imagefile=req.file.originalname;
+app.post("/personal", upload.single("photo"), function (req, res) {
+  let imagefile = req.file.originalname;
   //  console.log(req.file);
   //  console.log(imagefile);
   //  console.log(req.body);
 
-   var myquery = {_id: req.user.id };
-   var newvalues = { $set: { 
-       img:imagefile,
-    } };
-   Project.updateOne(myquery, newvalues,function(err,res){
-     if(!err)
-     console.log("Document updated successfully");
-   })
+  var myquery = { _id: req.user.id };
+  var newvalues = {
+    $set: {
+      img: imagefile,
+    },
+  };
+  Project.updateOne(myquery, newvalues, function (err, res) {
+    if (!err) console.log("Document updated successfully");
+  });
 
-   filepresentornot=1;
+  filepresentornot = 1;
 
-   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
+  fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
     if (err) {
-        console.log(err);
+      console.log(err);
     }
-     
-     
-    files.forEach(file => {
-        const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
 
-        if (file !== imagefile) {
-            fs.unlinkSync(fileDir);
-        }
+    files.forEach((file) => {
+      const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
+
+      if (file !== imagefile) {
+        fs.unlinkSync(fileDir);
+      }
     });
-});
-  
+  });
 
-
-   res.redirect("/personal")
-  
+  res.redirect("/personal");
 });
 
-
-app.post("/extra",function(req,res)
-{
+app.post("/extra", function (req, res) {
   console.log(req.body);
 
-  if(req.body.btn==="1")
-  {
+  if (req.body.btn === "1") {
     noOfhobbies++;
-  }
-  else if(req.body.btn==="2"&&noOfhobbies>1)
-  {
+  } else if (req.body.btn === "2" && noOfhobbies > 1) {
     noOfhobbies--;
-  }
-  else if(req.body.btn==="3")
-  {
+  } else if (req.body.btn === "3") {
     noOfStrengths++;
-  }
-  else if(req.body.btn==="4"&&noOfStrengths>1)
-  {
+  } else if (req.body.btn === "4" && noOfStrengths > 1) {
     noOfStrengths--;
-  }
-  else if(req.body.btn==="5")
-  {
+  } else if (req.body.btn === "5") {
     noOfLanguage++;
-  }
-  else if(req.body.btn==="6"&&noOfLanguage>1)
-  {
+  } else if (req.body.btn === "6" && noOfLanguage > 1) {
     noOfLanguage--;
-  }
-  else if(req.body.btn==="7")
-  {
+  } else if (req.body.btn === "7") {
     noOfGoals++;
-  }
-  else if(req.body.btn==="8"&&noOfGoals>1)
-  {
+  } else if (req.body.btn === "8" && noOfGoals > 1) {
     noOfGoals--;
   }
-  
-  var myquery = { _id: req.user.id };
 
+  var myquery = { _id: req.user.id };
 
   Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
 
- var newvalue = {
-        $push: {
-          extra: {
-            hobbie: req.body.hobbie,
-            strength:req.body.strength,
-            language:req.body.language,
-            goals:req.body.goal,
-            
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-
-
+  var newvalue = {
+    $push: {
+      extra: {
+        hobbie: req.body.hobbie,
+        strength: req.body.strength,
+        language: req.body.language,
+        goals: req.body.goal,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
 
   res.redirect("/extra");
-})
-
-
+});
 
 app.listen("3000", function () {
   console.log("Server has been started at port 3000");

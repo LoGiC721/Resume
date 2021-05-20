@@ -306,7 +306,7 @@ a.article:hover {
 
 
 
-  h3,li{
+  h3,h4,li{
     font-family: 'Open Sans', sans-serif;
   }
 
@@ -506,12 +506,16 @@ label:hover{
         background-color: #56c9aa;
         color: #fff;
         font-size: 20px;
-        padding-bottom: 1px;
-        border-width: 0;
+        padding-bottom: 4px;
         height:35px;
-        /* position:relative;
-        left:90px; */
+        margin:0px;
+        
+         position:relative;
+        left:40px; 
+        
       }
+
+     
 
 
       .smallbtn:hover{
@@ -521,21 +525,20 @@ label:hover{
 
      
 
-      
+     .marginn{
+         margin-bottom:15px;
+     } 
 
-      .same input {
+   
+
+     .same input {
         margin-bottom: 10px;
-        width:50%;
-        max-width: 100%; 
-         
+         width:100%; 
       }
       
       .same label {
         display: inline-block;
         width: 100px;
-        
       }
-
-
+    
      
-      
