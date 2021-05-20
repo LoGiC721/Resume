@@ -68,7 +68,6 @@
 
 <ul class="list-unstyled components">
  
-
  <% if (current==="profile" ) { %>
 <li>
 <a href="/profile" class="coloured">Personal </a>
@@ -146,10 +145,23 @@
     <%} else { %>
     <li>
     <a href="/personal"
-     class="uncoloured">Add Picture</a>
+     class="uncoloured">Add Picture </a>
     </li>
     <% } %>
  
+
+
+    <% if (current==="extra" ) { %>
+        <li>
+        <a href="/extra" class="coloured">Extra Details</a>
+        </li>
+        <%} else { %>
+        <li>
+        <a href="/extra"
+         class="uncoloured">Extra Details</a>
+        </li>
+        <% } %>
+
 
 </ul>
 

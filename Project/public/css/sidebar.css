@@ -300,6 +300,12 @@ a.article:hover {
     font-family: 'Lato', sans-serif;
   }
 
+  li{
+      position:relative;
+      bottom:19px;
+      font-size:14px;
+  }
+
   ::placeholder{
     font-family: 'Lato', sans-serif;
   }
@@ -474,3 +480,16 @@ label:hover{
         padding: 6px 12px;
         cursor: pointer;
     }
+
+    .smallbtn {
+        /* min-height: 20px; */
+        width: 35px;
+        border-radius: 50%;
+        border-color: transparent;
+        background-color: #56c9aa;
+        color: #fff;
+        font-size: 20px;
+        padding-bottom: 1px;
+        border-width: 0;
+        height:35px;
+      }

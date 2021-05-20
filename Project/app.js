@@ -41,7 +41,7 @@ mongoose.connect("mongodb://localhost:27017/Resume", {
 
 const UserSchema = new Schema({
   firstname: { type: String, default: null },
-  lastname: { type: String, default: null },
+  profile: { type: String, default: null },
   email: { type: String, default: null },
   pno: { type: Number, default: null },
   website: { type: String, default: null },
@@ -53,7 +53,7 @@ const UserSchema = new Schema({
   city: { type: String, default: null },
   pin: { type: String, default: null },
   address: { type: String, default: null },
-  dob: { type: Date, default: null },
+  currentposition: { type: String, default: null },
 
   img:{ type: String, default: null },
 
@@ -106,6 +106,17 @@ const UserSchema = new Schema({
       Awarddescription: { type: String, default: null },
     },
   ],
+
+
+  extra: [
+    {
+      hobbie:{type: String, default: null},
+      strength: { type: String, default: null },
+      language: { type: String, default: null },
+      goals: { type: String, default: null },
+    },
+  ],
+
 
 
  
@@ -275,6 +286,14 @@ let flag2=0;
 let flag3=0;
 let flag4=0;
 let filepresentornot=0;
+let flag5=0;//hobbies
+let noOfhobbies=1;
+let flag6=0;//strengths
+let noOfStrengths=1;
+let flag7=0;//language
+let noOfLanguage=1;
+let flag8=0;//goals
+let noOfGoals=1;
 
 let important=1;
 app.get("/:customName", function (req, res) {
@@ -303,7 +322,15 @@ app.get("/:customName", function (req, res) {
         flag3:flag3,
         flag4:flag4,
         filepresentornot:filepresentornot,
-        
+        flag5:flag5,
+        noOfhobbies:noOfhobbies,
+        flag6:flag6,
+        flag7:flag7,
+        noOfStrengths:noOfStrengths,
+        noOfLanguage:noOfLanguage,
+        flag8:flag8,
+        noOfGoals:noOfGoals,
+
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -383,7 +410,7 @@ app.post("/profile", function (req, res) {
   var newvalues = {
     $set: {
       firstname: req.body.firstname,
-      lastname: req.body.lastname,
+      profile: req.body.profile,
       email: req.body.email,
       pno: req.body.pno,
       website: req.body.website,
@@ -395,7 +422,7 @@ app.post("/profile", function (req, res) {
       city: req.body.city,
       pin: req.body.pin,
       address: req.body.address,
-      dob:req.body.dob,
+      currentposition:req.body.currentposition,
     },
   };
   Project.updateMany(myquery, newvalues, function (err, res) {
@@ -790,7 +817,45 @@ app.post('/personal', upload.single('photo'), function (req, res)
 });
 
 
+app.post("/extra",function(req,res)
+{
+  console.log(req.body);
 
+  if(req.body.btn==="1")
+  {
+    noOfhobbies++;
+  }
+  else if(req.body.btn==="2")
+  {
+    noOfhobbies--;
+  }
+  else if(req.body.btn==="3")
+  {
+    noOfStrengths++;
+  }
+  else if(req.body.btn==="4")
+  {
+    noOfStrengths--;
+  }
+  else if(req.body.btn==="5")
+  {
+    noOfLanguage++;
+  }
+  else if(req.body.btn==="6")
+  {
+    noOfLanguage--;
+  }
+  else if(req.body.btn==="7")
+  {
+    noOfGoals++;
+  }
+  else if(req.body.btn==="8")
+  {
+    noOfGoals--;
+  }
+  
+  res.redirect("/extra");
+})
 
 
 

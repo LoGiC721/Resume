@@ -33,11 +33,16 @@
                 <%if(found[0].firstname!==null&&found[0].firstname.length!==0){%>
                   <%=found[0].firstname%>
                     <%}%>
-                      <%if(found[0].lastname!==null&&found[0].lastname.length!==0){%>
-                        <%=found[0].lastname%>
+                      <%if(found[0].profile!==null&&found[0].profile.length!==0){%>
+                        <%=found[0].profile%>
                           <%}%>
               </p>
-              <p class="regular">Designer</p>
+
+              <%if(found[0].currentposition!==null&&found[0].currentposition.length!==0){%>
+              <p class="regular"><%=found[0].currentposition%></p>
+              <%}%>
+
+
             </div>
             <%}%>
 
