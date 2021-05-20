@@ -267,7 +267,7 @@
             <%}%>
 
            
-           <%if(found[0].work[i].jobtitle.length!==null||found[0].work[i].jobdescription.length){%>
+           <%if(found[0].work[i].jobtitle.length!==0||found[0].work[i].jobdescription.length!==0){%>
             <div class="info">
               <p class="semi-bold"><%=found[0].work[i].jobtitle%></p>
               <p><%=found[0].work[i].jobdescription%><br /><br /></p>
@@ -294,20 +294,51 @@
         <div class="title">
           <p class="bold">Education</p>
         </div>
+
+
+
+        <%for(let i=0;i<found[0].school.length;i++){%>
         <ul>
           <li>
-            <div class="date">2010 - 2013</div>
-            <div class="info">
-              <p class="semi-bold">Web Designing (Texas University)</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibuslllllllllllllllllllllllll
-                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll!</p>
+            <%if(found[0].school[i].name.length!==0){%>
+            <h3><%=found[0].school[i].name.length%></h3>
+            <%}%>
+
+            <%if(found[0].school[i].startdate!==null|| found[0].school[i].enddate!==null){%>
+            <div class="date"><%=found[0].school[i].startdate.getDate()%> /
+              <%=found[0].school[i].startdate.getMonth()+1%> /
+              <%=found[0].school[i].startdate.getFullYear()%>  -   
+              <%=found[0].school[i].enddate.getDate()%> /
+              <%=found[0].school[i].enddate.getMonth()+1%> /
+              <%=found[0].school[i].enddate.getFullYear()%>
+               <div>
+              <%if(found[0].school[0].location.length!==0){%>  
+              <em><%=found[0].school[i].location%></em>
+              <%}%>
             </div>
+              </div>
+            <%}%>
+
+           
+           <%if(found[0].school[i].gpa!==null||found[0].school[i].degree.length!==0){%>
+            <div class="info">
+              <p class="semi-bold"><%=found[0].school[i].degree%></p>
+              <p><%=found[0].school[i].gpa%><br /><br /></p>
+            </div>
+           
+            <%}%>
           </li>
           
         </ul>
+      
+        <%}%>
+
+
+
       </div>
 <%}%>
 <%}%>
+
 
       <div class="resume_item resume_hobby">
         <div class="title">
