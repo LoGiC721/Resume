@@ -93,6 +93,7 @@ body {
   margin-right: 15px;
   font-size: 16px;
   position: relative;
+  width:21%;
 }
 
 .resume .icon i,
@@ -197,7 +198,7 @@ body {
   top: 14px;
   left: -21px;
   width: 2px;
-  height: 93%;
+  height: 94%;
   background: #0bb5f4;
 }
 
@@ -250,3 +251,4 @@ li{
   font-size: 16px;
   font-weight: 500;
 }
+
