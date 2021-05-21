@@ -108,8 +108,6 @@
        <%}%>
        <%}%>
         <%}%>
-
-
         <%if((found[0].github!==null&&found[0].github.length!=0)||
                 (found[0].linkedin!==null&&found[0].linkedin.length!==0)||
                 (found[0].twitter!==null&&found[0].twitter.length!==0)){%>
@@ -154,15 +152,9 @@
                <p><%=found[0].website%></p>
              </div>
            </li>
-
          </ul>
        </div>
-
  <%}%>
-
-
-
-
  <%if(found[0].extra.length!==0){%>
           <%if(found[0].extra[0].language.length!==0){%>
             <%if(found[0].extra[0].language[0].length!==0){%>
@@ -184,23 +176,10 @@
        <%}%>
         <%}%>
         <%}%>
-
-
-
  
-
-
-
-
-
      </div>
   </div>
-
-
   <div class="resume_right">
-
-
-
      <%if(found[0].project.length!==0){%>
           <%if(found[0].project[0].projectname.length!==0){%>
             <%if((found[0].project[0].projectname[0].length!==0||
@@ -211,14 +190,11 @@
         <div class="title">
            <p class="bold">Projects</p>
          </div>
-
          <ul>
-
              <%for(let i=0;i<found[0].project[0].projectname.length;i++){%>
          <li>
             <div class="date"><%=found[0].project[0].projectname[i]%></div> 
             <div class="info">
-
               <p><i class="fab fa-weebly"></i> <%=found[0].project[0].link[i]%></p>
               <br />
             <p class="semi-bold"><%=found[0].project[0].toolsused[i]%></p> 
@@ -232,9 +208,7 @@
     <%}%>
     <%}%>
     <%}%>
-
     
-
     <%if(found[0].work.length!==0){%>
           <%if(found[0].work[0].companyname.length!==0){%>
             <%if((found[0].work[0].companyname[0].length!==0||found[0].work[0].startdate[0]!==null
@@ -249,7 +223,6 @@
            <p class="bold">Work Experience</p>
          </div>
         <ul>
-
           <%for(let i=0;i<found[0].work[0].companyname.length;i++){%>
             <li>
                 <div class="date">2013 - 2015</div> 
@@ -265,9 +238,6 @@
 <%}%>
 <%}%>
 <%}%>
-
-
-
 <%if(found[0].school.length!==0){%>
           <%if(found[0].school[0].name.length!==0){%>
             <%if((found[0].school[0].name[0].length!==0||
@@ -277,13 +247,11 @@
             found[0].school[0].gpa[0]!==null||
             found[0].school[0].location[0].length!==0)){%>
     <div class="resume_item resume_education">
-
       
       <div class="title">
            <p class="bold">Education</p>
          </div>
       <ul>
-
         <%for(let i=0;i<found[0].work[0].companyname.length;i++){%>
             <li>
                 <div class="date">2010 - 2013</div> 
@@ -292,7 +260,39 @@
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
                 </div>
             </li>
+           <%}%> 
+           
+        </ul>
+        
+    </div>
+   <%}%> 
+<%}%>
+<%}%>
+ 
 
+
+
+
+<%if(found[0].awards.length!==0){%>
+          <%if(found[0].awards[0].awardname.length!==0){%>
+            <%if((found[0].awards[0].awardname[0].length!==0||
+            found[0].awards[0].awarddate[0]!==null||
+            found[0].awards[0].awarder[0].length!==0||
+            found[0].awards[0].Awarddescription[0].length!==0)){%>
+    <div class="resume_item resume_education">
+      
+      <div class="title">
+           <p class="bold">Awards</p>
+         </div>
+      <ul>
+        <%for(let i=0;i<found[0].work[0].companyname.length;i++){%>
+            <li>
+                <div class="date">2010 - 2013</div> 
+                <div class="info">
+                     <p class="semi-bold">Web Designing (Texas University)</p> 
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
+                </div>
+            </li>
            <%}%> 
            
         </ul>
@@ -304,21 +304,8 @@
 
 
 
-    <div class="resume_item resume_hobby">
-      <div class="title">
-           <p class="bold">Hobby</p>
-         </div>
-       <ul>
-         <li><i class="fas fa-book"></i></li>
-         <li><i class="fas fa-gamepad"></i></li>
-         <li><i class="fas fa-music"></i></li>
-         <li><i class="fab fa-pagelines"></i></li>
-      </ul>
-    </div>
+ 
 
-
-
-  
  <%if(found[0].extra.length!==0){%>
           <%if(found[0].extra[0].strength.length!==0){%>
             <%if(found[0].extra[0].strength[0].length!==0){%>
@@ -340,10 +327,61 @@
        <%}%>
         <%}%>
         <%}%>
+  
+
+        <%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].hobbie.length!==0){%>
+            <%if(found[0].extra[0].hobbie[0].length!==0){%>
+       <div class="resume_item">
+         <div class="title">
+           <p class="bold">Hobbies</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].hobbie.length;i++){%>
+           <li>
+             <div class="info">
+             <p class="semi-bold"> <%=found[0].extra[0].hobbie[i]%></p>
+             </div>
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
 
 
+
+
+  <%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].goals.length!==0){%>
+            <%if(found[0].extra[0].goals[0].length!==0){%>
+       <div class="resume_item">
+         <div class="title">
+           <p class="bold">Goals</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
+           <li>
+             <div class="info">
+             <p class="semi-bold"> <%=found[0].extra[0].goals[i]%></p>
+             </div>
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
   </div>
 </div>
 
+
+
+</div>  
+
+</div>
 </body>
 </html>
