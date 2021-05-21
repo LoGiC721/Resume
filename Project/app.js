@@ -681,7 +681,7 @@ app.post("/extra", function (req, res) {
     if (!err) console.log("Documents inserted successfully");
   });
 
-  res.redirect("/extra");
+  res.redirect("/download");
 });
 
 app.listen("3000", function () {
