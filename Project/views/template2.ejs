@@ -25,31 +25,51 @@
         (found[0].currentposition!==null&&found[0].currentposition.length!==0)||
         (found[0].profile!==null&&found[0].profile.length!==0)){%>
          <div class="title">
+          <%if(found[0].firstname!==null&&found[0].firstname.length!==0){%>
            <p class="bold"><%=found[0].firstname%></p>
+           <%}%>
+           <%if(found[0].currentposition!==null&&found[0].currentposition.length!==0){%>
            <p class="regular"><%=found[0].currentposition%></p>
            <br />
-           <p class="regular"><%=found[0].profile%></p>
-         </div>
-        <%}%>
+           <%}%>
 
-        <hr style="border:solid 1px #B1EAFF;background-color: #B1EAFF;">
+           <%if(found[0].profile!==null&&found[0].profile.length!==0){%>
+           <p class="regular"><%=found[0].profile%></p>
+           <%}%>
+         </div>
+         <hr style="border:solid 1px #B1EAFF;background-color: #B1EAFF;">
         <br>
+         <%}%>
+
+
+         <%if((found[0].address!==null&&found[0].address.length!==0)||
+                (found[0].country!==null&&found[0].country.length!==0)||
+                (found[0].state!==null&&found[0].state.length!==0)|| (found[0].city!==null&&found[0].city.length!==0)||
+                (found[0].pno!==null&&found[0].pno.length!==0)|| (found[0].email!==null&&found[0].email.length!==0)||
+                (found[0].pin!==null&&found[0].pin.length!==0)) {%>
+       
          <ul>
           
           <%if((found[0].address!==null&&found[0].address.length!==0)||
                 (found[0].country!==null&&found[0].country.length!==0)||
                 (found[0].state!==null&&found[0].state.length!==0)|| 
                 (found[0].city!==null&&found[0].city.length!==0)) {%>
+
+
           <li>
              <div class="icon">
                <i class="fas fa-map-signs"></i>
              </div>
              <div class="data">
               <%=found[0].address%>
-               <br /> <%=found[0].country%>
-               <br /> <%=found[0].state%>
-               <br /> <%=found[0].city%>
-               <br /> <%=found[0].pin%>
+               <br /> 
+               <%=found[0].country%>
+               <br /> 
+               <%=found[0].state%>
+               <br /> 
+               <%=found[0].city%>
+               <br /> 
+               <%=found[0].pin%>
              </div>
            </li>
           <%}%>
@@ -77,6 +97,7 @@
            <%}%>
 
          </ul>
+         <%}%>
        </div>
 
 
@@ -111,11 +132,13 @@
         <%if((found[0].github!==null&&found[0].github.length!=0)||
                 (found[0].linkedin!==null&&found[0].linkedin.length!==0)||
                 (found[0].twitter!==null&&found[0].twitter.length!==0)){%>
+
        <div class="resume_item resume_social">
          <div class="title">
            <p class="bold">Social</p>
          </div>
          <ul>
+          <%if(found[0].twitter!==null&&found[0].twitter.length!==0){%>
            <li>
              <div class="icon">
                <i class="fab fa-twitter-square"></i>
@@ -125,6 +148,8 @@
                <p><%=found[0].twitter%></p>
              </div>
            </li>
+          <%}%>
+          <%if(found[0].github!==null&&found[0].github.length!==0){%>
            <li>
              <div class="icon">
                <i class="fab fa-github"></i>
@@ -134,6 +159,8 @@
                <p><%=found[0].github%></p>
              </div>
            </li>
+          <%}%>
+          <%if(found[0].linkedin!==null&&found[0].linkedin.length!==0){%>
            <li>
              <div class="icon">
                <i class="fab fa-linkedin"></i>
@@ -143,6 +170,8 @@
                <p><%=found[0].linkedin%></p>
              </div>
            </li>
+           <%}%>
+           <%if(found[0].website!==null&&found[0].website.length!==0){%>
            <li>
              <div class="icon">
                <i class="fab fa-weebly"></i>
@@ -152,7 +181,9 @@
                <p><%=found[0].website%></p>
              </div>
            </li>
+           <%}%>
          </ul>
+
        </div>
  <%}%>
  <%if(found[0].extra.length!==0){%>
