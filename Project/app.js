@@ -336,20 +336,7 @@ app.post("/login", function (req, res) {
       res.redirect("/login");
     } else {
       passport.authenticate("local")(req, res, function () {
-        filepresentornot = 0;
-        count = 1;
-        noOfProjects = 1;
-        noOfSkills = 1;
-        noOfWorkExperience = 1;
-        noOfAwards = 1;
-        noOfhobbies = 1;
-
-        noOfStrengths = 1;
-
-        noOfLanguage = 1;
-
-        noOfGoals = 1;
-        res.redirect("/");
+        res.redirect("/front");
       });
     }
   });
@@ -366,19 +353,7 @@ app.post("/register", function (req, res) {
       } else {
         passport.authenticate("local")(req, res, function () {
           filepresentornot = 0;
-        count = 1;
-        noOfProjects = 1;
-        noOfSkills = 1;
-        noOfWorkExperience = 1;
-        noOfAwards = 1;
-        noOfhobbies = 1;
-
-        noOfStrengths = 1;
-
-        noOfLanguage = 1;
-
-        noOfGoals = 1;
-          res.redirect("/");
+          res.redirect("/front");
         });
       }
     }
@@ -683,6 +658,49 @@ app.post("/extra", function (req, res) {
 
   res.redirect("/download");
 });
+
+
+app.post("/front",function(req,res){
+  console.log(req.body);
+let value=req.body.btn;
+  if(value==="1"){
+
+
+    var myquery = { _id: req.user.id };
+
+    Project.updateMany(myquery, { $set: 
+      { 
+        
+        school:[],work:[],skills:[],project:[],awards:[],extra:[],
+        img:null,currentposition:null,address:null,pin:null,
+        city:null,state:null,country:null,twitter:null,linkedin:null,github:null,
+        website:null,pno:null,email:null,profile:null,firstname:null
+      
+      } 
+    
+    
+    }, function (err, res) {
+      if (!err) console.log(" All Documents deleted successfully");
+    });
+
+        filepresentornot = 0;
+        count = 1;
+        noOfProjects = 1;
+        noOfSkills = 1;
+        noOfWorkExperience = 1;
+        noOfAwards = 1;
+        noOfhobbies = 1;
+
+        noOfStrengths = 1;
+
+        noOfLanguage = 1;
+
+        noOfGoals = 1;
+
+  }
+  res.redirect("/profile")
+})
+
 
 app.listen("3000", function () {
   console.log("Server has been started at port 3000");
