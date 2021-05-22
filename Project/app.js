@@ -232,7 +232,8 @@ app.get(
 );
 
 app.get("/", function (req, res) {
-  res.render("home", { currentUser: req.user });
+  console.log(req.user);
+  res.render("front", { currentUser: req.user });
 });
 
 app.get("/templates", function (req, res) {
@@ -336,7 +337,7 @@ app.post("/login", function (req, res) {
       res.redirect("/login");
     } else {
       passport.authenticate("local")(req, res, function () {
-        res.redirect("/front");
+        res.redirect("/");
       });
     }
   });
@@ -353,7 +354,7 @@ app.post("/register", function (req, res) {
       } else {
         passport.authenticate("local")(req, res, function () {
           filepresentornot = 0;
-          res.redirect("/front");
+          res.redirect("/");
         });
       }
     }
@@ -698,6 +699,7 @@ let value=req.body.btn;
         noOfGoals = 1;
 
   }
+  
   res.redirect("/profile")
 })
 

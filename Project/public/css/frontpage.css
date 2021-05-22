@@ -14,9 +14,9 @@ html{
 
 .navbar{
     background-color: #131313;
-    padding:1rem 8rem;
+    padding:1rem 2rem;
     z-index:1000;
-}
+} 
 
 .navbar .navbar-brand{
     font-size:1.4rem;
@@ -36,7 +36,7 @@ padding:0 0.8rem;
     color:#00BF85
 }
 
-#navbarSupportedContent > button{
+#navbarSupportedContent > a{
     background-color: #00BF85;
     font-weight:600;
     padding:0.4rem 1.4rem;
@@ -160,7 +160,7 @@ background-color: #000;
     }
     
     
-    .discovery .text button,.about .text button,.sign .text button{
+    .discovery .text button,.about .text button,.sign .text a{
         background-color: #111;
         font-weight:800;
         padding:0.6rem 1.4rem;
@@ -170,7 +170,7 @@ background-color: #000;
         font-family: 'Source Sans Pro', sans-serif;
     }
 
-    .discovery .text button:hover,.sign .text button:hover{
+    .discovery .text button:hover,.sign .text a:hover{
         background-color: #00BF85;
     }
 
