@@ -241,6 +241,11 @@ app.get("/templates", function (req, res) {
   else res.render("availabletemplates", { currentUser: req.user });
 });
 
+app.get("/home", function (req, res) {
+  if (!req.user) res.render("SignIn");
+  else res.render("home", { currentUser: req.user });
+});
+
 app.get("/login", function (req, res) {
   res.render("Signin");
 });
@@ -316,9 +321,7 @@ app.get("/:customName", function (req, res) {
 });
 
 
-app.post("/", function (req, res) {
-  res.redirect("/templates");
-});
+
 
 app.post("/templates", function (req, res) {
   templateno = req.body.template;
@@ -661,10 +664,10 @@ app.post("/extra", function (req, res) {
 });
 
 
-app.post("/front",function(req,res){
-  console.log(req.body);
+app.post("/",function(req,res){
+  console.log(req.body.btn);
 let value=req.body.btn;
-  if(value==="1"){
+  if(value==="1"&&req.user){
 
 
     var myquery = { _id: req.user.id };
@@ -700,9 +703,24 @@ let value=req.body.btn;
 
   }
   
-  res.redirect("/profile")
+  if(value==="3")
+  {
+    res.redirect("/templates");
+  }
+  else if(value==="2")
+  {
+    res.redirect("/templates")
+  }
+  else{
+  res.redirect("/home")
+  }
 })
 
+
+app.post("/home",function(req,res)
+{
+  res.render("availabletemplates", { currentUser: req.user });
+})
 
 app.listen("3000", function () {
   console.log("Server has been started at port 3000");

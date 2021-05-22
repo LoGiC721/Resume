@@ -13,7 +13,8 @@ html{
 }
 
 .navbar{
-    background-color: #131313;
+    background-color: black;
+    /* background-color: #131313 ;*/
     padding:1rem 2rem;
     z-index:1000;
 } 
@@ -28,6 +29,7 @@ html{
 color:white;
 font-size:1.1rem;
 padding:0 0.8rem;
+text-align: center;
 }
 
 #navbarSupportedContent > ul > li:nth-child(n) > a:hover,
@@ -36,12 +38,12 @@ padding:0 0.8rem;
     color:#00BF85
 }
 
-#navbarSupportedContent > a{
+/* #navbarSupportedContent > a{
     background-color: #00BF85;
     font-weight:600;
     padding:0.4rem 1.4rem;
     border-radius:30px;
-}
+} */
 
 
 .navbar-nav li a {
@@ -145,12 +147,12 @@ background-color: #000;
         font-family: 'Dancing Script', cursive;
     }
 
-    .about .text h4,.sign .text h4{
+    .about .text h4,.sign .text h4 {
       font-family: 'Yanone Kaffeesatz', sans-serif;
     }
     
     
-    .discovery .text p,.about .text p,.sign .text p,.service p{
+    .discovery .text p,.about .text p,.sign .text p,.service p,footer p{
        
         font-weight: 400;
         font-size: 1.1rem;
@@ -223,7 +225,9 @@ background-color: #000;
                 padding:1rem;
             }
             
-
+            .buttonn{
+                margin-bottom:10px;
+            }
 
         #navbarSupportedContent > ul{
             padding: 0.8rem;
