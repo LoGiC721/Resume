@@ -120,6 +120,21 @@ const UserSchema = new Schema({
   secret: { type: String, default: null },
   username: { type: String, default: null },
   password: { type: String, default: null },
+
+
+   count: { type: Number, default: 1 },
+   noOfProjects: { type: Number, default: 1 },
+   noOfSkills: { type: Number, default: 1 },
+   noOfWorkExperience: { type: Number, default: 1 },
+   noOfAwards: { type: Number, default: 1 },
+   filepresentornot: { type: Number, default: 0 },
+   noOfhobbies: { type: Number, default: 1 },
+   noOfStrengths: { type: Number, default: 1 },
+   noOfLanguage: { type: Number, default: 1 },
+   noOfGoals: { type: Number, default: 1 },
+
+
+
 });
 
 UserSchema.plugin(passportLocalMongoose);
@@ -301,19 +316,15 @@ app.get("/:customName", function (req, res) {
         current: customListName,
         found: found,
         count: count,
-        noOfProjects: noOfProjects,
-        noOfSkills: noOfSkills,
-        noOfWorkExperience: noOfWorkExperience,
-        noOfAwards: noOfAwards,
-
-        filepresentornot: filepresentornot,
-
-        noOfhobbies: noOfhobbies,
-
-        noOfStrengths: noOfStrengths,
-        noOfLanguage: noOfLanguage,
-
-        noOfGoals: noOfGoals,
+        // noOfProjects: noOfProjects,
+        // noOfSkills: noOfSkills,
+        // noOfWorkExperience: noOfWorkExperience,
+        // // noOfAwards: noOfAwards,
+        // filepresentornot: filepresentornot,
+        // noOfhobbies: noOfhobbies,
+        // noOfStrengths: noOfStrengths,
+        // noOfLanguage: noOfLanguage,
+        // noOfGoals: noOfGoals,
       });
       //  console.log(found[0].project[0].projectname);
     }
@@ -356,7 +367,10 @@ app.post("/register", function (req, res) {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          filepresentornot = 0;
+         
+          filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
+          noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
+          noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
           res.redirect("/");
         });
       }
@@ -403,6 +417,11 @@ app.post("/education", function (req, res) {
 
   var myquery = { _id: req.user.id };
 
+
+  Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
   Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
@@ -440,6 +459,12 @@ app.post("/work", function (req, res) {
   }
 
   var myquery = { _id: req.user.id };
+
+
+  Project.updateOne(myquery, { $set: { noOfWorkExperience:noOfWorkExperience} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
 
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
@@ -486,6 +511,11 @@ app.post("/skills", function (req, res) {
 
   var myquery = { _id: req.user.id };
 
+  Project.updateOne(myquery, { $set: { noOfSkills:noOfSkills} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+
   Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
@@ -515,11 +545,16 @@ app.post("/projects", function (req, res) {
     count++;
   } else {
     if (value === "2" && count > 1) {
-      count--;
+          count--;
     }
   }
 
   var myquery = { _id: req.user.id };
+
+  Project.updateOne(myquery, { $set: { count:count} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
 
   Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
@@ -555,8 +590,13 @@ app.post("/awards", function (req, res) {
       noOfAwards--;
     }
   }
+ var myquery = { _id: req.user.id };
 
-  var myquery = { _id: req.user.id };
+  Project.updateOne(myquery, { $set: { noOfAwards:noOfAwards} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+ 
 
   let arr = req.body.awardname;
   Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
@@ -590,6 +630,9 @@ app.post("/personal", upload.single("photo"), function (req, res) {
   //  console.log(imagefile);
   //  console.log(req.body);
 
+
+
+
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -601,6 +644,10 @@ app.post("/personal", upload.single("photo"), function (req, res) {
   });
 
   filepresentornot = 1;
+
+  Project.updateOne(myquery, { $set: {filepresentornot:filepresentornot} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
     if (err) {
@@ -642,6 +689,13 @@ app.post("/extra", function (req, res) {
 
   var myquery = { _id: req.user.id };
 
+  Project.updateMany(myquery,
+     { $set: { noOfGoals:noOfGoals,noOfLanguage:noOfLanguage,noOfhobbies:noOfhobbies,
+      noOfStrengths:noOfStrengths,} },
+     function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
   Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
@@ -678,7 +732,10 @@ let value=req.body.btn;
         school:[],work:[],skills:[],project:[],awards:[],extra:[],
         img:null,currentposition:null,address:null,pin:null,
         city:null,state:null,country:null,twitter:null,linkedin:null,github:null,
-        website:null,pno:null,email:null,profile:null,firstname:null
+        website:null,pno:null,email:null,profile:null,firstname:null,
+        filepresentornot: 0,count: 1,noOfProjects:1,noOfSkills:1,
+        noOfWorkExperience:1,noOfAwards:1,noOfhobbies:1,
+        noOfStrengths:1,noOfLanguage:1,noOfGoals:1,
       
       } 
     
@@ -687,19 +744,9 @@ let value=req.body.btn;
       if (!err) console.log(" All Documents deleted successfully");
     });
 
-        filepresentornot = 0;
-        count = 1;
-        noOfProjects = 1;
-        noOfSkills = 1;
-        noOfWorkExperience = 1;
-        noOfAwards = 1;
-        noOfhobbies = 1;
-
-        noOfStrengths = 1;
-
-        noOfLanguage = 1;
-
-        noOfGoals = 1;
+        filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
+        noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
+        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
 
   }
   

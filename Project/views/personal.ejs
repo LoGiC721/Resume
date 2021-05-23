@@ -10,7 +10,7 @@
             <div class="container container-personal">
                 <div class="wrapper">
                     <div class="image">
-                        <%if(filepresentornot===1){%>
+                        <%if(found[0].filepresentornot===1){%>
                             <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
                             <%}%>
 
@@ -23,7 +23,7 @@
                     <div class="text">No file chosen, yet!</div>
                 </div>
 
-                <%if(filepresentornot===1){%>
+                <%if(found[0].filepresentornot===1){%>
                     <div class="file-name" id="fname">
                         <%=found[0].img%>
                     </div>

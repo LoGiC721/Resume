@@ -3,7 +3,7 @@
 	<h3>Your Educational Details</h3>
 	<br>
 	<form method="POST" action="education">
-		<%for(let i=0;i<noOfProjects;i++){%>
+		<%for(let i=0;i<found[0].noOfProjects;i++){%>
 		<div class="sameline">
 			<%if(found[0].school.length!==0){%>
 			<label for="name">College</label>
@@ -103,7 +103,7 @@
 		<div class="footer">
 			<a href="/profile" class="btn button prev">Prev</a>
 			<button class="add increment" name="btn" value="1">Add School</button>
-		    <%if(noOfProjects===1){%>
+		    <%if(found[0].noOfProjects===1){%>
 				<button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove School</button>
 				<%}else{%>
 					<button class="add decrement" name="btn" value="2">Remove School</button>

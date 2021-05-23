@@ -3,7 +3,7 @@
     <h3>Your Work Details</h3>
     <br>
     <form method="POST" action="work">
-        <%for(let i=0;i<noOfWorkExperience;i++){%>
+        <%for(let i=0;i<found[0].noOfWorkExperience;i++){%>
         <div class="sameline">
             <%if(found[0].work.length!==0){%>
             <label for="companyname">Company</label>
@@ -108,7 +108,7 @@
 		<div class="footer">
 			<a href="/education" class="btn button prev">Prev</a>
 			<button class="add increment" name="btn" value="1">Add Job</button>
-		    <%if(noOfWorkExperience===1){%>
+		    <%if(found[0].noOfWorkExperience===1){%>
                 <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Job</button>
                 <%}else{%>
                     <button class="add decrement" name="btn" value="2">Remove Job</button>

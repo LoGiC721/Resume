@@ -3,7 +3,7 @@
     <h3>Your Skills </h3>
     <br>
     <form method="POST" action="skills">
-        <%for(let i=0;i<noOfSkills;i++){%>
+        <%for(let i=0;i<found[0].noOfSkills;i++){%>
         <div class="sameline"> 
               
             <label for="skillsname">Skill Name</label>
@@ -34,7 +34,7 @@
         <div class="footer">
             <a href="/work" class="btn button prev">Prev</a>
 			<button class="add increment" name="btn" value="1">Add Skill</button>
-		    <%if(noOfSkills===1){%>
+		    <%if(found[0].noOfSkills===1){%>
                 <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Skill</button>
                 <%}else{%>
                     <button class="add decrement" name="btn" value="2">Remove Skill</button>
