@@ -122,7 +122,7 @@ const UserSchema = new Schema({
   password: { type: String, default: null },
 
 
-   count: { type: Number, default: 1 },
+   noOfeducation: { type: Number, default: 1 },
    noOfProjects: { type: Number, default: 1 },
    noOfSkills: { type: Number, default: 1 },
    noOfWorkExperience: { type: Number, default: 1 },
@@ -289,7 +289,7 @@ app.get("/download", function (req, res) {
   });
 });
 
-let count = 1;
+let noOfeducation = 1;
 let noOfProjects = 1;
 let noOfSkills = 1;
 let noOfWorkExperience = 1;
@@ -315,18 +315,7 @@ app.get("/:customName", function (req, res) {
       res.render(customListName, {
         current: customListName,
         found: found,
-        count: count,
-        // noOfProjects: noOfProjects,
-        // noOfSkills: noOfSkills,
-        // noOfWorkExperience: noOfWorkExperience,
-        // // noOfAwards: noOfAwards,
-        // filepresentornot: filepresentornot,
-        // noOfhobbies: noOfhobbies,
-        // noOfStrengths: noOfStrengths,
-        // noOfLanguage: noOfLanguage,
-        // noOfGoals: noOfGoals,
       });
-      //  console.log(found[0].project[0].projectname);
     }
   });
 });
@@ -408,17 +397,17 @@ app.post("/profile", function (req, res) {
 app.post("/education", function (req, res) {
   let value = req.body.btn;
   if (value === "1") {
-    noOfProjects++;
+    noOfeducation++;
   } else {
     if (value === "2" && noOfProjects > 1) {
-      noOfProjects--;
+      noOfeducation--;
     }
   }
 
   var myquery = { _id: req.user.id };
 
 
-  Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
+  Project.updateOne(myquery, { $set: { noOfeducation:noOfeducation} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
 
@@ -542,16 +531,16 @@ app.post("/skills", function (req, res) {
 app.post("/projects", function (req, res) {
   let value = req.body.btn;
   if (value === "1") {
-    count++;
+    noOfProjects++;
   } else {
     if (value === "2" && count > 1) {
-          count--;
+      noOfProjects--;
     }
   }
 
   var myquery = { _id: req.user.id };
 
-  Project.updateOne(myquery, { $set: { count:count} }, function (err, res) {
+  Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
 
