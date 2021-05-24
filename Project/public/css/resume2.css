@@ -9,7 +9,7 @@
 }
 
 body {
-  background: #585c68;
+  background: #f9f6f7;
   font-size: 14px;
   line-height: 22px;
   color: #555555;
@@ -30,7 +30,9 @@ body {
   width: 800px;
   height: auto;
   display: flex;
-  margin: 50px auto;
+  margin: auto auto;
+  /* 50px */
+  border:0.5px solid black;
 }
 
 .resume .resume_left {
