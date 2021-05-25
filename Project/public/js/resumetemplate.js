@@ -9,7 +9,7 @@ function pdf()
     <br><br><br>
     <style>
           body{
-            background-image: url('images/a.jpg'); background-size: cover; background-position: top center; min-height: 620px;
+            background: linear-gradient(to right,#23049d ,#cf0000 );
           }
     </style>
     <button class="btn btn-dark btn-lg text-light" onclick="pdf()" 

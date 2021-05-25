@@ -219,7 +219,7 @@ app.get(
   "/auth/google/secrets",
   passport.authenticate("google", { failureRedirect: "/auth/google/login" }),
   function (req, res) {
-    res.redirect("/download");
+    res.redirect("/");
   }
 );
 
