@@ -252,21 +252,21 @@ app.get("/", function (req, res) {
 });
 
 app.get("/templates", function (req, res) {
-  if (!req.user) res.render("SignIn");
+  if (!req.user) res.render("login");
   else res.render("availabletemplates", { currentUser: req.user });
 });
 
 app.get("/home", function (req, res) {
-  if (!req.user) res.render("SignIn");
+  if (!req.user) res.render("login");
   else res.render("home", { currentUser: req.user });
 });
 
 app.get("/login", function (req, res) {
-  res.render("Signin");
+  res.render("login");
 });
 
 app.get("/register", function (req, res) {
-  res.render("Register");
+  res.render("signup");
 });
 
 
