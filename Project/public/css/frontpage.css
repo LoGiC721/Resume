@@ -289,3 +289,70 @@ footer{
     width:15px;
     margin:8px;
 }
+
+
+
+
+@media (max-width:518px)
+{
+    
+    .mid .hero h2{
+        font-size:1.8rem;
+        }
+
+
+
+}
+
+
+
+
+@media (max-width:375px)
+{
+    
+.marginnn{
+    margin-top:100px;
+    
+}
+
+
+
+
+}
+
+@media (max-width:296px)
+{
+    
+.marginnn{
+    margin-top:150px;
+    
+}
+.mid .hero button{
+  
+    font-weight:600;
+    padding:0.2rem 0.6rem;
+    margin:5px;
+    border-radius:30px;
+   
+}
+
+.mid .hero h2{
+    font-size:1.2rem;
+    }
+
+
+
+
+}
+
+@media (max-width:296px){
+
+    .marginnn{
+        margin-top:100px;
+        
+    }
+
+    .mid{
+        background-color: black;
+    }
+}

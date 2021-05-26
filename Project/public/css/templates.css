@@ -1,6 +1,9 @@
 img{
-    height:400px;
-    width:300px;
+    /* height:400px;
+    width:300px; */
+    height:auto;
+    width:auto;
+    
 }
 
 .logo{
@@ -105,4 +108,13 @@ footer{
   height:20px;
   width:20px;
   margin:10px;
+}
+
+
+
+.container
+{
+  text-align: center;
+  vertical-align: middle;
+  
 }

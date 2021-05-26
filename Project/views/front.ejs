@@ -50,11 +50,11 @@
       </ul>
 
       <% if(!currentUser){ %>
-        <li class="nav-item active"></li>
-        <a class="btn btn-light nav-link text-dark" href="/login">Login <span class="sr-only">(current)</span></a>
+        <li class="nav-item active">
+        <a class="btn btn-light nav-link text-dark  mr-3 mb-4" href="/login">Login <span class="sr-only">(current)</span></a>
         </li>
-        <li class=" nav-link">
-          <a class="btn btn-light nav-link text-dark" href="/register">Register</a>
+        <li class=" nav-item active">
+          <a class="btn btn-light nav-link text-dark mb-4 mr-3" href="/register">Register</a>
         </li>
         <% } else { %>
           <li class="nav-item active">
@@ -85,7 +85,7 @@
     </video>
 
     <div class="hero text-center">
-        <h2 class="text-light display-4 font-weight-bold mx-auto w-50">What if we know how to create outstanding CV?</h2>
+        <h2 class="text-light display-4 font-weight-bold mx-auto w-50 marginnn">What if we know how to create outstanding CV?</h2>
         <p class="text-light mx-auto">Make a great first impression with our resume builder tools !</p>
         <button class="btn" type="submit" name="btn" value="1">Create New Resume</button>
        

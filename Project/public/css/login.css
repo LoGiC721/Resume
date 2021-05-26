@@ -270,7 +270,7 @@ form.sign-in-form {
   pointer-events: all;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 870px) {
   .container {
     min-height: 800px;
     height: 100vh;
@@ -309,10 +309,9 @@ form.sign-in-form {
   }
 
   .image {
-    width: 300px;
+    width: 200px;
     transition: transform 0.9s ease-in-out;
-    transition-delay: 0.3s;
-    
+    transition-delay: 0.6s;
   }
 
   .panel .content {
@@ -355,7 +354,7 @@ form.sign-in-form {
 
   .container.sign-up-mode .left-panel .image,
   .container.sign-up-mode .left-panel .content {
-    transform: translateY(0px);
+    transform: translateY(-300px);
   }
 
   .container.sign-up-mode .right-panel .image,

@@ -62,14 +62,18 @@ a:focus {
     align-items: stretch;
     position:relative;
     bottom:39px;
+    
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    /* min-width: 250px;
+    max-width: 250px; */
+   
+    width: 250px;
     background:#14171D;
     color: #fff;
     transition: all 0.3s;
+    border-right:1px solid white;
 }
 
 #sidebar.active {
@@ -148,6 +152,22 @@ a.article,
 a.article:hover {
     background: black !important;
     color: #fff !important;
+}
+
+
+@media(max-width:468)
+{
+    #sidebar
+    {
+       max-width:auto;
+    }
+}
+
+@media(max-width:337)
+{
+   .smalll{
+       font-size: small;
+   }
 }
 
 /* ---------------------------------------------------
