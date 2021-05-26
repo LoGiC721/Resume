@@ -1,4 +1,5 @@
 <%-include("sidemenu")-%>
+
 <div class="text-center information">
 	<h4>Your Educational Details</h4>
 	<br>
@@ -101,7 +102,8 @@
 		<br>
 		<br>
 		<div class="footer">
-			<a href="/profile" class="btn button prev">Prev</a>
+			<div class="container flexx">
+			<a href="/profile" class="btn button prev ">Prev</a>
 			<button class="add increment" name="btn" value="1">Add School</button>
 		    <%if(found[0].noOfeducation===1){%>
 				<button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove School</button>
@@ -109,6 +111,7 @@
 					<button class="add decrement" name="btn" value="2">Remove School</button>
 				<%}%>   
 			<button name="btn" value="3" class="btn button next">Save & Next</button>
+		</div>
 		</div>
 	</form>
 </div>

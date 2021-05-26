@@ -163,12 +163,6 @@ a.article:hover {
     }
 }
 
-@media(max-width:337)
-{
-   .smalll{
-       font-size: small;
-   }
-}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -227,23 +221,32 @@ a.article:hover {
     width: 100%;
     background-color:#14171D;
     color: white;
-    text-align: center;
     border-top: 1px solid white;
+   
+
   }
 
-  .prev{
+
+.flexx{
+    display:flex;
+   align-items:center;
+   justify-content: space-around;
+  
+}
+
+
+
+
+
+   .prev{
     background-color: #56c9aa;
-   position:absolute;
-   left:9%;
-   bottom:20%;
+   
   }
 
   .next{
     background-color: #56c9aa;
-    position:absolute;
-    right:9%;
-    bottom:20%;
-  } 
+   
+  }  
 
 
 
@@ -357,16 +360,17 @@ a.article:hover {
     border: 1px solid;
     color: #56c9aa;
     padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+  
+    margin: 10px 0px; 
     border-radius: 15%;
     outline-color:#56c9aa ;
-    
+  
      font-family: 'Advent Pro', sans-serif; 
     
+}
+
+.marginnnn{
+    margin: 10px 0px; 
 }
 .add:hover{
     background-color: #56c9aa;
@@ -374,25 +378,7 @@ a.article:hover {
     outline:none;
 }
 
-.increment{
-    position:relative;
-    bottom:auto;
-    left:auto;
-    top:auto;
-    right:auto;
-    bottom:-10px;
-    margin:5px;
-}
 
-.decrement{
-    position:relative;
-    bottom:auto;
-    left:auto;
-    top:auto;
-    right:auto;
-    bottom:-10px;
-    margin:5px;
-}
 
 
 .notclickable{
