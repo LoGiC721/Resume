@@ -24,15 +24,15 @@
 				  background: linear-gradient(to right,#23049d ,#cf0000 );
 				}
 		  </style>
-		  <button class="btn btn-dark btn-lg text-light" onclick="pdf()" 
-			  onMouseOver="this.style.background='#E05343'"
-			  onMouseOut="this.style.background='#1C1F23'">Download PDF</button>
-		  <a class="btn btn-light btn-lg text-dark" style="margin-left:20px" href="/profile" 
-		  onMouseOver="this.style.background='#E05343'"
-			  onMouseOut="this.style.background='white'">Edit Details</a>
-			  <a class="btn btn-dark btn-lg text-light" style="margin-left:20px ;background-color:#cf0000;" href="/" 
-			  onMouseOver="this.style.background='#E05343'"
-				  onMouseOut="this.style.background='#cf0000'">Back to Home page</a> 
+		<button class="btn btn-dark btn-lg text-light down" onclick="pdf()" 
+		onMouseOver="this.style.background='#E05343'"
+		onMouseOut="this.style.background='#1C1F23'">Download PDF</button>
+	<a class="btn btn-light btn-lg text-dark down" style="margin-left:20px" href="/profile" 
+	onMouseOver="this.style.background='#E05343'"
+		onMouseOut="this.style.background='white'">Edit Details</a>
+		<a class="btn btn-dark btn-lg text-light down" style="margin-left:20px ;background-color:#cf0000;" href="/" 
+		onMouseOver="this.style.background='#E05343'"
+			onMouseOut="this.style.background='#cf0000'">Back to Home page</a> 
 		  <br><br><br>
 		  </div>
 		</div>
@@ -41,6 +41,7 @@
 
 
 	<div class="wrapper">
+		
 		<div class="resume">
 			<div class="left">
 				<%if(found[0].img!==null){%>
@@ -333,6 +334,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
 
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

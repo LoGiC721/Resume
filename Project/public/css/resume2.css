@@ -30,9 +30,10 @@ body {
   width: 800px;
   height: auto;
   display: flex;
+ 
   margin: auto auto;
   /* 50px */
-  border:0.5px solid black;
+  /* border:0.5px solid black; */
 }
 
 .resume .resume_left {
@@ -185,8 +186,8 @@ body {
 .resume .resume_right .resume_education ul li:before {
   content: "";
   position: absolute;
-  top: 5px;
-  left: -25px;
+  top: 9px;
+  left: -23px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -260,4 +261,88 @@ li{
 
 .marginn{
   margin-bottom:6px;
+}
+
+
+
+
+
+
+@media  (max-width:822px) {
+	
+  .resume{
+      width:90%;
+      margin:auto auto;
+  }
+	
+	
+}
+
+
+@media (max-width:579px) {
+	
+  .resume {
+    width: 90%;
+    margin:auto,auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+   
+   
+  }
+
+  .resume .resume_left{
+    width:90%;
+    margin:auto auto;
+
+  }
+
+  .resume .resume_right{
+    width:90%;
+    margin:auto auto;
+  }
+
+  .down{
+    margin-top:10px;
+  }
+
+	
+}
+
+
+
+@media (min-width:580px) and (max-width:633px){
+
+  .resume .resume_left{
+    width:50%;
+    margin:auto auto;
+
+  }
+
+  .down{
+    margin-top:10px;
+  }
+
+}
+
+@media print{
+
+	
+		body{
+			display: table;
+			table-layout: fixed;
+			height:auto;
+		}
+    .resume{
+      margin:0;
+    }
+		
+
+		
+        @page {
+			margin: 0;
+			
+		}
+        
+		
 }
