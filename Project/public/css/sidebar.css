@@ -407,6 +407,7 @@ a.article:hover {
 .container-personal{
     height:300px;
     width:430px;
+   
     border:2px dashed #c2cdda;
     border-radius:10px;
 }
@@ -589,4 +590,78 @@ label:hover{
         .iconn{
             display:none;
         }
+     }
+
+
+
+     @media(max-width:598px)
+     {
+        .personalll{
+            height:200px;
+            width:250px;
+        }
+        .profilepic{
+            height:150px;
+            width:245.5px;
+            position:absolute;
+            bottom:-190px;
+        }
+        .file-name{
+            width:245.5px;
+            position:relative;
+            bottom:35px;
+        }
+       
+     }
+
+     @media(max-width:356px)
+     {
+         .uploadbtn{
+             margin-top:10px;
+         }
+     }
+
+     @media(max-width:400px)
+     {
+        .personalll{
+            height:200px;
+            width:150px;
+        }
+        .profilepic{
+            position:absolute;
+            bottom:-184px;
+            height:144px;
+            width:146px;
+        }
+        .file-name{
+            position:relative;
+            bottom:5px;
+            width:146px;
+           
+        }
+        .text{
+            display:none;
+        }
+     }
+
+
+     @media(max-width:315px){
+
+        .personalll{
+            height:200px;
+            width:100px;
+        }
+        .profilepic{
+            position:absolute;
+            bottom:-184px;
+            height:144px;
+            width:96px;
+        }
+        .file-name{
+            position:relative;
+            bottom:5px;
+            width:96px;
+           
+        }
+
      }
