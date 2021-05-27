@@ -4,31 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/icons/favicon.ico" />
     <title>Document</title>
-    <style>
-        #loader{
-            position:fixed;
-            z-index:999999;
-        }
-    </style>
+    <link rel="stylesheet" href="css/loaderstyle.css">
 </head>
-<body style="background-color:black" onload="loading()">
-    <div id="loader">
-        <div class="container" style="display:flex;justify-content: center;">
-            <video autoplay muted loop style="width:500px;height:500px">
-                <source class="embed-responsive" src="images/drib.mp4" type="video/mp4">
-            </video>
-            </div>
+<body style="background-color:black">
+    <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+            
     </div>
 
 <script>
-   let preloader=document.getElementById("loader");
-   function loading()
-   {
-       preloader.style.display="none";
-   }
-</script>
+    setTimeout(function(){
+        $('.loader').fadeToggle();
+    },3000);
 
+</script>
 
 </body>
 </html>

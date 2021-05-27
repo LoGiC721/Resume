@@ -247,7 +247,9 @@ app.get(
 );
 
 app.get("/", function (req, res) {
-  console.log(req.user);
+  //console.log(req.user);
+
+  
   res.render("front", { currentUser: req.user });
 });
 
