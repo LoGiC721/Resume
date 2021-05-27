@@ -33,7 +33,12 @@
 
                
               <button name="btn" class="smallbtn" value="1">+</button>
-               <button name="btn"  class="smallbtn" value="2">-</button>
+
+              <%if(found[0].noOfhobbies===1){%>
+                    <button type="button" name="btn" class="smallbtn smallbtn1" style="cursor: no-drop;border:1px solid white;background-color:#14171D ;" value="2">-</button>
+                <%}else{%>
+               <button name="btn" class="smallbtn" value="2">-</button>
+               <%}%>  
                
               
             
@@ -70,7 +75,14 @@
                 </div>
                <button name="btn"  class="smallbtn" value="3">+</button>
                 
-               <button name="btn"  class="smallbtn" value="4">-</button>
+
+               <%if(found[0].noOfStrengths===1){%>
+                <button type="button" name="btn" class="smallbtn smallbtn1" style="cursor: no-drop;border:1px solid white;background-color:#14171D ;" value="4">-</button>
+            <%}else{%>
+                <button name="btn"  class="smallbtn" value="4">-</button>
+           <%}%>  
+
+              
 
             
                
@@ -106,8 +118,12 @@
         </div>
         </div>
             <button name="btn"  class="smallbtn" value="5">+</button>
+            <%if(found[0].noOfLanguage===1){%>
+                <button type="button" name="btn" class="smallbtn smallbtn1" style="cursor: no-drop;border:1px solid white;background-color:#14171D ;" value="6">-</button>
+            <%}else{%>
+                <button name="btn"  class="smallbtn" value="6">-</button>
+           <%}%>  
             
-            <button name="btn"  class="smallbtn" value="6">-</button>
        
         </div>
     </div>
@@ -135,8 +151,12 @@
             </div>
             </div>
                 <button name="btn"  class="smallbtn" value="7">+</button>
+                <%if(found[0].noOfGoals===1){%>
+                    <button type="button" name="btn" class="smallbtn smallbtn1" style="cursor: no-drop;border:1px solid white;background-color:#14171D ;" value="8">-</button>
+                <%}else{%>
+                    <button name="btn"  class="smallbtn" value="8">-</button>
+               <%}%>  
                 
-                <button name="btn"  class="smallbtn" value="8">-</button>
             <br><br>
        </div>
     </div>
@@ -147,8 +167,14 @@
 
          <div class="footer">
             <div class="container flexx">
-            <a href="/personal" class="btn button prev marginnnn">Prev</a>
-            <button class="btn button next">Save & Download</button>
+            <a href="/personal" class="btn button prev marginnnn">
+                <i class="fas fa-arrow-left iconn"></i>
+                <span class="change">Prev</span>
+            </a>
+            <button class="btn button next" name="btn" value="9">
+                <i class="fas fa-arrow-right iconn"></i>
+                <span class="change">Save & Next</span> 
+            </button>
             </div>
         </div>
         </form>

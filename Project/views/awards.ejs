@@ -67,14 +67,29 @@
 		<br>
 		<div class="footer">
             <div class="container flexx">
-			<a href="/projects" class="btn button prev">Prev</a>
-			<button class="add increment" name="btn" value="1">Add Award</button>
+			<a href="/projects" class="btn button prev">
+                <i class="fas fa-arrow-left iconn"></i>
+				<span class="change">Prev</span>
+            </a>
+			<button class="add increment" name="btn" value="1">
+                <i class="fas fa-plus iconn"></i>
+				<span class="change">Add Award</span>
+            </button>
             <%if(found[0].noOfAwards===1){%>
-		    <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Award</button>
+		    <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">
+                <i class="fas fa-minus iconn"></i>
+				<span class="change">Remove Award</span>
+            </button>
             <%}else{%>
-                <button class="add decrement" name="btn" value="2">Remove Award</button>
+                <button class="add decrement" name="btn" value="2">
+                    <i class="fas fa-minus iconn"></i>
+				<span class="change">Remove Award</span>
+                </button>
             <%}%>    
-			<button name="btn" value="3" class="btn button next">Save & Next</button>
+			<button name="btn" value="3" class="btn button next">
+                <i class="fas fa-arrow-right iconn"></i>
+				<span class="change">Save & Next</span>
+            </button>
             </div>
 		</div>
     </form>

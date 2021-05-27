@@ -533,7 +533,7 @@ app.post("/projects", function (req, res) {
   if (value === "1") {
     noOfProjects++;
   } else {
-    if (value === "2" && count > 1) {
+    if (value === "2" && noOfProjects > 1) {
       noOfProjects--;
     }
   }
@@ -703,7 +703,10 @@ app.post("/extra", function (req, res) {
     if (!err) console.log("Documents inserted successfully");
   });
 
+  if(req.body.btn==="9")
   res.redirect("/download");
+  else
+  res.redirect("/extra");
 });
 
 
