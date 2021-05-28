@@ -401,7 +401,7 @@ app.post("/education", function (req, res) {
   if (value === "1") {
     noOfeducation++;
   } else {
-    if (value === "2" && noOfProjects > 1) {
+    if (value === "2" && noOfeducation > 1) {
       noOfeducation--;
     }
   }

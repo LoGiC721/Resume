@@ -1,6 +1,8 @@
-document.getElementById("sidebarCollapse").addEventListener("click", function() {
+
+
+function togglee(){
     document.getElementById("sidebar").classList.toggle('active');
-});
+}
 
 
     $(document).ready(function(){
@@ -10,7 +12,6 @@ document.getElementById("sidebarCollapse").addEventListener("click", function() 
         });
     });
 
-console.log("clickeddd");
 
 
 

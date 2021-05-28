@@ -58,6 +58,7 @@ var preloaderHTML = `
                 <div></div>
                     
             </div>
+
                 `;
 
 var request = new XMLHttpRequest();
@@ -78,6 +79,6 @@ request.onreadystatechange = function() {
 };
 
 var currentpage=document.getElementById("page").value;
-console.log(currentpage);
+// console.log(currentpage);
   request.open("GET", currentpage, true);
 request.send();
