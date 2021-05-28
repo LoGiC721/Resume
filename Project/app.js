@@ -259,6 +259,13 @@ app.get("/templates", function (req, res) {
   else res.render("availabletemplates", { currentUser: req.user });
 });
 
+
+
+
+
+
+
+
 app.get("/home", function (req, res) {
   if (!req.user) res.render("login");
   else res.render("home", { currentUser: req.user });
@@ -284,6 +291,7 @@ app.get("/logout", function (req, res) {
 
 let templateno = 1;
 
+
 app.get("/download", function (req, res) {
   Project.find({ _id: req.user.id }, function (err, posts) {
     if (!err) {
@@ -292,6 +300,15 @@ app.get("/download", function (req, res) {
   });
 });
 
+
+
+app.get("/download1", function (req, res) {
+  Project.find({ _id: req.user.id }, function (err, posts) {
+    if (!err) {
+      res.render("template" + templateno, { found: posts });
+    }
+  });
+});
 
 
 
@@ -773,6 +790,13 @@ app.post("/home",function(req,res)
 {
   res.render("availabletemplates", { currentUser: req.user });
 })
+
+
+
+
+
+
+
 
 app.listen("3000", function () {
   console.log("Server has been started at port 3000");

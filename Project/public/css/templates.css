@@ -94,7 +94,7 @@ a{
     border:none; 
     color:white;
     padding: 0px !important;
-    border:2px solid #444; 
+    border:1px solid #444; 
     font-weight:540;
     font-family: 'Open Sans', sans-serif;
 }
@@ -172,4 +172,11 @@ footer{
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%)
   }
+}
+
+
+
+button:focus {
+  border: none;
+  outline: none;
 }

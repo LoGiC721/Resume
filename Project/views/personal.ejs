@@ -44,7 +44,13 @@
                 <img class="cloud" src="./icons/upload.png"> Choose File
             </label>
 
-            <button class="btn button uploadbtn">Upload & Show</button>
+            <%if(!found[0].filepresentornot===1){%>
+                <button class="btn button uploadbtn">Upload & Show</button>
+            <%}else{%>
+               
+                <button class="btn button uploadbtn" style="background-color: #14171D; border:solid #fff2;
+                color:#fff2; ">Upload & Show</button>
+            <%}%>
 
 
             <!-- </div> -->

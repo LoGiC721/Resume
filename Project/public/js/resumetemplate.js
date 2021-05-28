@@ -1,4 +1,13 @@
+function mobile1()
+{
+  console.log("click");
+const data=document.getElementById("wrap");	
 
+html2pdf()
+.from(data)
+.save();
+
+}
 
 
 
@@ -59,10 +68,10 @@ function pdf()
 onMouseOver="this.style.background='#cf0000'" onMouseOut="this.style.background='white'">
     <i class="fas fa-edit"></i>Edit Details</a>
 
-    <a class="btn btn-dark btn-lg text-light down bottom" href="/" 
-    onMouseOver="this.style.background='#cf0000';"
-    onMouseOut="this.style.background=''"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-        Back to Home</a> 
+    <a class="btn btn-dark btn-lg text-light down bottom" href="/templates" 
+		onMouseOver="this.style.background='#cf0000';"
+		onMouseOut="this.style.background=''"><i class="far fa-file"></i>
+			Templates</a> 
 
       <br><br><br>
     </div>
