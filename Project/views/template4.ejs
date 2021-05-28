@@ -86,167 +86,669 @@
 		</div>
 		<%}%>
 		<div class="resume_bottom">
-			<div class="resume_item resume_namerole">
-				<div class="name">Rosie Jackson</div>
-				<div class="role">UI Designer</div>
-			</div>
+			
+
+		
+
+
+			<%if(found[0].profile!==null&&found[0].profile.length!==0){%>
 			<div class="resume_item resume_profile">
 				<div class="resume_title">Profile</div>
-				<div class="resume_info">IT expert with 6+ years of experience</div>
+				<div class="resume_info"><%=found[0].profile%></div>
 			</div>
+			<%}%>
+
+
+			<%if((found[0].address!==null&&found[0].address.length!==0)||
+                (found[0].country!==null&&found[0].country.length!==0)||
+                (found[0].state!==null&&found[0].state.length!==0)|| 
+				(found[0].city!==null&&found[0].city.length!==0)||
+                (found[0].pin!==null&&found[0].pin.length!==0)) {%>
+
 			<div class="resume_item resume_address">
 				<div class="resume_title">Address</div>
+
+				<%if((found[0].address!==null&&found[0].address.length!==0)||
+                (found[0].country!==null&&found[0].country.length!==0)||
+                (found[0].state!==null&&found[0].state.length!==0)|| 
+                (found[0].city!==null&&found[0].city.length!==0)||
+				(found[0].pin!==null&&found[0].pin.length!==0)) {%>
 				<div class="resume_info">
-					18th home,<br/>
-					woods street,<br/>
-					New York City, United States
+					<%if(found[0].address!==null&&found[0].address.length!==0){%>
+                         <%=found[0].address%>
+					<br/>
+					
+					
+               <%}%>
+               <%if(found[0].country!==null&&found[0].country.length!==0){%>
+               <%=found[0].country%>
+              ,
+               <%}%>
+               <%if(found[0].state!==null&&found[0].state.length!==0){%>
+               <%=found[0].state%>
+               ,
+               <%}%>
+               <%if(found[0].city!==null&&found[0].city.length!==0){%>
+               <%=found[0].city%>
+              ,
+               <%}%>
+               <%if(found[0].pin!==null&&found[0].pin.length!==0){%>
+               <%=found[0].pin%>
+               <%}%>
+
+
+
 				</div>
+				<%}%>
 			</div>
+			<%}%>
+
+
+
+            <%if ((found[0].pno!==null&&found[0].pno.length!==0)||
+			 (found[0].email!==null&&found[0].email.length!==0)||
+			 (found[0].github!==null&&found[0].github.length!=0)||
+                (found[0].linkedin!==null&&found[0].linkedin.length!==0)||
+                (found[0].twitter!==null&&found[0].twitter.length!==0)||
+                (found[0].website!==null&&found[0].website.length!==0)){%>
+
+
 			<div class="resume_item resume_contact">
 				<div class="resume_title">Contact</div>
+
+				<%if(found[0].pno!==null){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Phone</div>
-					<div class="resume_subinfo">+62 000 222 333</div>
+					<div class="resume_subinfo"><%=found[0].pno%></div>
 				</div>
+				<%}%>
+				<%if(found[0].email!==null&&found[0].email.length!==0){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Email</div>
-					<div class="resume_subinfo">rosiejack@gmail.com</div>
+					<div class="resume_subinfo"><%=found[0].email%></div>
 				</div>
+				<%}%>
+				<%if(found[0].twitter!==null&&found[0].twitter.length!==0){%>
+				<div class="resume_info">
+					<div class="resume_subtitle">Twitter</div>
+					<div class="resume_subinfo"><%=found[0].twitter%></div>
+				</div>
+				<%}%>
+				<%if(found[0].github!==null&&found[0].github.length!==0){%>
+				<div class="resume_info">
+					<div class="resume_subtitle">Github</div>
+					<div class="resume_subinfo"><%=found[0].github%></div>
+				</div>
+				<%}%>
+          <%if(found[0].linkedin!==null&&found[0].linkedin.length!==0){%>
+				<div class="resume_info">
+					<div class="resume_subtitle">Linkedin</div>
+					<div class="resume_subinfo"><%=found[0].linkedin%></div>
+				</div>
+				<%}%>
+           <%if(found[0].website!==null&&found[0].website.length!==0){%>
+				<div class="resume_info">
+					<div class="resume_subtitle">Website</div>
+					<div class="resume_subinfo"><%=found[0].website%></div>
+				</div>
+
 			</div>
+			<%}%>
+
+            <%}%>
+
+
+
+			<%if(found[0].skills.length!==0){%>
+          <%if(found[0].skills[0].skillsname.length!==0){%>
+            <%if((found[0].skills[0].skillsname[0].length!==0||found[0].skills[0].skillsdetails[0]!==null)){%>
+
 			<div class="resume_item resume_skills">
 				<div class="resume_title">Skills</div>
 				<div class="resume_info">
+					<%for(let i=0;i<found[0].skills[0].skillsname.length;i++){%>
 					<div class="skills_list">
-						<div class="skills_left">HTML</div>
+							<%if(found[0].skills[0].skillsname[i].length!==0){%>
+					    	<div class="skills_left"><%=found[0].skills[0].skillsname[i]%></div>
+							<%}%>
+						<%if(found[0].skills[0].skillsdetails[i]!==null){%>	
 						<div class="skills_bar">
 							<p>
-								<span style="width: 90%"></span>
+								<span style="width: <%=found[0].skills[0].skillsdetails[i]%>%;"></span>
 							</p>
 						</div>
+						<%}%>
+						
+
 					</div>
-					<div class="skills_list">
-						<div class="skills_left">CSS</div>
-						<div class="skills_bar">
-							<p>
-								<span style="width: 80%"></span>
-							</p>
-						</div>
-					</div>
-					<div class="skills_list">
-						<div class="skills_left">Javascript</div>
-						<div class="skills_bar">
-							<p>
-								<span style="width: 50%"></span>
-							</p>
-						</div>
-					</div>
-					<div class="skills_list">
-						<div class="skills_left">Photoshop</div>
-						<div class="skills_bar">
-							<p>
-								<span style="width: 95%"></span>
-							</p>
-						</div>
-					</div>
+					<%}%>
+					
 				</div>
-			</div>
+				</div>
+		
+				
+				<%}%>
+				<%}%>
+				<%}%>
+
+
+
+
+
+
+
+<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].strength.length!==0){%>
+            <%if(found[0].extra[0].strength[0].length!==0){%>
+
+			<div class="resume_item resume_skills">
+				<div class="resume_title">Strengths</div>
+				<div class="resume_info">
+					<%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
+					<div class="skills_list">
+							<%if(found[0].extra[0].strength[i].length!==0){%>
+					    	<div class="skills_left"><%=found[0].extra[0].strength[i]%></div>
+							<%}%>
+						
+						
+
+					</div>
+					<%}%>
+					
+				</div>
+				</div>
+		
+				
+				<%}%>
+				<%}%>
+				<%}%>
+
+
+
+
+
+
+
+				
+				<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].language.length!==0){%>
+            <%if(found[0].extra[0].language[0].length!==0){%>
+
+			<div class="resume_item resume_skills">
+				<div class="resume_title">Languages</div>
+				<div class="resume_info">
+					<%for(let i=0;i<found[0].extra[0].language.length;i++){%>
+					<div class="skills_list">
+							<%if(found[0].extra[0].language[i].length!==0){%>
+					    	<div class="skills_left"><%=found[0].extra[0].language[i]%></div>
+							<%}%>
+						
+						
+
+					</div>
+					<%}%>
+					
+				</div>
+				</div>
+		
+				
+				<%}%>
+				<%}%>
+				<%}%>
+
+
+
+
+			
+				<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].goals.length!==0){%>
+            <%if(found[0].extra[0].goals[0].length!==0){%>
+
+			<div class="resume_item resume_skills">
+				<div class="resume_title">Goals</div>
+				<div class="resume_info">
+					<%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
+					<div class="skills_list">
+							<%if(found[0].extra[0].goals[i].length!==0){%>
+					    	<div class="skills_left"><%=found[0].extra[0].goals[i]%></div>
+							<%}%>
+						
+						
+
+					</div>
+					<%}%>
+					
+				</div>
+				</div>
+		
+				
+				<%}%>
+				<%}%>
+				<%}%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
 	<div class="resume_right">
 		<div class="resume_item resume_namerole">
-			<div class="name">Rosie Jackson</div>
-			<div class="role">UI Designer</div>
+
+
+
+			<%if((found[0].firstname!==null&&found[0].firstname.length!==0)||
+			(found[0].currentposition!==null&&found[0].currentposition.length!==0)){%>
+			<div class="resume_item resume_namerole">
+				<%if(found[0].firstname!==null&&found[0].firstname.length!==0){%>
+				<div class="name"><%=found[0].firstname%></div>
+				<%}%>
+           <%if(found[0].currentposition!==null&&found[0].currentposition.length!==0){%>
+				<div class="role"><%=found[0].currentposition%></div>
+				<%}%>
+			</div>
+			<%}%>
+
+
 		</div>
+
+
+
+		<%if(found[0].school.length!==0){%>
+          <%if(found[0].school[0].name.length!==0){%>
+            <%if((found[0].school[0].name[0].length!==0||
+            found[0].school[0].startdate[0]!==null
+            ||found[0].school[0].enddate[0]!==null||
+            found[0].school[0].degree[0].length!==0||
+            found[0].school[0].gpa[0]!==null||
+            found[0].school[0].location[0].length!==0)){%>
+
 		<div class="resume_item resume_education">
 			<div class="resume_title">Education</div>
+		
+			
 			<div class="resume_info">
+				<%for(let i=0;i<found[0].school[0].name.length;i++){%>
 				<div class="resume_data">
-					<div class="year">2000 - 2010</div>
+					<div class="year">
+						
+						                  <%if(found[0].school[0].startdate[i]!==null){%>
+											<%=found[0].school[0].startdate[i].getDate()%> /
+                                            <%=found[0].school[0].startdate[i].getMonth()+1%> /
+                                            <%=found[0].school[0].startdate[i].getFullYear()%> 
+											<center>-</center>
+											<%}%>
+											
+											<%if(found[0].school[0].enddate[i]!==null){%>
+											<%=found[0].school[0].enddate[i].getDate()%> /
+                                            <%=found[0].school[0].enddate[i].getMonth()+1%> /
+                                            <%=found[0].school[0].enddate[i].getFullYear()%>
+											<%}%>
+						
+						</div>
+
+
 					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<%if(found[0].school[0].name[i].length!==0){%>
+						<p><%=found[0].school[0].name[i]%></p>
+						<%}%>
+
+						<%if(found[0].school[0].location[i].length!==0){%>  
+              <p class="data"><%=found[0].school[0].location[i]%></p>
+              <%}%>
+           
+           <%if(found[0].school[0].gpa[i]!==null||found[0].school[0].degree[i].length!==0){%>
+          
+             
+            
+
+			  <%if(found[0].school[0].gpa[i]!==null){%>
+				<p><%=found[0].school[0].gpa[i]%></p>
+              <%}%>
+              <%if(found[0].school[0].degree[i].length!==0){%>
+				<p><%=found[0].school[0].degree[i]%></p>
+              <%}%>
+          
+           
+            <%}%>
 					</div>
 				</div>
+				<%}%>
+				
+				
 				<div class="resume_data">
-					<div class="year">2010 - 2013</div>
+					<div class="year"></div>
 					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="resume_data">
-					<div class="year">2013 - 2015</div>
-					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 					</div>
 				</div>
 			</div>
 		</div>
+	
+			
+				
+<%}%> 
+<%}%>
+<%}%>
+
+
+
+
+<%if(found[0].work.length!==0){%>
+          <%if(found[0].work[0].companyname.length!==0){%>
+            <%if((found[0].work[0].companyname[0].length!==0||found[0].work[0].startdate[0]!==null
+            ||found[0].work[0].enddate[0]!==null||
+            found[0].work[0].jobdescription[0].length!==0||
+            found[0].work[0].jobtitle[0].length!==0||
+            found[0].work[0].state[0].length!==0||
+            found[0].work[0].city[0].length!==0)){%>
+
+
+
+
 		<div class="resume_item resume_experience">
 			<div class="resume_title">Experience</div>
 			<div class="resume_info">
+
+
+				<%for(let i=0;i<found[0].work[0].companyname.length;i++){%>
 				<div class="resume_data">
-					<div class="year">2000 - 2010</div>
-					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
+
+					<div class="year">
+						
+						<%if(found[0].work[0].startdate[i]!==null){%>
+											<%=found[0].work[0].startdate[i].getDate()%> /
+                                            <%=found[0].work[0].startdate[i].getMonth()+1%> /
+                                            <%=found[0].work[0].startdate[i].getFullYear()%> 
+											
+											<center>-</center>
+											<%}%>
+											
+											
+											<%if(found[0].work[0].enddate[i]!==null){%>
+											<%=found[0].work[0].enddate[i].getDate()%> /
+                                            <%=found[0].work[0].enddate[i].getMonth()+1%> /
+                                            <%=found[0].work[0].enddate[i].getFullYear()%>
+											<%}%>
+
+						</div>
+						<div class="content">
+						<%if(found[0].work[0].jobtitle[i].length!==0){%>
+						<p><%=found[0].work[0].jobtitle[i]%></p>
+						<%}%>
+
+						<%if(found[0].work[0].companyname[i].length!==0){%>
+                           <p class="data"><%=found[0].work[0].companyname[i]%></p>
+                          <%}%>
+
+
+
+						<%if(found[0].work[0].jobdescription[i].length!==0){%>
+                           <p class="data"><%=found[0].work[0].jobdescription[i]%></p>
+                          <%}%>
+
+						
+                           <p class="data">
+							  <%if(found[0].work[0].state[i].length!==0){%>
+							<%=found[0].work[0].state[i]%>,
+							 <%}%>
+							 <%if(found[0].work[0].city[i].length!==0){%>
+                         <%=found[0].work[0].city[i]%>
+                          <%}%>
+							</p>
+                         
+						
+
+
+
+
 				</div>
-				<div class="resume_data">
-					<div class="year">2010 - 2013</div>
-					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
 				</div>
-				<div class="resume_data">
-					<div class="year">2013 - 2015</div>
-					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="resume_data">
-					<div class="year">2013 - 2015</div>
-					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="resume_data">
-					<div class="year">2013 - 2015</div>
-					<div class="content">
-						<p>Title</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="resume_item resmue_interests">
-			<div class="resume_title">Interests</div>
-			<div class="resume_info">
-				<div class="interests">
-					<div class="int_icon">
-						<i class="fas fa-volleyball-ball"></i>
-					</div>
-					<div class="int_data">Volleyball</div>
-				</div>
-				<div class="interests">
-					<div class="int_icon">
-						<i class="fas fa-book-open"></i>
-					</div>
-					<div class="int_data">Reading</div>
-				</div>
-				<div class="interests">
-					<div class="int_icon">
-						<i class="fas fa-film"></i>
-					</div>
-					<div class="int_data">Movies</div>
-				</div>
+				<%}%>
 				
+				
+				<div class="resume_data">
+					<div class="year"></div>
+					<div class="content">
+					</div>
+				</div>
+
+
 			</div>
 		</div>
+
+		<%}%>
+    <%}%>
+    <%}%>
+
+
+
+
+
+	<%if(found[0].project.length!==0){%>
+          <%if(found[0].project[0].projectname.length!==0){%>
+            <%if((found[0].project[0].projectname[0].length!==0||
+            found[0].project[0].project1description[0].length!==0||
+            found[0].project[0].link[0].length!==0||
+            found[0].project[0].toolsused[0].length!==0)){%>
+
+	<div class="resume_item resume_experience">
+			<div class="resume_title">Projects</div>
+			<div class="resume_info">
+
+
+				<%for(let i=0;i<found[0].project[0].projectname.length;i++){%>
+				<div class="resume_data">
+
+					<div class="year"></div>
+						<div class="content">
+							<%if(found[0].project[0].projectname[i].length!==0){%>
+											<p>
+												<%=found[0].project[0].projectname[i]%>
+											</p>
+											<%}%>
+											<%if(found[0].project[0].link[i].length!==0){%>
+											<p>
+												<%=found[0].project[0].link[i]%>
+											</p>
+											<%}%>
+											<%if(found[0].project[0].toolsused[i].length!==0){%>  
+											<p>
+												<%=found[0].project[0].toolsused[i]%>
+											</p>
+											<%}%>
+											<%if(found[0].project[0].project1description[i].length!==0){%>  
+											<p>
+												<%=found[0].project[0].project1description[i]%>
+											</p>
+											<%}%>
+						
+                           
+                         
+						
+
+
+
+
+				</div>
+				</div>
+				<%}%>
+				
+				
+				<div class="resume_data">
+					<div class="year"></div>
+					<div class="content">
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	
+
+		<%}%>
+    <%}%>
+    <%}%>
+
+
+
+
+
+
+	<%if(found[0].awards.length!==0){%>
+          <%if(found[0].awards[0].awardname.length!==0){%>
+            <%if((found[0].awards[0].awardname[0].length!==0||
+            found[0].awards[0].awarddate[0]!==null||
+            found[0].awards[0].awarder[0].length!==0||
+            found[0].awards[0].Awarddescription[0].length!==0)){%>
+
+	<div class="resume_item resume_experience">
+			<div class="resume_title">Awards</div>
+			<div class="resume_info">
+
+
+				<%for(let i=0;i<found[0].awards[0].awardname.length;i++){%>
+				<div class="resume_data">
+
+					<div class="year">
+						
+						<%if(found[0].awards[0].awarddate[i]!==null){%>
+											<%=found[0].awards[0].awarddate[i].getDate()%> /
+                                            <%=found[0].awards[0].awarddate[i].getMonth()+1%> /
+                                            <%=found[0].awards[0].awarddate[i].getFullYear()%> 
+											<%}%>
+						
+						</div>
+						<div class="content">
+							
+
+
+							<%if(found[0].awards[0].awardname[i].length!==0){%>
+											<p>
+												<%=found[0].awards[0].awardname[i]%>
+											</p>
+											<%}%>
+											<%if(found[0].awards[0].awarder[i].length!==0){%>
+											<p>
+												<%=found[0].awards[0].awarder[i]%>
+											</p>
+											<%}%>
+											<%if(found[0].awards[0].Awarddescription[i].length!==0){%>  
+											<p>
+												<%=found[0].awards[0].Awarddescription[i]%>
+											</p>
+											<%}%>
+											
+											
+											
+						
+                           
+                         
+						
+
+
+
+
+				</div>
+				</div>
+				<%}%>
+				
+				
+				<div class="resume_data">
+					<div class="year"></div>
+					<div class="content">
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	
+
+		<%}%>
+    <%}%>
+    <%}%>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].hobbie.length!==0){%>
+            <%if(found[0].extra[0].hobbie[0].length!==0){%>
+
+				<div class="resume_item resume_experience">
+			<div class="resume_title">Hobbies</div>
+			<div class="resume_info">
+				    <%for(let i=0;i<found[0].extra[0].hobbie.length;i++){%>
+
+						<div class="resume_data">
+
+                     <div class="year"></div>
+
+
+					<div class="content">
+							<%if(found[0].extra[0].hobbie[i].length!==0){%>
+					    	<p ><%=found[0].extra[0].hobbie[i]%></p>
+							<%}%>
+						
+
+					</div>
+					</div>
+					<%}%>
+
+						
+				
+					
+				</div>
+				</div>
+		
+				
+				<%}%>
+				<%}%>
+				<%}%>
+
+
 	</div>
 </div>
 

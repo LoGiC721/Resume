@@ -268,9 +268,11 @@
           
           <%for(let i=0;i<found[0].extra[0].language.length;i++){%>
            <li>
+            <%if(found[0].extra[0].language[i].length!==0){%>
              <div class="data">
              <p class="semi-bold data"> <%=found[0].extra[0].language[i]%></p>
              </div>
+             <%}%>
            </li>
            <%}%>   
          </ul>
@@ -297,9 +299,11 @@
           
           <%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
            <li>
+            <%if(found[0].extra[0].goals[i].length!==0){%>
              <div class=" data">
              <p class="semi-bold"> <%=found[0].extra[0].goals[i]%></p>
              </div>
+             <%}%>
            </li>
            <%}%>   
          </ul>
@@ -325,19 +329,25 @@
          <ul>
              <%for(let i=0;i<found[0].project[0].projectname.length;i++){%>
          <li>
+          <%if(found[0].project[0].projectname[i].length!==0){%>
             <p class="heading data"><%=found[0].project[0].projectname[i]%></p> 
             <br/>
+            <%}%>
               <%if(found[0].project[0].link[0].length!==0){%>
               <div class="data">
                 <p> <i class="fab fa-weebly"></i> <%=found[0].project[0].link[i]%></p>
                  </div>
+                 <br />
               <%}%>
-              <br />
+
+              <%if(found[0].project[0].toolsused[i].length!==0){%>  
             <p class="data"><%=found[0].project[0].toolsused[i]%></p> 
             <br />
+            <%}%>
+            <%if(found[0].project[0].project1description[i].length!==0){%>  
             <p class="data"><%=found[0].project[0].project1description[i]%></p>
             <br />
-            
+            <%}%>
          </li>
             <%}%> 
       </ul>
@@ -426,13 +436,18 @@
             <%}%>
             <%if(found[0].school[0].startdate[i]!==null|| found[0].school[0].enddate[i]!==null){%>
             
-            <div class="marginn"><%=found[0].school[0].startdate[i].getDate()%> /
+            <div class="marginn">
+              <%if(found[0].school[0].startdate[i]!==null){%>
+              <%=found[0].school[0].startdate[i].getDate()%> /
               <%=found[0].school[0].startdate[i].getMonth()+1%> /
-              <%=found[0].school[0].startdate[i].getFullYear()%>  -   
+              <%=found[0].school[0].startdate[i].getFullYear()%>  - 
+              <%}%>
+              <%if(found[0].school[0].enddate[i]!==null){%> 
               <%=found[0].school[0].enddate[i].getDate()%> /
               <%=found[0].school[0].enddate[i].getMonth()+1%> /
               <%=found[0].school[0].enddate[i].getFullYear()%>
               </div>
+              <%}%>
             <%}%>
             <%if(found[0].school[0].location[i].length!==0){%>  
               <p class="data"><%=found[0].school[0].location[i]%></p>
@@ -440,8 +455,12 @@
            
            <%if(found[0].school[0].gpa[i]!==null||found[0].school[0].degree[i].length!==0){%>
             <div>
+              <%if(found[0].school[0].gpa[i]!==null){%>
               <p class="data"><%=found[0].school[0].degree[i]%></p><br/>
+              <%}%>
+              <%if(found[0].school[0].degree[i].length!==0){%>
               <p><%=found[0].school[0].gpa[i]%><br /><br /></p>
+              <%}%>
             </div>
            
             <%}%>
@@ -513,9 +532,11 @@
           
           <%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
            <li>
+            <%if(found[0].extra[0].strength[i].length!==0){%>
              <div class=" data">
              <p class="semi-bold"> <%=found[0].extra[0].strength[i]%></p>
              </div>
+             <%}%>
            </li>
            <%}%>   
          </ul>
@@ -536,9 +557,12 @@
           
           <%for(let i=0;i<found[0].extra[0].hobbie.length;i++){%>
            <li>
+            <%if(found[0].extra[0].hobbie[i].length!==0){%>
              <div class="info data">
+             
              <p class="semi-bold"> <%=found[0].extra[0].hobbie[i]%></p>
              </div>
+             <%}%>   
            </li>
            <%}%>   
          </ul>

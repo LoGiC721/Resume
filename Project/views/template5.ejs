@@ -250,9 +250,11 @@
 						<ul>
 							<%for(let i=0;i<found[0].extra[0].hobbie.length;i++){%>
 							<li>
+								<%if(found[0].extra[0].hobbie[i].length!==0){%>
 								<div class="li_wrap">
 									<div class="text"> <%=found[0].extra[0].hobbie[i]%></div>
 								</div>
+								<%}%> 
 							</li>
 							<%}%> 
 							
@@ -277,9 +279,11 @@
 						<ul>
 							<%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
 							<li>
+								<%if(found[0].extra[0].strength[i].length!==0){%>
 								<div class="li_wrap">
 									<div class="text"> <%=found[0].extra[0].strength[i]%></div>
 								</div>
+								<%}%>
 							</li>
 							<%}%> 
 							
@@ -304,9 +308,11 @@
 						<ul>
 							<%for(let i=0;i<found[0].extra[0].language.length;i++){%>
 							<li>
+								<%if(found[0].extra[0].language[i].length!==0){%>
 								<div class="li_wrap">
 									<div class="text"> <%=found[0].extra[0].language[i]%></div>
 								</div>
+								<%}%>
 							</li>
 							<%}%> 
 							
@@ -332,9 +338,11 @@
 						<ul>
 							<%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
 							<li>
+								<%if(found[0].extra[0].goals[i].length!==0){%>
 								<div class="li_wrap">
 									<div class="text"> <%=found[0].extra[0].goals[i]%></div>
 								</div>
+								<%}%>
 							</li>
 							<%}%> 
 							
@@ -408,13 +416,18 @@
 									<div class="li_wrap">
 										
 										<div class="date">
-											<%if(found[0].work[0].startdate[i]!==null||found[0].work[0].enddate[i]!==null){%>
+											<%if(found[0].work[0].startdate[i]!==null){%>
 											<%=found[0].work[0].startdate[i].getDate()%> /
                                             <%=found[0].work[0].startdate[i].getMonth()+1%> /
                                             <%=found[0].work[0].startdate[i].getFullYear()%> 
 											
-											- <br/>
+											- 
+											<%}%>
 											
+											<br/>
+
+											
+											<%if(found[0].work[0].enddate[i]!==null){%>
 											<%=found[0].work[0].enddate[i].getDate()%> /
                                             <%=found[0].work[0].enddate[i].getMonth()+1%> /
                                             <%=found[0].work[0].enddate[i].getFullYear()%>
@@ -481,17 +494,19 @@
 								<li>
 									<div class="li_wrap">
 										<div class="date">
-											<%if(found[0].school[0].startdate[i]!==null||found[0].school[0].enddate[i]!==null){%>
+											<%if(found[0].school[0].startdate[i]!==null){%>
 											<%=found[0].school[0].startdate[i].getDate()%> /
                                             <%=found[0].school[0].startdate[i].getMonth()+1%> /
                                             <%=found[0].school[0].startdate[i].getFullYear()%> 
-											
-											- <br/>
-											
+											-
+											<%}%>
+											 <br/>
+											<%if(found[0].school[0].enddate[i]!==null){%>
 											<%=found[0].school[0].enddate[i].getDate()%> /
                                             <%=found[0].school[0].enddate[i].getMonth()+1%> /
                                             <%=found[0].school[0].enddate[i].getFullYear()%>
 											<%}%>
+
 										</div>
 										<div class="info">
 											<%if(found[0].school[0].degree[i].length!==0){%>
