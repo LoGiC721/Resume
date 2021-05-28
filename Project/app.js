@@ -292,6 +292,16 @@ app.get("/download", function (req, res) {
   });
 });
 
+
+
+
+app.get("/forget", function (req, res) {
+ 
+      res.render("forget");
+   
+});
+
+
 let noOfeducation = 1;
 let noOfProjects = 1;
 let noOfSkills = 1;

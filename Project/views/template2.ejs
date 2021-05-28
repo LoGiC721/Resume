@@ -281,27 +281,9 @@
 
 
 
-        <%if(found[0].extra.length!==0){%>
-          <%if(found[0].extra[0].strength.length!==0){%>
-            <%if(found[0].extra[0].strength[0].length!==0){%>
-       <div class="resume_item resume_education">
-         <div class="title">
-           <p class="bold">Strengths</p>
-         </div>
-         <ul>
-          
-          <%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
-           <li>
-             <div class=" data">
-             <p class="semi-bold"> <%=found[0].extra[0].strength[i]%></p>
-             </div>
-           </li>
-           <%}%>   
-         </ul>
-       </div>
-       <%}%>
-        <%}%>
-        <%}%>
+      
+
+
 
 
         <%if(found[0].extra.length!==0){%>
@@ -520,6 +502,27 @@
 <%}%>
  
 
+<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].strength.length!==0){%>
+            <%if(found[0].extra[0].strength[0].length!==0){%>
+       <div class="resume_item resume_education">
+         <div class="title">
+           <p class="bold">Strengths</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
+           <li>
+             <div class=" data">
+             <p class="semi-bold"> <%=found[0].extra[0].strength[i]%></p>
+             </div>
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
 
   
         <%if(found[0].extra.length!==0){%>

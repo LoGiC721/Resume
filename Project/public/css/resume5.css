@@ -202,7 +202,7 @@ body{
 
 .right_inner .li_wrap .date {
     /* width: 125px; */
-	width: auto;
+	width: 125px;
     color: #9153c9;
 }
 
