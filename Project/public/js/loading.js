@@ -78,7 +78,8 @@ request.onreadystatechange = function() {
 
 };
 
-var currentpage=document.getElementById("page").value;
+
+currentpage=document.getElementById("page").value;
 // console.log(currentpage);
   request.open("GET", currentpage, true);
 request.send();

@@ -34,12 +34,11 @@ function pdf()
                 .down{
                     margin-bottom:15px;
                 }
-                .container{
-                    height:220px;
-                }
+                
                 .bottom{
                     margin-bottom:-8px;
                 }
+                
             }
       </style>
 
