@@ -324,34 +324,7 @@
                 <%}%>
 
 
-
-
-
-				<%if(found[0].extra.length!==0){%>
-          <%if(found[0].extra[0].goals.length!==0){%>
-            <%if(found[0].extra[0].goals[0].length!==0){%>
-				<div class="hobbies_wrap pb">
-					<div class="title">
-						Goals
-					</div>
-					<div class="hobbies">
-						<ul>
-							<%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
-							<li>
-								<%if(found[0].extra[0].goals[i].length!==0){%>
-								<div class="li_wrap">
-									<div class="text"> <%=found[0].extra[0].goals[i]%></div>
-								</div>
-								<%}%>
-							</li>
-							<%}%> 
-							
-						</ul>
-					</div>
-				</div>
-				<%}%> 
-                <%}%>
-                <%}%>
+						
 
 
 
@@ -656,6 +629,46 @@
 					<%}%> 
                     <%}%>
                     <%}%>
+
+
+
+					<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].goals.length!==0){%>
+            <%if(found[0].extra[0].goals[0].length!==0){%>
+				<div class="hobbies_wrap pb">
+					<div class="title">
+						Goals
+					</div>
+
+
+					<div class="education_wrap">
+							<ul>
+								<%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
+								<li>
+									<div class="li_wrap">
+										<div class="date">
+										</div>
+										<%if(found[0].extra[0].goals[i].length!==0){%>
+								<div class="info">
+									<p class="info_com"> <%=found[0].extra[0].goals[i]%></p>
+								</div>
+								<%}%>
+									</div>
+								</li>
+                               <%}%>
+
+							</ul>
+						</div>
+
+
+
+
+
+
+				</div>
+				<%}%> 
+                <%}%>
+                <%}%>
 
 
 
