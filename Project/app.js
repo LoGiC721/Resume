@@ -114,6 +114,7 @@ const UserSchema = new Schema({
 
   username: { type: String, default: null },
   password: { type: String, default: null },
+  loginid:  { type: String, default: null },
   googleId: { type: String, default: null },
   facebookId: { type: String, default: null },
   twitterId: { type: String, default: null },
@@ -350,7 +351,7 @@ app.post("/login", function (req, res) {
 
 app.post("/register", function (req, res) {
   Project.register(
-    { username: req.body.username },
+    { username: req.body.username,loginid:req.body.emailid },
     req.body.password,
     function (err, user) {
       if (err) {
