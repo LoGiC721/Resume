@@ -228,3 +228,12 @@ body{
 		font-size: 24px;
 	}
 }
+
+
+@media print{
+
+	@page {
+		margin: 0;
+		
+	}
+}

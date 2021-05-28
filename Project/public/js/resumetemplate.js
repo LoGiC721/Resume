@@ -15,7 +15,7 @@ function pdf()
       <br><br><br>
       <style>
             body{
-              background: linear-gradient(to right,#23049d ,#cf0000 );
+              background: #c4c4c4;
             }
             .flexxx{
                 display:flex;
