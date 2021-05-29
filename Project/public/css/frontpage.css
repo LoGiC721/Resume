@@ -356,3 +356,17 @@ footer{
         background-color: black;
     }
 }
+
+
+.one{
+    max-height:1000px;
+    height:470px;
+}
+
+
+@media(max-width:767px)
+{
+    .one{
+        height:auto;
+    }
+}
