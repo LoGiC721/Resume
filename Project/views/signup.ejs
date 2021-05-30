@@ -48,15 +48,15 @@
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off">
+              <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off" required>
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email"  class="form-control" placeholder="Email" name="emailid" autocomplete="off"   />
+              <input type="email"  class="form-control" placeholder="Email" name="emailid" autocomplete="off" required  />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" class="form-control" placeholder="Password..." name="password" autocomplete="off">
+              <input type="password" class="form-control" placeholder="Password..." name="password" autocomplete="off" required>
             </div>
             <input type="submit" value="Sign up" class="btn solid" />
             <input type="reset" class="btn" value="Reset" />
@@ -74,6 +74,9 @@
               <a href="/auth/linkedin" class="social-icon">
                 <i class="fab fa-linkedin"></i>
               </a>
+              <a href="/auth/github" class="social-icon">
+                <i class="fab fa-github"></i>
+              </a>
             </div>
           </form>
           <!-- Signin -->
@@ -81,12 +84,12 @@
             <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off">
+              <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off" required>
             </div>
             
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" class="form-control" placeholder="Password..." name="password" autocomplete="off">
+              <input type="password" class="form-control" placeholder="Password..." name="password" autocomplete="off" required>
             </div>
 
             <a href="/forget" style="color: black;">Forgot your password?</a>
@@ -107,6 +110,9 @@
               </a>
               <a href="/auth/linkedin" class="social-icon">
                 <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="/auth/github" class="social-icon">
+                <i class="fab fa-github"></i>
               </a>
             
             </div>

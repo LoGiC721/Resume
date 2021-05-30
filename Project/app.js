@@ -11,6 +11,7 @@ const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 
 const findOrCreate = require("mongoose-findorcreate");
 const multer = require("multer");
@@ -128,6 +129,7 @@ const UserSchema = new Schema({
   facebookId: { type: String},
   twitterId: { type: String},
   linkedInId: { type: String},
+  githubId: { type: String},
   secret: { type: String, default: null },
   resetPasswordToken: { type: String},
   resetPasswordExpires: { type: Date},
@@ -225,6 +227,20 @@ passport.use(new LinkedInStrategy({
   });
 }));
 
+
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.Github_CLIENT_ID,
+  clientSecret: process.env.Github_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/github/token"
+},
+function(accessToken, refreshToken, profile, done) {
+  Project.findOrCreate({ githubId: profile.id,username:profile.username }, function (err, user) {
+    console.log(profile);
+    return done(err, user);
+  });
+}
+));
 
 
 
