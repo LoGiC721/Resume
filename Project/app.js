@@ -122,9 +122,9 @@ const UserSchema = new Schema({
   username: { type: String, default: null },
   password: { type: String, default: null },
   loginid:  { type: String, default: null },
-  googleId: { type: String, default: null },
-  facebookId: { type: String, default: null },
-  twitterId: { type: String, default: null },
+  googleId: { type: String},
+  facebookId: { type: String},
+  twitterId: { type: String},
   secret: { type: String, default: null },
   resetPasswordToken: { type: String},
   resetPasswordExpires: { type: Date},
@@ -170,7 +170,7 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, cb) {
       console.log(profile);
-      Project.findOrCreate({ googleId: profile.id }, function (err, user) {
+      Project.findOrCreate({ googleId: profile.id,username:profile.displayName }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -183,9 +183,10 @@ passport.use(
       clientID: process.env.Facebook_CLIENT_ID,
       clientSecret: process.env.Facebook_CLIENT_SECRET,
       callbackURL: "http://localhost:3000/auth/facebook/key",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, cb) {
-      Project.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      Project.findOrCreate({ facebookId: profile.id,username:profile.displayName }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -200,7 +201,7 @@ passport.use(
       callbackURL: "http://localhost:3000/auth/twitter/importantkey",
     },
     function (token, tokenSecret, profile, cb) {
-      Project.findOrCreate({ twitterId: profile.id }, function (err, user) {
+      Project.findOrCreate({ twitterId: profile.id,username:profile.username }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -231,11 +232,11 @@ app.get(
   }
 );
 
-app.get("/auth/facebook", passport.authenticate("facebook"));
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["profile"]}));
 
 app.get(
   "/auth/facebook/key",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  passport.authenticate("facebook", { failureRedirect: "/auth/facebook/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
 
@@ -243,11 +244,11 @@ app.get(
   }
 );
 
-app.get("/auth/twitter", passport.authenticate("twitter"));
+app.get("/auth/twitter", passport.authenticate("twitter", { scope: ["profile"]}));
 
 app.get(
   "/auth/twitter/importantkey",
-  passport.authenticate("twitter", { failureRedirect: "/download" }),
+  passport.authenticate("twitter", { failureRedirect: "/auth/twitter/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
