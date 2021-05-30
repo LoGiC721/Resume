@@ -270,9 +270,6 @@ app.get("/templates", function (req, res) {
 
 
 
-
-
-
 app.get("/home", function (req, res) {
   if (!req.user) res.render("login");
   else res.render("home", { currentUser: req.user });
@@ -283,7 +280,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/register", function (req, res) {
-  res.render("signup");
+  res.render("signup",{success:req.flash('info'),danger:req.flash('error')});
 });
 
 
@@ -412,7 +409,8 @@ app.post("/register", function (req, res) {
     req.body.password,
     function (err, user) {
       if (err) {
-        console.log(err);
+        // console.log(err);
+        req.flash('error',"Error occured while registration ! Please Contact developer");
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {

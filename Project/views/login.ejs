@@ -19,6 +19,7 @@
             <form class="sign-in-form" method="POST" action="/login">
               <%if(success.length>0){%>
                 <div class="success">
+                  <i class="fas fa-check-circle"></i>
                   <%=success%>
                   <span onclick="this.parentElement.style.display='none'">&times;</span>
               </div>
@@ -27,6 +28,8 @@
                 <%}else{%>
                   <%if(danger.length>0){%>
                     <div class="danger">
+                     
+                      <i class="fas fa-exclamation-triangle"></i>
                       <%=danger%>
                       <span onclick="this.parentElement.style.display='none'">&times;</span>
                   </div>

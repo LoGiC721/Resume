@@ -18,6 +18,33 @@
           <!-- Signup -->
         <div class="signin-signup">
             <form class="sign-in-form" method="POST" action="/register">
+
+
+              <%if(success.length>0){%>
+                <div class="success">
+                  <i class="fas fa-check-circle"></i>
+                  <%=success%>
+                  <span onclick="this.parentElement.style.display='none'">&times;</span>
+              </div>
+            
+              
+                <%}else{%>
+                  <%if(danger.length>0){%>
+                    <div class="danger">
+                     
+                      <i class="fas fa-exclamation-triangle"></i>
+                      <%=danger%>
+                      <span onclick="this.parentElement.style.display='none'">&times;</span>
+                  </div>
+                    
+                 
+                  <%}%>
+                  <%}%>
+
+
+
+
+
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
