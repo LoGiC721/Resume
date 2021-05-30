@@ -17,7 +17,10 @@ const path = require("path");
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+const flash = require('connect-flash');
 const loading = multer({ dest: "public/uploads/" });
+
+
 
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +35,7 @@ app.use(
   })
 );
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -275,7 +279,7 @@ app.get("/home", function (req, res) {
 });
 
 app.get("/login", function (req, res) {
-  res.render("login");
+  res.render("login",{success:req.flash('info'),danger:req.flash('error')});
 });
 
 app.get("/register", function (req, res) {
@@ -308,7 +312,7 @@ app.get("/download", function (req, res) {
 
 app.get("/forget", function (req, res) {
  
-      res.render("forget");
+      res.render("forget",{success:req.flash('info'),danger:req.flash('error')});
    
 });
 
@@ -352,11 +356,11 @@ app.get('/reset/:token', function(req, res) {
   
   Project.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
-      // req.flash('error', 'Password reset token is invalid or has expired.');
-      console.log("failed");
-      return res.redirect('/login');
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      // console.log("failed");
+      return res.redirect('/forget');
     }
-    res.render('newpassword', {found: user});
+    res.render('newpassword', {found: user,success:req.flash('info'),danger:req.flash('error')});
   });
 });
 
@@ -369,22 +373,38 @@ app.post("/templates", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
+
   const user = new Project({
     username: req.body.username,
     password: req.body.password,
   });
 
-  req.login(user, function (err) {
-    if (err) {
-      console.log(err);
-      res.redirect("/login");
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/");
-      });
-    }
-  });
-});
+  
+
+        passport.authenticate('local', function(err, user) {
+           if (err) 
+           { 
+            req.flash('error',"Error occured due to failure in authentication! Please Contact developer"); 
+            return  res.redirect("/login");
+            }
+           if (!user) 
+            {  
+              req.flash('error',"Invalid Credentials"); 
+              return res.redirect("/login");
+            }
+
+          req.logIn(user, function(err) {
+           if (err) 
+         {  
+           req.flash('error',"Error occured while login ! Please Contact developer"); 
+           return res.redirect("/login");
+         }
+         return res.redirect('/');
+       });
+       })(req, res);
+     
+    });
+ 
 
 app.post("/register", function (req, res) {
   Project.register(
@@ -816,8 +836,8 @@ app.post('/forget', function(req, res, next) {
     function(token, done) {
       Project.findOne({ loginid: req.body.email }, function(err, user) {
         if (!user) {
-          // req.flash('error', 'No account with that email address exists.');
-          return res.redirect('/forget');
+          req.flash('error', 'No account with that email address exists.');
+         return  res.redirect('/forget');
         }
 
         user.resetPasswordToken = token;
@@ -846,12 +866,14 @@ app.post('/forget', function(req, res, next) {
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        // req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+        req.flash('info', 'An e-mail has been sent to ' + req.body.email + ' with further instructions.');
         done(err, 'done');
       });
     }
   ], function(err) {
-    if (err) return next(err);
+     if (err)
+       // return next(err);
+       req.flash('error',"Error occured! Please contact developer"); 
     res.redirect('/forget');
   });
 });
@@ -859,28 +881,32 @@ app.post('/forget', function(req, res, next) {
 
 
 app.post('/reset/:token', function(req, res) {
-  console.log(req.body);
+  let loc=`/reset/${req.params.token}`;
   if(req.body.password===req.body.confirm){
   async.waterfall([
     function(done) {
       Project.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
-          // req.flash('error', 'Password reset token is invalid or has expired.');
+          req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('/forget');
         }
+
 
         Project.findByUsername(user.username).then(function(sanitizedUser){
           if (sanitizedUser){
               sanitizedUser.setPassword(req.body.password, function(){
                   sanitizedUser.save();
-                 console.log("password reset successful'");
+                //  console.log("password reset successful'");
               });
           } else {
-            console.log('This user does not exist');
-             
+            // console.log('This user does not exist');
+            req.flash('error', "User does not exist!");
+            return res.redirect('/forget');
           }
       },function(err){
-          console.log(err);
+          // console.log(err);
+          if(err)
+          req.flash('error',"Error occured! Please contact developer"); 
       })
 
 
@@ -910,17 +936,20 @@ app.post('/reset/:token', function(req, res) {
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        // req.flash('success', 'Success! Your password has been changed.');
+        req.flash('info', 'Your password has been successfully changed.');
         done(err);
       });
     }
   ], function(err) {
     res.redirect('/login');
+    if(err)
+    req.flash('error',"Error occured! Please contact developer"); 
   });
 }
 else{
-  console.log("Password don't match");
-  res.redirect("/")
+  req.flash('error',"Password don't match"); 
+ 
+  res.redirect(loc)
 }
 
 

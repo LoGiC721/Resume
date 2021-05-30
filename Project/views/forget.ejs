@@ -16,6 +16,27 @@
       <div class="forms-container">
         <div class="signin-signup">
             <form class="sign-in-form" method="POST" action="/forget">
+
+              <%if(success.length>0){%>
+                <div class="success">
+                  <%=success%>
+                  <span onclick="this.parentElement.style.display='none'">&times;</span>
+              </div>
+            
+              
+                <%}else{%>
+                  <%if(danger.length>0){%>
+                    <div class="danger">
+                      <%=danger%>
+                      <span onclick="this.parentElement.style.display='none'">&times;</span>
+                  </div>
+                    
+                 
+                  <%}%>
+                  <%}%>
+
+
+
             <h2 class="title">Password Reset</h2>
             <p style="text-align: center;">Enter your email address that you used to register. 
                 We'll send you an email with your username and a link to reset your password.

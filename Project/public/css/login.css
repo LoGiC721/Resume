@@ -398,3 +398,23 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+
+.success{
+  color: #4F8A10;
+  background-color: #DFF2BF;
+padding:10px;
+border-radius:8px;
+}
+
+.danger{
+  color: #D8000C;
+  background-color: #FFD2D2;
+padding:10px;
+border-radius:8px;
+}
+
+.success span,.danger span{
+  cursor:pointer;
+
+}

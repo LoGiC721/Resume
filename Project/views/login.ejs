@@ -17,6 +17,26 @@
       <div class="forms-container">
         <div class="signin-signup">
             <form class="sign-in-form" method="POST" action="/login">
+              <%if(success.length>0){%>
+                <div class="success">
+                  <%=success%>
+                  <span onclick="this.parentElement.style.display='none'">&times;</span>
+              </div>
+            
+              
+                <%}else{%>
+                  <%if(danger.length>0){%>
+                    <div class="danger">
+                      <%=danger%>
+                      <span onclick="this.parentElement.style.display='none'">&times;</span>
+                  </div>
+                    
+                 
+                  <%}%>
+                  <%}%>
+
+
+
             <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
