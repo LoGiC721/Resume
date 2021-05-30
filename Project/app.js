@@ -10,6 +10,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+
 const findOrCreate = require("mongoose-findorcreate");
 const multer = require("multer");
 const fs = require("fs");
@@ -125,6 +127,7 @@ const UserSchema = new Schema({
   googleId: { type: String},
   facebookId: { type: String},
   twitterId: { type: String},
+  linkedInId: { type: String},
   secret: { type: String, default: null },
   resetPasswordToken: { type: String},
   resetPasswordExpires: { type: Date},
@@ -208,6 +211,24 @@ passport.use(
   )
 );
 
+
+passport.use(new LinkedInStrategy({
+  clientID: process.env.LinkedIn_CLIENT_ID,
+  clientSecret:process.env.LinkedIn_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/linkedin/keyy",
+  scope: ['r_liteprofile'],
+  state: true
+}, function(accessToken, refreshToken, profile, done) {
+  Project.findOrCreate({ linkedInId: profile.id,username:profile.displayName }, function (err, user) {
+    console.log(profile);
+    return done(err, user);
+  });
+}));
+
+
+
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, `./public/uploads/${req.user.id}/`);
@@ -254,6 +275,24 @@ app.get(
     res.redirect("/");
   }
 );
+
+
+app.get("/auth/linkedin", passport.authenticate("linkedin", { scope: ['r_liteprofile']}));
+
+app.get(
+  "/auth/linkedin/keyy",
+  passport.authenticate("linkedin", { failureRedirect: "/auth/linkedin/login" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
+
+
+
+
+
+
 
 app.get("/", function (req, res) {
   //console.log(req.user);
