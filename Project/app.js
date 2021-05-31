@@ -309,7 +309,16 @@ app.get(
 
 
 
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
 
+app.get('/auth/github/token', 
+  passport.authenticate('github', { failureRedirect: '/auth/github/login' }),
+  function(req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 
 
