@@ -99,7 +99,7 @@
                 (found[0].twitter!==null&&found[0].twitter.length!==0)||
                 (found[0].website!==null&&found[0].website.length!==0)) {%>
 
-				<div class="contact_wrap pb">
+				<div class="contact_wrap pb data">
 					<div class="title">
 						Contact
 					</div>
@@ -167,7 +167,7 @@
 							(found[0].pin!==null&&found[0].pin.length!==0)) {%>
 
 							<li>
-								<div class="li_wrap">
+								<div class="li_wrap data">
 									<div class="icon"><i class="fas fa-map-signs" aria-hidden="true"></i></div>
 									<div class="text">
 										<%if(found[0].address!==null&&found[0].address.length!==0){%>
@@ -220,7 +220,7 @@
 								
 								<div class="li_wrap">
 									<%if(found[0].skills[0].skillsname[i].length!==0){%>
-									<div class="text"> <%=found[0].skills[0].skillsname[i]%></div>
+									<div class="text data1"> <%=found[0].skills[0].skillsname[i]%></div>
 									<br/>
 									<%}%>
 									<%if(found[0].skills[0].skillsdetails[i]!==null){%>
@@ -252,7 +252,7 @@
 							<li>
 								<%if(found[0].extra[0].hobbie[i].length!==0){%>
 								<div class="li_wrap">
-									<div class="text"> <%=found[0].extra[0].hobbie[i]%></div>
+									<div class="text data1"> <%=found[0].extra[0].hobbie[i]%></div>
 								</div>
 								<%}%> 
 							</li>
@@ -281,7 +281,7 @@
 							<li>
 								<%if(found[0].extra[0].strength[i].length!==0){%>
 								<div class="li_wrap">
-									<div class="text"> <%=found[0].extra[0].strength[i]%></div>
+									<div class="text data1"> <%=found[0].extra[0].strength[i]%></div>
 								</div>
 								<%}%>
 							</li>
@@ -310,7 +310,7 @@
 							<li>
 								<%if(found[0].extra[0].language[i].length!==0){%>
 								<div class="li_wrap">
-									<div class="text"> <%=found[0].extra[0].language[i]%></div>
+									<div class="text data1"> <%=found[0].extra[0].language[i]%></div>
 								</div>
 								<%}%>
 							</li>
@@ -338,7 +338,7 @@
 			</div>
 
 
-			<div class="right">
+			<div class="right data">
 				<%if((found[0].firstname!==null&&found[0].firstname.length!==0)||
         (found[0].currentposition!==null&&found[0].currentposition.length!==0)||
         (found[0].profile!==null&&found[0].profile.length!==0)){%>
