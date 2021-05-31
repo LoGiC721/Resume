@@ -265,6 +265,7 @@ app.get(
   "/auth/google/secrets",
   passport.authenticate("google", { failureRedirect: "/auth/google/login" }),
   function (req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
     res.redirect("/");
   }
 );
@@ -276,7 +277,7 @@ app.get(
   passport.authenticate("facebook", { failureRedirect: "/auth/facebook/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
-
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
     res.redirect("/");
   }
 );
@@ -287,6 +288,7 @@ app.get(
   "/auth/twitter/importantkey",
   passport.authenticate("twitter", { failureRedirect: "/auth/twitter/login" }),
   function (req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
     // Successful authentication, redirect home.
     res.redirect("/");
   }
@@ -299,6 +301,7 @@ app.get(
   "/auth/linkedin/keyy",
   passport.authenticate("linkedin", { failureRedirect: "/auth/linkedin/login" }),
   function (req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
     // Successful authentication, redirect home.
     res.redirect("/");
   }

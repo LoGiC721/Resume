@@ -81,6 +81,8 @@ body {
   display: flex;
   margin-bottom: 10px;
   align-items: center;
+  margin-left:-20px;
+  
 }
 
 .resume .resume_left ul li:last-child {
@@ -88,7 +90,7 @@ body {
 }
 
 .resume .resume_left ul li .icon {
-  width: 35px;
+  width: 45px;
   height: 35px;
   background: #fff;
   color: #0bb5f4;
@@ -96,7 +98,7 @@ body {
   margin-right: 15px;
   font-size: 16px;
   position: relative;
-  width:21%;
+  
 }
 
 .resume .icon i,
@@ -192,7 +194,7 @@ body {
   height: 6px;
   border-radius: 50%;
   border: 2px solid #0bb5f4;
-  background-color: #0bb5f4;
+  /* background-color: #0bb5f4; */
 }
 
 .resume .resume_right .resume_work ul li:after,
@@ -268,18 +270,9 @@ li{
 
 
 
-@media  (max-width:822px) {
-	
-  .resume{
-      width:90%;
-      margin:auto auto;
-  }
-	
-	
-}
 
 
-@media (max-width:579px) {
+@media (max-width:653px) {
 	
   .resume {
     width: 90%;
@@ -311,32 +304,74 @@ li{
 
 
 
-@media (min-width:580px) and (max-width:633px){
+@media (min-width:767px) and (max-width:841px){
 
   .resume .resume_left{
-    width:50%;
-    margin:auto auto;
+   
+    margin-left:40px;
+
+  }
+  .resume .resume_right{
+    width:50%; 
 
   }
 
   .down{
-    margin-top:10px;
+    margin-top:5px;
   }
 
 }
 
+@media (min-width:653px) and (max-width:767px){
+  .resume .resume_right{
+    width:40%; 
+    
+
+  }
+
+  .resume .resume_left{
+   
+   width:30%;
+   margin-left:60px;
+
+  }
+
+}
+
+
+
+
+
+
 @media print{
 
-	
-		body{
-			display: table;
-			table-layout: fixed;
-			height:auto;
-		}
+  .resume {
+    height: auto; 
+   display: flex; 
+    flex-direction: row;
+   
+   
+  }
+
+  .resume .resume_right{
+    width:90%;
+    margin:0 0;
+  }
+
+
     .resume{
       margin:0;
     }
 		
+    .resume .resume_left{
+      margin:0;
+      width:280px;
+    }
+
+    .resume .resume_right{
+      width:520px;
+    }
+
 
 		
         @page {
