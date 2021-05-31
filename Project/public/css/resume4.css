@@ -140,6 +140,7 @@ body{
 
 .resume_wrapper .resume_right .resume_data .year{
 	padding-right: 35px;
+	min-width:125px;
 	width: 125px;
 	position: relative;
 }
@@ -149,7 +150,7 @@ body{
 .resume_wrapper .resume_right .resume_data .content{
 	padding-left: 35px;
 	margin-bottom: 20px;
-	width: calc(100% - 115px);
+	width: 300px;
 }
 
 .resume_wrapper .resume_right .resume_data .year:before{
@@ -170,7 +171,7 @@ body{
     top: 17px;
     right: 4px;
     width: 3px;
-    height: 90%;
+    height: 100%;
     background: #0175b2;
 }
 
@@ -191,7 +192,22 @@ body{
 }
 
 
-@media screen and (max-width: 800px){
+.data{
+	overflow: hidden;
+	 word-wrap: break-word ;
+	 display: inline-block;
+	 width: 100%;
+   }
+
+@media(max-width:824px)
+{
+	.resume_wrapper{
+        width:90%;
+	}
+}
+
+
+@media screen and (max-width: 600px){
 	.resume_wrapper .resume_right .resume_namerole{
 		display: none;
 	}
@@ -207,6 +223,7 @@ body{
 	.resume_wrapper .resume_right{
 		width: 100%;
 	}
+
 }
 
 @media screen and (max-width: 424px){
@@ -242,6 +259,9 @@ body{
 
 @media print{
 
+	.resume_wrapper{
+		margin:0;
+	}
 	@page {
 		margin: 0;
 		

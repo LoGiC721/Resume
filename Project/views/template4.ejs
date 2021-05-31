@@ -79,7 +79,7 @@
 
 
 <div class="resume_wrapper" id="wrap">
-	<div class="resume_left">
+	<div class="resume_left data">
 		<%if(found[0].img!==null){%>
 		<div class="resume_image">
 			<img src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="Resume_image">
@@ -209,7 +209,7 @@
 					<%for(let i=0;i<found[0].skills[0].skillsname.length;i++){%>
 					<div class="skills_list">
 							<%if(found[0].skills[0].skillsname[i].length!==0){%>
-					    	<div class="skills_left"><%=found[0].skills[0].skillsname[i]%></div>
+					    	<div class="skills_left data"><%=found[0].skills[0].skillsname[i]%></div>
 							<%}%>
 						<%if(found[0].skills[0].skillsdetails[i]!==null){%>	
 						<div class="skills_bar">
@@ -247,7 +247,7 @@
 					<%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
 					<div class="skills_list">
 							<%if(found[0].extra[0].strength[i].length!==0){%>
-					    	<div class="skills_left"><%=found[0].extra[0].strength[i]%></div>
+					    	<div class="skills_left data"><%=found[0].extra[0].strength[i]%></div>
 							<%}%>
 						
 						
@@ -280,7 +280,7 @@
 					<%for(let i=0;i<found[0].extra[0].language.length;i++){%>
 					<div class="skills_list">
 							<%if(found[0].extra[0].language[i].length!==0){%>
-					    	<div class="skills_left"><%=found[0].extra[0].language[i]%></div>
+					    	<div class="skills_left data"><%=found[0].extra[0].language[i]%></div>
 							<%}%>
 						
 						
@@ -310,7 +310,7 @@
 					<%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
 					<div class="skills_list">
 							<%if(found[0].extra[0].goals[i].length!==0){%>
-					    	<div class="skills_left"><%=found[0].extra[0].goals[i]%></div>
+					    	<div class="skills_left data"><%=found[0].extra[0].goals[i]%></div>
 							<%}%>
 						
 						
@@ -359,7 +359,7 @@
 	
 
 
-	<div class="resume_right">
+	<div class="resume_right data">
 		<div class="resume_item resume_namerole">
 
 
