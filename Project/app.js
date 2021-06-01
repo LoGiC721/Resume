@@ -174,8 +174,8 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
       Project.findOrCreate({ googleId: profile.id,username:profile.displayName }, function (err, user) {
+       
         return cb(err, user);
       });
     }
@@ -222,7 +222,7 @@ passport.use(new LinkedInStrategy({
   state: true
 }, function(accessToken, refreshToken, profile, done) {
   Project.findOrCreate({ linkedInId: profile.id,username:profile.displayName }, function (err, user) {
-    console.log(profile);
+   
     return done(err, user);
   });
 }));
@@ -236,7 +236,7 @@ passport.use(new GitHubStrategy({
 },
 function(accessToken, refreshToken, profile, done) {
   Project.findOrCreate({ githubId: profile.id,username:profile.username }, function (err, user) {
-    console.log(profile);
+  
     return done(err, user);
   });
 }
@@ -323,15 +323,17 @@ app.get('/auth/github/token',
 
 
 app.get("/", function (req, res) {
-  //console.log(req.user);
-
-  
-  res.render("front", { currentUser: req.user });
+ 
+  res.render("front", { currentUser: req.user});
 });
 
 app.get("/templates", function (req, res) {
-  if (!req.user) res.render("login");
-  else res.render("availabletemplates", { currentUser: req.user });
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to that page"); 
+  res.render("login",{success:req.flash('info'),danger:req.flash('error') });
+  }
+  else res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 });
 
 
@@ -339,12 +341,18 @@ app.get("/templates", function (req, res) {
 
 
 app.get("/home", function (req, res) {
-  if (!req.user) res.render("login");
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    res.render("login",{success:req.flash('info'),danger:req.flash('error')});
+  }
   else res.render("home", { currentUser: req.user });
 });
 
 app.get("/login", function (req, res) {
+  
   res.render("login",{success:req.flash('info'),danger:req.flash('error')});
+   
 });
 
 app.get("/register", function (req, res) {
@@ -449,19 +457,19 @@ app.post("/login", function (req, res) {
         passport.authenticate('local', function(err, user) {
            if (err) 
            { 
-            req.flash('error',"Error occured due to failure in authentication! Please Contact developer"); 
+            req.flash('error',err.message); 
             return  res.redirect("/login");
             }
            if (!user) 
             {  
-              req.flash('error',"Invalid Credentials"); 
+              req.flash('error',"Invalid credentials"); 
               return res.redirect("/login");
             }
 
           req.logIn(user, function(err) {
            if (err) 
          {  
-           req.flash('error',"Error occured while login ! Please Contact developer"); 
+           req.flash('error',err.message); 
            return res.redirect("/login");
          }
          return res.redirect('/');
@@ -472,13 +480,23 @@ app.post("/login", function (req, res) {
  
 
 app.post("/register", function (req, res) {
+
+  let value=req.body.password;
+  let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+if(!value.match(passw)) 
+{ 
+  req.flash('error',"Password must be atleast 6 characters long , contains atleast one numeric digit, one uppercase & one lowercase letter."); 
+    return res.redirect("/register");
+}
+
+
   Project.register(
     { username: req.body.username,loginid:req.body.emailid },
     req.body.password,
     function (err, user) {
       if (err) {
-        // console.log(err);
-        req.flash('error',"Error occured while registration ! Please Contact developer");
+        req.flash('error',err.message);
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
