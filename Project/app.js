@@ -21,6 +21,7 @@ var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const flash = require('connect-flash');
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 const loading = multer({ dest: "public/uploads/" });
 
 
@@ -412,6 +413,7 @@ let noOfStrengths = 1;
 let noOfLanguage = 1;
 
 let noOfGoals = 1;
+
 
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
@@ -869,21 +871,70 @@ let value = req.body.btn;
   }
 });
 
+
+
+let flag=1;
+let flag1=0;
+let count=0;
 app.post("/personal", upload.single("photo"), function (req, res) {
+  
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
+try{
+    let buttonvalue=req.body.btnn;
+    if(buttonvalue!=1)
+    {
+        
+      if(flag1!==flag&&count!=0)
+      { 
+        req.flash('info',"Image is removed successfully");
+       
+      }
+      else
+      {
+        req.flash('error',"First you have to choose file then you can delete it");
+      }
+     
+      flag=0;
 
-  try{
+      fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
+        if (err) {
+          console.log(err); 
+        }
+    
+        files.forEach((file) => {
+          const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
+            fs.unlinkSync(fileDir);
+        });
+      });
+
+      var query = { _id: req.user.id };
+  var values = {
+    $set: {
+      img: null,
+      filepresentornot:0
+    },
+  };
+  Project.updateOne(query, values, function (err, res) {
+    if (!err) console.log("Document updated successfully");
+  });
+
+  
+  
+      return res.redirect("/personal")
+        //  console.log("uploaded");
+    }
+
+    flag=1;count=1;
+
   let imagefile = req.file.originalname;
   //  console.log(req.file);
   //  console.log(imagefile);
   //  console.log(req.body);
-
-
-
+  
 
   var myquery = { _id: req.user.id };
   var newvalues = {
@@ -892,13 +943,13 @@ app.post("/personal", upload.single("photo"), function (req, res) {
     },
   };
   Project.updateOne(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Document updated successfully");
+    if (!err) console.log("Document updated successfully"); 
   });
 
   filepresentornot = 1;
 
   Project.updateOne(myquery, { $set: {filepresentornot:filepresentornot} }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
+    if (!err) console.log("Documents deleted successfully");  
   });
 
   
@@ -917,9 +968,11 @@ app.post("/personal", upload.single("photo"), function (req, res) {
   });
 }catch(err){
   req.flash('error',"First you have to choose file then you can upload it");
+ 
   return res.redirect("/personal")
 }
-  
+
+
   res.redirect("/personal");
 });
 

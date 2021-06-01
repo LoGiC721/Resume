@@ -3,19 +3,21 @@
 
 
         <%if(success.length>0){%>
-            <div class="alert alert-success alert-dismissible w-50">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <div class="success">
+            
               <i class="fas fa-check-circle"></i>
               <%=success%>
+              <span onclick="this.parentElement.style.display='none'">&times;</span>
           </div>
         
           
             <%}else{%>
               <%if(danger.length>0){%>
-                <div class="alert alert-danger alert-dismissible w-50 mx-auto p-2 ">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <div class="danger ">
+                 
                   <i class="fas fa-exclamation-triangle"></i>
                   <%=danger%>
+                  <span onclick="this.parentElement.style.display='none'">&times;</span>
               </div>
 <%}%>
 <%}%>

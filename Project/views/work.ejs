@@ -1,5 +1,31 @@
 <%-include("sidemenu")-%>
 <div class="text-center information">
+
+
+    <%if(success.length>0){%>
+        <div class="success">
+         
+          <i class="fas fa-check-circle"></i>
+          <%=success%>
+          <span onclick="this.parentElement.style.display='none'">&times;</span>
+      </div>
+    
+      
+        <%}else{%>
+          <%if(danger.length>0){%>
+            <div class="danger">
+             
+              <i class="fas fa-exclamation-triangle"></i>
+              <%=danger%>
+              <span onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+<%}%>
+<%}%>
+
+
+
+
+
     <h4>Your Work Details</h4>
     <br>
     <form method="POST" action="work">
