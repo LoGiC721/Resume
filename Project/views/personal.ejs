@@ -1,7 +1,23 @@
 <%-include("sidemenu")-%>
     <div class="text-center information">
 
-
+        <%if(success.length>0){%>
+            <div class="alert alert-success alert-dismissible w-50">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <i class="fas fa-check-circle"></i>
+              <%=success%>
+          </div>
+        
+          
+            <%}else{%>
+              <%if(danger.length>0){%>
+                <div class="alert alert-danger alert-dismissible w-50 mx-auto p-2 ">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <%=danger%>
+              </div>
+<%}%>
+<%}%>
         <br>
         <form method="POST" action="personal" enctype="multipart/form-data">
 
@@ -44,13 +60,9 @@
                 <img class="cloud" src="./icons/upload.png"> Choose File
             </label>
 
-            <%if(!found[0].filepresentornot===1){%>
+    
                 <button class="btn button uploadbtn">Upload & Show</button>
-            <%}else{%>
-               
-                <button class="btn button uploadbtn" style="background-color: #14171D; border:solid #fff2;
-                color:#fff2; ">Upload & Show</button>
-            <%}%>
+           
 
 
             <!-- </div> -->

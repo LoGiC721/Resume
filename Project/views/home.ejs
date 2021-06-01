@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Open+Sans:ital,wght@1,700&display=swap"
     rel="stylesheet">
+    <script
+    src="https://kit.fontawesome.com/64d58efce2.js"
+    crossorigin="anonymous"
+  ></script>
 </head>
 
 
@@ -53,6 +57,26 @@
     </div>
   </nav>
   <hr>
+
+
+  <%if(success.length>0){%>
+    <div class="alert alert-success alert-dismissible w-50">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%=success%>
+  </div>
+
+  
+    <%}else{%>
+      <%if(danger.length>0){%>
+        <div class="alert alert-danger alert-dismissible w-50 mx-auto p-2 mb-5">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%=danger%>
+      </div>
+        
+     
+      <%}%>
+      <%}%>
+
   <div class="container">
     <div class="row">
       <div class="col-lg">

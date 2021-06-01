@@ -331,7 +331,7 @@ app.get("/templates", function (req, res) {
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to that page"); 
-  res.render("login",{success:req.flash('info'),danger:req.flash('error') });
+   res.redirect("/login");
   }
   else res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 });
@@ -344,9 +344,9 @@ app.get("/home", function (req, res) {
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
-    res.render("login",{success:req.flash('info'),danger:req.flash('error')});
+    res.redirect("/login");
   }
-  else res.render("home", { currentUser: req.user });
+  else res.render("home", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 });
 
 app.get("/login", function (req, res) {
@@ -373,6 +373,11 @@ let templateno = 1;
 
 
 app.get("/download", function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
   Project.find({ _id: req.user.id }, function (err, posts) {
     if (!err) {
       res.render("template" + templateno, { found: posts });
@@ -412,15 +417,24 @@ app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
   // const loader = multer({ dest: `public/uploads/${req.user.id}/` });
-
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+ 
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
       res.render(customListName, {
         current: customListName,
         found: found,
+        success:req.flash('info'),danger:req.flash('error')
+       
       });
     }
+
   });
+
 });
 
 
@@ -441,6 +455,11 @@ app.get('/reset/:token', function(req, res) {
 
 
 app.post("/templates", function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
   templateno = req.body.template;
   res.redirect("/profile");
 });
@@ -472,6 +491,7 @@ app.post("/login", function (req, res) {
            req.flash('error',err.message); 
            return res.redirect("/login");
          }
+            const loader = multer({ dest: `public/uploads/${req.user.id}/` });
          return res.redirect('/');
        });
        })(req, res);
@@ -512,7 +532,16 @@ if(!value.match(passw))
 });
 
 app.post("/profile", function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
+
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+
+  try{
+
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -533,13 +562,31 @@ app.post("/profile", function (req, res) {
     },
   };
   Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
+    if (!err) 
+    {console.log("Documents updated successfully");}
   });
+
+  }catch(err){
+    req.flash('error',err.message);
+  return res.redirect("/profile")
+  }
+
+
   res.redirect("/education");
 });
 
 app.post("/education", function (req, res) {
-  let value = req.body.btn;
+
+
+
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+ let value = req.body.btn;
+  try{
+ 
   if (value === "1") {
     noOfeducation++;
   } else {
@@ -552,7 +599,9 @@ app.post("/education", function (req, res) {
 
 
   Project.updateOne(myquery, { $set: { noOfeducation:noOfeducation} }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
+    if (!err){
+    console.log("Documents deleted successfully");
+    }
   });
 
   Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
@@ -575,6 +624,15 @@ app.post("/education", function (req, res) {
     if (!err) console.log("Documents inserted successfully");
   });
 
+  }catch(err)
+{
+  req.flash('error',err.message);
+  return res.redirect("/education")
+}
+
+
+
+
   if (value === "3") {
     res.redirect("/work");
   } else {
@@ -582,7 +640,15 @@ app.post("/education", function (req, res) {
   }
 });
 app.post("/work", function (req, res) {
-  let value = req.body.btn;
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+let value = req.body.btn;
+
+  try{
+  
   if (value === "1") {
     noOfWorkExperience++;
   } else {
@@ -625,6 +691,12 @@ app.post("/work", function (req, res) {
     if (!err) console.log("Documents inserted successfully");
   });
 
+
+}catch(err){
+  req.flash('error',err.message);
+  return res.redirect("/work")
+}
+
   if (value === "3") {
     res.redirect("/skills");
   } else {
@@ -634,8 +706,15 @@ app.post("/work", function (req, res) {
 
 app.post("/skills", function (req, res) {
   console.log(req.body);
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+let value = req.body.btn;
 
-  let value = req.body.btn;
+  try{
+  
   if (value === "1") {
     noOfSkills++;
   } else if (value === "2" && noOfSkills > 1) {
@@ -663,7 +742,13 @@ app.post("/skills", function (req, res) {
   };
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
+
   });
+  }catch(err){
+    req.flash('error',err.message);
+    return res.redirect("/skills")
+  }
+
 
   if (value === "3") {
     res.redirect("/projects");
@@ -673,7 +758,15 @@ app.post("/skills", function (req, res) {
 });
 
 app.post("/projects", function (req, res) {
-  let value = req.body.btn;
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+
+let value = req.body.btn;
+  try{
+  
   if (value === "1") {
     noOfProjects++;
   } else {
@@ -706,6 +799,11 @@ app.post("/projects", function (req, res) {
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
+  }catch(err){
+    req.flash('error',err.message);
+    return res.redirect("/projects")
+  }
+
 
   if (value === "3") {
     res.redirect("/awards");
@@ -715,7 +813,14 @@ app.post("/projects", function (req, res) {
 });
 
 app.post("/awards", function (req, res) {
-  let value = req.body.btn;
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+let value = req.body.btn;
+  try{
+  
   if (value === "1") {
     noOfAwards++;
   } else {
@@ -748,7 +853,14 @@ app.post("/awards", function (req, res) {
   };
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
+   
   });
+  }catch(err){
+    req.flash('error',err.message);
+  return res.redirect("/awards")
+  }
+
+
 
   if (value === "3") {
     res.redirect("/personal");
@@ -758,6 +870,13 @@ app.post("/awards", function (req, res) {
 });
 
 app.post("/personal", upload.single("photo"), function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+
+  try{
   let imagefile = req.file.originalname;
   //  console.log(req.file);
   //  console.log(imagefile);
@@ -782,9 +901,10 @@ app.post("/personal", upload.single("photo"), function (req, res) {
     if (!err) console.log("Documents deleted successfully");
   });
 
+  
   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
     if (err) {
-      console.log(err);
+      console.log(err); 
     }
 
     files.forEach((file) => {
@@ -795,13 +915,23 @@ app.post("/personal", upload.single("photo"), function (req, res) {
       }
     });
   });
-
+}catch(err){
+  req.flash('error',"First you have to choose file then you can upload it");
+  return res.redirect("/personal")
+}
+  
   res.redirect("/personal");
 });
 
 app.post("/extra", function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
 
+  try{
   if (req.body.btn === "1") {
     noOfhobbies++;
   } else if (req.body.btn === "2" && noOfhobbies > 1) {
@@ -831,6 +961,7 @@ app.post("/extra", function (req, res) {
 
   Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
+   
   });
 
   var newvalue = {
@@ -845,7 +976,12 @@ app.post("/extra", function (req, res) {
   };
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
+   
   });
+}catch(err){
+  req.flash('error',err.message);
+  return res.redirect("/extra")
+}
 
   if(req.body.btn==="9")
   res.redirect("/download");
@@ -855,7 +991,7 @@ app.post("/extra", function (req, res) {
 
 
 app.post("/",function(req,res){
-  console.log(req.body.btn);
+  // console.log(req.body.btn);
 let value=req.body.btn;
   if(value==="1"&&req.user){
 
@@ -878,6 +1014,7 @@ let value=req.body.btn;
     
     }, function (err, res) {
       if (!err) console.log(" All Documents deleted successfully");
+     
     });
 
         filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
@@ -902,6 +1039,11 @@ let value=req.body.btn;
 
 app.post("/home",function(req,res)
 {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
   res.render("availabletemplates", { currentUser: req.user });
 })
 
@@ -922,6 +1064,11 @@ app.post('/forget', function(req, res, next) {
         if (!user) {
           req.flash('error', 'No account with that email address exists.');
          return  res.redirect('/forget');
+        }
+        if(err)
+        {
+          req.flash('error',err.message);
+          return  res.redirect('/forget');
         }
 
         user.resetPasswordToken = token;

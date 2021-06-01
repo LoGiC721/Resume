@@ -1,6 +1,28 @@
 <%-include("sidemenu")-%>
 
 <div class="text-center information">
+
+
+	<%if(success.length>0){%>
+		<div class="alert alert-success alert-dismissible w-50">
+		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		  <i class="fas fa-check-circle"></i>
+		  <%=success%>
+	  </div>
+	
+	  
+		<%}else{%>
+		  <%if(danger.length>0){%>
+			<div class="alert alert-danger alert-dismissible w-50 mx-auto p-2 ">
+			  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			  <i class="fas fa-exclamation-triangle"></i>
+			  <%=danger%>
+		  </div>
+<%}%>
+<%}%>
+
+
+
 	<h4>Your Educational Details</h4>
 	<br>
 	<form method="POST" action="education">
