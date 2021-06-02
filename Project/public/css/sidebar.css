@@ -658,10 +658,10 @@ label:hover{
             width:96px;
         }
         .file-name{
-            position:relative;
+            /* position:relative;
             bottom:5px;
-            width:96px;
-           
+            width:96px; */
+            display: none;
         }
 
      }

@@ -31,7 +31,7 @@
                        
                         <%if(found[0].filepresentornot===1){%>
                             
-                            <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="no">
+                            <img class="profilepic" src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="">
                             <%}%>
 
                     </div>
@@ -63,7 +63,9 @@
             </label>
 
     
-                <button class="btn button uploadbtn">Upload & Show</button>
+                <button class="btn button uploadbtn">
+                    <i class="fas fa-upload"></i>
+                    Upload & Show</button>
            
 
 
@@ -83,7 +85,7 @@
         </a>
 
         <button class="btn button next"  onclick="func()">
-            <i class="fas fa-arrow-right iconn"></i>
+            <i class="fas fa-trash-alt iconn"></i>
             <span class="change">Remove Picture</span>
         </button>
 
