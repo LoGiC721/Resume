@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/icons/favicon.ico" />
+  <title>Makeresume</title>
+  <link rel="stylesheet" href="css/resume7.css">
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="body1">
+
+
+
+		<div id="buttonn" class="text-center">
+		  <br><br><br>
+		  <style>
+				body{
+				  background: #c4c4c4;
+				}
+				.flexxx{
+					display:flex;
+					align-items:center;
+                    justify-content: space-around;
+				}
+				.container{
+					max-width:800px;
+				}
+				@media(max-width:768px)
+				{
+					.flexxx{
+            display:flex;
+						flex-direction: column;
+					}
+					.down{
+						margin-bottom:15px;
+					}
+				
+					.bottom{
+						margin-bottom:-8px;
+					}
+				}
+
+                
+		  </style>
+
+		  <div class="container flexxx">
+		<button class="btn btn-dark btn-lg text-light down"  onclick="pdf()" 
+		onMouseOver="this.style.background='#cf0000'"
+		onMouseOut="this.style.background='#1C1F23'">
+		<i class="fa fa-laptop" aria-hidden="true"></i>Download</button>
+
+		<button class="btn btn-light btn-lg text-dark down white" onclick="mobile1()" 
+		onMouseOver="this.style.background='#cf0000'"
+		onMouseOut="this.style.background='white'">
+		<img src="https://img.icons8.com/material-rounded/24/000000/android.png"/>Download</button>
+
+
+
+	<a class="btn btn-light btn-lg text-dark down white"  href="/profile" 
+	onMouseOver="this.style.background='#cf0000'" onMouseOut="this.style.background='white'">
+		<i class="fas fa-edit"></i>Edit Details</a>
+
+    <a class="btn btn-dark btn-lg text-light down bottom" href="/templates" 
+		onMouseOver="this.style.background='#cf0000';"
+		onMouseOut="this.style.background=''"><i class="far fa-file"></i>
+			Templates</a> 
+
+		  <br><br><br>
+		</div>
+
+
+		  </div>
+		</div>
+
+
+<div class="resume" id="wrap">
+   <div class="resume_left" style="background-color: #2A2A2A;">
+     <%if(found[0].img!==null){%>
+     <div class="resume_profile">
+      <img src="./uploads/<%=found[0]._id%>/<%=found[0].img%>" alt="profile_pic">
+     </div>
+     <%}%>
+     <div class="resume_content">
+       <div class="resume_item resume_info">
+
+        <%if((found[0].firstname!==null&&found[0].firstname.length!==0)||
+        (found[0].currentposition!==null&&found[0].currentposition.length!==0)||
+        (found[0].profile!==null&&found[0].profile.length!==0)){%>
+         <div class="title data">
+          <%if(found[0].firstname!==null&&found[0].firstname.length!==0){%>
+           <p class="bold"><%=found[0].firstname%></p>
+           <%}%>
+           <%if(found[0].currentposition!==null&&found[0].currentposition.length!==0){%>
+           <p class="regular data"><%=found[0].currentposition%></p>
+           <br />
+           <%}%>
+           <%if(found[0].profile!==null&&found[0].profile.length!==0){%>
+           <p class="regular data"><%=found[0].profile%></p>
+           <%}%>
+         </div>
+         <hr style="border:solid 1px #FFFFFF;background-color: #FFFFFF;">
+        <br>
+         <%}%>
+
+
+         <%if((found[0].address!==null&&found[0].address.length!==0)||
+                (found[0].country!==null&&found[0].country.length!==0)||
+                (found[0].state!==null&&found[0].state.length!==0)|| (found[0].city!==null&&found[0].city.length!==0)||
+                (found[0].pno!==null&&found[0].pno.length!==0)|| (found[0].email!==null&&found[0].email.length!==0)||
+                (found[0].pin!==null&&found[0].pin.length!==0)) {%>
+       
+
+
+                  <div class="title">
+           <p class="bold">Contact</p>
+         </div>
+         <ul>
+          
+          
+          <%if((found[0].address!==null&&found[0].address.length!==0)||
+                (found[0].country!==null&&found[0].country.length!==0)||
+                (found[0].state!==null&&found[0].state.length!==0)|| 
+                (found[0].city!==null&&found[0].city.length!==0)) {%>
+          <li>
+             <div class="icon">
+               <i class="fas fa-map-signs"></i>
+             </div>
+             <div class="data">
+              <%if(found[0].address!==null&&found[0].address.length!==0){%>
+              <%=found[0].address%>
+              ,
+               <%}%>
+               <%if(found[0].country!==null&&found[0].country.length!==0){%>
+               <%=found[0].country%>
+              ,
+               <%}%>
+               <%if(found[0].state!==null&&found[0].state.length!==0){%>
+               <%=found[0].state%>
+               ,
+               <%}%>
+               <%if(found[0].city!==null&&found[0].city.length!==0){%>
+               <%=found[0].city%>
+              ,
+               <%}%>
+               <%if(found[0].pin!==null&&found[0].pin.length!==0){%>
+               <%=found[0].pin%>
+               <%}%>
+             </div>
+           </li>
+          <%}%>
+          <%if(found[0].pno!==null){%>
+           <li>
+             <div class="icon">
+               <i class="fas fa-mobile-alt"></i>
+             </div>
+             <div class="data">
+              <%=found[0].pno%>
+             </div>
+           </li>
+          <%}%>
+          <%if(found[0].email!==null&&found[0].email.length!==0){%>
+           <li>
+             <div class="icon">
+               <i class="fas fa-envelope"></i>
+             </div>
+             <div class="data">
+              <%=found[0].email%>
+             </div>
+           </li>
+           <%}%>
+         </ul>
+         <%}%>
+       </div>
+
+
+       <%if(found[0].skills.length!==0){%>
+          <%if(found[0].skills[0].skillsname.length!==0){%>
+            <%if((found[0].skills[0].skillsname[0].length!==0||found[0].skills[0].skillsdetails[0]!==null)){%>
+       <div class="resume_item resume_skills">
+         <div class="title">
+           <p class="bold">skill's</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].skills[0].skillsname.length;i++){%>
+           <li>
+            <%if(found[0].skills[0].skillsname[i].length!==0){%>
+             <div class="skill_name data">
+              <%=found[0].skills[0].skillsname[i]%>
+             </div>
+             <%}%>
+             <%if(found[0].skills[0].skillsdetails[i]!==null){%>
+             <div class="skill_progress">
+               <span style="width: <%=found[0].skills[0].skillsdetails[i]%>%;"></span>
+             </div>
+             <div class="skill_per data"><%=found[0].skills[0].skillsdetails[i]%>%</div>
+             <%}%>
+           </li>
+           <%}%>
+          
+          
+          
+         </ul>
+       </div>
+       <%}%>
+       <%}%>
+        <%}%>
+        <%if((found[0].github!==null&&found[0].github.length!=0)||
+                (found[0].linkedin!==null&&found[0].linkedin.length!==0)||
+                (found[0].twitter!==null&&found[0].twitter.length!==0)||
+                (found[0].website!==null&&found[0].website.length!==0)){%>
+       <div class="resume_item resume_social">
+         <div class="title">
+           <p class="bold">Social</p>
+         </div>
+         <ul>
+          <%if(found[0].twitter!==null&&found[0].twitter.length!==0){%>
+           <li>
+             <div class="icon">
+               <i class="fab fa-twitter-square"></i>
+             </div>
+             <div class="data">
+               <p class="semi-bold">Twitter</p>
+               <p><%=found[0].twitter%></p>
+             </div>
+           </li>
+          <%}%>
+          <%if(found[0].github!==null&&found[0].github.length!==0){%>
+           <li>
+             <div class="icon">
+               <i class="fab fa-github"></i>
+             </div>
+             <div class="data">
+               <p class="semi-bold">Github</p>
+               <p><%=found[0].github%></p>
+             </div>
+           </li>
+          <%}%>
+          <%if(found[0].linkedin!==null&&found[0].linkedin.length!==0){%>
+           <li>
+             <div class="icon">
+               <i class="fab fa-linkedin"></i>
+             </div>
+             <div class="data">
+               <p class="semi-bold">Linkedin</p>
+               <p><%=found[0].linkedin%></p>
+             </div>
+           </li>
+           <%}%>
+           <%if(found[0].website!==null&&found[0].website.length!==0){%>
+           <li>
+             <div class="icon">
+               <i class="fab fa-weebly"></i>
+             </div>
+             <div class="data">
+               <p class="semi-bold">Website</p>
+               <p><%=found[0].website%></p>
+             </div>
+           </li>
+           <%}%>
+         </ul>
+       </div>
+ <%}%>
+ <%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].language.length!==0){%>
+            <%if(found[0].extra[0].language[0].length!==0){%>
+       <div class="resume_item resume_skills">
+         <div class="title">
+           <p class="bold">Languages</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].language.length;i++){%>
+           <li>
+            <%if(found[0].extra[0].language[i].length!==0){%>
+             <div class="data">
+             <p class="semi-bold data"> <%=found[0].extra[0].language[i]%></p>
+             </div>
+             <%}%>
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
+
+
+
+      
+
+
+
+
+        <%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].goals.length!==0){%>
+            <%if(found[0].extra[0].goals[0].length!==0){%>
+       <div class="resume_item resume_education">
+         <div class="title">
+           <p class="bold">Goals</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].goals.length;i++){%>
+           <li>
+            <%if(found[0].extra[0].goals[i].length!==0){%>
+             <div class=" data">
+             <p class="semi-bold"> <%=found[0].extra[0].goals[i]%></p>
+             </div>
+             <%}%>
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
+  
+ 
+     </div>
+  </div>
+  <div class="resume_right" style="background-color: #2A2A2A;">
+     <%if(found[0].project.length!==0){%>
+          <%if(found[0].project[0].projectname.length!==0){%>
+            <%if((found[0].project[0].projectname[0].length!==0||
+            found[0].project[0].project1description[0].length!==0||
+            found[0].project[0].link[0].length!==0||
+            found[0].project[0].toolsused[0].length!==0)){%>
+    <div class="resume_item resume_education">
+        <div class="title">
+           <p class="bold">Projects</p>
+         </div>
+         <ul>
+             <%for(let i=0;i<found[0].project[0].projectname.length;i++){%>
+         <li>
+          <%if(found[0].project[0].projectname[i].length!==0){%>
+            <p class="heading data"><%=found[0].project[0].projectname[i]%></p> 
+            <br/>
+            <%}%>
+              <%if(found[0].project[0].link[0].length!==0){%>
+              <div class="data">
+                <p> <i class="fab fa-weebly"></i> <%=found[0].project[0].link[i]%></p>
+                 </div>
+                 <br />
+              <%}%>
+
+              <%if(found[0].project[0].toolsused[i].length!==0){%>  
+            <p class="data"><%=found[0].project[0].toolsused[i]%></p> 
+            <br />
+            <%}%>
+            <%if(found[0].project[0].project1description[i].length!==0){%>  
+            <p class="data"><%=found[0].project[0].project1description[i]%></p>
+            <br />
+            <%}%>
+         </li>
+            <%}%> 
+      </ul>
+      
+    </div>
+    <%}%>
+    <%}%>
+    <%}%>
+    
+    <%if(found[0].work.length!==0){%>
+          <%if(found[0].work[0].companyname.length!==0){%>
+            <%if((found[0].work[0].companyname[0].length!==0||found[0].work[0].startdate[0]!==null
+            ||found[0].work[0].enddate[0]!==null||
+            found[0].work[0].jobdescription[0].length!==0||
+            found[0].work[0].jobtitle[0].length!==0||
+            found[0].work[0].state[0].length!==0||
+            found[0].work[0].city[0].length!==0)){%>
+    <div class="resume_item resume_work">
+      
+        <div class="title">
+           <p class="bold">Work Experience</p>
+         </div>
+        <ul>
+          <%for(let i=0;i<found[0].work[0].companyname.length;i++){%>
+            <li>
+            <%if(found[0].work[0].companyname[i].length!==0){%>
+            <div class="heading data"><%=found[0].work[0].companyname[i]%></div>
+            <br>
+            <%}%>
+            
+            <%if(found[0].work[0].startdate[i]!==null){%>
+            <div class="marginn">
+             
+              <%=found[0].work[0].startdate[i].getDate()%> /
+              <%=found[0].work[0].startdate[i].getMonth()+1%> /
+              <%=found[0].work[0].startdate[i].getFullYear()%> 
+              
+            <%}%>
+            <%if(found[0].work[0].enddate[i]!==null){%>
+              
+              -   
+              <%=found[0].work[0].enddate[i].getDate()%> /
+              <%=found[0].work[0].enddate[i].getMonth()+1%> /
+              <%=found[0].work[0].enddate[i].getFullYear()%>
+             </div>
+             
+            <%}%>
+            <%if(found[0].work[0].state[i].length!==0||
+          found[0].work[0].city[i].length!==0){%>  
+              <p class="data"><%=found[0].work[0].state[i]%> , <%=found[0].work[0].city[i]%></p>
+              <%}%>
+           <br />
+           <%if(found[0].work[0].jobtitle[i].length!==0||found[0].work[0].jobdescription[i].length!==0){%>
+            <div class="data">
+              <p class="marginn"><%=found[0].work[0].jobtitle[i]%></p>
+              <p><%=found[0].work[0].jobdescription[i]%><br /><br /></p>
+            </div>
+           
+            <%}%>
+          </li>
+           <%}%> 
+        </ul>
+        
+    </div>
+<%}%>
+<%}%>
+<%}%>
+<%if(found[0].school.length!==0){%>
+          <%if(found[0].school[0].name.length!==0){%>
+            <%if((found[0].school[0].name[0].length!==0||
+            found[0].school[0].startdate[0]!==null
+            ||found[0].school[0].enddate[0]!==null||
+            found[0].school[0].degree[0].length!==0||
+            found[0].school[0].gpa[0]!==null||
+            found[0].school[0].location[0].length!==0)){%>
+    <div class="resume_item resume_education">
+      
+      <div class="title">
+           <p class="bold">Education</p>
+         </div>
+      <ul>
+        <%for(let i=0;i<found[0].school[0].name.length;i++){%>
+          <li>
+            <%if(found[0].school[0].name[i].length!==0){%>
+            <p class="heading data"><%=found[0].school[0].name[i]%></p>
+            <%}%>
+            <%if(found[0].school[0].startdate[i]!==null|| found[0].school[0].enddate[i]!==null){%>
+            
+            <div class="marginn">
+              <%if(found[0].school[0].startdate[i]!==null){%>
+              <%=found[0].school[0].startdate[i].getDate()%> /
+              <%=found[0].school[0].startdate[i].getMonth()+1%> /
+              <%=found[0].school[0].startdate[i].getFullYear()%>  - 
+              <%}%>
+              <%if(found[0].school[0].enddate[i]!==null){%> 
+              <%=found[0].school[0].enddate[i].getDate()%> /
+              <%=found[0].school[0].enddate[i].getMonth()+1%> /
+              <%=found[0].school[0].enddate[i].getFullYear()%>
+              </div>
+              <%}%>
+            <%}%>
+            <%if(found[0].school[0].location[i].length!==0){%>  
+              <p class="data"><%=found[0].school[0].location[i]%></p>
+              <%}%>
+           
+           <%if(found[0].school[0].gpa[i]!==null||found[0].school[0].degree[i].length!==0){%>
+            <div>
+              <%if(found[0].school[0].gpa[i]!==null){%>
+              <p class="data"><%=found[0].school[0].degree[i]%></p><br/>
+              <%}%>
+              <%if(found[0].school[0].degree[i].length!==0){%>
+              <p><%=found[0].school[0].gpa[i]%><br /><br /></p>
+              <%}%>
+            </div>
+           
+            <%}%>
+          </li>
+           <%}%> 
+           
+        </ul>
+        
+    </div>
+   <%}%> 
+<%}%>
+<%}%>
+ 
+<%if(found[0].awards.length!==0){%>
+          <%if(found[0].awards[0].awardname.length!==0){%>
+            <%if((found[0].awards[0].awardname[0].length!==0||
+            found[0].awards[0].awarddate[0]!==null||
+            found[0].awards[0].awarder[0].length!==0||
+            found[0].awards[0].Awarddescription[0].length!==0)){%>
+    <div class="resume_item resume_education">
+      
+      <div class="title">
+           <p class="bold">Awards</p>
+         </div>
+      <ul>
+        <%for(let i=0;i<found[0].awards[0].awardname.length;i++){%>
+           
+         
+          <li>
+            <%if(found[0].awards[0].awardname[i].length!==0){%>
+              
+            <p class="heading data"><%=found[0].awards[0].awardname[i]%></p>
+         
+            <%}%>
+            <%if(found[0].awards[0].awarddate[i]!==null){%>
+            <div class="marginn"><%=found[0].awards[0].awarddate[i].getDate()%> /
+              <%=found[0].awards[0].awarddate[i].getMonth()+1%> /
+              <%=found[0].awards[0].awarddate[i].getFullYear()%>
+              
+              </div>
+            <%}%>
+            <%if(found[0].awards[0].awarder[i].length!==0){%>  
+              <p class="data"><%=found[0].awards[0].awarder[i]%></p>
+              <%}%>
+            <br />
+              <%if(found[0].awards[0].Awarddescription[i]!==null){%>
+            
+            <p class="data"><%=found[0].awards[0].Awarddescription[i]%><br /><br /></p>
+           <%}%>
+          </li>
+           <%}%> 
+           
+        </ul>
+        
+    </div>
+   <%}%> 
+<%}%>
+<%}%>
+ 
+
+<%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].strength.length!==0){%>
+            <%if(found[0].extra[0].strength[0].length!==0){%>
+       <div class="resume_item resume_education">
+         <div class="title">
+           <p class="bold">Strengths</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].strength.length;i++){%>
+           <li>
+            <%if(found[0].extra[0].strength[i].length!==0){%>
+             <div class=" data">
+             <p class="semi-bold"> <%=found[0].extra[0].strength[i]%></p>
+             </div>
+             <%}%>
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
+
+  
+        <%if(found[0].extra.length!==0){%>
+          <%if(found[0].extra[0].hobbie.length!==0){%>
+            <%if(found[0].extra[0].hobbie[0].length!==0){%>
+       <div class="resume_item resume_education">
+         <div class="title">
+           <p class="bold">Hobbies</p>
+         </div>
+         <ul>
+          
+          <%for(let i=0;i<found[0].extra[0].hobbie.length;i++){%>
+           <li>
+            <%if(found[0].extra[0].hobbie[i].length!==0){%>
+             <div class="info data">
+             
+             <p class="semi-bold"> <%=found[0].extra[0].hobbie[i]%></p>
+             </div>
+             <%}%>   
+           </li>
+           <%}%>   
+         </ul>
+       </div>
+       <%}%>
+        <%}%>
+        <%}%>
+     
+  
+  </div>
+
+  <input type="hidden" id="page" value="download" />
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  <script src="js/resumetemplate.js"></script>
+  <script src="js/loading.js"></script>
+
+  
+
+</div>
+
+</body>
+</html>

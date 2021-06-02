@@ -20,7 +20,7 @@ body{
 	background: #fff;
 	margin: auto auto;
 	 display: flex;
-	
+	border:1px solid black;
 	/* margin:auto auto; */
 }
 
@@ -28,7 +28,7 @@ body{
 
 
 .left{
-	background: #292b2f;
+	background: #C6C5CA;
 	width: 250px;
 	padding: 0 20px;
 	
@@ -80,10 +80,7 @@ body{
 .left .icon{
 	font-size: 20px;
 	color: #9153c9;
-	
 }
-
-
 
 .left .text{
 	color: #9153c9;
@@ -113,7 +110,7 @@ body{
 .contact .li_wrap .text{
 	width: calc(100% - 50px);
 	word-break: break-word;
-	color: #fff;
+	color: black;
 }
 
 .skills ul,
@@ -154,7 +151,7 @@ body{
 
 .hobbies .li_wrap .icon,
 .hobbies .li_wrap .text{
-	color: #fff;
+	color: black;
 }
 
 .hobbies .li_wrap:hover{
@@ -167,9 +164,9 @@ body{
 }
 
 .header{
-	background: #292b2f;
+	background: #C6C5CA;
 	padding: 15px 30px;
-	color: #fff;
+	color: black;
 	/* height: auto;
 	width:auto; */
 }
@@ -193,7 +190,7 @@ body{
 
 .right_inner{
 	padding: 30px;
-	color: #292b2f;
+	color: black;
 }
 
 .right_inner .education{
