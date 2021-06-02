@@ -28,16 +28,16 @@
     <form method="POST" action="awards">
         <%for(let i=0;i<found[0].noOfAwards;i++){%>
         <div class="sameline">
-            <label for="awardname">Award name </label>
+            <label for="awardname<%=i%>">Award name </label>
             <%if(found[0].awards.length!==0){%>
-           <input type="text" placeholder="awardname" id="awardname" name="awardname" value="<%=found[0].awards[0].awardname[i]%>" autocomplete="off">
+           <input type="text" placeholder="Award name" id="awardname<%=i%>" name="awardname" value="<%=found[0].awards[0].awardname[i]%>" autocomplete="off">
             <%}else{%>
-                <input type="text" placeholder="awardname" id="awardname" name="awardname" value="" autocomplete="off">  
+                <input type="text" placeholder="Award name" id="awardname<%=i%>" name="awardname" value="" autocomplete="off">  
             <%}%>    
         </div>
 
         <div class="sameline">
-            <label for="awarddate">Award Date</label>
+            <label for="awarddate<%=i%>">Award Date</label>
             <%if(found[0].awards.length!==0){%>
                 <%if(found[0].awards[0].awarddate[i]!=null){%>
                     <%let template=found[0].awards[0].awarddate[i]%>
@@ -52,32 +52,32 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             
-            <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="<%=finaldate%>" autocomplete="off">
+            <input type="date" placeholder="Award date" id="awarddate<%=i%>" name="awarddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
+                <input type="date" placeholder="Award date" id="awarddate<%=i%>" name="awarddate" value="" autocomplete="off">
                 <%}%>
                 <%}else{%>
-                    <input type="date" placeholder="awarddate" id="awarddate" name="awarddate" value="" autocomplete="off">
+                    <input type="date" placeholder="Award date" id="awarddate<%=i%>" name="awarddate" value="" autocomplete="off">
                     <%}%>     
         </div>
         <div class="sameline">
-            <label for="awarder">Awarder</label>
+            <label for="awarder<%=i%>">Awarder</label>
             <%if(found[0].awards.length!==0){%>
             
-            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="<%=found[0].awards[0].awarder[i]%>" autocomplete="off">
+            <input type="text" placeholder="Awarder" id="awarder<%=i%>" name="awarder" value="<%=found[0].awards[0].awarder[i]%>" autocomplete="off">
             <%}else{%>
                
-            <input type="text" placeholder="awarder" id="awarder" name="awarder" value="" autocomplete="off">
+            <input type="text" placeholder="Awarder" id="awarder<%=i%>" name="awarder" value="" autocomplete="off">
             <%}%> 
         </div>
         <div class="sameline">
-            <label for="Awarddescription">Award description</label>
+            <label for="Awarddescription<%=i%>">Description</label>
             <%if(found[0].awards.length!==0){%>
             
-            <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="<%=found[0].awards[0].Awarddescription[i]%>" autocomplete="off">
+            <input type="text" placeholder="Award description" id="Awarddescription<%=i%>" name="Awarddescription" value="<%=found[0].awards[0].Awarddescription[i]%>" autocomplete="off">
             <%}else{%>
                 
-                <input type="text" placeholder="Awarddescription" id="Awarddescription" name="Awarddescription" value="" autocomplete="off">
+                <input type="text" placeholder="Award description" id="Awarddescription<%=i%>" name="Awarddescription" value="" autocomplete="off">
             <%}%>    
         </div>
         <br>

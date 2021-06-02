@@ -32,38 +32,38 @@
         <%for(let i=0;i<found[0].noOfWorkExperience;i++){%>
         <div class="sameline">
             <%if(found[0].work.length!==0){%>
-            <label for="companyname">Company</label>
-            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="<%=found[0].work[0].companyname[i]%>" autocomplete="off">
+            <label for="companyname<%=i%>">Company</label>
+            <input type="text" placeholder="Company name" id="companyname<%=i%>" name="companyname" value="<%=found[0].work[0].companyname[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="companyname">Company</label>
-            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="" autocomplete="off">
+                <label for="companyname<%=i%>">Company</label>
+            <input type="text" placeholder="Company name" id="companyname<%=i%>" name="companyname" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
             <%if(found[0].work.length!==0){%>
-            <label for="jobtitle">jobtitle</label>
-            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="<%=found[0].work[0].jobtitle[i]%>" autocomplete="off">
+            <label for="jobtitle<%=i%>">Jobtitle</label>
+            <input type="text" placeholder="jobtitle" id="jobtitle<%=i%>" name="jobtitle" value="<%=found[0].work[0].jobtitle[i]%>" autocomplete="off">
             <%}else{%>
-            <label for="jobtitle">jobtitle</label>
-            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="" autocomplete="off">
+            <label for="jobtitle<%=i%>">Jobtitle</label>
+            <input type="text" placeholder="jobtitle" id="jobtitle<%=i%>" name="jobtitle" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
             <%if(found[0].work.length!==0){%>
-            <label for="state">state</label>
-            <input type="text" placeholder="state" id="state" name="state" value="<%=found[0].work[0].state[i]%>" autocomplete="off">
+            <label for="state<%=i%>">state</label>
+            <input type="text" placeholder="state" id="state<%=i%>" name="state" value="<%=found[0].work[0].state[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="state">state</label>
-                <input type="text" placeholder="state" id="state" name="state" value="" autocomplete="off">
+                <label for="state<%=i%>">state</label>
+                <input type="text" placeholder="state" id="state<%=i%>" name="state" value="" autocomplete="off">
                 <%}%>     
         </div>
         <div class="sameline">
             <%if(found[0].work.length!==0){%>
-            <label for="city">city</label>
-            <input type="text" placeholder="city" id="city" name="city" value="<%=found[0].work[0].city[i]%>" autocomplete="off">
+            <label for="city<%=i%>">city</label>
+            <input type="text" placeholder="city" id="city<%=i%>" name="city" value="<%=found[0].work[0].city[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="city">city</label>
-            <input type="text" placeholder="city" id="city" name="city" value="" autocomplete="off">
+                <label for="city<%=i%>">city</label>
+            <input type="text" placeholder="city" id="city<%=i%>" name="city" value="" autocomplete="off">
             <%}%> 
         </div>
         <div class="sameline">
@@ -80,15 +80,15 @@
                     <%}%>
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
-            <label for="startdate">Start Date</label>
-            <input type="date" placeholder="startdate" id="startdate" name="startdate" value="<%=finaldate%>" autocomplete="off">
+            <label for="startdate<%=i%>">Start Date</label>
+            <input type="date" placeholder="startdate" id="startdate<%=i%>" name="startdate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <label for="startdate">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="" autocomplete="off">
+                <label for="startdate<%=i%>">Start Date</label>
+                <input type="date" placeholder="startdate" id="startdate<%=i%>" name="startdate" value="" autocomplete="off">
             <%}%> 
             <%}else{%>
-                <label for="startdate">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="" autocomplete="off">
+                <label for="startdate<%=i%>">Start Date</label>
+                <input type="date" placeholder="startdate" id="startdate<%=i%>" name="startdate" value="" autocomplete="off">
             <%}%>     
         </div>
         <div class="sameline">
@@ -105,24 +105,24 @@
                     <%}%>
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
-            <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="<%=finaldate%>" autocomplete="off">
+            <label for="enddate<%=i%>">End Date</label>
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" name="enddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="" autocomplete="off">
+                <label for="enddate<%=i%>">End Date</label>
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" name="enddate" value="" autocomplete="off">
             <%}%>
             <%}else{%>
-                <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="" autocomplete="off">
+                <label for="enddate<%=i%>">End Date</label>
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" name="enddate" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
             <%if(found[0].work.length!==0){%>
-            <label for="jobdescription">Description</label>
-            <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" value="<%=found[0].work[0].jobdescription[i]%>" autocomplete="off">
+            <label for="jobdescription<%=i%>">Description</label>
+            <input type="text" placeholder="jobdescription" id="jobdescription<%=i%>" name="jobdescription" value="<%=found[0].work[0].jobdescription[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="jobdescription">Description</label>
-                <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" autocomplete="off">
+                <label for="jobdescription<%=i%>">Description</label>
+                <input type="text" placeholder="jobdescription" id="jobdescription<%=i%>" name="jobdescription" autocomplete="off">
             <%}%>       
         </div>
         <br>

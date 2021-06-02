@@ -29,21 +29,21 @@
         <%for(let i=0;i<found[0].noOfSkills;i++){%>
         <div class="sameline"> 
               
-            <label for="skillsname">Skill Name</label>
+            <label for="skillsname<%=i%>">Skill</label>
             <%if(found[0].skills.length!==0){%> 
-            <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="<%=found[0].skills[0].skillsname[i]%>" autocomplete="off">
+            <input type="text" placeholder="Skill name" id="skillsname<%=i%>" name="skillsname" value="<%=found[0].skills[0].skillsname[i]%>" autocomplete="off">
                 <%}else{%>
-                    <input type="text" placeholder="skillsname" id="skillsname" name="skillsname" value="" autocomplete="off">      
+                    <input type="text" placeholder="Skill name" id="skillsname<%=i%>" name="skillsname" value="" autocomplete="off">      
              <%}%>
         </div>
 
         <div class="sameline">
             
-            <label for="skillsdetails">Level Percentage</label>
+            <label for="skillsdetails<%=i%>">Percentage</label>
             <%if(found[0].skills.length!==0){%> 
-            <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off"> 
+            <input type="number" placeholder="Level" id="skillsdetails<%=i%>" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off"> 
             <%}else{%>
-                <input type="number" placeholder="Level" id="skillsdetails" name="skillsdetails" value="" autocomplete="off">  
+                <input type="number" placeholder="Level" id="skillsdetails<%=i%>" name="skillsdetails" value="" autocomplete="off">  
             <%}%>   
                 
         </div>

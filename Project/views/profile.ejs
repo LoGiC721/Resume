@@ -41,22 +41,22 @@
                         <div class="samelinewidth">
                             <%if(found[0].firstname!=="NULL"){%>
                                 <label for="firstname">Full Name</label>
-                                <input type="text" placeholder="First name" id="firstname" name="firstname"
+                                <input type="text" placeholder="Name" id="firstname" name="firstname"
                                     value="<%=found[0].firstname%>" autocomplete="off">
                                 <%}else{%>
                                     <label for="firstname">Full Name</label>
-                                    <input type="text" placeholder="First name" id="firstname" name="firstname" value=""
+                                    <input type="text" placeholder="Name" id="firstname" name="firstname" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
 
                         <div class="samelinewidth">
                             <%if(found[0].profile!=="NULL"){%>
-                                <label for="profile">Heading</label>
+                                <label for="profile">About</label>
                                 <input type="text" placeholder="Write a short note of yourself" id="profile" name="profile"
                                     value="<%=found[0].profile%>" autocomplete="off">
                                 <%}else{%>
-                                    <label for="profile">Heading</label>
+                                    <label for="profile">About</label>
                                     <input type="text" placeholder="Write a short note of yourself" id="profile" name="profile" value=""
                                         autocomplete="off">
                                     <%}%>
@@ -139,11 +139,11 @@
                         <div class="samelinewidth">
                             <%if(found[0].pno!=="NULL"){%>
                                 <label for="pno">Phone</label>
-                                <input type="number" placeholder="Phone" id="pno" name="pno" value="<%=found[0].pno%>"
+                                <input type="number" placeholder="Contact no" id="pno" name="pno" value="<%=found[0].pno%>"
                                     autocomplete="off">
                                 <%}else{%>
                                     <label for="pno">Phone</label>
-                                    <input type="number" placeholder="Phone" id="pno" name="pno" value=""
+                                    <input type="number" placeholder="Contact no" id="pno" name="pno" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
@@ -159,13 +159,13 @@
 
 
                                                                             <label for="currentposition">Role</label>
-                                                                            <input type="text" placeholder="Student/Designer"
+                                                                            <input type="text" placeholder="Student"
                                                                                 id="currentposition" name="currentposition"
                                                                                 value="<%=found[0].currentposition%>"
                                                                                 autocomplete="off">
                                                                             <%}else{%>
                                                                                 <label for="currentposition">Role</label>
-                                                                                <input type="text" placeholder="Student/Designer"
+                                                                                <input type="text" placeholder="Student"
                                                                                     id="currentposition" name="currentposition"
                                                                                     value=""
                                                                                     autocomplete="off">
