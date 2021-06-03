@@ -123,9 +123,9 @@ const UserSchema = new Schema({
     },
   ],
 
-  username: { type: String, default: null },
+  username: { type: String, default: null},
   password: { type: String, default: null },
-  loginid:  { type: String, default: null },
+  loginid:  { type: String, default: null},
   googleId: { type: String},
   facebookId: { type: String},
   twitterId: { type: String},
@@ -1174,6 +1174,16 @@ app.post('/reset/:token', function(req, res) {
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('/forget');
         }
+
+
+        let value=req.body.password;
+  let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+if(!value.match(passw)) 
+{ 
+  req.flash('error',"Password must be atleast 6 characters long , contains atleast one numeric digit, one uppercase & one lowercase letter."); 
+    return res.redirect(loc);
+}
 
 
         Project.findByUsername(user.username).then(function(sanitizedUser){

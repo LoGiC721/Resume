@@ -38,7 +38,7 @@
                     <div class="col-4">
                <label for="hobbie" class="labell">Hobbies</label>
             </div>
-            <div class="col-6">
+            <div class="col-sm-6 col-xs-3">
                 <%for(let i=0;i<found[0].noOfhobbies;i++){%>
               <%if(found[0].extra.length!==0){%> 
               <input type="text" placeholder="Hobby" class="inputt" name="hobbie" id="hobbie" value="<%=found[0].extra[0].hobbie[i]%>">
@@ -81,7 +81,7 @@
                 <label for="strength">Strengths</label>
                 </div>
 
-                <div class="col-6">
+                <div class="col-sm-6 col-xs-3">
             <%for(let i=0;i<found[0].noOfStrengths;i++){%>
                 <%if(found[0].extra.length!==0){%> 
                 <input type="text" placeholder="Strength" name="strength" id="strength" value="<%=found[0].extra[0].strength[i]%>">
@@ -125,7 +125,7 @@
         <label for="language">Languages</label>
         </div>
        
-        <div class="col-6">
+        <div class="col-sm-6 col-xs-3">
         <%for(let i=0;i<found[0].noOfLanguage;i++){%>
             <%if(found[0].extra.length!==0){%> 
             <input type="text" placeholder="Language" id="language" name="language" value="<%=found[0].extra[0].language[i]%>">
@@ -158,7 +158,7 @@
             <label for="goal">Goals</label>
             </div>
             
-            <div class="col-6">
+            <div class="col-sm-6 col-xs-3">
             <%for(let i=0;i<found[0].noOfGoals;i++){%>
                 <%if(found[0].extra.length!==0){%> 
                 <input type="text" placeholder="Goal" name="goal" id="goal" value="<%=found[0].extra[0].goals[i]%>">

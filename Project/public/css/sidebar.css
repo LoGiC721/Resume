@@ -6,8 +6,11 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    
+    background-color: #14171D;
 }
+
+
 
 p {
     font-family: 'Poppins', sans-serif;
@@ -20,6 +23,8 @@ p {
 #content{
     background-color: #14171D;
 }
+
+
 
 a,
 a:hover,
@@ -36,6 +41,8 @@ a:focus {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #fafafa;
+   width:auto;
 }
 
 .navbar-btn {
@@ -614,7 +621,7 @@ label:hover{
        
      }
 
-     @media(max-width:356px)
+     @media(max-width:376px)
      {
          .uploadbtn{
              margin-top:10px;
@@ -696,3 +703,47 @@ background-color: #FFD2D2;
     cursor:pointer;
   
   }
+
+
+
+  @media(max-width:550px)
+  {
+      .sameline input{
+          width:50%;
+      }
+
+      
+  }
+
+  @media(max-width:575px)
+  {
+      
+
+      .same input{
+    width:50%;
+}
+
+
+.smallbtn{
+    position:relative;
+    left:10px;
+}
+
+  }
+
+
+  
+
+
+  @media(max-width:361px)
+  {
+
+   
+      .end-vertical-line{
+          display:none
+      }
+
+      
+  }
+
+  
