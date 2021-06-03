@@ -159,37 +159,61 @@
 				<%if(found[0].pno!==null){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Phone</div>
-					<div class="resume_subinfo"><%=found[0].pno%></div>
+					<div class="resume_subinfo">
+						<a href="callto:<%=found[0].pno%>" style="text-decoration: none;color:black">
+					<%=found[0].pno%>
+					</a>
+					</div>
 				</div>
 				<%}%>
 				<%if(found[0].email!==null&&found[0].email.length!==0){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Email</div>
-					<div class="resume_subinfo"><%=found[0].email%></div>
+					<div class="resume_subinfo">
+						<a href="mailto:<%=found[0].email%>" style="text-decoration: none;color:black">
+					<%=found[0].email%>
+					</a>
+					</div>
 				</div>
 				<%}%>
 				<%if(found[0].twitter!==null&&found[0].twitter.length!==0){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Twitter</div>
-					<div class="resume_subinfo"><%=found[0].twitter%></div>
+					<div class="resume_subinfo">
+						<a href="<%=found[0].twitter%>" style="text-decoration: none;color:black">
+					<%=found[0].twitter%>
+					</a>
+					</div>
 				</div>
 				<%}%>
 				<%if(found[0].github!==null&&found[0].github.length!==0){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Github</div>
-					<div class="resume_subinfo"><%=found[0].github%></div>
+					<div class="resume_subinfo">
+						<a href="<%=found[0].github%>" style="text-decoration: none;color:black">
+					<%=found[0].github%>
+					</a>
+					</div>
 				</div>
 				<%}%>
           <%if(found[0].linkedin!==null&&found[0].linkedin.length!==0){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Linkedin</div>
-					<div class="resume_subinfo"><%=found[0].linkedin%></div>
+					<div class="resume_subinfo">
+						<a href="<%=found[0].linkedin%>" style="text-decoration: none;color:black">
+					<%=found[0].linkedin%>
+					</a>
+					</div>
 				</div>
 				<%}%>
            <%if(found[0].website!==null&&found[0].website.length!==0){%>
 				<div class="resume_info">
 					<div class="resume_subtitle">Website</div>
-					<div class="resume_subinfo"><%=found[0].website%></div>
+					<div class="resume_subinfo">
+						<a href="<%=found[0].website%>" style="text-decoration: none;color:black">
+					<%=found[0].website%>
+					</a>
+					</div>
 				</div>
 
 			</div>
