@@ -1097,7 +1097,7 @@ app.post("/home",function(req,res)
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-  res.render("availabletemplates", { currentUser: req.user });
+  res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 })
 
 

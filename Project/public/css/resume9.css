@@ -21,6 +21,7 @@ body{
 	margin: auto auto;
 	 display: flex;
 	border:1px solid black;
+	border-bottom: none;
 	/* margin:auto auto; */
 }
 

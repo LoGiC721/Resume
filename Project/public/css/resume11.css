@@ -15,8 +15,8 @@ body{
 }
 
 .resume_wrapper{
-    max-height:1000px;
 	display: flex;
+	max-width:1000px;
 	width: 800px;
 	margin: auto auto;
 	background: #fff;
@@ -25,8 +25,8 @@ body{
 
 .resume_wrapper .resume_left{
 	width: 35%;
-	background:white;
-    color:#26252D;
+	background: white;
+
 }
 
 .resume_wrapper .resume_left .resume_image{
@@ -39,7 +39,7 @@ body{
 }
 
 .resume_wrapper .resume_title{
-	color: #26252D;
+	color: black;
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 16px;
@@ -47,7 +47,9 @@ body{
 	letter-spacing: 4px;
 }
 
-
+.resume_wrapper .resume_left .resume_info{
+	color: #84838b;
+}
 
 .resume_wrapper .resume_left .resume_bottom{
 	padding: 20px 30px;
@@ -99,14 +101,15 @@ body{
 	position: relative;
 	width: 125px;
     height: 20px;
-    background: #fff;
+    background: white;
+	border:1px solid black;
 }
 
 .resume_wrapper .resume_left .resume_skills .skills_list .skills_bar p span{	
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: #26252D;
+	background: black;
 	width: 100%;
 	height: 100%;
 }
@@ -115,7 +118,7 @@ body{
 	width: 65%;
 	padding: 20px 40px;
 	color: white;
-    background-color: #26252D;
+	background-color: #26252d;
 }
 
 .resume_wrapper .resume_right .resume_namerole .name{
@@ -162,7 +165,7 @@ body{
 	width: 10px;
 	height: 10px;
 	background: #fff;
-	border: 1px solid white;
+	border: 1px solid #26252d;
 	border-radius: 50%;
 }
 
@@ -238,7 +241,7 @@ body{
 		padding: 0;
 		margin-bottom: 5px;
 		width: 100%;
-		color: #0175b2;
+		color: white;
 	}
 	.resume_wrapper .resume_right .resume_data .year:before,
 	.resume_wrapper .resume_right .resume_data .year:after{
@@ -260,6 +263,7 @@ body{
 
 @media print{
 
+	
 	.resume_wrapper{
 		margin:0;
         width:1000px;
