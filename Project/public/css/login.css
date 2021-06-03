@@ -481,7 +481,7 @@ margin-right:15px;
       top: 110%;
       transform: translate(-50%, -100%);
       transition: 1s 0.8s ease-in-out;
-     height:600px;
+     height:650px;
     }
 
     .social-icon{
@@ -491,7 +491,12 @@ margin-right:15px;
     .btn {
       width:100px;
     }
-   
+    .success,.danger{
+      margin-top:-10px;
+      height:70px;
+    }
+
+    
 }
 
 .social-media {
