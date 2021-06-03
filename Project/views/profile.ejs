@@ -214,11 +214,11 @@
                         <div class="samelinewidth">
                             <%if(found[0].pin!=="NULL"){%>
                                 <label for="pin">Pincode</label>
-                                <input type="text" placeholder="Pincode" id="pin" name="pin" value="<%=found[0].pin%>"
+                                <input type="number" placeholder="Pincode" id="pin" name="pin" value="<%=found[0].pin%>"
                                     autocomplete="off">
                                 <%}else{%>
                                     <label for="pin">Pincode</label>
-                                    <input type="text" placeholder="Pincode" id="pin" name="pin" value=""
+                                    <input type="number" placeholder="Pincode" id="pin" name="pin" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>

@@ -25,6 +25,29 @@
 
 
 
+
+           <%let d = new Date();%>
+		   <%let date1=d.getDate()%>
+			<%if(date1<10){%>
+				<%date1='0' +date1%>
+				<%}%>
+				<%let month1=(d.getMonth())+1%>
+				<%if(month1<10){%>
+				<%month1='0' +month1%>
+				<%}%>
+				<%let year1=d.getFullYear()%>
+
+
+
+			<%var strdate = year1 + "-" + month1 + "-" + date1;%>
+
+
+
+
+
+
+
+
 	<h4>Your Educational Details</h4>
 	<br>
 	<form method="POST" action="education">
@@ -52,15 +75,21 @@
 			<%}%>
 			<%let year=template.getFullYear()%>
 			<%let finaldate=`${year}-${month}-${date}`%>
+
+
 			<label for="startdate<%=i%>">Start date</label>
-			<input type="date" placeholder="Start date" id="startdate<%=i%>" name="startdate" value="<%=finaldate%>" autocomplete="off"> 
+			<input type="date" placeholder="Start date" id="startdate<%=i%>"
+			 name="startdate" min="1940-01-01" max="<%=strdate%>"
+			 value="<%=finaldate%>" autocomplete="off"> 
             <%}else{%>
             <label for="startdate<%=i%>">Start date</label>
-			<input type="date" placeholder="Start date" id="startdate<%=i%>" name="startdate" value="" autocomplete="off">
+			<input type="date" placeholder="Start date" id="startdate<%=i%>"
+			 name="startdate" min="1940-01-01" max="<%=strdate%>" value="" autocomplete="off">
 			<%}%>
 			<%}else{%>
 			<label for="startdate<%=i%>">Start date</label>
-			<input type="date" placeholder="Start date" id="startdate<%=i%>" name="startdate" value="" autocomplete="off">
+			<input type="date" placeholder="Start date" id="startdate<%=i%>" 
+			name="startdate" min="1940-01-01" max="<%=strdate%>" value="" autocomplete="off">
 			<%}%>
 		</div>
 		
@@ -79,14 +108,14 @@
 			<%let year=template.getFullYear()%>
 			<%let finaldate=`${year}-${month}-${date}`%>
 			<label for="enddate<%=i%>">End date</label>
-			<input type="date" placeholder="End date" id="enddate<%=i%>" name="enddate" value="<%=finaldate%>" autocomplete="off"> 
+			<input type="date" placeholder="End date" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="<%=finaldate%>" autocomplete="off"> 
             <%}else{%>
                 <label for="enddate<%=i%>">End date</label>
-                <input type="date" placeholder="End date" id="enddate<%=i%>" name="enddate" value="" autocomplete="off">
+                <input type="date" placeholder="End date" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
 			<%}%>
 			<%}else{%>
                 <label for="enddate<%=i%>">End date</label>
-                <input type="date" placeholder="End date" id="enddate<%=i%>" name="enddate" value="" autocomplete="off">
+                <input type="date" placeholder="End date" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<div class="sameline">
@@ -101,10 +130,10 @@
 		<div class="sameline">
 			<%if(found[0].school.length!==0){%>
 			<label for="gpa<%=i%>">Gpa</label>
-			<input type="number" placeholder="Gpa" id="gpa<%=i%>" name="gpa" value="<%=found[0].school[0].gpa[i]%>" autocomplete="off"> 
+			<input type="number" placeholder="Gpa" id="gpa<%=i%>" max="10" min="0" name="gpa" value="<%=found[0].school[0].gpa[i]%>" autocomplete="off"> 
 			<%}else{%>
 			<label for="gpa<%=i%>">Gpa</label>
-			<input type="number" placeholder="Gpa" id="gpa<%=i%>" name="gpa" value="" autocomplete="off">
+			<input type="number" placeholder="Gpa" id="gpa<%=i%>" max="10" min="0" name="gpa" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<div class="sameline">

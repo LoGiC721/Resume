@@ -12,7 +12,6 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
-
 const findOrCreate = require("mongoose-findorcreate");
 const multer = require("multer");
 const fs = require("fs");
@@ -21,6 +20,7 @@ var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const flash = require('connect-flash');
+
 const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 const loading = multer({ dest: "public/uploads/" });
 
@@ -29,6 +29,9 @@ const loading = multer({ dest: "public/uploads/" });
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+
+
 
 app.use(express.static("public"));
 app.use(
@@ -42,6 +45,8 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 mongoose.connect("mongodb://localhost:27017/Resume", {
   useNewUrlParser: true,
@@ -70,8 +75,8 @@ const UserSchema = new Schema({
   school: [
     {
       name: [{ type: String, default: null }],
-      startdate: [{ type: Date, default: Date.now }],
-      enddate: [{ type: Date, default: Date.now }],
+      startdate: [{ type: Date, default: Date.now}],
+      enddate: [{ type: Date, default: Date.now, }],
       degree: [{ type: String, default: null }],
       gpa: [{ type: Number, default: null }],
       location: [{ type: String, default: null }],
@@ -84,8 +89,8 @@ const UserSchema = new Schema({
       jobtitle: [{ type: String, default: null }],
       state: [{ type: String, default: null }],
       city: [{ type: String, default: null }],
-      startdate: [{ type: Date, default: null }],
-      enddate: [{ type: Date, default: null }],
+      startdate: [{ type: Date, default: null, }],
+      enddate: [{ type: Date, default: null ,}],
       jobdescription: [{ type: String, default: null }],
     },
   ],
@@ -109,7 +114,7 @@ const UserSchema = new Schema({
   awards: [
     {
       awardname: [{ type: String, default: null }],
-      awarddate: [{ type: Date, default: null }],
+      awarddate: [{ type: Date, default: null, }],
       awarder: [{ type: String, default: null }],
       Awarddescription: [{ type: String, default: null }],
     },
@@ -265,6 +270,12 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({ storage: storage });
+
+
+
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+
 
 app.get(
   "/auth/google",
@@ -642,8 +653,6 @@ app.post("/education", function (req, res) {
   req.flash('error',err.message);
   return res.redirect("/education")
 }
-
-
 
 
   if (value === "3") {

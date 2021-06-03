@@ -23,6 +23,27 @@
 <%}%>
 
 
+
+<%let d = new Date();%>
+		   <%let date1=d.getDate()%>
+			<%if(date1<10){%>
+				<%date1='0' +date1%>
+				<%}%>
+				<%let month1=(d.getMonth())+1%>
+				<%if(month1<10){%>
+				<%month1='0' +month1%>
+				<%}%>
+				<%let year1=d.getFullYear()%>
+
+
+
+			<%var strdate = year1 + "-" + month1 + "-" + date1;%>
+
+
+
+
+
+
     <h4>Your Award Details</h4>
     <br>
     <form method="POST" action="awards">
@@ -52,12 +73,12 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             
-            <input type="date" placeholder="Award date" id="awarddate<%=i%>" name="awarddate" value="<%=finaldate%>" autocomplete="off">
+            <input type="date" placeholder="Award date" id="awarddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="awarddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <input type="date" placeholder="Award date" id="awarddate<%=i%>" name="awarddate" value="" autocomplete="off">
+                <input type="date" placeholder="Award date" id="awarddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="awarddate" value="" autocomplete="off">
                 <%}%>
                 <%}else{%>
-                    <input type="date" placeholder="Award date" id="awarddate<%=i%>" name="awarddate" value="" autocomplete="off">
+                    <input type="date" placeholder="Award date" id="awarddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="awarddate" value="" autocomplete="off">
                     <%}%>     
         </div>
         <div class="sameline">

@@ -41,9 +41,9 @@
             
             <label for="skillsdetails<%=i%>">Percentage</label>
             <%if(found[0].skills.length!==0){%> 
-            <input type="number" placeholder="Level" id="skillsdetails<%=i%>" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off"> 
+            <input type="number" placeholder="Level" id="skillsdetails<%=i%>" max="100" min="0" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off"> 
             <%}else{%>
-                <input type="number" placeholder="Level" id="skillsdetails<%=i%>" name="skillsdetails" value="" autocomplete="off">  
+                <input type="number" placeholder="Level" id="skillsdetails<%=i%>" max="100" min="0" name="skillsdetails" value="" autocomplete="off">  
             <%}%>   
                 
         </div>

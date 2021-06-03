@@ -26,6 +26,24 @@
 
 
 
+<%let d = new Date();%>
+		   <%let date1=d.getDate()%>
+			<%if(date1<10){%>
+				<%date1='0' +date1%>
+				<%}%>
+				<%let month1=(d.getMonth())+1%>
+				<%if(month1<10){%>
+				<%month1='0' +month1%>
+				<%}%>
+				<%let year1=d.getFullYear()%>
+
+
+
+			<%var strdate = year1 + "-" + month1 + "-" + date1;%>
+
+
+
+
     <h4>Your Work Details</h4>
     <br>
     <form method="POST" action="work">
@@ -81,14 +99,14 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             <label for="startdate<%=i%>">Start Date</label>
-            <input type="date" placeholder="startdate" id="startdate<%=i%>" name="startdate" value="<%=finaldate%>" autocomplete="off">
+            <input type="date" placeholder="startdate" id="startdate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="startdate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
                 <label for="startdate<%=i%>">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate<%=i%>" name="startdate" value="" autocomplete="off">
+                <input type="date" placeholder="startdate" id="startdate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="startdate" value="" autocomplete="off">
             <%}%> 
             <%}else{%>
                 <label for="startdate<%=i%>">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate<%=i%>" name="startdate" value="" autocomplete="off">
+                <input type="date" placeholder="startdate" id="startdate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="startdate" value="" autocomplete="off">
             <%}%>     
         </div>
         <div class="sameline">
@@ -106,14 +124,14 @@
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
             <label for="enddate<%=i%>">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate<%=i%>" name="enddate" value="<%=finaldate%>" autocomplete="off">
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
                 <label for="enddate<%=i%>">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate<%=i%>" name="enddate" value="" autocomplete="off">
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
             <%}%>
             <%}else{%>
                 <label for="enddate<%=i%>">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate<%=i%>" name="enddate" value="" autocomplete="off">
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
