@@ -46,6 +46,7 @@ app.use(passport.session());
 mongoose.connect("mongodb://localhost:27017/Resume", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 const UserSchema = new Schema({
@@ -125,7 +126,7 @@ const UserSchema = new Schema({
 
   username: { type: String, default: null},
   password: { type: String, default: null },
-  loginid:  { type: String, default: null},
+  loginid:  { type: String, default: null,unique:true},
   googleId: { type: String},
   facebookId: { type: String},
   twitterId: { type: String},
@@ -153,7 +154,15 @@ const UserSchema = new Schema({
 
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
+UserSchema.plugin(passportLocalMongoose, { usernameQueryFields: ['loginid'] });
+
+
 const Project = mongoose.model("Project", UserSchema);
+
+ 
+
+  
+
 
 passport.use(Project.createStrategy());
 passport.serializeUser(function (user, done) {
@@ -513,12 +522,14 @@ if(!value.match(passw))
 }
 
 
+
+
   Project.register(
     { username: req.body.username,loginid:req.body.emailid },
     req.body.password,
     function (err, user) {
       if (err) {
-        req.flash('error',err.message);
+        req.flash('error',"A user with the given username or email is already registered ");
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
@@ -1157,7 +1168,7 @@ app.post('/forget', function(req, res, next) {
   ], function(err) {
      if (err)
        // return next(err);
-       req.flash('error',"Error occured! Please contact developer"); 
+       req.flash('error',err.message); 
     res.redirect('/forget');
   });
 });
@@ -1237,7 +1248,7 @@ if(!value.match(passw))
   ], function(err) {
     res.redirect('/login');
     if(err)
-    req.flash('error',"Error occured! Please contact developer"); 
+    req.flash('error',err.message); 
   });
 }
 else{
