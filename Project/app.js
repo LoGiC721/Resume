@@ -191,7 +191,9 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/secrets",
+      // callbackURL: "http://localhost:3000/auth/google/secrets",
+      callbackURL: "https://damp-beach-49352.herokuapp.com/auth/google/secrets",
+     
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
@@ -208,7 +210,8 @@ passport.use(
     {
       clientID: process.env.Facebook_CLIENT_ID,
       clientSecret: process.env.Facebook_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/key",
+      // callbackURL: "http://localhost:3000/auth/facebook/key",
+      callbackURL: "https://damp-beach-49352.herokuapp.com/auth/google/secrets",
       proxy: true
     },
     function (accessToken, refreshToken, profile, cb) {
@@ -224,7 +227,8 @@ passport.use(
     {
       consumerKey: process.env.Twitter_CLIENT_ID,
       consumerSecret: process.env.Twitter_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/twitter/importantkey",
+      // callbackURL: "http://localhost:3000/auth/twitter/importantkey",
+      callbackURL: "https://damp-beach-49352.herokuapp.com/auth/twitter/importantkey",
     },
     function (token, tokenSecret, profile, cb) {
       Project.findOrCreate({ twitterId: profile.id,username:profile.username }, function (err, user) {
@@ -238,7 +242,8 @@ passport.use(
 passport.use(new LinkedInStrategy({
   clientID: process.env.LinkedIn_CLIENT_ID,
   clientSecret:process.env.LinkedIn_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/linkedin/keyy",
+  // callbackURL: "http://localhost:3000/auth/linkedin/keyy",
+  callbackURL: "https://damp-beach-49352.herokuapp.com/auth/linkedin/keyy",
   scope: ['r_liteprofile'],
   state: true
 }, function(accessToken, refreshToken, profile, done) {
@@ -253,7 +258,8 @@ passport.use(new LinkedInStrategy({
 passport.use(new GitHubStrategy({
   clientID: process.env.Github_CLIENT_ID,
   clientSecret: process.env.Github_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/github/token"
+  // callbackURL: "http://localhost:3000/auth/github/token"
+  callbackURL: "https://damp-beach-49352.herokuapp.com/auth/github/token"
 },
 function(accessToken, refreshToken, profile, done) {
   Project.findOrCreate({ githubId: profile.id,username:profile.username }, function (err, user) {
@@ -1010,6 +1016,8 @@ app.post("/extra", function (req, res) {
     return res.redirect("/login");
   }
 
+
+
   try{
   if (req.body.btn === "1") {
     noOfhobbies++;
@@ -1031,6 +1039,12 @@ app.post("/extra", function (req, res) {
 
   var myquery = { _id: req.user.id };
 
+
+  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully(sbb delete krna)");
+   
+  });
+
   Project.updateMany(myquery,
      { $set: { noOfGoals:noOfGoals,noOfLanguage:noOfLanguage,noOfhobbies:noOfhobbies,
       noOfStrengths:noOfStrengths,} },
@@ -1038,10 +1052,6 @@ app.post("/extra", function (req, res) {
     if (!err) console.log("Documents updated successfully(goals vgera ke count)");
   });
 
-  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully(sbb delete krna)");
-   
-  });
 
   var newvalue = {
     $push: {
@@ -1062,7 +1072,7 @@ app.post("/extra", function (req, res) {
   return res.redirect("/extra")
 }
 
-  if(req.body.btn==="9")
+if(req.body.btn==="9")
   res.redirect("/download");
   else
   res.redirect("/extra");
