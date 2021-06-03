@@ -20,6 +20,7 @@ var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const flash = require('connect-flash');
+const uniqueValidator=require('mongoose-unique-validator');
 
 const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 const loading = multer({ dest: "public/uploads/" });
@@ -48,11 +49,7 @@ app.use(passport.session());
 
 
 
-mongoose.connect("mongodb://localhost:27017/Resume", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+
 
 const UserSchema = new Schema({
   firstname: { type: String, default: null },
@@ -160,7 +157,16 @@ const UserSchema = new Schema({
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
 UserSchema.plugin(passportLocalMongoose, { usernameQueryFields: ['loginid'] });
+UserSchema.plugin(uniqueValidator)
 
+
+
+
+mongoose.connect(`mongodb+srv://${process.env.DATABASE_ID}:${process.env.DATABASE_PASSWORD}@cluster0.rfaz9.mongodb.net/Resume`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 const Project = mongoose.model("Project", UserSchema);
 
