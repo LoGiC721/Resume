@@ -1003,7 +1003,7 @@ try{
 });
 
 app.post("/extra", function (req, res) {
-  // console.log(req.body);
+  console.log(req.body);
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
@@ -1035,11 +1035,11 @@ app.post("/extra", function (req, res) {
      { $set: { noOfGoals:noOfGoals,noOfLanguage:noOfLanguage,noOfhobbies:noOfhobbies,
       noOfStrengths:noOfStrengths,} },
      function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
+    if (!err) console.log("Documents updated successfully(goals vgera ke count)");
   });
 
   Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
+    if (!err) console.log("Documents deleted successfully(sbb delete krna)");
    
   });
 
@@ -1054,7 +1054,7 @@ app.post("/extra", function (req, res) {
     },
   };
   Project.updateMany(myquery, newvalue, function (err, res) {
-    if (!err) console.log("Documents inserted successfully");
+    if (!err) console.log("Documents inserted successfully(insert krna)");
    
   });
 }catch(err){

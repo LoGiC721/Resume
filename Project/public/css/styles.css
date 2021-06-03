@@ -65,3 +65,11 @@ footer{
     width:15px;
     margin:8px;
 }
+
+@media(max-width:991px)
+{
+   .top{
+       margin-top:55px;
+       margin-bottom:55px;
+   }
+}
