@@ -172,7 +172,7 @@ const Project = mongoose.model("Project", UserSchema);
 
  
 
-  
+   
 
 
 passport.use(Project.createStrategy());
@@ -1277,6 +1277,6 @@ else{
 
 
 
-app.listen("3000", function () {
-  console.log("Server has been started at port 3000");
+app.listen(process.env.PORT || 3000, function () {
+  console.log("Server has been started");
 });
