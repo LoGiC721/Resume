@@ -492,7 +492,7 @@ app.post("/education", function (req, res) {
     return res.redirect("/login");
   }
  let value = req.body.btn;
-  // try{
+  
  
   if (value === "1") {
     noOfeducation++;
@@ -531,11 +531,7 @@ app.post("/education", function (req, res) {
     if (!err) console.log("Documents inserted successfully");
   });
 
-//   }catch(err)
-// {
-//   req.flash('error',err.message);
-//   return res.redirect("/education")
-// }
+
 
 
   if (value === "3") {
@@ -555,7 +551,7 @@ app.post("/work", function (req, res) {
     return res.redirect("/login");
   }
 let value = req.body.btn;
-  try{
+ 
   
   if (value === "1") {
     noOfWorkExperience++;
@@ -591,10 +587,7 @@ let value = req.body.btn;
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-}catch(err){
-  req.flash('error',err.message);
-  return res.redirect("/work")
-}
+
   if (value === "3") {
     res.redirect("/skills");
   } else {
@@ -614,7 +607,7 @@ app.post("/skills", function (req, res) {
     return res.redirect("/login");
   }
 let value = req.body.btn;
-  try{
+ 
   
   if (value === "1") {
     noOfSkills++;
@@ -639,10 +632,7 @@ let value = req.body.btn;
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-  }catch(err){
-    req.flash('error',err.message);
-    return res.redirect("/skills")
-  }
+ 
   if (value === "3") {
     res.redirect("/projects");
   } else {
@@ -656,7 +646,7 @@ app.post("/projects", function (req, res) {
     return res.redirect("/login");
   }
 let value = req.body.btn;
-  try{
+  
   
   if (value === "1") {
     noOfProjects++;
@@ -685,10 +675,7 @@ let value = req.body.btn;
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-  }catch(err){
-    req.flash('error',err.message);
-    return res.redirect("/projects")
-  }
+  
   if (value === "3") {
     res.redirect("/awards");
   } else {
@@ -754,7 +741,7 @@ app.post("/personal", upload.single("photo"), function (req, res) {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-try{
+
     let buttonvalue=req.body.btnn;
     if(buttonvalue!=1)
     {
@@ -826,11 +813,7 @@ try{
       }
     });
   });
-}catch(err){
-  req.flash('error',"First you have to choose file then you can upload it");
- 
-  return res.redirect("/personal")
-}
+
   res.redirect("/personal");
 });
 app.post("/extra", function (req, res) {
@@ -840,7 +823,7 @@ app.post("/extra", function (req, res) {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-  try{
+ 
   if (req.body.btn === "1") {
     noOfhobbies++;
   } else if (req.body.btn === "2" && noOfhobbies > 1) {
@@ -883,10 +866,7 @@ app.post("/extra", function (req, res) {
     if (!err) console.log("Documents inserted successfully");
    
   });
-}catch(err){
-  req.flash('error',err.message);
-  return res.redirect("/extra")
-}
+
   if(req.body.btn==="9")
   res.redirect("/download");
   else

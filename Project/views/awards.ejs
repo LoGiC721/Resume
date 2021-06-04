@@ -49,7 +49,7 @@
     <form method="POST" action="awards">
         <%for(let i=0;i<found[0].noOfAwards;i++){%>
         <div class="sameline">
-            <label for="awardname<%=i%>">Award name </label>
+            <label for="awardname<%=i%>">Award Name </label>
             <%if(found[0].awards.length!==0){%>
            <input type="text" placeholder="Award name" id="awardname<%=i%>" name="awardname" value="<%=found[0].awards[0].awardname[i]%>" autocomplete="off">
             <%}else{%>
