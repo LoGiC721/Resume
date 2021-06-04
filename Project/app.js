@@ -21,19 +21,11 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const flash = require('connect-flash');
 const uniqueValidator=require('mongoose-unique-validator');
-
 const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 const loading = multer({ dest: "public/uploads/" });
-
-
-
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
-
-
-
 app.use(express.static("public"));
 app.use(
   session({
@@ -42,15 +34,15 @@ app.use(
     saveUninitialized: false,
   })
 );
-
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
-
-
+mongoose.connect(`mongodb+srv://${process.env.DATABASE_ID}:${process.env.DATABASE_PASSWORD}@cluster0.rfaz9.mongodb.net/Resume`, 
+{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 const UserSchema = new Schema({
   firstname: { type: String, default: null },
   profile: { type: String, default: null },
@@ -66,9 +58,7 @@ const UserSchema = new Schema({
   pin: { type: String, default: null },
   address: { type: String, default: null },
   currentposition: { type: String, default: null },
-
   img: { type: String, default: null },
-
   school: [
     {
       name: [{ type: String, default: null }],
@@ -79,7 +69,6 @@ const UserSchema = new Schema({
       location: [{ type: String, default: null }],
     },
   ],
-
   work: [
     {
       companyname: [{ type: String, default: null }],
@@ -91,14 +80,12 @@ const UserSchema = new Schema({
       jobdescription: [{ type: String, default: null }],
     },
   ],
-
   skills: [
     {
       skillsname: [{ type: String, default: null }],
       skillsdetails: [{ type: Number, default: 0 }],
     },
   ],
-
   project: [
     {
       projectname: [{ type: String, default: null }],
@@ -107,7 +94,6 @@ const UserSchema = new Schema({
       toolsused: [{ type: String, default: null }],
     },
   ],
-
   awards: [
     {
       awardname: [{ type: String, default: null }],
@@ -116,7 +102,6 @@ const UserSchema = new Schema({
       Awarddescription: [{ type: String, default: null }],
     },
   ],
-
   extra: [
     {
       hobbie: [{ type: String, default: null }],
@@ -125,7 +110,6 @@ const UserSchema = new Schema({
       goals: [{ type: String, default: null }],
     },
   ],
-
   username: { type: String, default: null},
   password: { type: String, default: null },
   loginid:  { type: String, default: null,unique:true},
@@ -137,8 +121,6 @@ const UserSchema = new Schema({
   secret: { type: String, default: null },
   resetPasswordToken: { type: String},
   resetPasswordExpires: { type: Date},
-
-
    noOfeducation: { type: Number, default: 1 },
    noOfProjects: { type: Number, default: 1 },
    noOfSkills: { type: Number, default: 1 },
@@ -149,51 +131,29 @@ const UserSchema = new Schema({
    noOfStrengths: { type: Number, default: 1 },
    noOfLanguage: { type: Number, default: 1 },
    noOfGoals: { type: Number, default: 1 },
-
-
-
 });
-
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
 UserSchema.plugin(passportLocalMongoose, { usernameQueryFields: ['loginid'] });
 UserSchema.plugin(uniqueValidator)
-
-
-
-
-mongoose.connect(`mongodb+srv://${process.env.DATABASE_ID}:${process.env.DATABASE_PASSWORD}@cluster0.rfaz9.mongodb.net/Resume`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
-
 const Project = mongoose.model("Project", UserSchema);
-
  
-
-   
-
-
+  
 passport.use(Project.createStrategy());
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
-
 passport.deserializeUser(function (id, done) {
   Project.findById(id, function (err, user) {
     done(err, user);
   });
 });
-
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      // callbackURL: "http://localhost:3000/auth/google/secrets",
-      callbackURL: "https://damp-beach-49352.herokuapp.com/auth/google/secrets",
-     
+      callbackURL: "http://localhost:3000/auth/google/secrets",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
@@ -204,14 +164,12 @@ passport.use(
     }
   )
 );
-
 passport.use(
   new FacebookStrategy(
     {
       clientID: process.env.Facebook_CLIENT_ID,
       clientSecret: process.env.Facebook_CLIENT_SECRET,
-      // callbackURL: "http://localhost:3000/auth/facebook/key",
-      callbackURL: "https://damp-beach-49352.herokuapp.com/auth/google/secrets",
+      callbackURL: "http://localhost:3000/auth/facebook/key",
       proxy: true
     },
     function (accessToken, refreshToken, profile, cb) {
@@ -221,14 +179,12 @@ passport.use(
     }
   )
 );
-
 passport.use(
   new TwitterStrategy(
     {
       consumerKey: process.env.Twitter_CLIENT_ID,
       consumerSecret: process.env.Twitter_CLIENT_SECRET,
-      // callbackURL: "http://localhost:3000/auth/twitter/importantkey",
-      callbackURL: "https://damp-beach-49352.herokuapp.com/auth/twitter/importantkey",
+      callbackURL: "http://localhost:3000/auth/twitter/importantkey",
     },
     function (token, tokenSecret, profile, cb) {
       Project.findOrCreate({ twitterId: profile.id,username:profile.username }, function (err, user) {
@@ -237,13 +193,10 @@ passport.use(
     }
   )
 );
-
-
 passport.use(new LinkedInStrategy({
   clientID: process.env.LinkedIn_CLIENT_ID,
   clientSecret:process.env.LinkedIn_CLIENT_SECRET,
-  // callbackURL: "http://localhost:3000/auth/linkedin/keyy",
-  callbackURL: "https://damp-beach-49352.herokuapp.com/auth/linkedin/keyy",
+  callbackURL: "http://localhost:3000/auth/linkedin/keyy",
   scope: ['r_liteprofile'],
   state: true
 }, function(accessToken, refreshToken, profile, done) {
@@ -252,14 +205,10 @@ passport.use(new LinkedInStrategy({
     return done(err, user);
   });
 }));
-
-
-
 passport.use(new GitHubStrategy({
   clientID: process.env.Github_CLIENT_ID,
   clientSecret: process.env.Github_CLIENT_SECRET,
-  // callbackURL: "http://localhost:3000/auth/github/token"
-  callbackURL: "https://damp-beach-49352.herokuapp.com/auth/github/token"
+  callbackURL: "http://localhost:3000/auth/github/token"
 },
 function(accessToken, refreshToken, profile, done) {
   Project.findOrCreate({ githubId: profile.id,username:profile.username }, function (err, user) {
@@ -268,10 +217,6 @@ function(accessToken, refreshToken, profile, done) {
   });
 }
 ));
-
-
-
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, `./public/uploads/${req.user.id}/`);
@@ -280,20 +225,12 @@ var storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-
 var upload = multer({ storage: storage });
-
-
-
 app.get('/favicon.ico', (req, res) => res.status(204));
-
-
-
 app.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile"] })
 );
-
 app.get(
   "/auth/google/secrets",
   passport.authenticate("google", { failureRedirect: "/auth/google/login" }),
@@ -302,9 +239,7 @@ app.get(
     res.redirect("/");
   }
 );
-
 app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["profile"]}));
-
 app.get(
   "/auth/facebook/key",
   passport.authenticate("facebook", { failureRedirect: "/auth/facebook/login" }),
@@ -314,9 +249,7 @@ app.get(
     res.redirect("/");
   }
 );
-
 app.get("/auth/twitter", passport.authenticate("twitter", { scope: ["profile"]}));
-
 app.get(
   "/auth/twitter/importantkey",
   passport.authenticate("twitter", { failureRedirect: "/auth/twitter/login" }),
@@ -326,10 +259,7 @@ app.get(
     res.redirect("/");
   }
 );
-
-
 app.get("/auth/linkedin", passport.authenticate("linkedin", { scope: ['r_liteprofile']}));
-
 app.get(
   "/auth/linkedin/keyy",
   passport.authenticate("linkedin", { failureRedirect: "/auth/linkedin/login" }),
@@ -339,12 +269,8 @@ app.get(
     res.redirect("/");
   }
 );
-
-
-
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
-
 app.get('/auth/github/token', 
   passport.authenticate('github', { failureRedirect: '/auth/github/login' }),
   function(req, res) {
@@ -352,14 +278,10 @@ app.get('/auth/github/token',
     // Successful authentication, redirect home.
     res.redirect('/');
   });
-
-
-
 app.get("/", function (req, res) {
  
   res.render("front", { currentUser: req.user});
 });
-
 app.get("/templates", function (req, res) {
   if (!req.user) 
   {
@@ -368,11 +290,6 @@ app.get("/templates", function (req, res) {
   }
   else res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 });
-
-
-
-
-
 app.get("/home", function (req, res) {
   if (!req.user) 
   {
@@ -381,30 +298,20 @@ app.get("/home", function (req, res) {
   }
   else res.render("home", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 });
-
 app.get("/login", function (req, res) {
   
   res.render("login",{success:req.flash('info'),danger:req.flash('error')});
    
 });
-
 app.get("/register", function (req, res) {
   res.render("signup",{success:req.flash('info'),danger:req.flash('error')});
 });
-
-
 app.get("/logout", function (req, res) {
  
-
   req.logout();
   res.redirect("/");
 });
-
-
-
 let templateno = 1;
-
-
 app.get("/download", function (req, res) {
   if (!req.user) 
   {
@@ -417,39 +324,23 @@ app.get("/download", function (req, res) {
     }
   });
 });
-
-
-
-
 app.get("/forget", function (req, res) {
  
       res.render("forget",{success:req.flash('info'),danger:req.flash('error')});
    
 });
-
-
-
-
 let noOfeducation = 1;
 let noOfProjects = 1;
 let noOfSkills = 1;
 let noOfWorkExperience = 1;
 let noOfAwards = 1;
-
 let filepresentornot = 0;
-
 let noOfhobbies = 1;
-
 let noOfStrengths = 1;
-
 let noOfLanguage = 1;
-
 let noOfGoals = 1;
-
-
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
-
   // const loader = multer({ dest: `public/uploads/${req.user.id}/` });
   if (!req.user) 
   {
@@ -466,13 +357,8 @@ app.get("/:customName", function (req, res) {
        
       });
     }
-
   });
-
 });
-
-
-
 app.get('/reset/:token', function(req, res) {
   
   Project.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -484,10 +370,6 @@ app.get('/reset/:token', function(req, res) {
     res.render('newpassword', {found: user,success:req.flash('info'),danger:req.flash('error')});
   });
 });
-
-
-
-
 app.post("/templates", function (req, res) {
   if (!req.user) 
   {
@@ -497,16 +379,12 @@ app.post("/templates", function (req, res) {
   templateno = req.body.template;
   res.redirect("/profile");
 });
-
 app.post("/login", function (req, res) {
-
   const user = new Project({
     username: req.body.username,
     password: req.body.password,
   });
-
   
-
         passport.authenticate('local', function(err, user) {
            if (err) 
            { 
@@ -518,7 +396,6 @@ app.post("/login", function (req, res) {
               req.flash('error',"Invalid credentials"); 
               return res.redirect("/login");
             }
-
           req.logIn(user, function(err) {
            if (err) 
          {  
@@ -532,21 +409,14 @@ app.post("/login", function (req, res) {
      
     });
  
-
 app.post("/register", function (req, res) {
-
   let value=req.body.password;
   let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
 if(!value.match(passw)) 
 { 
   req.flash('error',"Password must be atleast 6 characters long , contains atleast one numeric digit, one uppercase & one lowercase letter."); 
     return res.redirect("/register");
 }
-
-
-
-
   Project.register(
     { username: req.body.username,loginid:req.body.emailid },
     req.body.password,
@@ -566,18 +436,14 @@ if(!value.match(passw))
     }
   );
 });
-
 app.post("/profile", function (req, res) {
   // console.log(req.body);
-
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-
   try{
-
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -601,22 +467,13 @@ app.post("/profile", function (req, res) {
     if (!err) 
     {console.log("Documents updated successfully");}
   });
-
   }catch(err){
     req.flash('error',err.message);
   return res.redirect("/profile")
   }
-
-
   res.redirect("/education");
 });
-
-
-
 app.post("/education", function (req, res) {
-
-
-
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
@@ -632,21 +489,15 @@ app.post("/education", function (req, res) {
       noOfeducation--;
     }
   }
-
   var myquery = { _id: req.user.id };
-
-
   Project.updateOne(myquery, { $set: { noOfeducation:noOfeducation} }, function (err, res) {
     if (!err){
     console.log("Documents deleted successfully");
     }
   });
-
-
   Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
   var newvalue = {
     $push: {
       school: {
@@ -662,14 +513,11 @@ app.post("/education", function (req, res) {
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-
   }catch(err)
 {
   req.flash('error',err.message);
   return res.redirect("/education")
 }
-
-
   if (value === "3") {
     res.redirect("/work");
   } else {
@@ -683,7 +531,6 @@ app.post("/work", function (req, res) {
     return res.redirect("/login");
   }
 let value = req.body.btn;
-
   try{
   
   if (value === "1") {
@@ -693,24 +540,17 @@ let value = req.body.btn;
       noOfWorkExperience--;
     }
   }
-
   var myquery = { _id: req.user.id };
-
-
   Project.updateOne(myquery, { $set: { noOfWorkExperience:noOfWorkExperience} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
-
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-
   let arr = req.body.companyname;
   Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
   var newvalue = {
     $push: {
       work: {
@@ -727,20 +567,16 @@ let value = req.body.btn;
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-
-
 }catch(err){
   req.flash('error',err.message);
   return res.redirect("/work")
 }
-
   if (value === "3") {
     res.redirect("/skills");
   } else {
     res.redirect("/work");
   }
 });
-
 app.post("/skills", function (req, res) {
   console.log(req.body);
   if (!req.user) 
@@ -749,7 +585,6 @@ app.post("/skills", function (req, res) {
     return res.redirect("/login");
   }
 let value = req.body.btn;
-
   try{
   
   if (value === "1") {
@@ -757,18 +592,13 @@ let value = req.body.btn;
   } else if (value === "2" && noOfSkills > 1) {
     noOfSkills--;
   }
-
   var myquery = { _id: req.user.id };
-
   Project.updateOne(myquery, { $set: { noOfSkills:noOfSkills} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
-
   Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
   var newvalue = {
     $push: {
       skills: {
@@ -779,28 +609,23 @@ let value = req.body.btn;
   };
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
-
   });
   }catch(err){
     req.flash('error',err.message);
     return res.redirect("/skills")
   }
-
-
   if (value === "3") {
     res.redirect("/projects");
   } else {
     res.redirect("/skills");
   }
 });
-
 app.post("/projects", function (req, res) {
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-
 let value = req.body.btn;
   try{
   
@@ -811,18 +636,13 @@ let value = req.body.btn;
       noOfProjects--;
     }
   }
-
   var myquery = { _id: req.user.id };
-
   Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
-
   Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
   var newvalue = {
     $push: {
       project: {
@@ -840,15 +660,12 @@ let value = req.body.btn;
     req.flash('error',err.message);
     return res.redirect("/projects")
   }
-
-
   if (value === "3") {
     res.redirect("/awards");
   } else {
     res.redirect("/projects");
   }
 });
-
 app.post("/awards", function (req, res) {
   if (!req.user) 
   {
@@ -866,18 +683,14 @@ let value = req.body.btn;
     }
   }
  var myquery = { _id: req.user.id };
-
   Project.updateOne(myquery, { $set: { noOfAwards:noOfAwards} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
  
-
   let arr = req.body.awardname;
   Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-
   var newvalue = {
     $push: {
       awards: {
@@ -896,18 +709,12 @@ let value = req.body.btn;
     req.flash('error',err.message);
   return res.redirect("/awards")
   }
-
-
-
   if (value === "3") {
     res.redirect("/personal");
   } else {
     res.redirect("/awards");
   }
 });
-
-
-
 let flag=1;
 let flag1=0;
 let count=0;
@@ -934,7 +741,6 @@ try{
       }
      
       flag=0;
-
       fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
         if (err) {
           console.log(err); 
@@ -945,7 +751,6 @@ try{
             fs.unlinkSync(fileDir);
         });
       });
-
       var query = { _id: req.user.id };
   var values = {
     $set: {
@@ -956,21 +761,17 @@ try{
   Project.updateOne(query, values, function (err, res) {
     if (!err) console.log("Document updated successfully");
   });
-
   
   
       return res.redirect("/personal")
         //  console.log("uploaded");
     }
-
     flag=1;count=1;
-
   let imagefile = req.file.originalname;
   //  console.log(req.file);
   //  console.log(imagefile);
   //  console.log(req.body);
   
-
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -980,22 +781,17 @@ try{
   Project.updateOne(myquery, newvalues, function (err, res) {
     if (!err) console.log("Document updated successfully"); 
   });
-
   filepresentornot = 1;
-
   Project.updateOne(myquery, { $set: {filepresentornot:filepresentornot} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");  
   });
-
   
   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
     if (err) {
       console.log(err); 
     }
-
     files.forEach((file) => {
       const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
-
       if (file !== imagefile) {
         fs.unlinkSync(fileDir);
       }
@@ -1006,21 +802,15 @@ try{
  
   return res.redirect("/personal")
 }
-
-
   res.redirect("/personal");
 });
-
 app.post("/extra", function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-
-
-
   try{
   if (req.body.btn === "1") {
     noOfhobbies++;
@@ -1039,23 +829,17 @@ app.post("/extra", function (req, res) {
   } else if (req.body.btn === "8" && noOfGoals > 1) {
     noOfGoals--;
   }
-
   var myquery = { _id: req.user.id };
-
-
-  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully(sbb delete krna)");
-   
-  });
-
   Project.updateMany(myquery,
      { $set: { noOfGoals:noOfGoals,noOfLanguage:noOfLanguage,noOfhobbies:noOfhobbies,
       noOfStrengths:noOfStrengths,} },
      function (err, res) {
-    if (!err) console.log("Documents updated successfully(goals vgera ke count)");
+    if (!err) console.log("Documents deleted successfully");
   });
-
-
+  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+   
+  });
   var newvalue = {
     $push: {
       extra: {
@@ -1067,37 +851,23 @@ app.post("/extra", function (req, res) {
     },
   };
   Project.updateMany(myquery, newvalue, function (err, res) {
-    if (!err) console.log("Documents inserted successfully(insert krna)");
+    if (!err) console.log("Documents inserted successfully");
    
   });
 }catch(err){
   req.flash('error',err.message);
   return res.redirect("/extra")
 }
-
-if(req.body.btn==="9")
+  if(req.body.btn==="9")
   res.redirect("/download");
   else
   res.redirect("/extra");
 });
-
-
 app.post("/",function(req,res){
-   console.log(req.body);
-
-  if (!req.user) 
-  {
-    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
-    return res.redirect("/login");
-  }
-
-
+  // console.log(req.body.btn);
 let value=req.body.btn;
-  if(value=="1"){
-
-
+  if(value==="1"&&req.user){
     var myquery = { _id: req.user.id };
-
     Project.updateMany(myquery, { $set: 
       { 
         
@@ -1107,7 +877,7 @@ let value=req.body.btn;
         website:null,pno:null,email:null,profile:null,firstname:null,
         filepresentornot: 0,count: 1,noOfProjects:1,noOfSkills:1,
         noOfWorkExperience:1,noOfAwards:1,noOfhobbies:1,
-        noOfStrengths:1,noOfLanguage:1,noOfGoals:1,noOfeducation:1,
+        noOfStrengths:1,noOfLanguage:1,noOfGoals:1,
       
       } 
     
@@ -1116,11 +886,9 @@ let value=req.body.btn;
       if (!err) console.log(" All Documents deleted successfully");
      
     });
-
         filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
         noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
-        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;noOfeducation=1;
-
+        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
   }
   
   if(value==="3")
@@ -1135,8 +903,6 @@ let value=req.body.btn;
   res.redirect("/home")
   }
 })
-
-
 app.post("/home",function(req,res)
 {
   if (!req.user) 
@@ -1146,11 +912,6 @@ app.post("/home",function(req,res)
   }
   res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 })
-
-
-
-
-
 app.post('/forget', function(req, res, next) {
   async.waterfall([
     function(done) {
@@ -1170,10 +931,8 @@ app.post('/forget', function(req, res, next) {
           req.flash('error',err.message);
           return  res.redirect('/forget');
         }
-
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
         user.save(function(err) {
           done(err, token, user);
         });
@@ -1208,9 +967,6 @@ app.post('/forget', function(req, res, next) {
     res.redirect('/forget');
   });
 });
-
-
-
 app.post('/reset/:token', function(req, res) {
   let loc=`/reset/${req.params.token}`;
   if(req.body.password===req.body.confirm){
@@ -1221,18 +977,13 @@ app.post('/reset/:token', function(req, res) {
           req.flash('error', 'Password reset token is invalid or has expired.');
           return res.redirect('/forget');
         }
-
-
         let value=req.body.password;
   let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
 if(!value.match(passw)) 
 { 
   req.flash('error',"Password must be atleast 6 characters long , contains atleast one numeric digit, one uppercase & one lowercase letter."); 
     return res.redirect(loc);
 }
-
-
         Project.findByUsername(user.username).then(function(sanitizedUser){
           if (sanitizedUser){
               sanitizedUser.setPassword(req.body.password, function(){
@@ -1249,11 +1000,8 @@ if(!value.match(passw))
           if(err)
           req.flash('error',"Error occured! Please contact developer"); 
       })
-
-
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
-
         user.save(function(err) {
           req.logIn(user, function(err) {
             done(err, user);
@@ -1292,12 +1040,7 @@ else{
  
   res.redirect(loc)
 }
-
-
 });
-
-
-
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server has been started");
 });
