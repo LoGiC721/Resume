@@ -429,7 +429,7 @@ if(!value.match(passw))
           const loader = multer({ dest: `public/uploads/${req.user.id}/` });
           filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
           noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
-          noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
+          noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;noOfeducation=1;
           res.redirect("/");
         });
       }
@@ -873,9 +873,14 @@ app.post("/extra", function (req, res) {
   res.redirect("/extra");
 });
 app.post("/",function(req,res){
-   
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+ 
 let value=req.body.btn;
-  if(value==="1"&&req.user){
+  if(value==="1"){
     var myquery = { _id: req.user.id };
     Project.updateMany(myquery, { $set: 
       { 
