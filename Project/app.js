@@ -436,14 +436,18 @@ if(!value.match(passw))
     }
   );
 });
+
+
 app.post("/profile", function (req, res) {
   // console.log(req.body);
+
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-  try{
+
+
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -467,20 +471,28 @@ app.post("/profile", function (req, res) {
     if (!err) 
     {console.log("Documents updated successfully");}
   });
-  }catch(err){
-    req.flash('error',err.message);
-  return res.redirect("/profile")
-  }
+
+ 
+
+
   res.redirect("/education");
 });
+
+
+
+
+
 app.post("/education", function (req, res) {
+
+
+
   if (!req.user) 
   {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
  let value = req.body.btn;
-  try{
+  // try{
  
   if (value === "1") {
     noOfeducation++;
@@ -489,15 +501,20 @@ app.post("/education", function (req, res) {
       noOfeducation--;
     }
   }
+
   var myquery = { _id: req.user.id };
+
+
   Project.updateOne(myquery, { $set: { noOfeducation:noOfeducation} }, function (err, res) {
     if (!err){
     console.log("Documents deleted successfully");
     }
   });
-  Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
+
+  Project.updateOne(myquery, { $set: { school: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
+
   var newvalue = {
     $push: {
       school: {
@@ -513,17 +530,24 @@ app.post("/education", function (req, res) {
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
-  }catch(err)
-{
-  req.flash('error',err.message);
-  return res.redirect("/education")
-}
+
+//   }catch(err)
+// {
+//   req.flash('error',err.message);
+//   return res.redirect("/education")
+// }
+
+
   if (value === "3") {
     res.redirect("/work");
   } else {
     res.redirect("/education");
   }
 });
+
+
+
+
 app.post("/work", function (req, res) {
   if (!req.user) 
   {
@@ -548,7 +572,7 @@ let value = req.body.btn;
     if (!err) console.log("Documents inserted successfully");
   });
   let arr = req.body.companyname;
-  Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
+  Project.updateOne(myquery, { $set: { work: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
   var newvalue = {
@@ -577,6 +601,11 @@ let value = req.body.btn;
     res.redirect("/work");
   }
 });
+
+
+
+
+
 app.post("/skills", function (req, res) {
   console.log(req.body);
   if (!req.user) 
@@ -596,7 +625,7 @@ let value = req.body.btn;
   Project.updateOne(myquery, { $set: { noOfSkills:noOfSkills} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-  Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
+  Project.updateOne(myquery, { $set: { skills: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
   var newvalue = {
@@ -640,7 +669,7 @@ let value = req.body.btn;
   Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-  Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
+  Project.updateOne(myquery, { $set: { project: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
   var newvalue = {
@@ -688,7 +717,7 @@ let value = req.body.btn;
   });
  
   let arr = req.body.awardname;
-  Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
+  Project.updateOne(myquery, { $set: { awards: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
   var newvalue = {
@@ -836,7 +865,7 @@ app.post("/extra", function (req, res) {
      function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
-  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
+  Project.updateOne(myquery, { $set: { extra: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
    
   });
@@ -864,7 +893,7 @@ app.post("/extra", function (req, res) {
   res.redirect("/extra");
 });
 app.post("/",function(req,res){
-  // console.log(req.body.btn);
+   
 let value=req.body.btn;
   if(value==="1"&&req.user){
     var myquery = { _id: req.user.id };
