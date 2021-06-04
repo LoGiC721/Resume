@@ -41,10 +41,10 @@
             <div class="col-sm-6 col-xs-3">
                 <%for(let i=0;i<found[0].noOfhobbies;i++){%>
               <%if(found[0].extra.length!==0){%> 
-              <input type="text" placeholder="Hobby" class="inputt" name="hobbie" id="hobbie" value="<%=found[0].extra[0].hobbie[i]%>">
+              <input type="text" placeholder="Hobby" class="inputt" name="hobbie" id="hobbie" value="<%=found[0].extra[0].hobbie[i]%>" autocomplete="off">
               <br>
               <%}else{%>
-                <input type="text" placeholder="Hobby" class="inputt" name="hobbie" id="hobbie" value="">
+                <input type="text" placeholder="Hobby" class="inputt" name="hobbie" id="hobbie" value="" autocomplete="off">
                 <br>
                 <%}%>
               <%}%>
@@ -84,10 +84,10 @@
                 <div class="col-sm-6 col-xs-3">
             <%for(let i=0;i<found[0].noOfStrengths;i++){%>
                 <%if(found[0].extra.length!==0){%> 
-                <input type="text" placeholder="Strength" name="strength" id="strength" value="<%=found[0].extra[0].strength[i]%>">
+                <input type="text" placeholder="Strength" name="strength" id="strength" value="<%=found[0].extra[0].strength[i]%>" autocomplete="off">
                 <br>
                 <%}else{%>
-                    <input type="text" placeholder="Strength" name="strength" id="strength" value="">
+                    <input type="text" placeholder="Strength" name="strength" id="strength" value="" autocomplete="off">
                     <br>
                     <%}%>
                <%}%>
@@ -128,10 +128,10 @@
         <div class="col-sm-6 col-xs-3">
         <%for(let i=0;i<found[0].noOfLanguage;i++){%>
             <%if(found[0].extra.length!==0){%> 
-            <input type="text" placeholder="Language" id="language" name="language" value="<%=found[0].extra[0].language[i]%>">
+            <input type="text" placeholder="Language" id="language" name="language" value="<%=found[0].extra[0].language[i]%>" autocomplete="off">
             <br>
             <%}else{%>
-                <input type="text" placeholder="Language" id="language" name="language" value="">
+                <input type="text" placeholder="Language" id="language" name="language" value="" autocomplete="off">
                 <br>
                 <%}%>
            <%}%>
@@ -161,10 +161,10 @@
             <div class="col-sm-6 col-xs-3">
             <%for(let i=0;i<found[0].noOfGoals;i++){%>
                 <%if(found[0].extra.length!==0){%> 
-                <input type="text" placeholder="Goal" name="goal" id="goal" value="<%=found[0].extra[0].goals[i]%>">
+                <input type="text" placeholder="Goal" name="goal" id="goal" value="<%=found[0].extra[0].goals[i]%>" autocomplete="off">
                 <br>
                 <%}else{%>
-                    <input type="text" placeholder="Goal" name="goal" value="">
+                    <input type="text" placeholder="Goal" name="goal" value="" autocomplete="off">
                     <br>
                     <%}%>
                <%}%>

@@ -734,6 +734,7 @@ let value = req.body.btn;
 let flag=1;
 let flag1=0;
 let count=0;
+
 app.post("/personal", upload.single("photo"), function (req, res) {
   
   if (!req.user) 
@@ -742,19 +743,11 @@ app.post("/personal", upload.single("photo"), function (req, res) {
     return res.redirect("/login");
   }
 
+  try{
+
     let buttonvalue=req.body.btnn;
     if(buttonvalue!=1)
     {
-        
-      if(flag1!==flag&&count!=0)
-      { 
-        req.flash('info',"Image is removed successfully");
-       
-      }
-      else
-      {
-        req.flash('error',"First you have to choose file then you can delete it");
-      }
      
       flag=0;
       fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
@@ -782,7 +775,7 @@ app.post("/personal", upload.single("photo"), function (req, res) {
       return res.redirect("/personal")
         //  console.log("uploaded");
     }
-    flag=1;count=1;
+   
   let imagefile = req.file.originalname;
   //  console.log(req.file);
   //  console.log(imagefile);
@@ -813,6 +806,11 @@ app.post("/personal", upload.single("photo"), function (req, res) {
       }
     });
   });
+}catch(err)
+{
+  req.flash('error',"First you have to choose file then you can upload it");
+  return res.redirect("/personal")
+}
 
   res.redirect("/personal");
 });
