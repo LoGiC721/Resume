@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;');
+
+*{
+margin: 0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+
+    scroll-behavior: smooth;
+}
+
+.navbar{
+    background-color: black;
+    /* background-color: #131313 ;*/
+    padding:1rem 2rem;
+    z-index:1000;
+} 
+
+.navbar .navbar-brand{
+    font-size:1.4rem;
+    font-weight:700;
+
+}
+
+#navbarSupportedContent > ul > li:nth-child(n) > a{
+color:white;
+font-size:1.1rem;
+padding:0 0.8rem;
+text-align: center;
+}
+
+#navbarSupportedContent > ul > li:nth-child(n) > a:hover,
+#navbarSupportedContent > ul > li:nth-child(n) > a.active
+{
+    color:#00BF85
+}
+
+/* #navbarSupportedContent > a{
+    background-color: #00BF85;
+    font-weight:600;
+    padding:0.4rem 1.4rem;
+    border-radius:30px;
+} */
+
+
+.navbar-nav li a {
+float:right;
+text-align: left;
+}
+
+.signin{
+    float:right;
+    text-align: left;
+}
+
+
+
+
+
+
+.mid{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+
+ video{
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    object-fit:cover;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.hero{
+    position:relative;
+}
+
+
+.mid .hero p{
+width:55%;
+font-size:1.1rem;
+letter-spacing: 0.2px;
+padding: 1.1rem;
+}
+
+
+.mid .hero button{
+    background-color: #00BF85;
+    font-weight:600;
+    padding:0.6rem 1rem;
+    margin:5px;
+    border-radius:30px;
+    text-decoration: none; 
+    color:black;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.mid .hero h2{
+   
+    font-family: 'Dancing Script', cursive;
+}
+
+
+
+ 
+
+
+.about{
+background-color: #000;
+}
+
+
+    
+    .discovery .text,.about .text,.sign .text{
+       display:flex;
+       flex-direction:column;
+       justify-content: flex-start;
+       align-items: flex-start;
+       margin: auto;
+       padding:100px;
+    }
+    
+    
+    .discovery .text h4,.about .text h4, .sign .text h4,.service h2{
+        color:#00BF85;
+        font-weight: 800;
+        font-size: 2rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 40px;
+        font-family: 'Dancing Script', cursive;
+    }
+
+    .about .text h4,.sign .text h4 {
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+    }
+    
+    
+    .discovery .text p,.about .text p,.sign .text p,.service p,footer p{
+       
+        font-weight: 400;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        font-family: 'KoHo', sans-serif;
+        margin-bottom:40px;
+    }
+    
+    
+    .discovery .text button,.about .text button,.sign .text a{
+        background-color: #111;
+        font-weight:800;
+        padding:0.6rem 1.4rem;
+        border-radius:30px;
+        text-decoration: none;
+        color:black;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .discovery .text button:hover,.sign .text a:hover{
+        background-color: #00BF85;
+    }
+
+    .buttonn{
+       margin-right:7px;
+    }
+
+   
+  
+
+    .service{
+        background-color: #000;
+    }
+
+
+    .service .one{
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        border-radius: 7px;
+    }
+
+
+    .target{
+        margin-top:60px;
+        text-align: center;
+    }
+    .target1{
+        width:30%;
+    }
+
+    .target1:hover{
+        background-color: #00BF85;
+    }
+    
+     
+
+        body>footer{
+            background-color: white!important;
+        }
+
+
+        @media screen  and (max-width:988px){
+
+            .navbar{
+                padding:1rem;
+            }
+            
+            .buttonn{
+                margin-bottom:10px;
+            }
+
+        #navbarSupportedContent > ul{
+            padding: 0.8rem;
+
+        }
+
+        #navbarSupportedContent > ul > li:nth-child(n) > a{
+          
+            padding:0.8rem 0;
+            }
+
+            .mid .hero h2{
+                font-size:2.5rem;
+                }
+
+
+            .mid .hero p{
+              
+                font-size:1rem;
+              
+                }
+                
+                
+                .mid .hero a{
+                   font-size: 0.9rem; 
+                }
+
+
+        }
+
+
+
+        .wave-container {
+            /* position: relative; */
+            background: black;
+           
+            /* text-align: center;
+            overflow: hidden; */
+            
+          }
+
+          
+.wave{
+    height:200px;
+    width:100%;
+  
+}
+         
+
+.wave-container-white{
+    background: white;
+    
+}
+
+
+footer{
+    text-align: center;
+    margin-top:20px;
+}
+
+.icon{
+    height:15px;
+    width:15px;
+    margin:8px;
+}
+
+
+
+
+@media (max-width:518px)
+{
+    
+    .mid .hero h2{
+        font-size:1.8rem;
+        }
+
+
+
+}
+
+
+
+
+@media (max-width:375px)
+{
+    
+.marginnn{
+    margin-top:100px;
+    
+}
+
+
+
+
+}
+
+@media (max-width:296px)
+{
+    
+.marginnn{
+    margin-top:150px;
+    
+}
+.mid .hero button{
+  
+    font-weight:600;
+    padding:0.2rem 0.6rem;
+    margin:5px;
+    border-radius:30px;
+   
+}
+
+.mid .hero h2{
+    font-size:1.2rem;
+    }
+
+
+
+
+}
+
+@media (max-width:296px){
+
+    .marginnn{
+        margin-top:100px;
+        
+    }
+
+    .mid{
+        background-color: black;
+    }
+}
+
+
+.one{
+    max-height:1000px;
+    height:470px;
+}
+
+
+@media(max-width:767px)
+{
+    .one{
+        height:auto;
+    }
+}

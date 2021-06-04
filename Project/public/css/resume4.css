@@ -17,7 +17,7 @@ body{
 .resume_wrapper{
 	display: flex;
 	width: 800px;
-	margin: 50px auto;
+	margin: auto auto;
 	background: #fff;
 	padding: 10px;
 }
@@ -51,6 +51,7 @@ body{
 
 .resume_wrapper .resume_left .resume_bottom{
 	padding: 20px 30px;
+	
 }
 
 .resume_wrapper .resume_item{
@@ -134,16 +135,22 @@ body{
 	display: flex;
 }
 
+
+
+
 .resume_wrapper .resume_right .resume_data .year{
 	padding-right: 35px;
-	width: 115px;
+	min-width:125px;
+	width: 125px;
 	position: relative;
 }
+
+
 
 .resume_wrapper .resume_right .resume_data .content{
 	padding-left: 35px;
 	margin-bottom: 20px;
-	width: calc(100% - 115px);
+	width: 300px;
 }
 
 .resume_wrapper .resume_right .resume_data .year:before{
@@ -164,7 +171,7 @@ body{
     top: 17px;
     right: 4px;
     width: 3px;
-    height: 90%;
+    height: 100%;
     background: #0175b2;
 }
 
@@ -185,7 +192,22 @@ body{
 }
 
 
-@media screen and (max-width: 800px){
+.data{
+	overflow: hidden;
+	 word-wrap: break-word ;
+	 display: inline-block;
+	 width: 100%;
+   }
+
+@media(max-width:824px)
+{
+	.resume_wrapper{
+        width:90%;
+	}
+}
+
+
+@media screen and (max-width: 600px){
 	.resume_wrapper .resume_right .resume_namerole{
 		display: none;
 	}
@@ -201,6 +223,7 @@ body{
 	.resume_wrapper .resume_right{
 		width: 100%;
 	}
+
 }
 
 @media screen and (max-width: 424px){
@@ -226,5 +249,21 @@ body{
 	}
 	.resume_wrapper .resume_right .resmue_interests .interests .int_icon{
 		font-size: 24px;
+	}
+}
+
+.resume_wrapper{
+	padding:0;
+}
+
+
+@media print{
+
+	.resume_wrapper{
+		margin:0;
+	}
+	@page {
+		margin: 0;
+		
 	}
 }

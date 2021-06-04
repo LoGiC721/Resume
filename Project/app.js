@@ -10,17 +10,28 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const TwitterStrategy = require("passport-twitter").Strategy;
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-const multer = require('multer');
-const fs=require("fs");
-const path = require('path');
-const loading=multer({dest:"public/uploads/"});
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+var async = require('async');
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+const flash = require('connect-flash');
+
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
+const loading = multer({ dest: "public/uploads/" });
 
 
 
 const Schema = mongoose.Schema;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+
+
 
 app.use(express.static("public"));
 app.use(
@@ -31,12 +42,16 @@ app.use(
   })
 );
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 mongoose.connect("mongodb://localhost:27017/Resume", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 const UserSchema = new Schema({
@@ -55,84 +70,104 @@ const UserSchema = new Schema({
   address: { type: String, default: null },
   currentposition: { type: String, default: null },
 
-  img:{ type: String, default: null },
-
+  img: { type: String, default: null },
 
   school: [
     {
-      name: { type: String, default: null },
-      startdate: { type: Date, default: Date.now },
-      enddate: { type: Date, default: Date.now },
-      degree: { type: String, default: null },
-      gpa: { type: Number, default: null },
-      location: { type: String, default: null },
+      name: [{ type: String, default: null }],
+      startdate: [{ type: Date, default: Date.now}],
+      enddate: [{ type: Date, default: Date.now, }],
+      degree: [{ type: String, default: null }],
+      gpa: [{ type: Number, default: null }],
+      location: [{ type: String, default: null }],
     },
   ],
 
   work: [
     {
-      companyname: { type: String, default: null },
-      jobtitle: { type: String, default: null },
-      state: { type: String, default: null },
-      city: { type: String, default: null },
-      startdate: { type: Date, default: null },
-      enddate: { type: Date, default: null },
-      jobdescription: { type: String, default: null },
+      companyname: [{ type: String, default: null }],
+      jobtitle: [{ type: String, default: null }],
+      state: [{ type: String, default: null }],
+      city: [{ type: String, default: null }],
+      startdate: [{ type: Date, default: null, }],
+      enddate: [{ type: Date, default: null ,}],
+      jobdescription: [{ type: String, default: null }],
     },
   ],
 
   skills: [
     {
-      skillsname: { type: String, default: null },
-      skillsdetails:{ type: Number, default: 0 },
+      skillsname: [{ type: String, default: null }],
+      skillsdetails: [{ type: Number, default: 0 }],
     },
   ],
 
-
   project: [
     {
-      projectname: { type: String, default: null },
-      project1description: { type: String, default: null },
-      link: { type: String, default: null },
-      toolsused: { type: String, default: null },
+      projectname: [{ type: String, default: null }],
+      project1description: [{ type: String, default: null }],
+      link: [{ type: String, default: null }],
+      toolsused: [{ type: String, default: null }],
     },
   ],
 
   awards: [
     {
-      awardname: { type: String, default: null },
-      awarddate: { type: Date, default: null },
-      awarder: { type: String, default: null },
-      Awarddescription: { type: String, default: null },
+      awardname: [{ type: String, default: null }],
+      awarddate: [{ type: Date, default: null, }],
+      awarder: [{ type: String, default: null }],
+      Awarddescription: [{ type: String, default: null }],
     },
   ],
-
 
   extra: [
     {
-      hobbie:{type: String, default: null},
-      strength: { type: String, default: null },
-      language: { type: String, default: null },
-      goals: { type: String, default: null },
+      hobbie: [{ type: String, default: null }],
+      strength: [{ type: String, default: null }],
+      language: [{ type: String, default: null }],
+      goals: [{ type: String, default: null }],
     },
   ],
 
-
-
- 
-  username: { type: String, default: null },
+  username: { type: String, default: null},
   password: { type: String, default: null },
-  googleId: { type: String, default: null },
-  facebookId: { type: String, default: null },
-  twitterId: { type: String, default: null },
+  loginid:  { type: String, default: null,unique:true},
+  googleId: { type: String},
+  facebookId: { type: String},
+  twitterId: { type: String},
+  linkedInId: { type: String},
+  githubId: { type: String},
   secret: { type: String, default: null },
-  username: { type: String, default: null },
-  password: { type: String, default: null },
+  resetPasswordToken: { type: String},
+  resetPasswordExpires: { type: Date},
+
+
+   noOfeducation: { type: Number, default: 1 },
+   noOfProjects: { type: Number, default: 1 },
+   noOfSkills: { type: Number, default: 1 },
+   noOfWorkExperience: { type: Number, default: 1 },
+   noOfAwards: { type: Number, default: 1 },
+   filepresentornot: { type: Number, default: 0 },
+   noOfhobbies: { type: Number, default: 1 },
+   noOfStrengths: { type: Number, default: 1 },
+   noOfLanguage: { type: Number, default: 1 },
+   noOfGoals: { type: Number, default: 1 },
+
+
+
 });
 
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
+UserSchema.plugin(passportLocalMongoose, { usernameQueryFields: ['loginid'] });
+
+
 const Project = mongoose.model("Project", UserSchema);
+
+ 
+
+  
+
 
 passport.use(Project.createStrategy());
 passport.serializeUser(function (user, done) {
@@ -154,8 +189,8 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
-      Project.findOrCreate({ googleId: profile.id }, function (err, user) {
+      Project.findOrCreate({ googleId: profile.id,username:profile.displayName }, function (err, user) {
+       
         return cb(err, user);
       });
     }
@@ -168,9 +203,10 @@ passport.use(
       clientID: process.env.Facebook_CLIENT_ID,
       clientSecret: process.env.Facebook_CLIENT_SECRET,
       callbackURL: "http://localhost:3000/auth/facebook/key",
+      proxy: true
     },
     function (accessToken, refreshToken, profile, cb) {
-      Project.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      Project.findOrCreate({ facebookId: profile.id,username:profile.displayName }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -185,7 +221,7 @@ passport.use(
       callbackURL: "http://localhost:3000/auth/twitter/importantkey",
     },
     function (token, tokenSecret, profile, cb) {
-      Project.findOrCreate({ twitterId: profile.id }, function (err, user) {
+      Project.findOrCreate({ twitterId: profile.id,username:profile.username }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -193,17 +229,51 @@ passport.use(
 );
 
 
+passport.use(new LinkedInStrategy({
+  clientID: process.env.LinkedIn_CLIENT_ID,
+  clientSecret:process.env.LinkedIn_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/linkedin/keyy",
+  scope: ['r_liteprofile'],
+  state: true
+}, function(accessToken, refreshToken, profile, done) {
+  Project.findOrCreate({ linkedInId: profile.id,username:profile.displayName }, function (err, user) {
+   
+    return done(err, user);
+  });
+}));
+
+
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.Github_CLIENT_ID,
+  clientSecret: process.env.Github_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/github/token"
+},
+function(accessToken, refreshToken, profile, done) {
+  Project.findOrCreate({ githubId: profile.id,username:profile.username }, function (err, user) {
+  
+    return done(err, user);
+  });
+}
+));
+
+
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `./public/uploads/${req.user.id}/`)
+    cb(null, `./public/uploads/${req.user.id}/`);
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
- 
+    cb(null, file.originalname);
+  },
+});
+
 var upload = multer({ storage: storage });
 
+
+
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 
 
@@ -216,58 +286,119 @@ app.get(
   "/auth/google/secrets",
   passport.authenticate("google", { failureRedirect: "/auth/google/login" }),
   function (req, res) {
-    res.redirect("/download");
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+    res.redirect("/");
   }
 );
 
-app.get("/auth/facebook", passport.authenticate("facebook"));
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["profile"]}));
 
 app.get(
   "/auth/facebook/key",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  passport.authenticate("facebook", { failureRedirect: "/auth/facebook/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
-
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
     res.redirect("/");
   }
 );
 
-app.get("/auth/twitter", passport.authenticate("twitter"));
+app.get("/auth/twitter", passport.authenticate("twitter", { scope: ["profile"]}));
 
 app.get(
   "/auth/twitter/importantkey",
-  passport.authenticate("twitter", { failureRedirect: "/download" }),
+  passport.authenticate("twitter", { failureRedirect: "/auth/twitter/login" }),
   function (req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
     // Successful authentication, redirect home.
     res.redirect("/");
   }
 );
 
+
+app.get("/auth/linkedin", passport.authenticate("linkedin", { scope: ['r_liteprofile']}));
+
+app.get(
+  "/auth/linkedin/keyy",
+  passport.authenticate("linkedin", { failureRedirect: "/auth/linkedin/login" }),
+  function (req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
+
+
+
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+app.get('/auth/github/token', 
+  passport.authenticate('github', { failureRedirect: '/auth/github/login' }),
+  function(req, res) {
+    const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
+
 app.get("/", function (req, res) {
-  res.render("home", { currentUser: req.user });
+ 
+  res.render("front", { currentUser: req.user});
 });
 
 app.get("/templates", function (req, res) {
-  if (!req.user) res.render("SignIn");
-  else res.render("availabletemplates", { currentUser: req.user });
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to that page"); 
+   res.redirect("/login");
+  }
+  else res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
+});
+
+
+
+
+
+app.get("/home", function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    res.redirect("/login");
+  }
+  else res.render("home", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
 });
 
 app.get("/login", function (req, res) {
-  res.render("Signin");
+  
+  res.render("login",{success:req.flash('info'),danger:req.flash('error')});
+   
 });
 
 app.get("/register", function (req, res) {
-  res.render("Register");
+  res.render("signup",{success:req.flash('info'),danger:req.flash('error')});
 });
 
+
 app.get("/logout", function (req, res) {
+ 
+
   req.logout();
   res.redirect("/");
 });
 
+
+
 let templateno = 1;
 
+
 app.get("/download", function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
   Project.find({ _id: req.user.id }, function (err, posts) {
     if (!err) {
       res.render("template" + templateno, { found: posts });
@@ -275,128 +406,148 @@ app.get("/download", function (req, res) {
   });
 });
 
-let count = 1;
-let noOfProjects=1;
-let noOfSkills=1;
-let noOfWorkExperience=1;
-let noOfAwards=1;
-let flag = 0;
-let flag1=0;
-let flag2=0;
-let flag3=0;
-let flag4=0;
-let filepresentornot=0;
-let flag5=0;//hobbies
-let noOfhobbies=1;
-let flag6=0;//strengths
-let noOfStrengths=1;
-let flag7=0;//language
-let noOfLanguage=1;
-let flag8=0;//goals
-let noOfGoals=1;
 
-let important=1;
+
+
+app.get("/forget", function (req, res) {
+ 
+      res.render("forget",{success:req.flash('info'),danger:req.flash('error')});
+   
+});
+
+
+
+
+let noOfeducation = 1;
+let noOfProjects = 1;
+let noOfSkills = 1;
+let noOfWorkExperience = 1;
+let noOfAwards = 1;
+
+let filepresentornot = 0;
+
+let noOfhobbies = 1;
+
+let noOfStrengths = 1;
+
+let noOfLanguage = 1;
+
+let noOfGoals = 1;
+
+
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
 
+  // const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
  
-   const loader=multer({dest:`public/uploads/${req.user.id}/`});
-  
- // important:1;
-  
-  
-
   Project.find({ _id: req.user.id }, function (err, found) {
     if (!err) {
       res.render(customListName, {
         current: customListName,
         found: found,
-        count: count,
-        noOfProjects:noOfProjects,
-        noOfSkills:noOfSkills,
-        noOfWorkExperience:noOfWorkExperience,
-        noOfAwards:noOfAwards,
-        flag: flag,
-        flag1:flag1,
-        flag2:flag2,
-        flag3:flag3,
-        flag4:flag4,
-        filepresentornot:filepresentornot,
-        flag5:flag5,
-        noOfhobbies:noOfhobbies,
-        flag6:flag6,
-        flag7:flag7,
-        noOfStrengths:noOfStrengths,
-        noOfLanguage:noOfLanguage,
-        flag8:flag8,
-        noOfGoals:noOfGoals,
-
+        success:req.flash('info'),danger:req.flash('error')
+       
       });
-      //  console.log(found[0].project[0].projectname);
     }
+
   });
-  
+
 });
 
-app.post("/", function (req, res) {
-  res.redirect("/templates");
+
+
+app.get('/reset/:token', function(req, res) {
+  
+  Project.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      // console.log("failed");
+      return res.redirect('/forget');
+    }
+    res.render('newpassword', {found: user,success:req.flash('info'),danger:req.flash('error')});
+  });
 });
+
+
+
 
 app.post("/templates", function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
   templateno = req.body.template;
   res.redirect("/profile");
 });
 
 app.post("/login", function (req, res) {
+
   const user = new Project({
     username: req.body.username,
     password: req.body.password,
   });
 
-  req.login(user, function (err) {
-    if (err) {
-      console.log(err);
-      res.redirect("/login");
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        filepresentornot=0;
-        count = 1;
-        noOfProjects=1;
-        noOfSkills=1;
-     noOfWorkExperience=1;
-     noOfAwards=1;
-     flag = 0;
-     flag1=0;
-     flag2=0;
-     flag3=0;
-     flag4=0;
-        res.redirect("/");
-      });
-    }
-  });
-});
+  
+
+        passport.authenticate('local', function(err, user) {
+           if (err) 
+           { 
+            req.flash('error',err.message); 
+            return  res.redirect("/login");
+            }
+           if (!user) 
+            {  
+              req.flash('error',"Invalid credentials"); 
+              return res.redirect("/login");
+            }
+
+          req.logIn(user, function(err) {
+           if (err) 
+         {  
+           req.flash('error',err.message); 
+           return res.redirect("/login");
+         }
+            const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+         return res.redirect('/');
+       });
+       })(req, res);
+     
+    });
+ 
 
 app.post("/register", function (req, res) {
+
+  let value=req.body.password;
+  let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+if(!value.match(passw)) 
+{ 
+  req.flash('error',"Password must be atleast 6 characters long , contains atleast one numeric digit, one uppercase & one lowercase letter."); 
+    return res.redirect("/register");
+}
+
+
+
+
   Project.register(
-    { username: req.body.username },
+    { username: req.body.username,loginid:req.body.emailid },
     req.body.password,
     function (err, user) {
       if (err) {
-        console.log(err);
+        req.flash('error',"A user with the given username or email is already registered ");
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          filepresentornot=0;
-        count = 1;
-        noOfProjects=1;
-        noOfSkills=1;
-        noOfWorkExperience=1;
-        noOfAwards=1;
-        flag = 0;
-        flag1=0;
-        flag2=0;
-        flag3=0;
-        flag4=0;
+          const loader = multer({ dest: `public/uploads/${req.user.id}/` });
+          filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
+          noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
+          noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
           res.redirect("/");
         });
       }
@@ -405,7 +556,16 @@ app.post("/register", function (req, res) {
 });
 
 app.post("/profile", function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
+
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+
+  try{
+
   var myquery = { _id: req.user.id };
   var newvalues = {
     $set: {
@@ -422,89 +582,95 @@ app.post("/profile", function (req, res) {
       city: req.body.city,
       pin: req.body.pin,
       address: req.body.address,
-      currentposition:req.body.currentposition,
+      currentposition: req.body.currentposition,
     },
   };
   Project.updateMany(myquery, newvalues, function (err, res) {
-    if (!err) console.log("Documents updated successfully");
+    if (!err) 
+    {console.log("Documents updated successfully");}
   });
-  res.redirect("/education");
-});
-app.post("/education", function (req, res) {
-    // console.log(req.body.startdate);
-  let value = req.body.btn;
-  if (value === "1") {
-    noOfProjects++;
-  } else {
-    if (value === "2" && noOfProjects > 1) {
-      noOfProjects--;
-    }
+
+  }catch(err){
+    req.flash('error',err.message);
+  return res.redirect("/profile")
   }
 
-  
-  //  console.log("noOfProjects="+noOfProjects);
+
+  res.redirect("/education");
+});
+
+app.post("/education", function (req, res) {
+
+
+
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+ let value = req.body.btn;
+  try{
+ 
+  if (value === "1") {
+    noOfeducation++;
+  } else {
+    if (value === "2" && noOfeducation > 1) {
+      noOfeducation--;
+    }
+  }
 
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.name;
-  if (!Array.isArray(checkisarray)) {
-    
-    var newvalue = {
-      $set: {
-        school: 
-          {
-            name:req.body.name,
-            startdate:req.body.startdate,
-            enddate: req.body.enddate,
-            degree:req.body.degree,
-            gpa: req.body.gpa,
-            location: req.body.location,
-          },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.name;
-    Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
 
-    for (let i = 0; i < arr.length; i++) {
-     
-      var newvalue = {
-        $push: {
-          school: 
-          {
-            name:req.body.name[i],
-            startdate:req.body.startdate[i],
-            enddate: req.body.enddate[i],
-            degree:req.body.degree[i],
-            gpa: req.body.gpa[i],
-            location: req.body.location[i],
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
+  Project.updateOne(myquery, { $set: { noOfeducation:noOfeducation} }, function (err, res) {
+    if (!err){
+    console.log("Documents deleted successfully");
     }
-  }
+  });
+
+  Project.updateMany(myquery, { $set: { school: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+  var newvalue = {
+    $push: {
+      school: {
+        name: req.body.name,
+        startdate: req.body.startdate,
+        enddate: req.body.enddate,
+        degree: req.body.degree,
+        gpa: req.body.gpa,
+        location: req.body.location,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
+
+  }catch(err)
+{
+  req.flash('error',err.message);
+  return res.redirect("/education")
+}
+
 
   if (value === "3") {
-    flag1 = 1;
     res.redirect("/work");
   } else {
-    if (value === "1") flag1 = 0;
-    else flag1 = 1;
     res.redirect("/education");
   }
 });
 app.post("/work", function (req, res) {
-  //   console.log(req.body);
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+let value = req.body.btn;
 
-  let value = req.body.btn;
+  try{
+  
   if (value === "1") {
     noOfWorkExperience++;
   } else {
@@ -513,208 +679,170 @@ app.post("/work", function (req, res) {
     }
   }
 
-  
-  //  console.log("noOfProjects="+noOfProjects);
-
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.companyname;
-  if (!Array.isArray(checkisarray)) {
-    
-    var newvalue = {
-      $set: {
-        work: 
-          {
-            companyname: req.body.companyname,
-            jobtitle: req.body.jobtitle,
-            state: req.body.state,
-            city: req.body.city,
-            startdate: req.body.startdate,
-            enddate: req.body.enddate,
-            jobdescription: req.body.jobdescription,
-          },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.companyname;
-    Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
 
-    for (let i = 0; i < arr.length; i++) {
-     
-      var newvalue = {
-        $push: {
-          work: 
-          {
-            companyname: req.body.companyname[i],
-            jobtitle: req.body.jobtitle[i],
-            state: req.body.state[i],
-            city: req.body.city[i],
-            startdate: req.body.startdate[i],
-            enddate: req.body.enddate[i],
-            jobdescription: req.body.jobdescription[i],
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    }
-  }
+  Project.updateOne(myquery, { $set: { noOfWorkExperience:noOfWorkExperience} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
+
+  let arr = req.body.companyname;
+  Project.updateMany(myquery, { $set: { work: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+  var newvalue = {
+    $push: {
+      work: {
+        companyname: req.body.companyname,
+        jobtitle: req.body.jobtitle,
+        state: req.body.state,
+        city: req.body.city,
+        startdate: req.body.startdate,
+        enddate: req.body.enddate,
+        jobdescription: req.body.jobdescription,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
+
+
+}catch(err){
+  req.flash('error',err.message);
+  return res.redirect("/work")
+}
 
   if (value === "3") {
-    flag3 = 1;
     res.redirect("/skills");
   } else {
-    if (value === "1") flag3 = 0;
-    else flag3 = 1;
     res.redirect("/work");
   }
 });
 
-
 app.post("/skills", function (req, res) {
-     console.log(req.body);
-
-     let value = req.body.btn;
-     if (value === "1") {
-       noOfSkills++;
-     } 
-     else if (value === "2" && noOfSkills > 1) {
-        noOfSkills--;
-     }
-     else if(value!=="3")
-     {
-       important++;
-     }
-     
-
-
-
-
-    var myquery = { _id: req.user.id };
-
-    let checkisarray = req.body.skillsname;
-    if (!Array.isArray(checkisarray)) {
-      
-      var newvalue = {
-        $set: {
-          skills: 
-            {
-              skillsname:req.body.skillsname,
-              skillsdetails:req.body.skillsdetails,
-              
-            },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    } else {
-      let arr = req.body.skillsname;
-      Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
-        if (!err) console.log("Documents deleted successfully");
-      });
-  
-      for (let i = 0; i < arr.length; i++) {
-       
-        var newvalue = {
-          $push: {
-            skills: 
-            {
-              skillsname:req.body.skillsname[i],
-              skillsdetails:req.body.skillsdetails[i],
-
-            },
-          },
-        };
-        Project.updateMany(myquery, newvalue, function (err, res) {
-          if (!err) console.log("Documents inserted successfully");
-        });
-      }
-    }
-  
-    if (value === "3") {
-      flag2 = 1;
-      res.redirect("/projects");
-    } else {
-      if (value === "1") flag2 = 0;
-      else flag2 = 1;
-      res.redirect("/skills");
-    }
-
-});
-
-app.post("/projects", function (req, res) {
-  let value = req.body.btn;
-  if (value === "1") {
-    count++;
-  } else {
-    if (value === "2" && count > 1) {
-      count--;
-    }
+  console.log(req.body);
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
   }
+let value = req.body.btn;
 
-  // console.log(req.body);
-  //  console.log("count="+count);
+  try{
+  
+  if (value === "1") {
+    noOfSkills++;
+  } else if (value === "2" && noOfSkills > 1) {
+    noOfSkills--;
+  }
 
   var myquery = { _id: req.user.id };
 
-  let checkisarray = req.body.projectname;
-  if (!Array.isArray(checkisarray)) {
-    var newvalue = {
-      $set: {
-        project: {
-          projectname: req.body.projectname,
-          project1description: req.body.project1description,
-          link: req.body.link,
-          toolsused: req.body.toolsused,
-        },
-      },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.projectname;
-    Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
+  Project.updateOne(myquery, { $set: { noOfSkills:noOfSkills} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
-    for (let i = 0; i < arr.length; i++) {
-      var newvalue = {
-        $push: {
-          project: {
-            projectname: req.body.projectname[i],
-            project1description: req.body.project1description[i],
-            link: req.body.link[i],
-            toolsused: req.body.toolsused[i],
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
+
+  Project.updateMany(myquery, { $set: { skills: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+  var newvalue = {
+    $push: {
+      skills: {
+        skillsname: req.body.skillsname,
+        skillsdetails: req.body.skillsdetails,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+
+  });
+  }catch(err){
+    req.flash('error',err.message);
+    return res.redirect("/skills")
+  }
+
+
+  if (value === "3") {
+    res.redirect("/projects");
+  } else {
+    res.redirect("/skills");
+  }
+});
+
+app.post("/projects", function (req, res) {
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+
+let value = req.body.btn;
+  try{
+  
+  if (value === "1") {
+    noOfProjects++;
+  } else {
+    if (value === "2" && noOfProjects > 1) {
+      noOfProjects--;
     }
   }
 
+  var myquery = { _id: req.user.id };
+
+  Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+
+  Project.updateMany(myquery, { $set: { project: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+  var newvalue = {
+    $push: {
+      project: {
+        projectname: req.body.projectname,
+        project1description: req.body.project1description,
+        link: req.body.link,
+        toolsused: req.body.toolsused,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+  });
+  }catch(err){
+    req.flash('error',err.message);
+    return res.redirect("/projects")
+  }
+
+
   if (value === "3") {
-    flag = 1;
     res.redirect("/awards");
   } else {
-    if (value === "1") flag = 0;
-    else flag = 1;
     res.redirect("/projects");
   }
 });
 
 app.post("/awards", function (req, res) {
-
-  let value = req.body.btn;
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+let value = req.body.btn;
+  try{
+  
   if (value === "1") {
     noOfAwards++;
   } else {
@@ -722,140 +850,424 @@ app.post("/awards", function (req, res) {
       noOfAwards--;
     }
   }
+ var myquery = { _id: req.user.id };
 
-  // console.log(req.body);
-  //  console.log("count="+count);
+  Project.updateOne(myquery, { $set: { noOfAwards:noOfAwards} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
 
-  var myquery = { _id: req.user.id };
+ 
 
-  let checkisarray = req.body.awardname;
-  if (!Array.isArray(checkisarray)) {
-    var newvalue = {
-      $set: {
-        awards: {
-          awardname: req.body.awardname,
-          awarddate:  req.body.awarddate,
-          awarder:  req.body.awarder,
-          Awarddescription: req.body.Awarddescription,
-        },
+  let arr = req.body.awardname;
+  Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+  var newvalue = {
+    $push: {
+      awards: {
+        awardname: req.body.awardname,
+        awarddate: req.body.awarddate,
+        awarder: req.body.awarder,
+        Awarddescription: req.body.Awarddescription,
       },
-    };
-    Project.updateMany(myquery, newvalue, function (err, res) {
-      if (!err) console.log("Documents inserted successfully");
-    });
-  } else {
-    let arr = req.body.awardname;
-    Project.updateMany(myquery, { $set: { awards: [] } }, function (err, res) {
-      if (!err) console.log("Documents deleted successfully");
-    });
-
-    for (let i = 0; i < arr.length; i++) {
-      var newvalue = {
-        $push: {
-          awards: {
-            awardname: req.body.awardname[i],
-          awarddate:  req.body.awarddate[i],
-          awarder:  req.body.awarder[i],
-          Awarddescription: req.body.Awarddescription[i],
-          },
-        },
-      };
-      Project.updateMany(myquery, newvalue, function (err, res) {
-        if (!err) console.log("Documents inserted successfully");
-      });
-    }
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+   
+  });
+  }catch(err){
+    req.flash('error',err.message);
+  return res.redirect("/awards")
   }
 
+
+
   if (value === "3") {
-    flag4 = 1;
     res.redirect("/personal");
   } else {
-    if (value === "1") flag4 = 0;
-    else flag4 = 1;
     res.redirect("/awards");
   }
 });
 
 
-app.post('/personal', upload.single('photo'), function (req, res)
-{
-   let imagefile=req.file.originalname;
+
+let flag=1;
+let flag1=0;
+let count=0;
+app.post("/personal", upload.single("photo"), function (req, res) {
+  
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+try{
+    let buttonvalue=req.body.btnn;
+    if(buttonvalue!=1)
+    {
+        
+      if(flag1!==flag&&count!=0)
+      { 
+        req.flash('info',"Image is removed successfully");
+       
+      }
+      else
+      {
+        req.flash('error',"First you have to choose file then you can delete it");
+      }
+     
+      flag=0;
+
+      fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
+        if (err) {
+          console.log(err); 
+        }
+    
+        files.forEach((file) => {
+          const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
+            fs.unlinkSync(fileDir);
+        });
+      });
+
+      var query = { _id: req.user.id };
+  var values = {
+    $set: {
+      img: null,
+      filepresentornot:0
+    },
+  };
+  Project.updateOne(query, values, function (err, res) {
+    if (!err) console.log("Document updated successfully");
+  });
+
+  
+  
+      return res.redirect("/personal")
+        //  console.log("uploaded");
+    }
+
+    flag=1;count=1;
+
+  let imagefile = req.file.originalname;
   //  console.log(req.file);
   //  console.log(imagefile);
   //  console.log(req.body);
+  
 
-   var myquery = {_id: req.user.id };
-   var newvalues = { $set: { 
-       img:imagefile,
-    } };
-   Project.updateOne(myquery, newvalues,function(err,res){
-     if(!err)
-     console.log("Document updated successfully");
-   })
+  var myquery = { _id: req.user.id };
+  var newvalues = {
+    $set: {
+      img: imagefile,
+    },
+  };
+  Project.updateOne(myquery, newvalues, function (err, res) {
+    if (!err) console.log("Document updated successfully"); 
+  });
 
-   filepresentornot=1;
+  filepresentornot = 1;
 
-   fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
+  Project.updateOne(myquery, { $set: {filepresentornot:filepresentornot} }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");  
+  });
+
+  
+  fs.readdir(`./public/uploads/${req.user.id}/`, (err, files) => {
     if (err) {
-        console.log(err);
+      console.log(err); 
     }
-     
-     
-    files.forEach(file => {
-        const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
 
-        if (file !== imagefile) {
-            fs.unlinkSync(fileDir);
-        }
+    files.forEach((file) => {
+      const fileDir = path.join(`./public/uploads/${req.user.id}/`, file);
+
+      if (file !== imagefile) {
+        fs.unlinkSync(fileDir);
+      }
     });
+  });
+}catch(err){
+  req.flash('error',"First you have to choose file then you can upload it");
+ 
+  return res.redirect("/personal")
+}
+
+
+  res.redirect("/personal");
 });
-  
 
-
-   res.redirect("/personal")
-  
-});
-
-
-app.post("/extra",function(req,res)
-{
-  console.log(req.body);
-
-  if(req.body.btn==="1")
+app.post("/extra", function (req, res) {
+  // console.log(req.body);
+  if (!req.user) 
   {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+
+  try{
+  if (req.body.btn === "1") {
     noOfhobbies++;
-  }
-  else if(req.body.btn==="2")
-  {
+  } else if (req.body.btn === "2" && noOfhobbies > 1) {
     noOfhobbies--;
-  }
-  else if(req.body.btn==="3")
-  {
+  } else if (req.body.btn === "3") {
     noOfStrengths++;
-  }
-  else if(req.body.btn==="4")
-  {
+  } else if (req.body.btn === "4" && noOfStrengths > 1) {
     noOfStrengths--;
-  }
-  else if(req.body.btn==="5")
-  {
+  } else if (req.body.btn === "5") {
     noOfLanguage++;
-  }
-  else if(req.body.btn==="6")
-  {
+  } else if (req.body.btn === "6" && noOfLanguage > 1) {
     noOfLanguage--;
-  }
-  else if(req.body.btn==="7")
-  {
+  } else if (req.body.btn === "7") {
     noOfGoals++;
-  }
-  else if(req.body.btn==="8")
-  {
+  } else if (req.body.btn === "8" && noOfGoals > 1) {
     noOfGoals--;
   }
-  
+
+  var myquery = { _id: req.user.id };
+
+  Project.updateMany(myquery,
+     { $set: { noOfGoals:noOfGoals,noOfLanguage:noOfLanguage,noOfhobbies:noOfhobbies,
+      noOfStrengths:noOfStrengths,} },
+     function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+  });
+
+  Project.updateMany(myquery, { $set: { extra: [] } }, function (err, res) {
+    if (!err) console.log("Documents deleted successfully");
+   
+  });
+
+  var newvalue = {
+    $push: {
+      extra: {
+        hobbie: req.body.hobbie,
+        strength: req.body.strength,
+        language: req.body.language,
+        goals: req.body.goal,
+      },
+    },
+  };
+  Project.updateMany(myquery, newvalue, function (err, res) {
+    if (!err) console.log("Documents inserted successfully");
+   
+  });
+}catch(err){
+  req.flash('error',err.message);
+  return res.redirect("/extra")
+}
+
+  if(req.body.btn==="9")
+  res.redirect("/download");
+  else
   res.redirect("/extra");
+});
+
+
+app.post("/",function(req,res){
+  // console.log(req.body.btn);
+let value=req.body.btn;
+  if(value==="1"&&req.user){
+
+
+    var myquery = { _id: req.user.id };
+
+    Project.updateMany(myquery, { $set: 
+      { 
+        
+        school:[],work:[],skills:[],project:[],awards:[],extra:[],
+        img:null,currentposition:null,address:null,pin:null,
+        city:null,state:null,country:null,twitter:null,linkedin:null,github:null,
+        website:null,pno:null,email:null,profile:null,firstname:null,
+        filepresentornot: 0,count: 1,noOfProjects:1,noOfSkills:1,
+        noOfWorkExperience:1,noOfAwards:1,noOfhobbies:1,
+        noOfStrengths:1,noOfLanguage:1,noOfGoals:1,
+      
+      } 
+    
+    
+    }, function (err, res) {
+      if (!err) console.log(" All Documents deleted successfully");
+     
+    });
+
+        filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
+        noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
+        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
+
+  }
+  
+  if(value==="3")
+  {
+    res.redirect("/templates");
+  }
+  else if(value==="2")
+  {
+    res.redirect("/templates")
+  }
+  else{
+  res.redirect("/home")
+  }
 })
+
+
+app.post("/home",function(req,res)
+{
+  if (!req.user) 
+  {
+    req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
+    return res.redirect("/login");
+  }
+  res.render("availabletemplates", { currentUser: req.user,success:req.flash('info'),danger:req.flash('error') });
+})
+
+
+
+
+
+app.post('/forget', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      Project.findOne({ loginid: req.body.email }, function(err, user) {
+        if (!user) {
+          req.flash('error', 'No account with that email address exists.');
+         return  res.redirect('/forget');
+        }
+        if(err)
+        {
+          req.flash('error',err.message);
+          return  res.redirect('/forget');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.MAIL_ID,
+          pass: process.env.MAIL_PASSWORD
+        }
+      });
+      var mailOptions = {
+        to: req.body.email,
+        from: 'passwordreset@demo.com',
+        subject: 'Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash('info', 'An e-mail has been sent to ' + req.body.email + ' with further instructions.');
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+     if (err)
+       // return next(err);
+       req.flash('error',err.message); 
+    res.redirect('/forget');
+  });
+});
+
+
+
+app.post('/reset/:token', function(req, res) {
+  let loc=`/reset/${req.params.token}`;
+  if(req.body.password===req.body.confirm){
+  async.waterfall([
+    function(done) {
+      Project.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          req.flash('error', 'Password reset token is invalid or has expired.');
+          return res.redirect('/forget');
+        }
+
+
+        let value=req.body.password;
+  let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+if(!value.match(passw)) 
+{ 
+  req.flash('error',"Password must be atleast 6 characters long , contains atleast one numeric digit, one uppercase & one lowercase letter."); 
+    return res.redirect(loc);
+}
+
+
+        Project.findByUsername(user.username).then(function(sanitizedUser){
+          if (sanitizedUser){
+              sanitizedUser.setPassword(req.body.password, function(){
+                  sanitizedUser.save();
+                //  console.log("password reset successful'");
+              });
+          } else {
+            // console.log('This user does not exist');
+            req.flash('error', "User does not exist!");
+            return res.redirect('/forget');
+          }
+      },function(err){
+          // console.log(err);
+          if(err)
+          req.flash('error',"Error occured! Please contact developer"); 
+      })
+
+
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        user.save(function(err) {
+          req.logIn(user, function(err) {
+            done(err, user);
+          });
+        });
+      });
+    },
+    function(user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.MAIL_ID,
+          pass: process.env.MAIL_PASSWORD
+        }
+      });
+      var mailOptions = {
+        to:user.loginid,
+        from: 'passwordreset@demo.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash('info', 'Your password has been successfully changed.');
+        done(err);
+      });
+    }
+  ], function(err) {
+    res.redirect('/login');
+    if(err)
+    req.flash('error',err.message); 
+  });
+}
+else{
+  req.flash('error',"Password don't match"); 
+ 
+  res.redirect(loc)
+}
+
+
+});
 
 
 

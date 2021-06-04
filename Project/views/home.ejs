@@ -7,18 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="public/icons/favicon.ico" />
-    <title>Document</title>
+    <link rel="icon" href="/icons/favicon.ico" />
+  <title>Makeresume</title>
   <link href="css/styles.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Advent+Pro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Open+Sans:ital,wght@1,700&display=swap"
     rel="stylesheet">
+    <script
+    src="https://kit.fontawesome.com/64d58efce2.js"
+    crossorigin="anonymous"
+  ></script>
 </head>
 
 
-<body>
+<body oncontextmenu="return false;">
 
   <nav class="navbar navbar-expand-lg navbar-light  ">
 
@@ -33,19 +37,19 @@
       <ul class="navbar-nav ml-auto">
         <% if(!currentUser){ %>
           <li class="nav-item active"></li>
-          <a class="nav-link text-white" href="/login">Login <span class="sr-only">(current)</span></a>
+          <a class="nav-link btn btn-light text-dark" href="/login">Login <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link text-white" href="/register">Register</a>
+            <a class="nav-link btn btn-light text-dark" href="/register">Register</a>
           </li>
           <% } else { %>
             <li class="nav-item active">
 
-              <a class="nav-link text-white" href="">Signed in as <%=currentUser.username%> <span
+              <a class="nav-link btn btn-light text-dark" href="">Signed in as <%=currentUser.username%> <span
                     class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link text-white" href="/logout">Logout</a>
+              <a class="nav-link btn btn-light text-dark" href="/logout">Logout</a>
             </li>
             <% } %>
 
@@ -53,6 +57,26 @@
     </div>
   </nav>
   <hr>
+
+
+  <%if(success.length>0){%>
+    <div class="alert alert-success alert-dismissible w-50">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%=success%>
+  </div>
+
+  
+    <%}else{%>
+      <%if(danger.length>0){%>
+        <div class="alert alert-danger alert-dismissible w-50 mx-auto p-2 mb-5">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%=danger%>
+      </div>
+        
+     
+      <%}%>
+      <%}%>
+
   <div class="container">
     <div class="row">
       <div class="col-lg">
@@ -66,12 +90,12 @@
         <p>Presto! Your resume is ready to share!
 
         </p>
-        <form method="POST" action="/">
+        <form method="POST" action="/home">
           <button type="submit" class="btn btn-light btn-lg  btn-block  ">Submit</button>
         </form>
       </div>
-      <div class="col-lg">
-        <img class="image" src="images\homepic.jpg">
+      <div class="col-lg image-fluid">
+        <img class="image" src="images\homenew1.png">
 
       </div>
     </div>
@@ -86,6 +110,10 @@
 
   </footer>
 
+<!-- for  loader -->
+  <input type="hidden" id="page" value="home">
+
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -95,6 +123,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+<script src="js/loading.js"></script>
+
 </body>
 
 </html>

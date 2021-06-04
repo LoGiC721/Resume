@@ -1,49 +1,93 @@
 <%-include("sidemenu")-%>
 <div class="text-center information">
-    <h3>Your Work Details</h3>
+
+
+    <%if(success.length>0){%>
+        <div class="success">
+         
+          <i class="fas fa-check-circle"></i>
+          <%=success%>
+          <span onclick="this.parentElement.style.display='none'">&times;</span>
+      </div>
+    
+      
+        <%}else{%>
+          <%if(danger.length>0){%>
+            <div class="danger">
+             
+              <i class="fas fa-exclamation-triangle"></i>
+              <%=danger%>
+              <span onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+<%}%>
+<%}%>
+
+
+
+
+
+<%let d = new Date();%>
+		   <%let date1=d.getDate()%>
+			<%if(date1<10){%>
+				<%date1='0' +date1%>
+				<%}%>
+				<%let month1=(d.getMonth())+1%>
+				<%if(month1<10){%>
+				<%month1='0' +month1%>
+				<%}%>
+				<%let year1=d.getFullYear()%>
+
+
+
+			<%var strdate = year1 + "-" + month1 + "-" + date1;%>
+
+
+
+
+    <h4>Your Work Details</h4>
     <br>
     <form method="POST" action="work">
-        <%for(let i=0;i<noOfWorkExperience;i++){%>
+        <%for(let i=0;i<found[0].noOfWorkExperience;i++){%>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="companyname">Company</label>
-            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="<%=found[0].work[i].companyname%>" autocomplete="off">
+            <%if(found[0].work.length!==0){%>
+            <label for="companyname<%=i%>">Company</label>
+            <input type="text" placeholder="Company name" id="companyname<%=i%>" name="companyname" value="<%=found[0].work[0].companyname[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="companyname">Company</label>
-            <input type="text" placeholder="Company name" id="companyname" name="companyname" value="" autocomplete="off">
+                <label for="companyname<%=i%>">Company</label>
+            <input type="text" placeholder="Company name" id="companyname<%=i%>" name="companyname" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="jobtitle">jobtitle</label>
-            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="<%=found[0].work[i].jobtitle%>" autocomplete="off">
+            <%if(found[0].work.length!==0){%>
+            <label for="jobtitle<%=i%>">Jobtitle</label>
+            <input type="text" placeholder="jobtitle" id="jobtitle<%=i%>" name="jobtitle" value="<%=found[0].work[0].jobtitle[i]%>" autocomplete="off">
             <%}else{%>
-            <label for="jobtitle">jobtitle</label>
-            <input type="text" placeholder="jobtitle" id="jobtitle" name="jobtitle" value="" autocomplete="off">
+            <label for="jobtitle<%=i%>">Jobtitle</label>
+            <input type="text" placeholder="jobtitle" id="jobtitle<%=i%>" name="jobtitle" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="state">state</label>
-            <input type="text" placeholder="state" id="state" name="state" value="<%=found[0].work[i].state%>" autocomplete="off">
+            <%if(found[0].work.length!==0){%>
+            <label for="state<%=i%>">state</label>
+            <input type="text" placeholder="state" id="state<%=i%>" name="state" value="<%=found[0].work[0].state[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="state">state</label>
-                <input type="text" placeholder="state" id="state" name="state" value="" autocomplete="off">
+                <label for="state<%=i%>">state</label>
+                <input type="text" placeholder="state" id="state<%=i%>" name="state" value="" autocomplete="off">
                 <%}%>     
         </div>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="city">city</label>
-            <input type="text" placeholder="city" id="city" name="city" value="<%=found[0].work[i].city%>" autocomplete="off">
+            <%if(found[0].work.length!==0){%>
+            <label for="city<%=i%>">city</label>
+            <input type="text" placeholder="city" id="city<%=i%>" name="city" value="<%=found[0].work[0].city[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="city">city</label>
-            <input type="text" placeholder="city" id="city" name="city" value="" autocomplete="off">
+                <label for="city<%=i%>">city</label>
+            <input type="text" placeholder="city" id="city<%=i%>" name="city" value="" autocomplete="off">
             <%}%> 
         </div>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-                <%if(found[0].work[i].startdate!==null){%>
-                    <%let template=found[0].work[i].startdate%>
+            <%if(found[0].work.length!==0){%>
+                <%if(found[0].work[0].startdate[i]!=null){%>
+                    <%let template=found[0].work[0].startdate[i]%>
                     <%let date=template.getDate()%>
                     <%if(date<10){%>
                     <%date='0' +date%>
@@ -54,21 +98,21 @@
                     <%}%>
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
-            <label for="startdate">Start Date</label>
-            <input type="date" placeholder="startdate" id="startdate" name="startdate" value="<%=finaldate%>" autocomplete="off">
+            <label for="startdate<%=i%>">Start Date</label>
+            <input type="date" placeholder="startdate" id="startdate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="startdate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <label for="startdate">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="" autocomplete="off">
+                <label for="startdate<%=i%>">Start Date</label>
+                <input type="date" placeholder="startdate" id="startdate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="startdate" value="" autocomplete="off">
             <%}%> 
             <%}else{%>
-                <label for="startdate">Start Date</label>
-                <input type="date" placeholder="startdate" id="startdate" name="startdate" value="" autocomplete="off">
+                <label for="startdate<%=i%>">Start Date</label>
+                <input type="date" placeholder="startdate" id="startdate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="startdate" value="" autocomplete="off">
             <%}%>     
         </div>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-                <%if(found[0].work[i].enddate!==null){%>
-                    <%let template=found[0].work[i].enddate%>
+            <%if(found[0].work.length!==0){%>
+                <%if(found[0].work[0].enddate[i]!=null){%>
+                    <%let template=found[0].work[0].enddate[i]%>
                     <%let date=template.getDate()%>
                     <%if(date<10){%>
                     <%date='0' +date%>
@@ -79,24 +123,24 @@
                     <%}%>
                     <%let year=template.getFullYear()%>
                     <%let finaldate=`${year}-${month}-${date}`%>
-            <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="<%=finaldate%>" autocomplete="off">
+            <label for="enddate<%=i%>">End Date</label>
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="<%=finaldate%>" autocomplete="off">
             <%}else{%>
-                <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="" autocomplete="off">
+                <label for="enddate<%=i%>">End Date</label>
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
             <%}%>
             <%}else{%>
-                <label for="enddate">End Date</label>
-            <input type="date" placeholder="enddate" id="enddate" name="enddate" value="" autocomplete="off">
+                <label for="enddate<%=i%>">End Date</label>
+            <input type="date" placeholder="enddate" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
             <%}%>
         </div>
         <div class="sameline">
-            <%if((found[0].work.length!==0&&((noOfWorkExperience-i)!==1))||(flag3===1)){%>
-            <label for="jobdescription">Description</label>
-            <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" value="<%=found[0].work[i].jobdescription%>" autocomplete="off">
+            <%if(found[0].work.length!==0){%>
+            <label for="jobdescription<%=i%>">Description</label>
+            <input type="text" placeholder="jobdescription" id="jobdescription<%=i%>" name="jobdescription" value="<%=found[0].work[0].jobdescription[i]%>" autocomplete="off">
             <%}else{%>
-                <label for="jobdescription">Description</label>
-                <input type="text" placeholder="jobdescription" id="jobdescription" name="jobdescription" autocomplete="off">
+                <label for="jobdescription<%=i%>">Description</label>
+                <input type="text" placeholder="jobdescription" id="jobdescription<%=i%>" name="jobdescription" autocomplete="off">
             <%}%>       
         </div>
         <br>
@@ -106,20 +150,42 @@
 		
 		<br>
 		<div class="footer">
-			<a href="/education" class="btn button prev">Prev</a>
-			<button class="add increment" name="btn" value="1">Add Job</button>
-		    <%if(noOfWorkExperience===1){%>
-                <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">Remove Job</button>
+            <div class="container flexx">
+			<a href="/education" class="btn button prev">
+                <i class="fas fa-arrow-left iconn"></i>
+				<span class="change">Prev</span>
+            </a>
+			<button class="add increment" name="btn" value="1">
+                <i class="fas fa-plus iconn"></i>
+				<span class="change">Add Work</span>
+            </button>
+		    <%if(found[0].noOfWorkExperience===1){%>
+                <button type="button" class="add decrement notclickable" style="cursor: no-drop;" name="btn" value="2">
+                    <i class="fas fa-minus iconn"></i>
+                    <span class="change">Remove Work</span>
+                </button>
                 <%}else{%>
-                    <button class="add decrement" name="btn" value="2">Remove Job</button>
+                    <button class="add decrement" name="btn" value="2">
+                        <i class="fas fa-minus iconn"></i>
+                        <span class="change">Remove Work</span>
+
+                    </button>
                 <%}%>   
-			<button name="btn" value="3" class="btn button next">Save & Next</button>
+			<button name="btn" value="3" class="btn button next">
+                <i class="fas fa-arrow-right iconn"></i>
+				<span class="change">Save & Next</span>
+            </button>
+            </div>
 		</div>
     </form>
 
     </div>
     </div>
 </div>
+
+<!-- for  loader -->
+<input type="hidden" id="page" value="work">
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -132,7 +198,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-    <script src="/js/sidebar.js" type="text/javascript"></script>
+    <script src="js/sidebar.js" type="text/javascript"></script>
+    <script src="js/loading.js" type="text/javascript"></script>
+
     </body>
 
     </html>

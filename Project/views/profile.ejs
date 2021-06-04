@@ -2,9 +2,33 @@
     <div class="text-center information">
 
 
+        
+        <%if(success.length>0){%>
+            <div class="success">
+             
+              <i class="fas fa-check-circle"></i>
+              <%=success%>
+              <span onclick="this.parentElement.style.display='none'">&times;</span>
+          </div>
+        
+          
+            <%}else{%>
+              <%if(danger.length>0){%>
+                <div class="danger">
+                 
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <%=danger%>
+                  <span onclick="this.parentElement.style.display='none'">&times;</span>
+              </div>
+<%}%>
+<%}%>
 
-        <h3>Enter Contact information</h3>
+
+        <h4>Enter Contact information</h4>
         <br>
+
+
+
         <form method="POST" action="profile">
 
 
@@ -14,32 +38,32 @@
 
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].firstname!=="NULL"){%>
                                 <label for="firstname">Full Name</label>
-                                <input type="text" placeholder="First name" id="firstname" name="firstname"
+                                <input type="text" placeholder="Name" id="firstname" name="firstname"
                                     value="<%=found[0].firstname%>" autocomplete="off">
                                 <%}else{%>
-                                    <label for="firstname">First Name</label>
-                                    <input type="text" placeholder="First name" id="firstname" name="firstname" value=""
+                                    <label for="firstname">Full Name</label>
+                                    <input type="text" placeholder="Name" id="firstname" name="firstname" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].profile!=="NULL"){%>
-                                <label for="profile">Heading</label>
+                                <label for="profile">About</label>
                                 <input type="text" placeholder="Write a short note of yourself" id="profile" name="profile"
                                     value="<%=found[0].profile%>" autocomplete="off">
                                 <%}else{%>
-                                    <label for="profile">Profile</label>
+                                    <label for="profile">About</label>
                                     <input type="text" placeholder="Write a short note of yourself" id="profile" name="profile" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].email!=="NULL"){%>
                                 <label for="email">Email</label>
                                 <input type="email" placeholder="Email" id="email" name="email"
@@ -54,7 +78,7 @@
 
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].website!=="NULL"){%>
                                 <label for="website">Website</label>
                                 <input type="url" placeholder="Website" id="website" name="website"
@@ -67,7 +91,7 @@
                         </div>
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].github!=="NULL"){%>
                                 <label for="github">Github Link</label>
                                 <input type="url" placeholder="Github" id="github" name="github"
@@ -80,7 +104,7 @@
                         </div>
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].linkedin!=="NULL"){%>
                                 <label for="linkedin">Linkedin Link</label>
                                 <input type="url" placeholder="LinkedIn" id="linkedin" name="linkedin"
@@ -91,7 +115,7 @@
                                         autocomplete="off">
                                     <%}%>
                         </div>
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].twitter!=="NULL"){%>
                                 <label for="twitter">Twitter Link</label>
                                 <input type="url" placeholder="Twitter" id="twitter" name="twitter"
@@ -104,12 +128,7 @@
                         </div>
 
 
-                        
-                        <div class="footer">
-                            <a class="btn button prev notclickable" style="cursor: no-drop;">Prev</a>
-                            <button class="btn button next">Save & Next</button>
-                        </div>
-
+                 
 
                     </div>
 
@@ -117,21 +136,21 @@
 
                     <div class="col col-6-lg col-6-md col-12-sm">
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].pno!=="NULL"){%>
                                 <label for="pno">Phone</label>
-                                <input type="number" placeholder="Phone" id="pno" name="pno" value="<%=found[0].pno%>"
+                                <input type="number" placeholder="Contact no" id="pno" name="pno" value="<%=found[0].pno%>"
                                     autocomplete="off">
                                 <%}else{%>
                                     <label for="pno">Phone</label>
-                                    <input type="number" placeholder="Phone" id="pno" name="pno" value=""
+                                    <input type="number" placeholder="Contact no" id="pno" name="pno" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
 
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].currentposition!==null){%>
 
 
@@ -139,14 +158,14 @@
 
 
 
-                                                                            <label for="currentposition">Position</label>
-                                                                            <input type="text" placeholder="Student/Designer"
+                                                                            <label for="currentposition">Role</label>
+                                                                            <input type="text" placeholder="Student"
                                                                                 id="currentposition" name="currentposition"
                                                                                 value="<%=found[0].currentposition%>"
                                                                                 autocomplete="off">
                                                                             <%}else{%>
-                                                                                <label for="currentposition">Position</label>
-                                                                                <input type="text" placeholder="Student/Designer"
+                                                                                <label for="currentposition">Role</label>
+                                                                                <input type="text" placeholder="Student"
                                                                                     id="currentposition" name="currentposition"
                                                                                     value=""
                                                                                     autocomplete="off">
@@ -155,7 +174,7 @@
 
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].country!=="NULL"){%>
                                 <label for="country">Country</label>
                                 <input type="text" placeholder="Country" id="country" name="country"
@@ -167,7 +186,7 @@
                                     <%}%>
                         </div>
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].state!=="NULL"){%>
                                 <label for="state">State</label>
                                 <input type="text" placeholder="State" id="state" name="state"
@@ -179,7 +198,7 @@
                                     <%}%>
                         </div>
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].city!=="NULL"){%>
                                 <label for="city">City</label>
                                 <input type="text" placeholder="City" id="city" name="city" value="<%=found[0].city%>"
@@ -192,19 +211,19 @@
                         </div>
 
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].pin!=="NULL"){%>
                                 <label for="pin">Pincode</label>
-                                <input type="text" placeholder="Pincode" id="pin" name="pin" value="<%=found[0].pin%>"
+                                <input type="number" placeholder="Pincode" id="pin" name="pin" value="<%=found[0].pin%>"
                                     autocomplete="off">
                                 <%}else{%>
                                     <label for="pin">Pincode</label>
-                                    <input type="text" placeholder="Pincode" id="pin" name="pin" value=""
+                                    <input type="number" placeholder="Pincode" id="pin" name="pin" value=""
                                         autocomplete="off">
                                     <%}%>
                         </div>
 
-                        <div class="sameline">
+                        <div class="samelinewidth">
                             <%if(found[0].address!=="NULL"){%>
                                 <label for="address">Address</label>
                                 <input type="text" rows="2" cols="30" placeholder="address" id="address" name="address"
@@ -220,6 +239,20 @@
 
 
                         <br> <br>
+
+                        <div class="footer">
+                            <div class="container flexx">
+                            <a class="btn button prev notclickable marginnnn" style="cursor: no-drop;">
+                                <i class="fas fa-arrow-left iconn"></i>
+				                <span class="change">Prev</span>
+                               
+                            </a>
+                            <button class="btn button next">
+                                <i class="fas fa-arrow-right iconn"></i>
+                                <span class="change">Save & Next</span>
+                            </button>
+                            </div>
+                        </div>
 
                     
 
@@ -239,6 +272,10 @@
     </div>
     </div>
 
+
+<!-- for  loader -->
+<input type="hidden" id="page" value="profile">
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -248,7 +285,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
-    <script src="/js/sidebar.js" type="text/javascript"></script>
+    <script src="js/sidebar.js" type="text/javascript"></script>
+    <script src="js/loading.js" type="text/javascript"></script>
     </body>
 
     </html>
