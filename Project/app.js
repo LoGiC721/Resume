@@ -877,7 +877,7 @@ let value=req.body.btn;
         website:null,pno:null,email:null,profile:null,firstname:null,
         filepresentornot: 0,count: 1,noOfProjects:1,noOfSkills:1,
         noOfWorkExperience:1,noOfAwards:1,noOfhobbies:1,
-        noOfStrengths:1,noOfLanguage:1,noOfGoals:1,
+        noOfStrengths:1,noOfLanguage:1,noOfGoals:1,noOfeducation:1,
       
       } 
     
@@ -888,7 +888,7 @@ let value=req.body.btn;
     });
         filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
         noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
-        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;
+        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;noOfeducation=1;
   }
   
   if(value==="3")
