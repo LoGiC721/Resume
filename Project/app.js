@@ -329,16 +329,8 @@ app.get("/forget", function (req, res) {
       res.render("forget",{success:req.flash('info'),danger:req.flash('error')});
    
 });
-let noOfeducation = 1;
-let noOfProjects = 1;
-let noOfSkills = 1;
-let noOfWorkExperience = 1;
-let noOfAwards = 1;
-let filepresentornot = 0;
-let noOfhobbies = 1;
-let noOfStrengths = 1;
-let noOfLanguage = 1;
-let noOfGoals = 1;
+
+
 app.get("/:customName", function (req, res) {
   let customListName = req.params.customName;
   // const loader = multer({ dest: `public/uploads/${req.user.id}/` });
@@ -427,9 +419,6 @@ if(!value.match(passw))
       } else {
         passport.authenticate("local")(req, res, function () {
           const loader = multer({ dest: `public/uploads/${req.user.id}/` });
-          filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
-          noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
-          noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;noOfeducation=1;
           res.redirect("/");
         });
       }
@@ -493,23 +482,21 @@ app.post("/education", function (req, res) {
   }
  let value = req.body.btn;
   
- 
+ var myquery = { _id: req.user.id };
   if (value === "1") {
-    noOfeducation++;
+    Project.updateOne(myquery, { $inc: { noOfeducation:1} }, function (err, res) {
+      if (!err) console.log("Education incremented successfully");
+    });
+
   } else {
-    if (value === "2" && noOfeducation > 1) {
-      noOfeducation--;
+    if (value === "2") {
+      Project.updateOne(myquery, { $inc: { noOfeducation:-1} }, function (err, res) {
+      if (!err) console.log("Education decremented successfully");
+    });
     }
   }
 
-  var myquery = { _id: req.user.id };
 
-
-  Project.updateOne(myquery, { $set: { noOfeducation:noOfeducation} }, function (err, res) {
-    if (!err){
-    console.log("Documents deleted successfully");
-    }
-  });
 
   Project.updateOne(myquery, { $set: { school: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
@@ -552,25 +539,38 @@ app.post("/work", function (req, res) {
   }
 let value = req.body.btn;
  
-  
-  if (value === "1") {
-    noOfWorkExperience++;
-  } else {
-    if (value === "2" && noOfWorkExperience > 1) {
-      noOfWorkExperience--;
-    }
-  }
   var myquery = { _id: req.user.id };
-  Project.updateOne(myquery, { $set: { noOfWorkExperience:noOfWorkExperience} }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
-  });
-  Project.updateMany(myquery, newvalue, function (err, res) {
-    if (!err) console.log("Documents inserted successfully");
-  });
-  let arr = req.body.companyname;
+  if (value === "1") {
+   
+    Project.updateOne(myquery, { $inc: { noOfWorkExperience:1} }, function (err, res) {
+      if (!err) console.log("Work incremented successfully");
+    });
+
+  } 
+  else 
+  {
+    if (value === "2") {
+
+        Project.updateOne(myquery, { $inc: { noOfWorkExperience:-1} }, function (err, res) {
+          if (!err) console.log("Work decremented successfully");
+        });
+       }
+  }
+  
+  // Project.updateMany(myquery, newvalue, function (err, res) {
+  //   if (!err) console.log("Documents inserted successfully");
+  // });
+  
+
+
   Project.updateOne(myquery, { $set: { work: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
+
+
+
+
+
   var newvalue = {
     $push: {
       work: {
@@ -587,6 +587,9 @@ let value = req.body.btn;
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
+
+
+
 
   if (value === "3") {
     res.redirect("/skills");
@@ -607,17 +610,20 @@ app.post("/skills", function (req, res) {
     return res.redirect("/login");
   }
 let value = req.body.btn;
- 
+   var myquery = { _id: req.user.id };
   
   if (value === "1") {
-    noOfSkills++;
-  } else if (value === "2" && noOfSkills > 1) {
-    noOfSkills--;
+    Project.updateOne(myquery, { $inc: { noOfSkills:1} }, function (err, res) {
+      if (!err) console.log("Skills incremented successfully");
+    });
+
+  } else if (value === "2") {
+    Project.updateOne(myquery, { $inc: { noOfSkills:-1} }, function (err, res) {
+      if (!err) console.log("Skills decremented successfully");
+    });
   }
-  var myquery = { _id: req.user.id };
-  Project.updateOne(myquery, { $set: { noOfSkills:noOfSkills} }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
-  });
+
+  
   Project.updateOne(myquery, { $set: { skills: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
@@ -647,18 +653,21 @@ app.post("/projects", function (req, res) {
   }
 let value = req.body.btn;
   
-  
+   var myquery = { _id: req.user.id };
   if (value === "1") {
-    noOfProjects++;
+    Project.updateOne(myquery, { $inc: { noOfProjects:1} }, function (err, res) {
+      if (!err) console.log("Projects incremented successfully");
+    });
+
   } else {
-    if (value === "2" && noOfProjects > 1) {
-      noOfProjects--;
+    if (value === "2") {
+      Project.updateOne(myquery, { $inc: { noOfProjects:-1} }, function (err, res) {
+        if (!err) console.log("Projects decremented successfully");
+      });
     }
   }
-  var myquery = { _id: req.user.id };
-  Project.updateOne(myquery, { $set: { noOfProjects:noOfProjects} }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
-  });
+ 
+ 
   Project.updateOne(myquery, { $set: { project: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
   });
@@ -688,20 +697,23 @@ app.post("/awards", function (req, res) {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
-let value = req.body.btn;
-  try{
+let value = req.body.btn; 
+var myquery = { _id: req.user.id };
+ 
   
   if (value === "1") {
-    noOfAwards++;
+    Project.updateOne(myquery, { $inc: { noOfAwards:1} }, function (err, res) {
+      if (!err) console.log("Awards incremented successfully");
+    });
+
   } else {
-    if (value === "2" && noOfAwards > 1) {
-      noOfAwards--;
+    if (value === "2") {
+      Project.updateOne(myquery, { $inc: { noOfAwards:-1} }, function (err, res) {
+        if (!err) console.log("Awards decremented successfully");
+      });
     }
   }
- var myquery = { _id: req.user.id };
-  Project.updateOne(myquery, { $set: { noOfAwards:noOfAwards} }, function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
-  });
+
  
   let arr = req.body.awardname;
   Project.updateOne(myquery, { $set: { awards: [] } }, function (err, res) {
@@ -721,10 +733,7 @@ let value = req.body.btn;
     if (!err) console.log("Documents inserted successfully");
    
   });
-  }catch(err){
-    req.flash('error',err.message);
-  return res.redirect("/awards")
-  }
+  
   if (value === "3") {
     res.redirect("/personal");
   } else {
@@ -821,31 +830,43 @@ app.post("/extra", function (req, res) {
     req.flash('error',"User is not authenticated ! You have to first login to get access to the page"); 
     return res.redirect("/login");
   }
- 
-  if (req.body.btn === "1") {
-    noOfhobbies++;
-  } else if (req.body.btn === "2" && noOfhobbies > 1) {
-    noOfhobbies--;
-  } else if (req.body.btn === "3") {
-    noOfStrengths++;
-  } else if (req.body.btn === "4" && noOfStrengths > 1) {
-    noOfStrengths--;
-  } else if (req.body.btn === "5") {
-    noOfLanguage++;
-  } else if (req.body.btn === "6" && noOfLanguage > 1) {
-    noOfLanguage--;
-  } else if (req.body.btn === "7") {
-    noOfGoals++;
-  } else if (req.body.btn === "8" && noOfGoals > 1) {
-    noOfGoals--;
-  }
   var myquery = { _id: req.user.id };
-  Project.updateMany(myquery,
-     { $set: { noOfGoals:noOfGoals,noOfLanguage:noOfLanguage,noOfhobbies:noOfhobbies,
-      noOfStrengths:noOfStrengths,} },
-     function (err, res) {
-    if (!err) console.log("Documents deleted successfully");
-  });
+
+  if (req.body.btn === "1") {
+    Project.updateOne(myquery, { $inc: { noOfhobbies:1} }, function (err, res) {
+      if (!err) console.log("Hobbie incremented successfully");
+    });
+  } else if (req.body.btn === "2") {
+    Project.updateOne(myquery, { $inc: { noOfhobbies:-1} }, function (err, res) {
+      if (!err) console.log("Hobbie decremented successfully");
+    });
+  } else if (req.body.btn === "3") {
+    Project.updateOne(myquery, { $inc: { noOfStrengths:1} }, function (err, res) {
+      if (!err) console.log("Strength incremented successfully");
+    });
+  } else if (req.body.btn === "4") {
+    Project.updateOne(myquery, { $inc: { noOfStrengths:-1} }, function (err, res) {
+      if (!err) console.log("Strength decremented successfully");
+    });
+  } else if (req.body.btn === "5") {
+    Project.updateOne(myquery, { $inc: { noOfLanguage:1} }, function (err, res) {
+      if (!err) console.log("Language incremented successfully");
+    });
+  } else if (req.body.btn === "6") {
+    Project.updateOne(myquery, { $inc: { noOfLanguage:-1} }, function (err, res) {
+      if (!err) console.log("Language decremented successfully");
+    });
+  } else if (req.body.btn === "7") {
+    Project.updateOne(myquery, { $inc: { noOfGoals:1} }, function (err, res) {
+      if (!err) console.log("Goals incremented successfully");
+    });
+  } else if (req.body.btn === "8") {
+    Project.updateOne(myquery, { $inc: { noOfGoals:-1} }, function (err, res) {
+      if (!err) console.log("Goals decremented successfully");
+    });
+  }
+  
+ 
   Project.updateOne(myquery, { $set: { extra: [] } }, function (err, res) {
     if (!err) console.log("Documents deleted successfully");
    
@@ -898,9 +919,7 @@ let value=req.body.btn;
       if (!err) console.log(" All Documents deleted successfully");
      
     });
-        filepresentornot = 0;count = 1;noOfProjects = 1;noOfSkills = 1;
-        noOfWorkExperience = 1;noOfAwards = 1;noOfhobbies = 1;
-        noOfStrengths = 1;noOfLanguage = 1;noOfGoals = 1;noOfeducation=1;
+
   }
   
   if(value==="3")
