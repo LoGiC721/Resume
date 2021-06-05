@@ -371,3 +371,10 @@ footer{
         height:auto;
     }
 }
+
+@media(max-width:420px){
+    .hero{
+        position:relative;
+        top:-85px;
+    }
+}
