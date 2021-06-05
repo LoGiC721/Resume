@@ -54,11 +54,11 @@
 		<%for(let i=0;i<found[0].noOfeducation;i++){%>
 		<div class="sameline">
 			<%if(found[0].school.length!==0){%>
-			<label for="name<%=i%>">Institution</label>
-			<input type="text" placeholder="College/School/University  name" id="name<%=i%>" name="name" value="<%=found[0].school[0].name[i]%>" autocomplete="off"> 
+			<label for="name<%=i%>">Institution *</label>
+			<input type="text" placeholder="College/School/University Name *" id="name<%=i%>" name="name" value="<%=found[0].school[0].name[i]%>" autocomplete="off" required> 
 			<%}else{%>
-			<label for="name<%=i%>">Institution</label>
-			<input type="text" placeholder="College/School/University name" id="name<%=i%>" name="name" value="" autocomplete="off">
+			<label for="name<%=i%>">Institution *</label>
+			<input type="text" placeholder="College/School/University Name *" id="name<%=i%>" name="name" value="" autocomplete="off" required>
 			<%}%>
 		</div>
 		<div class="sameline">
@@ -120,11 +120,11 @@
 		</div>
 		<div class="sameline">
 			<%if(found[0].school.length!==0){%>
-			<label for="degree<%=i%>">Degree</label>
-			<input type="text" placeholder="Degree" id="degree<%=i%>" name="degree" value="<%=found[0].school[0].degree[i]%>" autocomplete="off"> 
+			<label for="degree<%=i%>">Degree *</label>
+			<input type="text" placeholder="Degree *" id="degree<%=i%>" name="degree" value="<%=found[0].school[0].degree[i]%>" autocomplete="off" required> 
 			<%}else{%>
-			<label for="degree<%=i%>">Degree</label>
-			<input type="text" placeholder="Degree" id="degree<%=i%>" name="degree" value="" autocomplete="off">
+			<label for="degree<%=i%>">Degree *</label>
+			<input type="text" placeholder="Degree *" id="degree<%=i%>" name="degree" value="" autocomplete="off" required>
 			<%}%>
 		</div>
 		<div class="sameline">
@@ -138,11 +138,11 @@
 		</div>
 		<div class="sameline">
 			<%if(found[0].school.length!==0){%>
-			<label for="location<%=i%>">Location</label>
-			<input type="text" placeholder="location" id="location<%=i%>" name="location" value="<%=found[0].school[0].location[i]%>" autocomplete="off"> 
+			<label for="location<%=i%>">Location *</label>
+			<input type="text" placeholder="Location *" id="location<%=i%>" name="location" value="<%=found[0].school[0].location[i]%>" autocomplete="off" required> 
 			<%}else{%>
-			<label for="location<%=i%>">Location</label>
-			<input type="text" placeholder="location" id="location<%=i%>" name="location" value="" autocomplete="off">
+			<label for="location<%=i%>">Location *</label>
+			<input type="text" placeholder="Location *" id="location<%=i%>" name="location" value="" autocomplete="off" required>
 			<%}%>
 		</div>
 		<br>

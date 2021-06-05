@@ -131,6 +131,10 @@ const UserSchema = new Schema({
    noOfStrengths: { type: Number, default: 1 },
    noOfLanguage: { type: Number, default: 1 },
    noOfGoals: { type: Number, default: 1 },
+   visitedProfile: { type: Number, default: 0 },
+   visitedEducation: { type: Number, default: 0 },
+   visitedSkills: { type: Number, default: 0 },
+
 });
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
@@ -467,8 +471,13 @@ app.post("/profile", function (req, res) {
     {console.log("Documents updated successfully");}
   });
 
- 
-
+  if(req.body.btn=="1")
+  {
+  Project.updateOne(myquery, { $set: {visitedProfile:1} }, function (err, res) {
+    if (!err) 
+    {console.log("Setted visitedprofile from 0 to 1");}
+  });
+  }
 
   res.redirect("/education");
 });
@@ -528,7 +537,11 @@ app.post("/education", function (req, res) {
 
 
   if (value === "3") {
-    res.redirect("/work");
+    Project.updateOne(myquery, { $set: {visitedEducation:1} }, function (err, res) {
+      if (!err) 
+      {console.log("Setted visitedEducation from 0 to 1");}
+    });
+    res.redirect("/skills");
   } else {
     res.redirect("/education");
   }
@@ -596,7 +609,7 @@ let value = req.body.btn;
 
 
   if (value === "3") {
-    res.redirect("/skills");
+    res.redirect("/projects");
   } else {
     res.redirect("/work");
   }
@@ -644,7 +657,11 @@ let value = req.body.btn;
   });
  
   if (value === "3") {
-    res.redirect("/projects");
+    Project.updateOne(myquery, { $set: {visitedSkills:1} }, function (err, res) {
+      if (!err) 
+      {console.log("Setted visitedSkills from 0 to 1");}
+    });
+    res.redirect("/work");
   } else {
     res.redirect("/skills");
   }
@@ -915,6 +932,7 @@ let value=req.body.btn;
         filepresentornot: 0,count: 1,noOfProjects:1,noOfSkills:1,
         noOfWorkExperience:1,noOfAwards:1,noOfhobbies:1,
         noOfStrengths:1,noOfLanguage:1,noOfGoals:1,noOfeducation:1,
+        visitedProfile:0,visitedEducation:0,visitedSkills:0,
       
       } 
     

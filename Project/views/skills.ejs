@@ -29,21 +29,21 @@
         <%for(let i=0;i<found[0].noOfSkills;i++){%>
         <div class="sameline"> 
               
-            <label for="skillsname<%=i%>">Skill</label>
+            <label for="skillsname<%=i%>">Skill *</label>
             <%if(found[0].skills.length!==0){%> 
-            <input type="text" placeholder="Skill name" id="skillsname<%=i%>" name="skillsname" value="<%=found[0].skills[0].skillsname[i]%>" autocomplete="off">
+            <input type="text" placeholder="Skill Name *" id="skillsname<%=i%>" name="skillsname" value="<%=found[0].skills[0].skillsname[i]%>" autocomplete="off" required>
                 <%}else{%>
-                    <input type="text" placeholder="Skill name" id="skillsname<%=i%>" name="skillsname" value="" autocomplete="off">      
+                    <input type="text" placeholder="Skill Name *" id="skillsname<%=i%>" name="skillsname" value="" autocomplete="off" required>      
              <%}%>
         </div>
 
         <div class="sameline">
             
-            <label for="skillsdetails<%=i%>">Percentage</label>
+            <label for="skillsdetails<%=i%>">Percentage *</label>
             <%if(found[0].skills.length!==0){%> 
-            <input type="number" placeholder="Level" id="skillsdetails<%=i%>" max="100" min="0" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off"> 
+            <input type="number" placeholder="Level *" id="skillsdetails<%=i%>" max="100" min="0" name="skillsdetails" value="<%=found[0].skills[0].skillsdetails[i]%>" autocomplete="off" required> 
             <%}else{%>
-                <input type="number" placeholder="Level" id="skillsdetails<%=i%>" max="100" min="0" name="skillsdetails" value="" autocomplete="off">  
+                <input type="number" placeholder="Level *" id="skillsdetails<%=i%>" max="100" min="0" name="skillsdetails" value="" autocomplete="off" required>  
             <%}%>   
                 
         </div>
@@ -56,7 +56,7 @@
 		<br>
         <div class="footer">
             <div class="container flexx">
-            <a href="/work" class="btn button prev">
+            <a href="/education" class="btn button prev">
                 <i class="fas fa-arrow-left iconn"></i>
 				<span class="change">Prev</span>
             </a>
