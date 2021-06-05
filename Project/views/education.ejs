@@ -79,17 +79,17 @@
 
 			<label for="startdate<%=i%>">Start date</label>
 			<input type="date" placeholder="Start date" id="startdate<%=i%>"
-			 name="startdate" min="1940-01-01" max="<%=strdate%>"
+			 name="startdate" onchange="temp(this.value,this.id)" min="1940-01-01" max="<%=strdate%>"
 			 value="<%=finaldate%>" autocomplete="off"> 
             <%}else{%>
             <label for="startdate<%=i%>">Start date</label>
 			<input type="date" placeholder="Start date" id="startdate<%=i%>"
-			 name="startdate" min="1940-01-01" max="<%=strdate%>" value="" autocomplete="off">
+			 name="startdate" onchange="temp(this.value,this.id)" min="1940-01-01" max="<%=strdate%>" value="" autocomplete="off">
 			<%}%>
 			<%}else{%>
 			<label for="startdate<%=i%>">Start date</label>
 			<input type="date" placeholder="Start date" id="startdate<%=i%>" 
-			name="startdate" min="1940-01-01" max="<%=strdate%>" value="" autocomplete="off">
+			name="startdate" onchange="temp(this.value,this.id)" min="1940-01-01" max="<%=strdate%>" value="" autocomplete="off">
 			<%}%>
 		</div>
 		
@@ -108,14 +108,14 @@
 			<%let year=template.getFullYear()%>
 			<%let finaldate=`${year}-${month}-${date}`%>
 			<label for="enddate<%=i%>">End date</label>
-			<input type="date" placeholder="End date" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="<%=finaldate%>" autocomplete="off"> 
+			<input type="date" placeholder="End date" id="enddate<%=i%>" min="" max="<%=strdate%>" name="enddate" value="<%=finaldate%>" autocomplete="off"> 
             <%}else{%>
                 <label for="enddate<%=i%>">End date</label>
-                <input type="date" placeholder="End date" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
+                <input type="date" placeholder="End date" id="enddate<%=i%>" min="" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
 			<%}%>
 			<%}else{%>
                 <label for="enddate<%=i%>">End date</label>
-                <input type="date" placeholder="End date" id="enddate<%=i%>" min="1940-01-01" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
+                <input type="date" placeholder="End date" id="enddate<%=i%>" min="" max="<%=strdate%>" name="enddate" value="" autocomplete="off">
 			<%}%>
 		</div>
 		<div class="sameline">
@@ -147,6 +147,24 @@
 		</div>
 		<br>
 		<hr class="linecoloured">
+
+
+		<script>
+			function temp(val,i)
+			{
+				// console.log(val);
+			   var t=i[i.length-1];
+			   var a=document.getElementById("enddate"+t);
+			//    console.log(a);
+				a.min=val;
+			   
+			}
+	  </script>
+
+
+
+
+
 		<%}%>
 		<br>
 		<br>
