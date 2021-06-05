@@ -158,7 +158,7 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
-      Project.findOrCreate({ googleId: profile.id,username:profile.displayName }, function (err, user) {
+      Project.findOrCreate({ googleId: profile.id,loginid:profile.id,username:profile.displayName }, function (err, user) {
        
         return cb(err, user);
       });
@@ -175,7 +175,7 @@ passport.use(
       proxy: true
     },
     function (accessToken, refreshToken, profile, cb) {
-      Project.findOrCreate({ facebookId: profile.id,username:profile.displayName }, function (err, user) {
+      Project.findOrCreate({ facebookId: profile.id,loginid:profile.id,username:profile.displayName }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -190,7 +190,7 @@ passport.use(
       callbackURL: "https://damp-beach-49352.herokuapp.com/auth/twitter/importantkey",
     },
     function (token, tokenSecret, profile, cb) {
-      Project.findOrCreate({ twitterId: profile.id,username:profile.username }, function (err, user) {
+      Project.findOrCreate({ twitterId: profile.id,loginid:profile.id,username:profile.username }, function (err, user) {
         return cb(err, user);
       });
     }
@@ -204,7 +204,7 @@ passport.use(new LinkedInStrategy({
   scope: ['r_liteprofile'],
   state: true
 }, function(accessToken, refreshToken, profile, done) {
-  Project.findOrCreate({ linkedInId: profile.id,username:profile.displayName }, function (err, user) {
+  Project.findOrCreate({ linkedInId: profile.id,loginid:profile.id,username:profile.displayName }, function (err, user) {
    
     return done(err, user);
   });
@@ -216,7 +216,7 @@ passport.use(new GitHubStrategy({
   callbackURL: "https://damp-beach-49352.herokuapp.com/auth/github/token"
 },
 function(accessToken, refreshToken, profile, done) {
-  Project.findOrCreate({ githubId: profile.id,username:profile.username }, function (err, user) {
+  Project.findOrCreate({ githubId: profile.id,loginid:profile.id,username:profile.username }, function (err, user) {
   
     return done(err, user);
   });
