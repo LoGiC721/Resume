@@ -245,7 +245,7 @@ app.get(
     res.redirect("/");
   }
 );
-app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["profile"]}));
+app.get("/auth/facebook", passport.authenticate("facebook",{ scope: ["public_profile"]}));
 app.get(
   "/auth/facebook/key",
   passport.authenticate("facebook", { failureRedirect: "/auth/facebook/login" }),
