@@ -557,9 +557,6 @@ let value = req.body.btn;
        }
   }
   
-  // Project.updateMany(myquery, newvalue, function (err, res) {
-  //   if (!err) console.log("Documents inserted successfully");
-  // });
   
 
 
@@ -587,6 +584,7 @@ let value = req.body.btn;
   Project.updateMany(myquery, newvalue, function (err, res) {
     if (!err) console.log("Documents inserted successfully");
   });
+
 
 
 

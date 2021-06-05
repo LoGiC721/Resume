@@ -25,7 +25,7 @@
     
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark ">
     <a class="navbar-brand" href="/">
       <img src="/icons/navwhite.png" />
       makeresume</a>
@@ -52,24 +52,23 @@
         </ul>
 
         <% if(!currentUser){ %>
-          <li class="nav-item active">
-          <a class="btn btn-light nav-link text-dark  mr-3 mb-4" href="/login">Login <span class="sr-only">(current)</span></a>
-          </li>
-          <li class=" nav-item active">
-            <a class="btn btn-light nav-link text-dark mb-4 mr-3" href="/register">Register</a>
-          </li>
+          <div class="nav-item active">
+          <a class="btn btn-light text-dark nav-link mb-4  mr-3 " href="/login">Login <span class="sr-only">(current)</span></a>
+          </div>
+          <div class=" nav-item active">
+            <a class="btn btn-light nav-link  text-dark mb-4  mr-3" href="/register">Register</a>
+          </div>
           <% } else { %>
-            <li class="nav-item active">
+            <div class="nav-item active">
   
-              <a class="btn btn-light nav-link text-dark  mr-3 mb-4" href="">Signed in as <%=currentUser.username%> <span
+              <a class="btn btn-light nav-link text-dark  mr-3 " href="">Signed in as <%=currentUser.username%> <span
                     class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="btn btn-light nav-link text-dark mb-4 mr-3" href="/logout">Logout</a>
-            </li>
+              </div>
+            <div class="nav-item active">
+              <a class="btn btn-light nav-link text-dark  mr-3" href="/logout">Logout</a>
+            </div>
             <% } %>
-
-      
+         
         
 
     
