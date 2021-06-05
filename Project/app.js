@@ -172,11 +172,12 @@ passport.use(
       clientSecret: process.env.Facebook_CLIENT_SECRET,
       // callbackURL: "http://localhost:3000/auth/facebook/key",
       callbackURL: "https://damp-beach-49352.herokuapp.com/auth/facebook/key",
-      proxy: true
     },
     function (accessToken, refreshToken, profile, cb) {
       Project.findOrCreate({ facebookId: profile.id,loginid:profile.id,username:profile.displayName }, function (err, user) {
+        console.log(err);
         return cb(err, user);
+       
       });
     }
   )
