@@ -81,6 +81,13 @@ form.sign-in-form {
   position: relative;
 }
 
+.picture{
+  height:100px;
+}
+.picture1{
+  height:80px;
+}
+
 .input-field i {
   text-align: center;
   line-height: 55px;
@@ -495,9 +502,28 @@ margin-right:15px;
       margin-top:-10px;
       height:70px;
     }
-
+.toppp{
+  top:105%;
+}
     
 }
+
+@media(max-width:324px)
+{
+  
+  .picture,.picture1{
+    height:50px;
+  }
+}
+
+@media(max-width:286px)
+{
+  
+  .picture,.picture1{
+    display:none;
+  }
+}
+
 
 .social-media {
   margin-bottom:20px;
