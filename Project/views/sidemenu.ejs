@@ -25,7 +25,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body oncontextmenu="return false;">
 
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
@@ -161,7 +161,9 @@
         <% if(found[0].visitedProfile=="1"&&found[0].visitedEducation=="1"&&found[0].visitedSkills=="1"){%>
         <a href="/download" class="download">Download Resume</a>
         <%}else{%>
-            <a type="button" class="download" style="cursor: no-drop;">Download Resume</a>
+            <a type="button" class="download" 
+            style="cursor: no-drop;background-color:#14171D;border:1px solid #fff2;color:#fff2;">
+            Download Resume</a>
         <%}%>
      </li>
      

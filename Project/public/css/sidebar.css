@@ -10,6 +10,10 @@ body {
     background-color: #14171D;
 }
 
+#sidebarCollapse:hover{
+    background-color: white;
+  
+}
 
 
 p {
@@ -370,7 +374,7 @@ a.article:hover {
   
     margin: 10px 0px; 
     border-radius: 15%;
-    outline-color:#56c9aa ;
+    /* outline-color:#56c9aa ; */
   
      font-family: 'Advent Pro', sans-serif; 
     
@@ -386,7 +390,9 @@ a.article:hover {
 }
 
 
-
+button:focus,a:focus{
+    outline: none;
+}
 
 .notclickable{
     background-color: #14171D;
