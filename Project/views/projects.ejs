@@ -32,13 +32,13 @@
                     
                     <%if(found[0].project.length!==0){%>
                         
-                        <label for="projectname<%=i%>">Project </label>
-                        <input type="text" placeholder="Project name" id="projectname<%=i%>" name="projectname"
-                            value="<%=found[0].project[0].projectname[i]%>" autocomplete="off">
+                        <label for="projectname<%=i%>">Project * </label>
+                        <input type="text" placeholder="Project Name *" id="projectname<%=i%>" name="projectname"
+                            value="<%=found[0].project[0].projectname[i]%>" autocomplete="off" required>
                             <%}else{%>
                                
-                            <label for="projectname<%=i%>">Project </label>
-                            <input type="text" placeholder="Project name" id="projectname<%=i%>" name="projectname" value="" autocomplete="off">
+                            <label for="projectname<%=i%>">Project * </label>
+                            <input type="text" placeholder="Project Name *" id="projectname<%=i%>" name="projectname" value="" autocomplete="off" required>
                             <%}%>
                 </div>
                 <div class="sameline">

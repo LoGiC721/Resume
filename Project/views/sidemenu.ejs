@@ -54,14 +54,16 @@
 <nav id="sidebar">
 
 <ul class="list-unstyled components">
+
+
  
  <% if (current==="profile" ) { %>
 <li>
-<a href="/profile" class="coloured">Personal </a>
+<a href="/profile" class="coloured">Personal * </a>
  </li>
  <%} else { %>
  <li>
-<a href="/profile" class="uncoloured">Personal  </a>
+<a href="/profile" class="uncoloured">Personal * </a>
 </li>
 <% } %>
 
@@ -69,13 +71,25 @@
 
  <% if (current==="education" ) { %>
 <li>
-<a href="/education" class="coloured">Education</a>
+<a href="/education" class="coloured">Education *</a>
 </li>
 <%} else { %>
  <li>
- <a href="/education" class="uncoloured">Education</a>
+ <a href="/education" class="uncoloured">Education *</a>
 </li>
  <% } %>
+
+
+ <% if (current==="skills" ) { %>
+    <li>
+    <a href="/skills" class="coloured">Skills *</a>
+    </li>
+    <%} else { %>
+     <li>
+     <a href="/skills" class="uncoloured">Skills *</a>
+    </li>
+    <% } %>
+
 
 
 
@@ -90,16 +104,6 @@
 <% } %>
 
 
-
-<% if (current==="skills" ) { %>
-<li>
-<a href="/skills" class="coloured">Skills</a>
-</li>
-<%} else { %>
- <li>
- <a href="/skills" class="uncoloured">Skills</a>
-</li>
-<% } %>
 
 
  <% if (current==="projects" ) { %>
@@ -154,7 +158,13 @@
 
 <ul class="list-unstyled CTAs">
      <li>
+        <% if(found[0].visitedProfile=="1"&&found[0].visitedEducation=="1"&&found[0].visitedSkills=="1"){%>
         <a href="/download" class="download">Download Resume</a>
+        <%}else{%>
+            <a type="button" class="download" 
+            style="cursor: no-drop;background-color:#14171D;border:1px solid #fff2;color:#fff2;">
+            Download Resume</a>
+        <%}%>
      </li>
      
 </ul>

@@ -40,13 +40,13 @@
 
                         <div class="samelinewidth">
                             <%if(found[0].firstname!=="NULL"){%>
-                                <label for="firstname">Full Name</label>
-                                <input type="text" placeholder="Name" id="firstname" name="firstname"
-                                    value="<%=found[0].firstname%>" autocomplete="off">
+                                <label for="firstname">Full Name *</label>
+                                <input type="text" placeholder="Name *" id="firstname" name="firstname"
+                                    value="<%=found[0].firstname%>" autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="firstname">Full Name</label>
-                                    <input type="text" placeholder="Name" id="firstname" name="firstname" value=""
-                                        autocomplete="off">
+                                    <label for="firstname">Full Name *</label>
+                                    <input type="text" placeholder="Name *" id="firstname" name="firstname" value=""
+                                        autocomplete="off" required>
                                     <%}%>
                         </div>
 
@@ -65,13 +65,13 @@
 
                         <div class="samelinewidth">
                             <%if(found[0].email!=="NULL"){%>
-                                <label for="email">Email</label>
-                                <input type="email" placeholder="Email" id="email" name="email"
-                                    value="<%=found[0].email%>" autocomplete="off">
+                                <label for="email">Email *</label>
+                                <input type="email" placeholder="Email *" id="email" name="email"
+                                    value="<%=found[0].email%>" autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="email">Email</label>
-                                    <input type="email" placeholder="Email" id="email" name="email" value=""
-                                        autocomplete="off">
+                                    <label for="email">Email *</label>
+                                    <input type="email" placeholder="Email *" id="email" name="email" value=""
+                                        autocomplete="off" required>
                                     <%}%>
                         </div>
 
@@ -138,13 +138,13 @@
 
                         <div class="samelinewidth">
                             <%if(found[0].pno!=="NULL"){%>
-                                <label for="pno">Phone</label>
-                                <input type="number" placeholder="Contact no" id="pno" name="pno" value="<%=found[0].pno%>"
-                                    autocomplete="off">
+                                <label for="pno">Phone *</label>
+                                <input type="number" placeholder="Contact no *" id="pno" name="pno" value="<%=found[0].pno%>"
+                                    autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="pno">Phone</label>
-                                    <input type="number" placeholder="Contact no" id="pno" name="pno" value=""
-                                        autocomplete="off">
+                                    <label for="pno">Phone *</label>
+                                    <input type="number" placeholder="Contact no *" id="pno" name="pno" value=""
+                                        autocomplete="off" required>
                                     <%}%>
                         </div>
 
@@ -176,37 +176,37 @@
 
                         <div class="samelinewidth">
                             <%if(found[0].country!=="NULL"){%>
-                                <label for="country">Country</label>
-                                <input type="text" placeholder="Country" id="country" name="country"
-                                    value="<%=found[0].country%>" autocomplete="off">
+                                <label for="country">Country *</label>
+                                <input type="text" placeholder="Country *" id="country" name="country"
+                                    value="<%=found[0].country%>" autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="country">Country</label>
-                                    <input type="text" placeholder="Country" id="country" name="country" value=""
-                                        autocomplete="off">
+                                    <label for="country">Country *</label>
+                                    <input type="text" placeholder="Country *" id="country" name="country" value=""
+                                        autocomplete="off" required>
                                     <%}%>
                         </div>
 
                         <div class="samelinewidth">
                             <%if(found[0].state!=="NULL"){%>
-                                <label for="state">State</label>
-                                <input type="text" placeholder="State" id="state" name="state"
-                                    value="<%=found[0].state%>" autocomplete="off">
+                                <label for="state">State *</label>
+                                <input type="text" placeholder="State *" id="state" name="state"
+                                    value="<%=found[0].state%>" autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="state">State</label>
-                                    <input type="text" placeholder="state" id="state" name="state" value=""
-                                        autocomplete="off">
+                                    <label for="state">State *</label>
+                                    <input type="text" placeholder="State *" id="state" name="state" value=""
+                                        autocomplete="off" required>
                                     <%}%>
                         </div>
 
                         <div class="samelinewidth">
                             <%if(found[0].city!=="NULL"){%>
-                                <label for="city">City</label>
-                                <input type="text" placeholder="City" id="city" name="city" value="<%=found[0].city%>"
-                                    autocomplete="off">
+                                <label for="city">City *</label>
+                                <input type="text" placeholder="City *" id="city" name="city" value="<%=found[0].city%>"
+                                    autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="city">State</label>
-                                    <input type="text" placeholder="City" id="city" name="city" value=""
-                                        autocomplete="off">
+                                    <label for="city">City *</label>
+                                    <input type="text" placeholder="City *" id="city" name="city" value=""
+                                        autocomplete="off" required>
                                     <%}%>
                         </div>
 
@@ -225,13 +225,13 @@
 
                         <div class="samelinewidth">
                             <%if(found[0].address!=="NULL"){%>
-                                <label for="address">Address</label>
-                                <input type="text" rows="2" cols="30" placeholder="address" id="address" name="address"
-                                    value="<%=found[0].address%>" autocomplete="off">
+                                <label for="address">Address *</label>
+                                <input type="text" rows="2" cols="30" placeholder="Address *" id="address" name="address"
+                                    value="<%=found[0].address%>" autocomplete="off" required>
                                 <%}else{%>
-                                    <label for="address">Address</label>
-                                    <input type="text" rows="2" cols="30" placeholder="address" id="address"
-                                        name="address" value="" autocomplete="off">
+                                    <label for="address">Address *</label>
+                                    <input type="text" rows="2" cols="30" placeholder="Address *" id="address"
+                                        name="address" value="" autocomplete="off" required>
 
 
                                     <%}%>
@@ -247,7 +247,7 @@
 				                <span class="change">Prev</span>
                                
                             </a>
-                            <button class="btn button next">
+                            <button class="btn button next" name="btn" value="1">
                                 <i class="fas fa-arrow-right iconn"></i>
                                 <span class="change">Save & Next</span>
                             </button>
